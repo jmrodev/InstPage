@@ -4,6 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon --watch generatePages.js --watch materias --exec \"node generatePages.js && node server.js\"",
+    "dev:public": "node start-public.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -11,7 +13,9 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
+    "express": "^5.1.0",
     "fs": "0.0.1-security",
+    "nodemon": "^3.1.10",
     "path": "^0.12.7"
   }
 }
