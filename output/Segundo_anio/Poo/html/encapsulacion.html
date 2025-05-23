@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Encapsulación en PHP</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #ff5722;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #fff3e0;
+      border-left: 5px solid #ff5722;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #ff5722;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .benefit {
+      background-color: #e8f5e9;
+      border-left: 3px solid #4caf50;
+      padding: 0.8rem;
+      margin: 0.8rem 0;
+      border-radius: 4px;
+    }
+    .warning {
+      background-color: #fef9e7;
+      border-left: 3px solid #f1c40f;
+      padding: 0.8rem;
+      margin: 0.8rem 0;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🛡️ Encapsulación en PHP</h1>
+
+<div class="concept-box">
+  <span class="concept-title">¿Qué es la Encapsulación?</span>
+  <p>La encapsulación es uno de los cuatro principios fundamentales de la Programación Orientada a Objetos (junto con la herencia, el polimorfismo y la abstracción). Consiste en ocultar los detalles internos de implementación de un objeto y solo exponer una interfaz pública para interactuar con él.</p>
+  
+  <p>En términos simples, la encapsulación se refiere a:</p>
+  <ol>
+    <li>Agrupar datos (propiedades) y métodos relacionados en una sola unidad (la clase)</li>
+    <li>Restringir el acceso directo a algunos componentes del objeto</li>
+    <li>Determinar qué es visible al exterior y qué permanece oculto</li>
+  </ol>
+  
+  <p>La encapsulación se implementa en PHP principalmente a través de los modificadores de acceso (<code>public</code>, <code>private</code>, <code>protected</code>) y el uso de métodos getter y setter.</p>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Implementación Básica</span>
+  <p>Un ejemplo básico de encapsulación en PHP implica hacer que las propiedades sean privadas y proporcionar métodos públicos para acceder y modificar esas propiedades:</p>
+  
+  <div class="example-box">
+    <code>
+class Persona {<br>
+&nbsp;&nbsp;// Propiedades privadas (encapsuladas)<br>
+&nbsp;&nbsp;private $nombre;<br>
+&nbsp;&nbsp;private $edad;<br>
+<br>
+&nbsp;&nbsp;// Constructor<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->setEdad($edad);  // Usamos el setter para validar<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Getter para nombre<br>
+&nbsp;&nbsp;public function getNombre() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $this->nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Setter para nombre<br>
+&nbsp;&nbsp;public function setNombre($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Getter para edad<br>
+&nbsp;&nbsp;public function getEdad() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $this->edad;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Setter para edad con validación<br>
+&nbsp;&nbsp;public function setEdad($edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Validación: la edad debe ser un número positivo<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if (is_numeric($edad) && $edad >= 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;} else {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;throw new Exception("La edad debe ser un número positivo");<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Método adicional que usa propiedades privadas<br>
+&nbsp;&nbsp;public function presentarse() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Hola, soy $this->nombre y tengo $this->edad años.";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <div class="example-box">
+    <code>
+// Uso de la clase<br>
+$persona = new Persona("Carlos", 25);<br>
+<br>
+// No podemos acceder directamente a las propiedades privadas<br>
+// echo $persona->nombre;  // Error: Propiedad privada<br>
+// $persona->edad = -5;    // Error: Propiedad privada<br>
+<br>
+// Forma correcta: usar los métodos públicos<br>
+echo $persona->getNombre();  // "Carlos"<br>
+echo $persona->getEdad();    // 25<br>
+<br>
+// Modificar valores a través de setters<br>
+$persona->setNombre("Carlos Alberto");<br>
+<br>
+// La validación evita valores incorrectos<br>
+try {<br>
+&nbsp;&nbsp;$persona->setEdad(-5);  // Lanzará una excepción<br>
+} catch (Exception $e) {<br>
+&nbsp;&nbsp;echo "Error: " . $e->getMessage();<br>
+}<br>
+<br>
+echo $persona->presentarse();  // "Hola, soy Carlos Alberto y tengo 25 años."
+    

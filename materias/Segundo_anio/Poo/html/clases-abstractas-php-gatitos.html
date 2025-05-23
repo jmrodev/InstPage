@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clases Abstractas en PHP con Gatitos</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #9c27b0;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #f3e5f5;
+      border-left: 5px solid #9c27b0;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #9c27b0;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    .comparison-table th, .comparison-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    .comparison-table th {
+      background-color: #e1bee7;
+    }
+    .comparison-table tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+    .tip {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+    .note {
+      background-color: #e1f5fe;
+      border-left: 5px solid #03a9f4;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🐱 Clases Abstractas en PHP con Gatitos</h1>
+
+<div class="concept-box">
+  <span class="concept-title">¿Qué son las Clases Abstractas?</span>
+  <p>Una clase abstracta en PHP es una clase que no puede ser instanciada directamente y está diseñada para ser extendida por otras clases. Las clases abstractas pueden contener una mezcla de métodos con implementación completa y métodos abstractos (sin implementación).</p>
+  
+  <p>El propósito principal de una clase abstracta es proporcionar una base común para un grupo de subclases relacionadas, definiendo una interfaz común mientras comparten código.</p>
+  
+  <p>En PHP, las clases abstractas se definen utilizando la palabra clave <code>abstract</code>.</p>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Características Principales</span>
+  <p>Las clases abstractas en PHP tienen las siguientes características:</p>
+  
+  <ul>
+    <li>Se declaran con la palabra clave <code>abstract</code> antes de <code>class</code></li>
+    <li>No pueden ser instanciadas directamente con <code>new</code></li>
+    <li>Pueden contener métodos abstractos y métodos concretos (con implementación)</li>
+    <li>Los métodos abstractos se declaran con la palabra clave <code>abstract</code> y no tienen cuerpo</li>
+    <li>Las clases que extienden (heredan) de una clase abstracta deben implementar todos sus métodos abstractos, a menos que la subclase sea también abstracta</li>
+    <li>Pueden contener propiedades y constantes</li>
+    <li>Pueden tener modificadores de acceso (<code>public</code>, <code>protected</code>, <code>private</code>) para sus métodos y propiedades</li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Sintaxis Básica</span>
+  <p>La sintaxis para declarar una clase abstracta es la siguiente:</p>
+  
+  <div class="example-box">
+    <code>
+abstract class NombreClaseAbstracta {<br>
+&nbsp;&nbsp;// Propiedades<br>
+&nbsp;&nbsp;protected $propiedad;<br>
+<br>
+&nbsp;&nbsp;// Métodos concretos (con implementación)<br>
+&nbsp;&nbsp;public function metodoConcreto() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Implementación completa<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Métodos abstractos (sin implementación)<br>
+&nbsp;&nbsp;abstract public function metodoAbstracto();<br>
+}
+    </code>
+  </div>
+  
+  <p>Para extender una clase abstracta:</p>
+  
+  <div class="example-box">
+    <code>
+class ClaseConcreta extends NombreClaseAbstracta {<br>
+&nbsp;&nbsp;// Debe implementar todos los métodos abstractos<br>
+&nbsp;&nbsp;public function metodoAbstracto() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Implementación del método abstracto<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// También puede tener sus propios métodos adicionales<br>
+&nbsp;&nbsp;public function otroMetodo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Implementación<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Ejemplo con Gatitos</span>
+  <p>Veamos un ejemplo práctico creando una jerarquía de clases de gatos utilizando una clase abstracta como base:</p>
+  
+  <div class="example-box">
+    <code>
+abstract class Felino {<br>
+&nbsp;&nbsp;protected $nombre;<br>
+&nbsp;&nbsp;protected $peso; // en kg<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $peso) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->peso = $peso;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Método concreto - todos los felinos comparten esta implementación<br>
+&nbsp;&nbsp;public function dormir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está durmiendo profundamente... ZZZ";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Método concreto - común para todos los felinos<br>
+&nbsp;&nbsp;public function correr($velocidad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está corriendo a {$velocidad} km/h";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Método concreto protegido - solo accesible por las subclases<br>
+&nbsp;&nbsp;protected function calcularCalorias() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $this->peso * 30; // Fórmula básica para las calorías diarias<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Métodos abstractos - deben ser implementados por las subclases<br>
+&nbsp;&nbsp;abstract public function hacerSonido();<br>
+&nbsp;&nbsp;abstract public function cazar();<br>
+&nbsp;&nbsp;abstract public function getInfo();<br>
+}<br>
+<br>
+class GatoDomestico extends Felino {<br>
+&nbsp;&nbsp;private $raza;<br>
+&nbsp;&nbsp;private $propietario;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $peso, $raza, $propietario = null) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $peso);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->raza = $raza;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->propietario = $propietario;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementación del método abstracto<br>
+&nbsp;&nbsp;public function hacerSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementación del método abstracto<br>
+&nbsp;&nbsp;public function cazar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está cazando un ratón de juguete";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementación del método abstracto<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$info = "Gato doméstico: {$this->nombre}, Peso: {$this->peso}kg, Raza: {$this->raza}";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if ($this->propietario) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$info .= ", Propietario: {$this->propietario}";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$info .= ", Necesita {$this->calcularCalorias()} calorías diarias";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $info;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Método propio - específico de GatoDomestico<br>
+&nbsp;&nbsp;public function jugar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está jugando con una bola de lana";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class GatoSalvaje extends Felino {<br>
+&nbsp;&nbsp;private $habitat;<br>
+&nbsp;&nbsp;private $territorio; // km2<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $peso, $habitat, $territorio) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $peso);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->habitat = $habitat;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->territorio = $territorio;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementación del método abstracto<br>
+&nbsp;&nbsp;public function hacerSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} emite un gruñido salvaje: ¡Grrr!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementación del método abstracto<br>
+&nbsp;&nbsp;public function cazar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está cazando presas en su territorio natural";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementación del método abstracto<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Gato salvaje: {$this->nombre}, Peso: {$this->peso}kg, " . <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Habitat: {$this->habitat}, Territorio: {$this->territorio}km², " . <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Necesita {$this->calcularCalorias()} calorías diarias";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Sobrescribimos el método calcularCalorias para los gatos salvajes<br>
+&nbsp;&nbsp;protected function calcularCalorias() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Los gatos salvajes necesitan más calorías por su actividad física<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $this->peso * 40;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Método propio - específico de GatoSal

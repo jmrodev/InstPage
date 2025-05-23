@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Comandos Linux</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            color: #333;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #3498db;
+            margin-top: 30px;
+            border-left: 5px solid #3498db;
+            padding-left: 10px;
+        }
+        h3 {
+            color: #2c3e50;
+        }
+        pre {
+            background-color: #f5f5f5;
+            border-left: 3px solid #3498db;
+            padding: 15px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            text-align: left;
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .toc {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .toc h2 {
+            margin-top: 0;
+        }
+        .toc ul {
+            padding-left: 20px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .note {
+            background-color: #e9f7fe;
+            border-left: 4px solid #3498db;
+            padding: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Manual de Comandos Linux</h1>
+    
+    <div class="toc">
+        <h2>Índice</h2>
+        <ul>
+            <li><a href="#flujos-estandar">Flujos Estándar</a></li>
+            <li><a href="#redirecciones">Redirecciones</a></li>
+            <li><a href="#comandos-basicos">Comandos Básicos</a></li>
+            <li><a href="#tuberias">Tuberías (Pipes)</a></li>
+            <li><a href="#administracion-procesos">Administración de Procesos</a></li>
+            <li><a href="#directorio-dev">Directorio /dev</a></li>
+            <li><a href="#expresiones-expansiones">Expresiones y Expansiones</a></li>
+        </ul>
+    </div>
+    
+    <section id="flujos-estandar">
+        <h2>Flujos Estándar</h2>
+        <p>En sistemas Unix/Linux existen tres flujos estándar:</p>
+        
+        <table>
+            <tr>
+                <th>Flujo</th>
+                <th>Descriptor</th>
+                <th>Descripción</th>
+                <th>Conexión por defecto</th>
+            </tr>
+            <tr>
+                <td>stdin</td>
+                <td>0</td>
+                <td>Entrada estándar</td>
+                <td>Teclado</td>
+            </tr>
+            <tr>
+                <td>stdout</td>
+                <td>1</td>
+                <td>Salida estándar</td>
+                <td>Terminal</td>
+            </tr>
+            <tr>
+                <td>stderr</td>
+                <td>2</td>
+                <td>Error estándar</td>
+                <td>Terminal</td>
+            </tr>
+        </table>
+    </section>
+    
+    <section id="redirecciones">
+        <h2>Redirecciones</h2>
+        <p>Las redirecciones permiten controlar el flujo de información:</p>
+        
+        <table>
+            <tr>
+                <th>Operador</th>
+                <th>Descripción</th>
+                <th>Ejemplo</th>
+            </tr>
+            <tr>
+                <td><code>&gt;</code></td>
+                <td>Redirige stdout a un archivo (sobrescribe)</td>
+                <td><code>ls &gt; archivos.txt</code></td>
+            </tr>
+            <tr>
+                <td><code>&gt;&gt;</code></td>
+                <td>Redirige stdout a un archivo (añade)</td>
+                <td><code>echo "nueva línea" &gt;&gt; notas.txt</code></td>
+            </tr>
+            <tr>
+                <td><code>2&gt;</code></td>
+                <td>Redirige stderr a un archivo</td>
+                <td><code>ls archivo_inexistente 2&gt; errores.txt</code></td>
+            </tr>
+            <tr>
+                <td><code>2&gt;&1</code></td>
+                <td>Redirige stderr al mismo destino que stdout</td>
+                <td><code>ls * 2&gt;&1 &gt; todo.txt</code></td>
+            </tr>
+            <tr>
+                <td><code>&amp;&gt;</code></td>
+                <td>Redirige stdout y stderr a un archivo</td>
+                <td><code>ls * &amp;&gt; todo.txt</code></td>
+            </tr>
+            <tr>
+                <td><code>&lt;</code></td>
+                <td>Usa un archivo como stdin</td>
+                <td><code>sort &lt; datos.txt</code></td>
+            </tr>
+            <tr>
+                <td><code>/dev/null</code></td>
+                <td>Descarta cualquier salida redirigida allí</td>
+                <td><code>ls errores 2&gt; /dev/null</code></td>
+            </tr>
+        </table>
+        
+        <div class="note">
+            <p><strong>Nota:</strong> Para silenciar completamente un comando (tanto salida como errores), use: <code>comando &gt; /dev/null 2&gt;&1</code> o la versión más moderna: <code>comando &amp;&gt; /dev/null</code></p>
+        </div>
+    </section>
+    
+    <section id="comandos-basicos">
+        <h2>Comandos Básicos</h2>
+        
+        <h3>ls - Listar archivos</h3>
+        <pre>
+ls                     # Lista archivos del directorio actual
+ls -l                  # Lista en formato largo (permisos, tamaño, etc.)
+ls -a                  # Lista todos los archivos (incluyendo ocultos)
+ls -la                 # Combina opciones largo y todos
+ls /ruta/directorio    # Lista archivos de un directorio específico</pre>
+        
+        <h3>cat - Concatenar y mostrar archivos</h3>
+        <pre>
+cat archivo.txt                # Muestra contenido de un archivo
+cat archivo1.txt archivo2.txt  # Muestra contenido de varios archivos
+cat > nuevo.txt                # Crea un archivo (Ctrl+D para terminar)
+cat >> existente.txt           # Añade texto a un archivo existente</pre>
+
+        <h3>sort - Ordenar texto</h3>
+        <pre>
+sort archivo.txt               # Ordena líneas alfabéticamente
+sort -n numeros.txt            # Ordena numéricamente
+sort -r archivo.txt            # Ordena en orden inverso
+sort -u archivo.txt            # Elimina duplicados al ordenar
+sort -k 2 datos.txt            # Ordena por la segunda columna</pre>
+
+        <h3>grep - Buscar patrones</h3>
+        <pre>
+grep "texto" archivo.txt       # Busca "texto" en el archivo
+grep -i "texto" archivo.txt    # Busca ignorando mayúsculas/minúsculas
+grep -v "texto" archivo.txt    # Muestra líneas que NO contienen "texto"
+grep -n "texto" archivo.txt    # Muestra números de línea
+grep -E "patrón|otro" archivo  # Usa expresiones regulares extendidas</pre>
+
+        <h3>head y tail - Ver partes de archivos</h3>
+        <pre>
+head archivo.txt               # Muestra primeras 10 líneas
+head -n 5 archivo.txt          # Muestra primeras 5 líneas
+tail archivo.txt               # Muestra últimas 10 líneas
+tail -n 5 archivo.txt          # Muestra últimas 5 líneas
+tail -f archivo.log            # Muestra y sigue actualizaciones del archivo</pre>
+
+        <h3>cal - Calendario</h3>
+        <pre>
+cal                            # Muestra calendario del mes actual
+cal 2023                       # Muestra calendario del año 2023
+cal 12 2023                    # Muestra calendario de diciembre 2023
+cal -3                         # Muestra mes anterior, actual y siguiente</pre>
+    </section>
+    
+    <section id="tuberias">
+        <h2>Tuberías (Pipes)</h2>
+        <p>Las tuberías (<code>|</code>) conectan la salida de un comando con la entrada de otro:</p>
+        
+        <pre>
+ls | grep ".txt"               # Lista solo archivos .txt
+cat archivo.txt | sort         # Muestra contenido ordenado
+cat archivo.txt | sort | uniq  # Muestra líneas únicas ordenadas
+cat archivo.log | grep "error" | wc -l  # Cuenta líneas con "error"</pre>
+        
+        <div class="note">
+            <p><strong>Nota:</strong> Las tuberías permiten construir comandos complejos combinando herramientas simples, siguiendo la filosofía Unix de "hacer una cosa y hacerla bien".</p>
+        </div>
+    </section>
+    
+    <section id="administracion-procesos">
+        <h2>Administración de Procesos</h2>
+        
+        <h3>ps - Ver procesos</h3>
+        <pre>
+ps                             # Muestra procesos de la sesión actual
+ps aux                         # Muestra todos los procesos detallados
+ps -ef                         # Formato alternativo para todos los procesos</pre>
+
+        <h3>top - Monitor de procesos en tiempo real</h3>
+        <pre>
+top                            # Muestra procesos en tiempo real
+htop                           # Versión mejorada de top (si está instalada)</pre>
+
+        <h3>Control de trabajos</h3>
+        <pre>
+comando &                      # Ejecuta en segundo plano
+Ctrl+Z                         # Suspende proceso en primer plano
+jobs                           # Lista trabajos en segundo plano
+fg                             # Trae trabajo más reciente a primer plano
+fg %2                          # Trae trabajo #2 a primer plano
+bg                             # Continúa trabajo suspendido en segundo plano</pre>
+
+        <h3>kill - Terminar procesos</h3>
+        <pre>
+kill PID                       # Envía señal TERM (15) al proceso
+kill -9 PID                    # Envía señal KILL (9), fuerza terminación
+kill -STOP PID                 # Suspende un proceso
+kill -CONT PID                 # Continúa un proceso suspendido
+killall nombre_proceso         # Termina todos los procesos con ese nombre</pre>
+        
+        <table>
+            <tr>
+                <th>Señal</th>
+                <th>Número</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td>SIGTERM</td>
+                <td>15</td>
+                <td>Termina el proceso de forma limpia (puede ser ignorada)</td>
+            </tr>
+            <tr>
+                <td>SIGKILL</td>
+                <td>9</td>
+                <td>Fuerza la terminación (no puede ser ignorada)</td>
+            </tr>
+            <tr>
+                <td>SIGSTOP</td>
+                <td>19</td>
+                <td>Detiene el proceso (puede continuarse)</td>
+            </tr>
+            <tr>
+                <td>SIGCONT</td>
+                <td>18</td>
+                <td>Continúa un proceso detenido</td>
+            </tr>
+        </table>
+    </section>
+    
+    <section id="directorio-dev">
+        <h2>Directorio /dev</h2>
+        <p>El directorio <code>/dev</code> contiene archivos especiales que representan dispositivos:</p>
+        
+        <table>
+            <tr>
+                <th>Archivo</th>
+                <th>Descripción</th>
+            </tr>
+            <tr>
+                <td><code>/dev/null</code></td>
+                <td>Descarta todos los datos escritos en él</td>
+            </tr>
+            <tr>
+                <td><code>/dev/zero</code></td>
+                <td>Proporciona bytes cero al leerlo</td>
+            </tr>
+            <tr>
+                <td><code>/dev/random</code></td>
+                <td>Genera números aleatorios de alta calidad</td>
+            </tr>
+            <tr>
+                <td><code>/dev/urandom</code></td>
+                <td>Genera números aleatorios</td>
+            </tr>
+            <tr>
+                <td><code>/dev/sda</code>, <code>/dev/sdb</code></td>
+                <td>Representan discos duros</td>
+            </tr>
+            <tr>
+                <td><code>/dev/tty*</code></td>
+                <td>Dispositivos de terminal</td>
+            </tr>
+            <tr>
+                <td><code>/dev/input/*</code></td>
+                <td>Dispositivos de entrada (teclado, ratón)</td>
+            </tr>
+        </table>
+        
+        <div class="note">
+            <p><strong>Nota:</strong> <code>/dev/null</code> es especialmente útil cuando solo quieres comprobar el resultado de un comando pero no te importa su salida. Por ejemplo: <code>comando &gt; /dev/null 2&gt;&1 &amp;&amp; echo "Éxito" || echo "Error"</code></p>
+        </div>
+    </section>
+    
+    <section id="expresiones-expansiones">
+        <h2>Expresiones y Expansiones</h2>
+        
+        <h3>Operaciones aritméticas</h3>
+        <pre>
+echo $(( 1 + 1 ))              # Muestra 2
+echo $(( 10 / 3 ))             # División entera: 3
+echo $(( 10 % 3 ))             # Módulo (resto): 1
+x=$(( 5 * 2 ))                 # Asigna 10 a la variable x
+echo $x                        # Muestra valor de x</pre>
+
+        <h3>Expansiones de llaves</h3>
+        <pre>
+echo file{1,3,5}               # Muestra: file1 file3 file5
+echo file{01..05}              # Muestra: file01 file02 file03 file04 file05
+echo {a,b,c}{1,2}              # Muestra: a1 a2 b1 b2 c1 c2</pre>
+
+        <h3>Sustitución de comandos</h3>
+        <pre>
+echo "Fecha: $(date)"          # Muestra: Fecha: [fecha actual]
+files=$(ls)                    # Guarda salida de ls en variable
+echo "Archivos: $files"        # Muestra archivos</pre>
+    </section>
+    
+    <footer style="margin-top: 50px; text-align: center; border-top: 1px solid #ddd; padding-top: 20px;">
+        <p>&copy; 2025 Manual de Comandos Linux</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="../../../../css/styles.css" />
+  <title>Análisis de Casos de Negocios</title>
+</head>
+
+<body>
+  <h1>PLANIFICACIÓN DE SISTEMAS 2/3</h1>
+  <h2>Análisis de Casos de Negocios</h2>
+  <main>
+    <nav>
+      <ul>
+        <li><a href="#estrategico">1 Planeamiento Estratégico</a></li>
+        <li>
+          <a href="#herramientas">
+            2 Herramientas de Planificación Estratégica
+          </a>
+        </li>
+        <li><a href="#caso-negocios">3 El Caso de Negocios</a></li>
+        <li>
+          <a href="#requerimientos">
+            4 Requerimientos/Solicitudes de Sistemas
+          </a>
+        </li>
+        <li>
+          <a href="#factores">
+            5 Factores que Afectan los Proyectos de Sistemas
+          </a>
+        </li>
+        <li>
+          <a href="#procesando">
+            6 Procesando los Requerimientos del Sistema
+          </a>
+        </li>
+        <li>
+          <a href="#evaluacion">
+            7 Evaluación de Viabilidad de los Requerimientos
+          </a>
+        </li>
+        <li><a href="#prioridades">8 Definiendo Prioridades</a></li>
+        <li><a href="#investigacion">9 La Investigación Preliminar</a></li>
+      </ul>
+    </nav>
+    <section>
+      <h2 id="estrategico">1 Planeamiento Estratégico</h2>
+      <ul>
+        <li><a href="#estrategico">Planeamiento Estratégico</a></li>
+        <li><a href="#foda">Análisis FODA</a></li>
+        <li><a href="#rol-it">El Rol del Departamento IT</a></li>
+      </ul>
+      <p id="estrategico">
+        El planeamiento estratégico es el proceso de identificar metas,
+        estrategias y recursos organizativos a largo plazo. El plan
+        estratégico mira más allá de las actividades del día a día y se enfoca
+        en un horizonte que es de tres, cinco o más años en el futuro. En la
+        mayoría de las compañías, el equipo IT revisa cada propuesta, proyecto
+        y requerimiento de sistemas relacionados con IT para determinar si
+        presenta un caso de negocios sólido o una justificación.
+      </p>
+      <h3 id="descripcion-planeacion">
+        Descripción de la Planeación Estratégica
+      </h3>
+      <p>
+        La planeación estratégica comienza con una declaración de la misión de
+        la empresa, que refleja la visión de la firma, sus propósitos y
+        valores. La declaración de misión normalmente se enfoca en metas y
+        desafíos a largo plazo, la importancia de las partes interesadas de la
+        empresa y el compromiso hacia el rol de la empresa como ciudadano
+        corporativo. Con la declaración de misión como telón de foro, la firma
+        desarrolla metas y objetivos a corto plazo.
+      </p>
+      <h3 id="foda">Análisis FODA</h3>
+      <p>
+        La sigla FODA proviene de Fortalezas, Oportunidades, Debilidades y
+        Amenazas (en inglés "SWOT" de "Strengths, Weaknesses, Opportunities
+        and Threats"). El análisis FODA puede enfocarse en un producto o
+        proyecto específicos, una división de operaciones, toda la compañía, o
+        en la misma declaración de misión. El objetivo general es el de evitar
+        buscar metas que no sean realistas, no sean rentables o sean
+        inalcanzables.
+      </p>
+      <h3 id="rol-it">El Rol del Departamento IT</h3>
+      <p>
+        El analista de sistemas debería estar interesado en el planeamiento
+        estratégico porque muestra una idea general de lo que implicará dar
+        soporte al proyecto. Los analistas de sistemas no deben dejar de
+        enfocarse en el rol estratégico del departamento IT, aún cuando lleven
+        a cabo sus tareas técnicas del día a día. Los analistas con
+        experiencia saben que la planificación es esencial para el éxito de
+        los proyectos IT y debe comenzarse lo antes posible. Una planificación
+        cuidadosa puede ayudar a asegurar que:
+      </p>
+      <ul>
+        <li>
+          El proyecto soporte la mayoría de la estrategia de negocios y
+          necesidades operativas.
+        </li>
+        <li>
+          El alcance del proyecto esté bien definido y claramente establecido.
+        </li>
+        <li>
+          Las metas del proyecto sean realistas, realizables y atadas a
+          declaraciones, suposiciones, restricciones, factores y otras
+          entradas; todas ellas bien definidas.
+        </li>
+      </ul>
+      <p>
+        Durante el proceso de planificación, la gerencia y el equipo IT deben
+        estar estrechamente vinculados.
+      </p>
+    </section>
+    <section>
+      <h2 id="herramientas">2 Herramientas de Planificación Estratégica</h2>
+      <p>
+        Algunos analistas se apegan a métodos tradicionales basados en texto,
+        usando procesadores de texto, para presentar estructura y claridad.
+        Otros prefieren usar hojas de cálculos, porque les resulta más fácil
+        mostrar prioridades y la relativa importancia de asunciones de la
+        planificación. Un enfoque más sofisticado es el de usar herramientas
+        "CASE" (del inglés "Computer Aided Software Engineering", en
+        castellano "Ingeniería de Software Asistida por Computadora") para
+        definir y documentar todo el entorno. Un rol importante para el
+        analista de sistemas es el de conocer cuando cada una de éstas
+        herramientas y técnicas serán mejor usadas y aprovechadas dependiendo
+        del contexto de cada proyecto en particular.
+      </p>
+      <h3>Ejemplo de Herramientas CASE:</h3>
+      <ul>
+        <li>
+          <h3>HERRAMIENTAS DE DIAGRAMA:</h3>
+          <p>
+            Éstas herramientas se usan para representar, de una manera
+            gráfica, componentes de software y flujos de datos, entre otros
+            varios componentes de software y estructuras de sistemas. Por
+            ejemplo:
+          </p>
+          <ul>
+            <li><a href="https://github.com/jgraph/drawio">draw.io</a></li>
+          </ul>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE MODELADO DE PROCESOS:</h3>
+          <p>
+            El modelado de procesos es un método para crear modelos de
+            procesos de software, el cual es usado para desarrollar el
+            software. Éstas herramientas ayudan a los administradores a elegir
+            el modelo de proceso o modificarlo según el requerimiento del
+            producto de software. Por ejemplo:
+          </p>
+          <ul>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Eclipse_Process_Framework">
+                EPF Composer
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE ADMINISTRACIÓN DE PROYECTOS:</h3>
+          <p>
+            Éstas herramientas se usan para la planificación del proyecto,
+            estimaciones de costo y esfuerzo, el armado del cronograma del
+            proyecto y el planeamiento de los recursos. Por ejemplo:
+          </p>
+          <ul>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/OpenProject">
+                OpenProject
+              </a>
+            </li>
+            <li><a href="https://en.wikipedia.org/wiki/Trac">trac</a></li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/LibrePlan">LibrePlan</a>
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Taiga_%28project_management%29">
+                Taiga
+              </a>
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Redmine">Redmine</a>
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Tuleap_%28project_management%29">
+                Tuleap
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE DOCUMENTACIÓN:</h3>
+          <p>
+            En un proyecto de software, la documentación comienza antes que
+            los procesos de software, atraviesa todas las fases del SDLC y
+            también se realiza luego de que el proyecto se haya completado.
+            Por ejemplo:
+          </p>
+          <ul>
+            <li>
+              <a href="https://github.com/facebook/docusaurus">Docusaurus</a>
+            </li>
+            <li><a href="https://github.com/vuejs/vuepress">VuePress</a></li>
+          </ul>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE ANÁLISIS:</h3>
+          <p>
+            Son herramientas que ayudan a recolectar requerimientos,
+            automáticamente controlar inconsistencias, inconsistencias en los
+            diagramas, redundancia de datos u omisiones erróneas.
+          </p>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE DISEÑO:</h3>
+          <p>
+            Herramientas que ayudan a los diseñadores de software a diseñar la
+            estructura de bloques del software, que luego podrá ser desglosado
+            en módulos más pequeños usando técnicas de refinamiento.
+          </p>
+        </li>
+
+        <li>
+          <h3>HERRAMIENTAS DE ADMINISTRACIÓN DE CONFIGURACIÓN:</h3>
+          <p>
+            Una instancia de software está publicada bajo una versión. Las
+            herramientas de administración de configuración ayudan con la
+            administración de versiones, administración de configuraciones y
+            administración de control de cambios. Por ejemplo:
+          </p>
+          <ul>
+            <li><a href="https://en.wikipedia.org/wiki/Git">Git</a></li>
+          </ul>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE CONTROL DE CAMBIOS:</h3>
+          <p>
+            Éstas herramientas son consideradas como parte de las herramientas
+            de administración de configuraciones. Se encargan de manejar los
+            cambios realizados al código del software.
+          </p>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE DESARROLLO:</h3>
+          <p>
+            Éstas herramientas consisten en entornos de desarrollo como los
+            "IDE" (del inglés "Integrated Development Environment").
+          </p>
+        </li>
+
+        <li>
+          <h3>HERRAMIENTAS DE PROTOTIPADO:</h3>
+          <p>
+            Los prototipos de software son una versión simulada del producto
+            de software al cual se busca llegar. Los prototipos anticipan la
+            experiencia del producto final y pueden simular algunas de sus
+            funciones. Por ejemplo:
+          </p>
+          <ul>
+            <li><a href="https://github.com/penpot/penpot">Penpot</a></li>
+            <li>
+              <a href="https://github.com/plasmicapp/plasmic">Plasmic</a>
+            </li>
+            <li>
+              <a href="https://github.com/vanila-io/wireflow">Wireflow</a>
+            </li>
+            <li>
+              <a href="https://github.com/KlausSchaefers/quant-ux">
+                Quant-UX
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE QA:</h3>
+          <p>
+            Asegurar la calidad de un producto de software conlleva a
+            monitorear el proceso de ingeniería y los métodos de desarrollo
+            adoptados, para asegurar la conformidad de calidad requerida por
+            los estándares de la compañía. Por ejemplo:
+          </p>
+          <ul>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Apache_JMeter">
+                Apache JMeter
+              </a>
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Selenium_%28software%29">
+                Selenium
+              </a>
+            </li>
+            <li><a href="https://github.com/Kong/insomnia">Insomnia</a></li>
+            <li>
+              <a href="https://github.com/hoppscotch/hoppscotch">
+                Hoppscotch
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3>HERRAMIENTAS DE MANTENIMIENTO:</h3>
+          <p>
+            El mantenimiento de software incluye modificaciones en el producto
+            de software luego de que éste haya sido entregado. Dentro de las
+            herramientas CASE, que ayudan en la fase de mantenimiento del
+            SDLC, encontramos a la generación automática de registros
+            ("logs"), reportes y tareas ("tickets") para corregir errores. Por
+            ejemplo:
+          </p>
+          <ul>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Bugzilla">Bugzilla</a>
+            </li>
+            <li>
+              <a href="https://en.wikipedia.org/wiki/Mantis_Bug_Tracker">
+                Mantis Bug Tracker
+              </a>
+            </li>
+            <li><a href="https://github.com/wekan/wekan">Wekan</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2 id="caso-negocios">3 El Caso de Negocios</h2>
+      <p>
+        Durante la fase de planeamiento del sistema, el equipo IT revisa las
+        peticiones para determinar si presentan casos de negocios sólidos. El
+        termino "caso de negocios" se refiere a las razones, o
+        justificaciones, de una propuesta. Al realizar la revisión, el
+        analista debe considerar la misión general de la compañía.
+      </p>
+      <p>
+        El caso de negocios debería responder a preguntas como las siguientes:
+      </p>
+      <ul>
+        <li>¿Por qué estamos realizando éste proyecto?</li>
+        <li>¿De qué se trata el proyecto?</li>
+        <li>
+          ¿De qué manera ésta solución aborda los problemas de negocios
+          importantes?
+        </li>
+        <li>¿Cuando costará y cuando tiempo llevará?</li>
+        <li>
+          ¿Se sufrirá alguna perdida de productividad durante el proceso de
+          transición?
+        </li>
+        <li>¿Cual es el periodo de retorno de inversión y pago?</li>
+        <li>
+          ¿Cuales son los riesgos en llevar a cabo el proyecto? ¿Cuales son
+          riesgos de no hacerlo?
+        </li>
+        <li>¿Como se medirá el éxito?</li>
+        <li>¿Qué alternativas existen?</li>
+      </ul>
+    </section>
+    <section>
+      <h2 id="requerimientos">4 Requerimientos/Solicitudes de Sistemas</h2>
+      <p>
+        El punto de partida para la mayoría de los proyectos de los sistemas
+        informáticos son los llamados requerimientos/solicitudes de sistemas,
+        que es una manera formal de pedir por soporte IT. Un requerimiento de
+        sistema debería proponer mejoras para un sistema existente, la
+        corrección de problemas, el remplazo de un sistema viejo o el
+        desarrollo de un sistema completamente nuevo y necesario para cumplir
+        con las actuales y futuras necesidades de negocios de la compañía. A
+        continuación se listan las seis principales razones de requerimientos
+        de sistemas:
+      </p>
+      <ul>
+        <li>
+          <h3>CONTROLES MÁS FUERTES:</h3>
+          <p>
+            El sistema debe tener controles efectivos para asegurar que los
+            datos estén asegurados y sean precisos.
+          </p>
+        </li>
+        <li>
+          <h3>REDUCCIÓN DE COSTOS:</h3>
+          <p>El sistema actual puede ser caro para operar o mantener.</p>
+        </li>
+        <li>
+          <h3>MÁS INFORMACIÓN:</h3>
+          <p>
+            El sistema puede producir información que sea insuficiente,
+            incompleta o incapaz de soportar las cambiantes necesidades de
+            información de la compañía.
+          </p>
+        </li>
+        <li>
+          <h3>MEJOR RENDIMIENTO:</h3>
+          <p>
+            El sistema actual puede no cumplir con los requerimientos de
+            rendimiento.
+          </p>
+        </li>
+        <li>
+          <h3>MEJORES SERVICIOS:</h3>
+          <p>
+            Los requerimientos de sistemas suelen estar dirigidos a mejorar
+            los servicios para los clientes o usuarios dentro de la compañía.
+          </p>
+        </li>
+        <li>
+          <h3>MAYOR SOPORTE PARA NUEVOS PRODUCTOS Y SERVICIOS:</h3>
+          <p>
+            Los nuevos productos y servicios suelen requerir nuevos tipos o
+            niveles de soporte IT.
+          </p>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2 id="factores">5 Factores que Afectan los Proyectos de Sistemas</h2>
+      <p>
+        Existen factores internos y externos que afectan a las decisiones de
+        negocios tomadas por cualquier compañía y los proyectos IT no son la
+        excepción.
+      </p>
+      <h3>Factores Internos</h3>
+      <ul>
+        <li>
+          <h3>PLAN ESTRATÉGICO:</h3>
+          <p>
+            El plan estratégico de la compañía define la dirección general
+            para la firma y tiene un impacto importante en los proyectos IT.
+          </p>
+        </li>
+        <li>
+          <h3>ALTOS DIRECTIVOS:</h3>
+          <p>
+            Debido a que se requieren recursos significativos, los altos
+            directivos usualmente inician proyectos de gran escala.
+          </p>
+        </li>
+        <li>
+          <h3>REQUERIMIENTOS DE USUARIOS:</h3>
+          <p>
+            A medida que los usuarios recaen, más y más, en los sistemas
+            informáticos para realizar sus trabajos, es probable que requieran
+            más servicios y soportes IT.
+          </p>
+        </li>
+        <li>
+          <h3>DEPARTAMENTO DE TECNOLOGÍA DE LA INFORMACIÓN:</h3>
+          <p>
+            Los requerimientos de los proyectos de sistemas también provienen
+            del propio departamento IT.
+          </p>
+        </li>
+        <li>
+          <h3>SISTEMA Y DATOS EXISTENTES:</h3>
+          <p>
+            Los errores o problemas en los sistemas existentes pueden disparar
+            requerimientos para proyectos de sistemas.
+          </p>
+        </li>
+        <li>
+          <h3>FINANZAS DE LA COMPAÑÍA:</h3>
+          <p>
+            El estado financiero de la compañía puede afectar los proyectos de
+            sistemas.
+          </p>
+        </li>
+      </ul>
+      <h3>Factores Externos</h3>
+      <ul>
+        <li>
+          <h3>TECNOLOGÍA:</h3>
+          <p>
+            Los cambios tecnológicos son una de las mayores fuerzas que
+            afectan a los negocios y la sociedad en general.
+          </p>
+        </li>
+        <li>
+          <h3>PROVEEDORES:</h3>
+          <p>
+            Con el crecimiento del intercambio electrónico de datos ("EDI" del
+            inglés "Electronic Data Interchange"), la relación con los
+            proveedores se ha vuelto críticamente importante.
+          </p>
+        </li>
+        <li>
+          <h3>CLIENTES:</h3>
+          <p>
+            Los sistemas informáticos que interactúan con los clientes
+            usualmente reciben la mayor prioridad.
+          </p>
+        </li>
+        <li>
+          <h3>COMPETENCIA:</h3>
+          <p>
+            La competencia es muchas veces la razón de decisiones tomadas en
+            sistemas informáticos.
+          </p>
+        </li>
+        <li>
+          <h3>LA ECONOMÍA:</h3>
+          <p>
+            La actividad económica tiene una fuerte influencia en la
+            administración de la información corporativa.
+          </p>
+        </li>
+        <li>
+          <h3>EL GOBIERNO:</h3>
+          <p>
+            Las regulaciones de los estados municipales, provinciales y
+            nacionales afectan directamente el diseño de los sistemas
+            informáticos corporativos.
+          </p>
+        </li>
+      </ul>
+    </section>
+    <section>
+      <h2 id="procesando">6 Procesando los Requerimientos del Sistema</h2>
+      <p>
+        En la mayoría de las organizaciones, el departamento IT recibe más
+        requerimientos de sistemas de los que puede manejar. Muchas
+        organizaciones asignan la responsabilidad de evaluar los
+        requerimientos de sistemas a un grupo especial de administradores y
+        usuarios.
+      </p>
+      <h3>Formularios de Requerimientos de Sistemas</h3>
+      <p>
+        Muchas organizaciones usan formularios especiales para los
+        requerimientos de sistemas.
+      </p>
+      <h3>Herramientas de Requerimientos de Sistemas</h3>
+      <p>
+        Cuando el numero de requerimientos enviados a través de los
+        formularios automatizados sea significativo, o si los requerimientos
+        se originan desde fuentes internas como externas, se pueden usar
+        herramientas especiales que ayudan a administrar el flujo de trabajo.
+      </p>
+      <h3>Comité de Revisión de Sistemas</h3>
+      <p>
+        La mayoría de las grandes compañías usan un comité de revisión de
+        sistemas para evaluar los requerimientos de sistemas.
+      </p>
+    </section>
+    <section>
+      <h2 id="evaluacion">
+        7 Evaluación de Viabilidad de los Requerimientos
+      </h2>
+      <p>
+        Los requerimientos de sistemas deben pasar varias pruebas para conocer
+        si vale la pena continuar con ellos. El primer paso es el de
+        identificar y eliminar requerimientos de sistemas que no sean viables.
+      </p>
+      <h3>Estudios de Factibilidad</h3>
+      <p>
+        Los estudios de factibilidad usan cuatro marcadores principales para
+        medir una propuesta: factibilidad operacional, factibilidad económica,
+        factibilidad técnica y factibilidad de cronograma.
+      </p>
+      <ul>
+        <li>
+          <h3>Operacional:</h3>
+          <p>¿Será fácil de aprender y usar?</p>
+        </li>
+
+        <li>
+          <h3>Económico:</h3>
+          <p>¿Los beneficios excederán los costos?</p>
+        </li>
+
+        <li>
+          <h3>Técnico:</h3>
+          <p>¿Se disponen de los recursos técnicos necesarios?</p>
+        </li>
+
+        <li>
+          <h3>Cronograma:</h3>
+          <p>¿Se puede hacer en tiempo?</p>
+        </li>
+      </ul>
+      <h3>Factibilidad Operacional</h3>
+      <p>
+        La factibilidad operacional significa que el sistema propuesto será
+        usado efectivamente luego de que haya sido desarrollado. Si los
+        usuarios tienen dificultades con un nuevo sistema, ésto no producirá
+        los beneficios esperados.
+      </p>
+      <h3>Factibilidad Económica</h3>
+      <p>
+        La factibilidad económica significa que los beneficios proyectados por
+        el sistema propuesto exceden los costos estimados. Normalmente se
+        considera el Costo Total de Propiedad ("TCO" del inglés "Total Cost of
+        Ownership"), que incluye los costos de creación o adquisición, como
+        también los costos del continuo soporte y mantenimiento. También deben
+        considerarse los costos intangibles, como la moral de los empleados
+        que no tiene un impacto monetario pero sí en el rendimiento de la
+        compañía.
+      </p>
+      <h3>Factibilidad Técnica</h3>
+      <p>
+        La factibilidad técnica se refiere a los recursos técnicos necesarios
+        para desarrollar, comprar, instalar u operar el sistema propuesto.
+      </p>
+      <h3>Factibilidad de Cronograma</h3>
+      <p>
+        La factibilidad de cronograma significa que el proyecto se puede
+        implementar en un rango de tiempo aceptable. Cuando se evalúa la
+        factibilidad de cronograma, el analista de sistemas debe considerar la
+        interacción entre tiempo y costos. Por ejemplo, acelerar el cronograma
+        de un proyecto puede hacer que éste sea viable, pero mucho más
+        costoso.
+      </p>
+    </section>
+    <section>
+      <h2 id="prioridades">8 Definiendo Prioridades</h2>
+      <p>
+        Luego de descartar los requerimientos de sistemas inviables, el comité
+        de revisión de sistemas debe establecer las prioridades para los
+        requerimientos que han quedado.
+      </p>
+      <h3>Prioridades Dinámicas</h3>
+      <p>
+        Es importante destacar que muchos proyectos son dinámicos por
+        naturaleza. Por ejemplo, los proyectos que han adoptado una
+        metodología ágil son propensos a cambiar rápidamente a través del
+        ciclo de vida de desarrollo del sistema. Éstos cambios pueden causar
+        que también cambien las prioridades de los requerimientos.
+      </p>
+      <h3>Factores que Afectan las Prioridades</h3>
+      <p>
+        Cuando se evalúan las prioridades del proyecto, el analista de
+        sistemas debe considerar los siguiente puntos:
+      </p>
+      <ul>
+        <li>
+          ¿El sistema propuesto reducirá los costos? ¿Dónde? ¿Cuándo? ¿Cómo?
+          ¿Por cuánto?
+        </li>
+        <li>
+          ¿El sistema incrementará los ingresos de la compañía? ¿Dónde?
+          ¿Cuándo? ¿Cómo? ¿Por cuánto?
+        </li>
+        <li>
+          ¿El sistema proyectará resultados en más información o producirá
+          mejores resultados? ¿Cómo? ¿Se pueden medir los resultados?
+        </li>
+        <li>¿El sistema servirá a los clientes de mejor manera?</li>
+        <li>¿El sistema servirá a la organización de mejor manera?</li>
+        <li>
+          ¿El proyecto se puede implementar en un periodo de tiempo razonable?
+          ¿Cuanto tiempo duraran los resultados?
+        </li>
+        <li>
+          ¿Están disponibles los recursos financieros, humanos y técnicos que
+          se necesitan?
+        </li>
+      </ul>
+      <h3>Proyectos Discrecionales y No Discrecionales</h3>
+      <p>
+        A los proyectos donde la administración dispone de la opción de
+        implementarlos, se los llama proyectos discrecionales. Mientras que a
+        los proyectos donde no existe tal opción, se los llama proyectos no
+        discrecionales. Crear un nuevo reporte para un usuario es un ejemplo
+        de un proyecto discrecional, mientras que agregar un reporte requerido
+        por una ley federal es un ejemplo de proyecto no discrecional.
+      </p>
+    </section>
+    <section>
+      <h2 id="investigacion">9 La Investigación Preliminar</h2>
+      <p>
+        El analista de sistemas realiza una investigación preliminar para
+        estudiar los requerimientos de sistemas y recomendar una acción
+        especifica. Luego de obtener la autorización para proceder, el
+        analista interactúa con los gerentes, usuarios y otras partes
+        interesadas.
+      </p>
+      <h3>Planificando la Investigación Preliminar</h3>
+      <p>
+        Antes de comenzar con la investigación preliminar, es importante
+        comunicarle a las personas sobre la investigación y explicarles el rol
+        del analista de sistemas. Deben planificarse reuniones con gerentes o
+        administradores claves, usuarios y otras partes interesadas como el
+        personal de IT, para describir el proyecto, explicar los roles y
+        responsabilidades, contestar preguntas e incentivar a que comenten y
+        opinen. La comunicación interactiva con los usuarios comienza en este
+        punto y continua a través de todo el proceso de desarrollo.
+      </p>
+      <h3>Ejecutando la Investigación Preliminar</h3>
+      <p>
+        Durante la investigación preliminar, el analista de sistemas
+        normalmente sigue una serie de pasos. El procedimiento exacto depende
+        de la naturaleza del requerimiento, el tamaño del proyecto y el grado
+        de urgencia.
+      </p>
+      <ol>
+        <li>
+          <h3>ENTENDER EL PROBLEMA U OPORTUNIDAD:</h3>
+          <p>
+            Una técnica popular para investigar las causas y efectos es la
+            llamada Diagrama de Ishikawa o Diagrama de Espina de Pescado (en
+            inglés "Fish-Bone Diagram"). Éste diagrama es una herramienta de
+            análisis que representa las posibles causas de un problema como un
+            esquema gráfico.
+          </p>
+        </li>
+
+        <li>
+          <h3>DEFINIR EL ALCANCE DEL PROYECTO Y LAS RESTRICCIONES:</h3>
+          <p>
+            Determinar el alcance del proyecto significa definir los límites
+            específicos, o la amplitud, del proyecto. El alcance del proyecto
+            se debe definir lo más claro que sea posible. Junto con el alcance
+            del proyecto, se debe identificar toda restricción que pueda tener
+            el sistema.
+          </p>
+        </li>
+
+        <li>
+          <h3>REALIZAR UNA INVESTIGACIÓN DE LOS HECHOS:</h3>
+          <p>
+            El objetivo de la investigación es la de recolectar datos sobre la
+            usabilidad, costos, beneficios y cronogramas del proyecto.
+          </p>
+
+          <ul>
+            <li>
+              ANALIZAR EL ORGANIGRAMA DE LA EMPRESA (también conocido como
+              diagrama jerárquico)
+            </li>
+            <li>REALIZAR ENTREVISTAS</li>
+            <li>REVISAR LA DOCUMENTACIÓN DEL SISTEMA ACTUAL</li>
+            <li>OBSERVAR COMO OPERA EL SISTEMA ACTUAL</li>
+            <li>REALIZAR UN CUESTIONARIO DE USUARIOS</li>
+            <li>
+              ANALIZAR LOS DATOS (diagrama de Pareto, diagrama de dispersión,
+              etc)
+            </li>
+          </ul>
+        </li>
+        <li>
+          <h3>
+            ANALIZAR LA USABILIDAD DEL PROYECTO, LOS COSTOS, BENEFICIOS Y LA
+            PROGRAMACIÓN DE DATOS:
+          </h3>
+          <p>
+            Luego de la recolección de datos en la investigación de los hechos
+            y antes de que se pueda evaluar la factibilidad, los datos deben
+            ser analizados minuciosamente. Por ejemplo, si se realizaron
+            entrevistas o encuestas, los datos se deben tabular para que sean
+            más fácil de entender.
+          </p>
+        </li>
+
+        <li>
+          <h3>EVALUAR LA FACTIBILIDAD:</h3>
+          <p>
+            Una vez en éste punto ya se analizaron los problemas u
+            oportunidades, ya se ha definido el alcance y las restricciones
+            del proyecto, y la investigación de los hechos ha terminado para
+            evaluar la usabilidad, costos, beneficios y restricciones de
+            tiempo del proyecto. A continuación se realiza la evaluación de la
+            factibilidad del proyecto. Para ésto se revisan las respuestas a
+            las preguntas listadas en la (anterior) sección "7 - Estudios de
+            Factibilidad".
+          </p>
+        </li>
+      </ol>
+      <h3>Resumiendo la Investigación Preliminar</h3>
+      <p>
+        La última tarea de la investigación preliminar es la de resumir los
+        resultados y recomendaciones, que se deben enviar a los gerentes, en
+        un reporte y/o presentación. El reporte escrito y la presentación oral
+        son ejemplos de la necesidad que tienen los analistas de sistemas de
+        desarrollar fuertes habilidades de comunicación. El reporte incluye
+        una evaluación de los requerimientos de sistemas, una estimación de
+        costos y beneficios y un caso de negocio, que es un resumen del
+        requerimiento del proyecto y las recomendaciones especificas.
+      </p>
+    </section>
+  </main>
+</body>
+
+</html>

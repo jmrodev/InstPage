@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link
+      rel="stylesheet"
+      href="../../../../css/styles.css"
+    />
+    <title>Diseño de Sistemas 2/3</title>
+  </head>
+
+  <body>
+    <h1>DISEÑO DE SISTEMAS 2/3</h1>
+    <h2>Diseño de Datos</h2>
+    <main>
+      <nav>
+        <ul>
+          <li><a href="#conceptos">1 Conceptos del Diseño de Datos</a></li>
+          <li><a href="#componentes-dbms">2 Componentes de los DBMS</a></li>
+          <li><a href="#diseno-web">3 Diseño Basado en la WEB</a></li>
+          <li><a href="#terminos">4 Términos del Diseño de Datos</a></li>
+          <li><a href="#erd">5 Diagramas de Entidad-Relación</a></li>
+          <li><a href="#normalizacion">6 Normalización de Datos</a></li>
+          <li><a href="#codigos">7 Códigos</a></li>
+          <li>
+            <a href="#almacenamiento">8 Almacenamiento y Acceso de Datos</a>
+          </li>
+          <li><a href="#control-datos">9 Control de Datos</a></li>
+        </ul>
+      </nav>
+      <section>
+        <h2 id="conceptos">1 Conceptos del Diseño de Datos</h2>
+        <h3>Estructuras de Datos</h3>
+        <p>
+          Las estructuras de datos son un framework ("marco de trabajo") para
+          organizar, almacenar y administrar datos. Las estructuras de datos
+          consisten en archivos o tablas que interactúan de varias formas. Cada
+          archivo o tabla contiene datos sobre personas, lugares, cosas o
+          eventos. Por ejemplo, un archivo o tabla puede contener datos sobre
+          los clientes y otros archivos o tablas pueden almacenar datos sobre
+          productos, compras, proveedores o empleados.
+        </p>
+        <p>
+          Muchos de los programas antiguos utilizaban el procesamiento de
+          archivos, ya que funcionaba muy bien con el hardware de la época y la
+          entrada en lote. Algunas compañías aún usan éste método para procesar
+          regularmente grandes cantidades de estructuras de datos, ya que puede
+          ser económico bajo ciertas circunstancias. Un ejemplo podría ser el de
+          una empresa de tarjetas de créditos que envía miles de transacciones
+          desde el archivo "TRANSACCIONES" al archivo "CLIENTES", donde se
+          representa el balance de las cuentas. Para éste método, el
+          procesamiento de archivos puede ser una buena opción.
+        </p>
+        <p>
+          A través del tiempo, las
+          <strong>Bases de Datos Relacionales</strong>
+          modernas se han convertido en un estándar para los desarrolladores de
+          sistemas.
+        </p>
+        <h3>Sistemas de Administración de Bases de Datos</h3>
+        <p>
+          Las bases de datos proveen un framework general que evita la
+          redundancia de datos y da soporte a entornos dinámicos y de tiempo
+          real. Un Sistema de Administración de Bases de Datos ("DBMS" del
+          inglés "Database Management System") es una colección de herramientas,
+          características e interfaces que le permiten a los usuarios el
+          agregar, actualizar, administrar, acceder y analizar datos.
+        </p>
+        <p>Entre las principales ventajas de los DBMS se encuentran:</p>
+        <ul>
+          <li>
+            <strong>ESCALABILIDAD:</strong>
+            La escalabilidad significa que el sistema puede ampliarse,
+            modificarse o reducirse fácilmente; De ésta forma podrá cumplir con
+            las necesidades de la industria de los negocios que cambian
+            rápidamente.
+          </li>
+          <li>
+            <strong>ECONOMÍA DEL CRECIMIENTO:</strong>
+            El diseño de bases de datos permite utilizar el hardware de mejor
+            manera. Si una compañía mantiene una base de datos corporativa, para
+            que su procesamiento sea menos costoso, se deben usar servidores
+            potentes y redes de comunicación. Se llama economía del crecimiento
+            a la eficiencia inherente de procesar un alto volumen de datos en
+            grandes computadoras.
+          </li>
+          <li>
+            <strong>APLICACIONES EMPRESARIALES:</strong>
+            Generalmente, los DBMS, son administrados por una persona llamada
+            Administrador de Bases de Datos ("DBA" del inglés "Database
+            Administrator"). Los DBA evalúan los requerimientos generales y
+            mantienen las bases de datos para el beneficio de toda la compañía,
+            en lugar de hacerlo para un solo departamento o usuario. Los
+            sistemas de bases de datos soportan aplicaciones empresariales de
+            manera más eficiente que los sistemas de procesamiento de archivos.
+          </li>
+          <li>
+            <strong>ESTÁNDARES FUERTES:</strong>
+            Una administración de bases de datos efectiva ayuda a asegurar que
+            los estándares de nombres de datos, formatos y documentación se
+            cumplan uniformemente a lo largo y ancho de la organización.
+          </li>
+          <li>
+            <strong>MEJOR SEGURIDAD:</strong>
+            Los DBA pueden definir procesos de autorización para asegurar que
+            sólo los usuarios legítimos puedan acceder a la bases de datos y que
+            diferentes usuarios tengan diferentes niveles de acceso.
+          </li>
+          <li>
+            <strong>INDEPENDENCIA DE DATOS:</strong>
+            Los sistemas que interactúan con los DBMS son relativamente
+            independientes de cómo se mantienen los datos físicamente. Éste
+            diseño le provee al DBA una flexibilidad para alterar las
+            estructuras de datos sin modificar los sistemas informáticos que
+            usan los datos.
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2 id="componentes-dbms">2 Componentes de los DBMS</h2>
+        <p>
+          Los DBMS proveen una interfaz entre la base de datos y los usuarios
+          que necesitan acceder a los datos. Si bien a los usuarios les interesa
+          principalmente las interfaces fáciles de usar y el soporte para sus
+          requerimientos de negocios, los analistas de sistemas deben entender
+          todos los componentes de los DBMS. Ademas de las interfaces para
+          usuarios, DBAs y sistemas relacionados; los DBMS también tienen un
+          lenguaje de manipulación de datos, un esquema, sub-esquema y un
+          repositorio físico de datos.
+        </p>
+        <h3>Interfaces para Usuarios, DBAs y Sistemas Relacionados</h3>
+        <p>
+          Cuando los usuarios, los DBAs y los sistemas informáticos relacionados
+          solicitan datos y servicios, el DBMS procesa la petición, manipula los
+          datos y provee una respuesta. Para éste fin, la mayoría de los DBMS
+          usan un
+          <strong>lenguaje de manipulación de datos</strong>
+          ("DML" del inglés "Data Manipulation Language"), siendo
+          <strong>SQL</strong>
+          ("Structured Query Language" traducido "Lenguaje de Consulta
+          Estructurada") el más usado. El DML controla las operaciones de la
+          base de datos, incluyendo la creación, lectura, actualización y
+          borrado de los datos ("CRUD" del inglés "Create, Read, Update and
+          Delete"). Algunos DBMS también proveen un entorno gráfico que permiten
+          realizar las operaciones a través de la GUI.
+        </p>
+        <h3>Esquema</h3>
+        <p>
+          El esquema es la definición completa de la base de datos, incluyendo
+          la descripción de todos los campos, tablas y relaciones. Uno o más
+          sub-esquemas pueden ser definidos. Un sub-esquema es una vista de la
+          base de datos usada por uno o más usuarios. El sub-esquema define
+          aquellas porciones de la base de datos que necesita (o se les permite
+          acceder) un usuario o sistema en particular.
+        </p>
+        <h3>Repositorio de Datos Físico</h3>
+        <p>
+          En el "Modelado de Datos y Procesos" se trató el diccionario de datos,
+          el cual describe todos los elementos de datos incluidos en el diseño
+          lógico. En está etapa del proceso de desarrollo de sistemas, el
+          diccionario de datos se transforma en un repositorio de datos físico,
+          el cual contiene el esquema y los sub-esquemas. El repositorio físico
+          puede estar centralizado o puede estar distribuido en diferentes
+          ubicaciones. Además, los datos guardados pueden estar administrados
+          por un solo DBMS, o por varios sistemas. Para solucionar potenciales
+          problemas de conectividad y acceso, las compañías usan software
+          compatible con ODBC ("Open Database Connectivity" traducido
+          "Conectividad de Base de Datos Abierta") que permite la comunicación
+          entre varios sistemas y DBMS. El ODBC es un protocolo industrial
+          estandarizado que hace posible que el software de diferentes
+          proveedores interactúen y compartan datos. ODBC usa declaraciones SQL
+          que los DBMS entienden y pueden ejecutar.
+        </p>
+      </section>
+      <section>
+        <h2 id="diseno-web">3 Diseño Basado en la WEB</h2>
+        <p>
+          Para los DBMS, al usar un diseño WEB, Internet es el front-end o la
+          interfaz. Las tecnologías de Internet proveen gran poder y
+          flexibilidad ya que los sistemas informáticos relacionados no están
+          atados a una combinación especifica de hardware o software. Para
+          acceder a la base de datos sólo se requiere un navegador y una
+          conexión a Internet. Los sistemas WEB son populares porque ofrecen un
+          acceso fácil, una conectividad mundial y son efectivos económicamente;
+          todo ésto es vital para la compañías que deben competir en una
+          economía global.
+        </p>
+        <p>
+          Para acceder a los datos en una sistema WEB, la base de datos debe
+          estar conectada a Internet o a la Intranet de la compañía. Sin
+          embargo, las bases de datos e Internet hablan dos idiomas diferentes.
+          Las bases de datos se crean y administran usando lenguajes y comandos
+          que no tienen nada que ver con HTML, el lenguaje de la WEB. Para
+          contrarrestar ésta diferencia, teniendo en cuenta que el objetivo es
+          el de conectar la bases de datos con la WEB y permitir que se puedan
+          ver y editar los datos, es necesario usar un middleware; el cual es un
+          software que integra diferentes aplicaciones y les permite
+          intercambiar datos. Los middlware conocen cómo interpretar las
+          peticiones desde la WEB y transformarlas en comandos que una base de
+          datos puede ejecutar. Cuando la base de datos responde a los comandos,
+          el middleware transforma los resultados en páginas HTML que pueden
+          mostrase en los navegadores de los usuarios. Un sitio WEB escrito con
+          PHP es un ejemplo de middleware.
+        </p>
+        <p>
+          Los datos WEB deben estar bien asegurados, sin embargo también deber
+          ser fáciles de acceder para los usuarios autorizados. Para que ésto se
+          pueda llevar a cabo, los sistemas bien diseñados proveen medidas de
+          seguridad en tres niveles: en la base de datos, en el sistema web y en
+          el servidor web que provee del contenido y los enlaces (HTTPS).
+        </p>
+      </section>
+      <section>
+        <h2 id="terminos">4 Términos del Diseño de Datos</h2>
+        <h3>Definiciones</h3>
+        <ul>
+          <li>
+            <strong>ENTIDAD:</strong>
+            Una entidad es una persona, un lugar, una cosa o un evento del cual
+            se colectan y mantienen sus datos (ej. CLIENTE, COMPRA, PRODUCTO,
+            PROVEEDOR). Cuando se prepararon los DFDs, durante la fase de
+            análisis de sistemas, se identificaron varias entidades y
+            repositorios de datos. Ahora se considerarán las relaciones entre
+            las entidades.
+          </li>
+          <li>
+            <strong>TABLA O ARCHIVO:</strong>
+            Los datos se organizan en tablas o archivos. Una tabla (o archivo)
+            contiene un conjunto de registros relacionados que guardan datos
+            sobre una entidad específica. Las tablas y archivos se muestran como
+            estructuras de dos dimensiones formadas por columnas (verticales) y
+            filas (horizontales). Cada columna representa un campo o
+            característica de la entidad; mientras que cada fila representa un
+            registro, el cual es una instancia u ocurrencia de la entidad.
+          </li>
+          <li>
+            <strong>CAMPO:</strong>
+            Un campo, también llamado atributo, es una característica o dato
+            sobre una entidad.
+          </li>
+          <li>
+            <strong>REGISTRO:</strong>
+            Un registro, también llamado tupla, es un conjunto de campos
+            relacionados que describen una instancia u ocurrencia de una
+            entidad.
+          </li>
+        </ul>
+        <h3>Campos Claves</h3>
+        <p>
+          Durante la fase de diseño de sistemas, los campos claves son usados
+          para organizar, acceder y mantener las estructuras de datos.
+        </p>
+        <ul>
+          <li>
+            <strong>CLAVES PRIMARIA:</strong>
+            Una clave primaria esta compuesta por uno o más campos que
+            identifican inequívocamente un único miembro de una entidad, por lo
+            tanto las claves primarias deben ser únicas. A la clave primaria
+            formada por múltiples campos se la puede llamar clave compuesta,
+            clave concatenada o clave multivalor.
+          </li>
+          <li>
+            <strong>CLAVE CANDIDATA:</strong>
+            A veces se puede contar con más de un campo del cual elegir una
+            clave primaria. A cualquier campo que pueda servir como clave
+            primaria se lo llama clave candidata. Como sólo puede existir una
+            clave primaria, se debe elegir al campo que contenga la menor
+            cantidad de datos y que se el más fácil de usar.
+          </li>
+          <li>
+            <strong>CLAVE FORÁNEA:</strong>
+            Teniendo en cuenta que existen campos comunes en más de una tabla y
+            pueden ser usados para crear relaciones (o enlaces) entre las
+            tablas, una clave foránea es un campo en una tabla que debe
+            coincidir con el valor de la clave primaria de otra tabla; creando,
+            de ésta forma, una relación entre dos tablas. A diferencia de las
+            claves primarias, las claves foráneas no necesitan ser únicas.
+          </li>
+          <li>
+            <strong>CLAVE SECUNDARIA:</strong>
+            Una clave secundaria es un campo (o combinación de campos) que puede
+            ser usado para recuperar registros. Los valores de las claves
+            secundarias no son únicos. Por ejemplo, para recuperar los registros
+            de los usuarios mayores de edad, el campo de la fecha de nacimiento
+            sería usado como clave secundaria. Las claves secundarias también
+            pueden ser usadas para clasificar o mostrar los registros en un
+            cierto orden.
+          </li>
+        </ul>
+        <h3>Integridad Referencial</h3>
+        <p>
+          Los controles de validación ayudan a evitar los errores de entrada. Un
+          tipo de validación, llamado integridad referencial, es un conjunto de
+          reglas que evitan la inconsistencia de datos y problemas de calidad.
+          En una base de datos relacional, la integridad referencial significa
+          que el valor de una clave foránea no puede ingresarse en una tabla si
+          no coincide con el valor de una clave primaria de otra tabla. La
+          integridad referencial también puede prevenir el borrado de un
+          registro, si éste tiene una clave primaria que coincide con la clave
+          foránea de un registro en otra tabla.
+        </p>
+      </section>
+      <section>
+        <h2 id="erd">5 Diagramas de Entidad-Relación</h2>
+        <p>
+          Recordemos que una entidad puede ser una persona, un lugar, una cosa o
+          un evento para la cual se recogen y mantienen datos. Los sistemas
+          informáticos deben reconocer las relaciones entre las entidades. Un
+          Diagrama de Entidad-Relación ("ERD" del inglés "Entity-Relationship
+          Diagram") es un modelo que muestra las relaciones lógicas y las
+          interacciones entre las entidades del sistema. Un ERD provee una vista
+          general del sistema y un plano para la creación de la estructura
+          física de datos.
+        </p>
+        <h3>Dibujando un ERD</h3>
+        <p>
+          El primer paso es el de listar las entidades que fueron identificadas
+          durante la fase del análisis de sistemas y considerar la naturaleza de
+          las relaciones que hay entre ellas. En ésta etapa se puede usar un
+          método simplificado para mostrar las relaciones entre las entidades.
+          Si bien hay diferentes formas de dibujar un ERD, un método popular es
+          el de representar las entidades como rectángulos y a las relaciones
+          como rombos. A los rectángulos (entidades) se los etiqueta con
+          sustantivos singulares y a los rombos (relaciones) se los etiqueta con
+          verbos. Normalmente de dibuja de arriba hacia abajo y de izquierda a
+          derecha. A diferencia de los DFD, los ERD describen relaciones y no
+          datos o flujos de información.
+        </p>
+        <h3>Tipos de Relaciones</h3>
+        <ul>
+          <li>
+            <strong>RELACIÓN UNO A UNO (abreviado 1:1):</strong>
+            Ésta relación se da cuando, para cada instancia de la primera
+            entidad, existe exactamente una instancia de la segunda entidad.
+          </li>
+          <li>
+            <strong>RELACIÓN UNO A MUCHOS (abreviado 1:M):</strong>
+            Ésta relación existe cuando una ocurrencia de la primera entidad se
+            puede relacionar con muchas instancias de la segundad entidad. Pero
+            cada instancia de la segundad entidad sólo se puede asociar con una
+            instancia de la primera entidad.
+          </li>
+          <li>
+            <strong>RELACIÓN MUCHOS A MUCHOS (abreviado M:M):</strong>
+            Ésta relación existe cuando una instancia de la primera entidad
+            puede relacionarse con muchas instancias de la segunda entidad y una
+            instancia de la segunda entidad puede relacionarse con muchas
+            instancias de la primera entidad.
+          </li>
+        </ul>
+        <p>
+          Cabe mencionar que la relación
+          <strong>M:M</strong>
+          es diferente a las relaciones
+          <strong>1:1</strong>
+          o
+          <strong>1:M</strong>
+          , ya que el evento (o transacción) que vincula dos entidades es una
+          tercer entidad. A ésta tercer entidad se la llama entidad asociativa,
+          la cual tiene sus propias características.
+        </p>
+        <p>
+          A éstas relaciones se las llaman cardinalidades. El analista debe
+          entender la cardinalidad para poder crear un diseño de datos que
+          refleje con precisión todas las relaciones entre las entidades del
+          sistema.
+        </p>
+        <h3>Cardinalidad</h3>
+        <p>
+          Luego de que el analista dibuje un ERD inicial, se deben detallar las
+          relaciones usando una técnica llamada cardinalidad. La cardinalidad
+          describe la relación numérica entre dos entidades y muestra como las
+          instancias de una entidad se relacionan con las instancias de otra
+          entidad.
+        </p>
+        <p>
+          El analista puede modelar ésta interacción al agregar notaciones de
+          cardinalidad, las cuales usan símbolos especiales para representar las
+          relaciones.
+        </p>
+        <ul>
+          <li>
+            Una barra vertical indica
+            <strong>uno</strong>
+          </li>
+          <li>
+            Dos barras verticales indica
+            <strong>uno y solo uno</strong>
+          </li>
+          <li>
+            Un circulo y una barra vertical indica
+            <strong>cero o uno</strong>
+          </li>
+          <li>
+            Una "pata de cuervo" (tres rayas) indica
+            <strong>muchos</strong>
+          </li>
+          <li>
+            Una barra vertical y una "pata de cuervo" indica
+            <strong>uno o muchos</strong>
+          </li>
+          <li>
+            Un circulo y una "pata de cuervo" indica
+            <strong>cero o muchos</strong>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2 id="normalizacion">6 Normalización de Datos</h2>
+        <p>
+          La normalización es el proceso de crear diseños de tablas al
+          asignarles campos o atributos específicos a cada tabla de la base de
+          datos. Un diseño de tabla se encarga de especificar los campos e
+          identifica la clave primaria en una tabla o archivo particular. La
+          normalización es usada para desarrollar un diseño general (de la base
+          de datos) que sea simple, flexible y libre de redundancia de datos.
+        </p>
+        <h3>Formato de Notación Estándar</h3>
+        <p>
+          El diseño de tablas se facilita al usar el formato de notación
+          estándar para mostrar la estructura de las tablas, los campos y las
+          claves primarias. A continuación veremos unos ejemplos de un sistema
+          de
+          <strong>PEDIDOS</strong>
+          (en inglés
+          <strong>ORDER</strong>
+          ); en éstos el formato de notación estándar comienza con el nombre de
+          la tabla, seguido por una lista de nombres de campos separados por
+          comas y encerrados dentro de paréntesis. Los campos que son claves
+          primarias se encierran entre asteriscos. Por ejemplo:
+        </p>
+        <pre><code>TABLE NAME (*FIELD 1*, FIELD 2, FIELD 3)</code></pre>
+        <p>
+          Durante el diseño de datos, el analista debe ser capaz de reconocer
+          cuando un grupo de campos se repite. Un grupo de repeticiones es un
+          conjunto de uno o más campos que puede aparecer una o más veces en un
+          registro, teniendo cada ocurrencia un valor diferente.
+        </p>
+        <p>
+          Un diseño de tabla que contiene un grupo de repeticiones es llamado
+          <strong>desnormalizado</strong>
+          . El método de notación estándar para representar un diseño
+          desnormalizado es el de agrupar el grupo de repeticiones dentro de un
+          segundo grupo de paréntesis. A continuación se muestra un ejemplo de
+          una tabla desnormalizada:
+        </p>
+        <pre><code>TABLE NAME (*FIELD 1*, FIELD 2, FIELD 3, (REPEATING FIELD 1, REPEATING FIELD 2))</code></pre>
+        <p>
+          Siguiendo las pautas de notación, el diseño para ORDER puede
+          describirse como a continuación:
+        </p>
+        <pre><code>ORDER (*ORDER*, DATE, (*PRODUCT NUMBER*, DESCRIPTION, NUMBER ORDERED, SUPPLIER NUMBER, SUPPLIER NAME, ISO))</code></pre>
+        <p>
+          La notación indica que el diseño de la tabla
+          <code>ORDER</code>
+          contiene ocho campos, los cuales se listan dentro de los paréntesis
+          exteriores. El campo
+          <code>ORDER</code>
+          se encuentra dentro de asteriscos para mostrar que es una clave
+          primaria. Los campos
+          <code>PRODUCT NUMBER</code>
+          ,
+          <code>DESCRIPTION</code>
+          ,
+          <code>NUMBER ORDERED</code>
+          ,
+          <code>SUPPLIER NUMBER</code>
+          ,
+          <code>SUPPLIER NAME</code>
+          e
+          <code>ISO</code>
+          , se enmarcan dentro de unos paréntesis internos para indicar que son
+          campos dentro de un grupo de repeticiones. Cabe mencionar que el campo
+          <code>PRODUCT NUMBER</code>
+          también se encuentra dentro de asteriscos, ya que actúa como clave
+          primaria del grupo de repeticiones.
+        </p>
+        <h3>Primera Forma Normal</h3>
+        <p>
+          Una tabla se encuentra en su primera forma normal ("1NF" del inglés
+          "First Normal Form") si no contiene un grupo de repeticiones. Para
+          convertir un diseño desnormalizado a 1NF, la primera clave de la tabla
+          debe expandirse para incluir la clave primaria del grupo de
+          repeticiones.
+        </p>
+        <pre><code>ORDER (*ORDER*, DATE, *PRODUCT NUMBER*, DESCRIPTION, NUMBER ORDERED, SUPPLIER NUMBER, SUPPLIER NAME, ISO)</code></pre>
+        <p>
+          Cuando se elimina el grupo de repeticiones, aparecen registros
+          adicionales; uno para cada combinación de un pedido especifico y un
+          producto especifico. El resultado son más registros pero con un diseño
+          más simple. También hay que notar que la clave primaria, en el diseño
+          1NF, es la combinación de los dos campos:
+          <code>ORDER</code>
+          y
+          <code>PRODUCT NUMBER</code>
+          .
+        </p>
+        <h3>Segunda Forma Normal</h3>
+        <p>
+          Para comprender la segunda forma normal ("2NF" del inglés "Second
+          Normal Form") hay que entender el concepto de dependencias
+          funcionales. Por ejemplo, el campo
+          <strong>A</strong>
+          es funcionalmente dependiente del campo
+          <strong>B</strong>
+          si el valor de
+          <strong>A</strong>
+          depende de
+          <strong>B</strong>
+          . Por ejemplo, en la anterior "1NF" el valor de
+          <code>DATE</code>
+          es funcionalmente dependiente de
+          <code>ORDER</code>
+          ; porque para un número de pedido especifico, sólo puede existir una
+          fecha. En contraste, la descripción del producto no es dependiente del
+          número de pedido. Para un número de pedido especifico, pueden existir
+          muchas descripciones de productos (una para cada producto dentro del
+          pedido).
+        </p>
+        <p>
+          Un diseño de tabla se encuentra en 2NF si está en 1NF y todos los
+          campos, que no son parte de la clave primaria, sean funcionalmente
+          dependientes de (toda) la clave primaria. Si algunos de los campos en
+          la tabla 1NF depende solo de una parte de los campos de una clave
+          primaria combinada (y no de todos), entonces la tabla no se encuentra
+          en 2NF.
+        </p>
+        <p>
+          Examinemos el diseño 1NF de la tabla
+          <code>ORDER</code>
+          . Recordemos que la clave primaria es la combinación del número de
+          pedido y el número de producto. El campo
+          <code>NUMBER ORDER</code>
+          depende de toda la clave primaria porque se refiere a un número de
+          producto especifico y a un número de pedido especifico. En contraste,
+          el campo
+          <code>DATE</code>
+          depende del número de pedido, que solo es una parte de la clave
+          primaria. De forma similar, el campo
+          <code>DESCRIPTION</code>
+          depende del número de producto, que también es parte de la clave
+          primaria. Debido a que algunos campos no dependen de toda la clave
+          primaria, el diseño no se encuentra en 2NF.
+        </p>
+        <p>
+          Existe un proceso estándar para convertir una tabla de 1NF a 2NF. El
+          objetivo es el de desglosar la tabla original en dos o más tablas y
+          reasignar los campos para que cada campo, que no sea una clave
+          primaria, dependa de toda la clave primaria de la tabla en la que es
+          asignado.
+        </p>
+        <ol>
+          <li>
+            Crear y nombrar una tabla separada para cada campo de la clave
+            primaria.
+          </li>
+          <pre><code>ORDER (*ORDER*, ...)</code></pre>
+          <pre><code>PRODUCT (*PRODUCT NUMBER*, ...)</code></pre>
+          <li>
+            Crear una nueva tabla para cada posible combinación de los campos de
+            la clave primaria original.
+          </li>
+          <pre><code>ORDER LINE (*ORDER*, *PRODUCT NUMBER*)</code></pre>
+          <li>
+            Estudiar las nuevas tablas y ubicar cada campo con la clave primaria
+            apropiada, que es la clave con la cual tiene una dependencia
+            funcional. Cuando todos los campos hayan sido reubicados, eliminar
+            las tablas que no hayan recibido ningún campo. Las tablas
+            resultantes serán la versión 2NF de la tabla original.
+          </li>
+          <pre><code>ORDER (*ORDER*, DATE)</code></pre>
+          <pre><code>PRODUCT (*PRODUCT NUMBER*, DESCRIPTION, SUPPLIER NUMBER, SUPPLIER NAME, ISO)</code></pre>
+          <pre><code>ORDER LINE (*ORDER*, *PRODUCT NUMBER*)</code></pre>
+        </ol>
+        <p>
+          ¿Por qué es importante ir de un diseño 1NF a un diseño 2NF? A
+          continuación se listan cuatro problemas existentes en el diseño 1NF
+          pero que no se encuentran en el diseño 2NF:
+        </p>
+        <ol>
+          <li>
+            Considerar el trabajo necesario para cambiar la descripción de un
+            producto en particular.
+          </li>
+          <li>
+            Las tablas 1NF pueden contener datos inconsistentes. Debido a que se
+            debe introducir la descripción del producto en cada registro, nada
+            previene que un producto tenga diferentes descripciones en distintos
+            registros.
+          </li>
+          <li>
+            Agregar un nuevo producto es un problema. Ya que la clave primaria
+            debe incluir un número de pedido y un número de producto, se
+            necesitan ambos valores para poder agregar un registro.
+          </li>
+          <li>
+            Eliminar un producto también es un problema. Por una razón similar
+            al punto anterior.
+          </li>
+        </ol>
+        <h3>Tercera Forma Normal</h3>
+        <p>
+          Una regla de oro popular es que un diseño está en su tercera forma
+          normal ("3NF" del inglés "Third Normal Form") si cada campo que no sea
+          una clave primaria depende de la clave, toda la clave y nada más que
+          la clave. Un diseño 3NF evita la redundancia y los problemas de
+          integridad de datos que pueden aún existir en el diseño 2NF.
+        </p>
+        <p>
+          Continuando con el ejemplo de los pedidos, ahora revisaremos el diseño
+          de la tabla
+          <code>PRODUCT</code>
+          .
+        </p>
+        <p>
+          La tabla
+          <code>PRODUCT</code>
+          esta en 1NF porque no tiene grupos de repeticiones. También está en
+          2NF porque la clave primaria es un único campo. Pero la tabla tiene
+          cuatro potenciales problemas:
+        </p>
+        <ol>
+          <li>
+            Para cambiar el nombre de un proveedor, cada registro donde aparezca
+            deberá actualizarse.
+          </li>
+          <li>
+            El diseño 2NF permite que un proveedor tenga diferentes nombres o
+            estados ISO en diferentes registros.
+          </li>
+          <li>
+            Debido a que el nombre del proveedor se referencia desde la tabla
+            <code>ORDER</code>
+            , es necesario crear un registro de pedido ficticio cuando haya que
+            ingresar un proveedor que aún no ha recibido pedidos.
+          </li>
+          <li>
+            Si se borran todos los pedidos de un proveedor, se perderá el nombre
+            y número de éste proveedor.
+          </li>
+        </ol>
+        <p>
+          Éstos potenciales problemas son causados porque el diseño no se
+          encuentra en 3NF. Un diseño de tabla está en 3NF si está en 2NF y todo
+          campo que no sea clave
+          <strong>no depende</strong>
+          de otro campo que no sea clave.
+        </p>
+        <p>
+          La tabla
+          <code>PRODUCT</code>
+          no está en 3NF porque dos campos que no son clave (
+          <code>SUPPLIER NAME</code>
+          e
+          <code>ISO</code>
+          ) dependen de otro campo que no es clave (
+          <code>SUPPLIER NUMBER</code>
+          ). Para convertir la tabla a 3NF, todos los campos de la tabla 2NF que
+          dependen de un campo no clave deben eliminarse y reubicarse en una
+          nueva tabla que use el campo no clave como clave primaria. En el
+          ejemplo de
+          <code>PRODUCT</code>
+          ,
+          <code>SUPPLIER NAME</code>
+          e
+          <code>ISO</code>
+          deben removerse e incluirse en una nueva tabla que use a
+          <code>SUPPLIER NUMBER</code>
+          como clave primaria. El diseño 3NF divide a la versión 2NF en dos
+          tablas 3NF separadas:
+        </p>
+        <pre><code>PRODUCT (*PRODUCT NUMBER*, DESCRIPTION, SUPPLIER NUMBER)</code></pre>
+        <pre><code>SUPPLIER (*SUPPLIER NUMBER*, SUPPLIER NAME, ISO)</code></pre>
+      </section>
+      <section>
+        <h2 id="codigos">7 Códigos</h2>
+        <p>
+          Un código es un conjunto de números o letras que representan un
+          elemento de datos. Los códigos pueden usarse para simplificar los
+          formatos de datos, de entrada y de salida.
+        </p>
+        <h3>Revisión de Códigos</h3>
+        <p>
+          Debido a que los códigos pueden representar datos, se encuentran
+          constantemente en la vida cotidiana. Por ejemplo, los números de
+          estudiantes son un código único para identificar estudiantes en un
+          sistema de registro escolar. Tres estudiantes con el mismo nombre
+          pueden ser inscriptos en la misma escuela, pero sólo uno de ellos
+          tendrá el código
+          <code>1234</code>
+          . Otro ejemplo común es el código postal.
+        </p>
+        <p>
+          Los códigos pueden usarse de distintas maneras. Ya que los códigos son
+          más cortos que los datos a los que representan, reducen espacio de
+          almacenamiento y costos, reducen los tiempos de transmisión de datos y
+          los tiempos de edición.
+        </p>
+        <p>
+          Finalmente, los códigos pueden reducir los errores de la entrada de
+          datos en situaciones donde los códigos son más fáciles de recordar e
+          ingresar en lugar de los datos a los que representan.
+        </p>
+        <h3>Tipos de Códigos</h3>
+        <ul>
+          <li>
+            <strong>CÓDIGO DE SECUENCIA:</strong>
+            Son números o letras asignados en un orden especifico. Los códigos
+            de secuencia no contienen otra información que la indicación del
+            orden de entrada en el sistema.
+          </li>
+          <li>
+            <strong>CÓDIGO DE BLOQUE DE SECUENCIA:</strong>
+            Se usan bloques de números para diferentes clasificaciones.
+          </li>
+          <li>
+            <strong>CÓDIGO ALFABÉTICOS:</strong>
+            Se usan letras del alfabeto para distinguir un elemento de otro,
+            basados en una categoría, una abreviación o un valor fácil de
+            recordar, llamado código mnemotécnico.
+          </li>
+          <li>
+            <strong>CÓDIGO DE DÍGITO SIGNIFICATIVO:</strong>
+            Se usan para distinguir elementos al usar una serie de sub-grupos de
+            dígitos.
+          </li>
+          <li>
+            <strong>CÓDIGO DE DERIVACIÓN:</strong>
+            Combina los datos desde diferentes atributos o características del
+            elemento.
+          </li>
+          <li>
+            <strong>CÓDIGO CIFRADO:</strong>
+            Se usa una palabra clave para cifrar un número.
+          </li>
+          <li>
+            <strong>CÓDIGO DE ACCIÓN:</strong>
+            Indica que acción se debe realizar con el elemento asociado.
+          </li>
+        </ul>
+        <h3>Diseño de Códigos</h3>
+        <ul>
+          <li>
+            <strong>CÓDIGOS CONCISOS:</strong>
+            No crear códigos que sean más largos que lo necesario.
+          </li>
+          <li>
+            <strong>PERMITIR LA EXPANSIÓN:</strong>
+            Un sistema de códigos debe permitir un crecimiento razonable en el
+            número de códigos asignados.
+          </li>
+          <li>
+            <strong>MANTENER LOS CÓDIGOS ESTABLES:</strong>
+            El cambio de códigos puede generar problemas de consistencia y
+            requerir la actualización de los datos.
+          </li>
+          <li>
+            <strong>LOS CÓDIGOS DEBEN SER ÚNICOS:</strong>
+            Para que los códigos de identificación tengan sentido, éstos deben
+            ser únicos.
+          </li>
+          <li>
+            <strong>USAR CÓDIGOS QUE SE PUEDAN ORDENAR:</strong>
+            Si, por ejemplo, usando códigos de tres dígitos ubicamos un tipo de
+            datos en el rango de códigos de 0 a 99y otro tipo de datos en el
+            rango de 100 a 199; al ordenar los registros por el código en forma
+            ascendente, también se estaría clasificando el resultado por tipos
+            de datos.
+          </li>
+          <li><strong>USAR UNA ESTRUCTURA SIMPLE.</strong></li>
+          <li>
+            <strong>EVITAR CONFUSIONES:</strong>
+            Es fácil confundir el número cero (0) con la letra 'o' mayúscula
+            (O).
+          </li>
+          <li>
+            <strong>QUE LOS CÓDIGOS TENGAN SIGNIFICADO:</strong>
+            Los códigos deben ser fácil de recordar, amigables, convenientes y
+            fácil de interpretar.
+          </li>
+          <li>
+            <strong>USAR UN CÓDIGO PARA UN SOLO PROPÓSITO:</strong>
+            No usar un código para clasificar atributos que no estén
+            relacionados.
+          </li>
+          <li>
+            <strong>MANTENER LA CONSISTENCIA DE LOS CÓDIGOS:</strong>
+            Usar el mismo esquema de códigos a través de diferentes sistemas.
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2 id="almacenamiento">8 Almacenamiento y Acceso de Datos</h2>
+        <h3>Técnicas y Herramientas</h3>
+        <ul>
+          <li>
+            <strong>ALMACÉN DE DATOS:</strong>
+            Las grandes firmas mantienen muchas bases de datos, las cuales
+            pueden o no estar vinculadas en una estructura general. Para
+            garantizar un acceso rápido a la información, las compañías usan
+            paquetes de software que organizan y almacenan los datos en una
+            configuración especial llamada "almacén de datos" (en inglés "data
+            warehouse"). Un almacén de datos es una colección integrada de datos
+            que pueden incluir información aparentemente no relacionada, sin
+            importar donde se almacene en la compañía. Debido a que puede
+            enlazar varios sistemas informáticos y bases de datos, el almacén de
+            datos provee una vista corporativa para dar soporte al análisis de
+            gestión y la toma de decisiones.
+          </li>
+          <li>
+            <strong>PROCESAMIENTO DE DATOS:</strong>
+            El software de procesamiento de datos busca patrones de datos
+            significativos y relacionados. Por ejemplo, éste tipo de software
+            podría ayudar a una firma de productos de consumo a identificar
+            potenciales clientes basados en sus compras anteriores. La
+            información sobre el comportamiento de los clientes es muy valiosa,
+            pero al mismo tiempo el procesamiento de datos trae consigo
+            inquietudes relacionadas con la ética y la privacidad.
+          </li>
+        </ul>
+        <h3>Almacenamiento Físico contra Almacenamiento Lógico</h3>
+        <p>
+          Es importante entender la diferencia entre el almacenamiento físico y
+          el almacenamiento lógico. El almacenamiento lógico se refiere a los
+          datos que un usuario puede ver, entender y acceder, sin importar cómo
+          o dónde se esta guardando la información. En contraste, el
+          almacenamiento físico está estrictamente relacionado con el hardware,
+          porque involucra los procesos de lectura y escritura de datos binarios
+          a medios físicos como discos duros, CD/DVD o dispositivos de
+          almacenamiento en red (entre otros).
+        </p>
+        <h3>Codificación de Datos</h3>
+        <p>
+          Las computadoras representan los datos como bits (abreviación de
+          "dígitos binarios", en inglés "binary digits") que tienen sólo dos
+          valores posibles: 1 y 0. Las computadoras ven a los grupos de bits
+          como código digital que puede ser transmitido, recibido y almacenado.
+        </p>
+        <ul>
+          <li>
+            <strong>EBCDIC, ASCII y BINARIO:</strong>
+            EBCDIC y ASCII requieren ocho bits (o un byte) para cada letra.
+            Comparado con los formatos basados en letras, el formato binario
+            ofrece un método de almacenamiento más eficiente porque representa
+            los números como valores binarios, en lugar de dígitos numéricos
+            codificados.
+          </li>
+          <li>
+            <strong>UNICODE:</strong>
+            Éste es un estándar de codificación reciente que usa dos bytes por
+            letra, en lugar de uno. Éste sistema expandido le permite al Unicode
+            representar más de 65.000 letras plurilingües. Debido a que
+            virtualmente soporta todas las lenguas, el Unicode se convirtió en
+            un estándar global.
+          </li>
+          <li>
+            <strong>ALMACENAMIENTO DE FECHAS:</strong>
+            ¿Cual es la mejor forma de guardar una fecha? La respuesta depende
+            en cómo se muestren las fechas y si serán usadas dentro de cálculos
+            de fechas. A finales del siglo XX, muchas firmas que usaban sólo dos
+            dígitos para representar el año se enfrentaron a un gran problema
+            llamado Y2K.
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2 id="control-datos">9 Control de Datos</h2>
+        <p>
+          De la misma forma que es importante asegurar la parte física del
+          sistema, el control de archivos y base de datos debe incluir todas las
+          medidas necesarias para asegurar que el almacenamiento de datos es
+          correcto, completo y seguro. El control de archivos y bases de datos
+          también está relacionado con las técnicas de entrada y salida que se
+          describieron antes.
+        </p>
+        <p>
+          Para un correcto mantenimiento de datos, un DBMS bien diseñado debe
+          proveer características de control y seguridad; incluyendo
+          sub-esquemas, contraseñas, cifrado, auditoría de archivos de
+          seguimiento y procedimientos de copias de respaldo y recuperación de
+          las mismas. La principal responsabilidad de los analistas es la de
+          asegurar que las características del DBMS sean usadas correctamente.
+        </p>
+      </section>
+    </main>
+  </body>
+</html>

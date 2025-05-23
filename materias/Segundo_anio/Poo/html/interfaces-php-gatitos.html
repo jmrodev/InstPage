@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Interfaces en PHP con Gatitos</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #03a9f4;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #e1f5fe;
+      border-left: 5px solid #03a9f4;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #03a9f4;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .tip {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+    .warning {
+      background-color: #ffebee;
+      border-left: 5px solid #f44336;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🐱 Interfaces en PHP con Gatitos</h1>
+
+<div class="concept-box">
+  <span class="concept-title">¿Qué son las Interfaces?</span>
+  <p>Una interfaz en PHP es un contrato o acuerdo que define un conjunto de métodos que una clase debe implementar. A diferencia de las clases, las interfaces solo contienen declaraciones de métodos sin implementación (sin cuerpo).</p>
+  
+  <p>Las interfaces permiten especificar qué debe hacer una clase, pero no cómo debe hacerlo.</p>
+  
+  <p>En PHP, las interfaces se definen utilizando la palabra clave <code>interface</code>.</p>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Sintaxis Básica</span>
+  <p>La sintaxis para declarar una interfaz es la siguiente:</p>
+  
+  <div class="example-box">
+    <code>
+interface NombreInterfaz {<br>
+&nbsp;&nbsp;// Declaraciones de métodos sin implementación<br>
+&nbsp;&nbsp;public function metodo1();<br>
+&nbsp;&nbsp;public function metodo2($parametro);<br>
+}
+    </code>
+  </div>
+  
+  <p>Para que una clase implemente una interfaz, se utiliza la palabra clave <code>implements</code>:</p>
+  
+  <div class="example-box">
+    <code>
+class MiClase implements NombreInterfaz {<br>
+&nbsp;&nbsp;// Debe implementar TODOS los métodos declarados en la interfaz<br>
+&nbsp;&nbsp;public function metodo1() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Implementación del método<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function metodo2($parametro) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Implementación del método<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Ejemplo con Gatitos</span>
+  <p>Veamos un ejemplo práctico creando interfaces para diferentes comportamientos de gatos:</p>
+  
+  <div class="example-box">
+    <code>
+// Definimos una interfaz para comportamientos felinos<br>
+interface ComportamientoFelino {<br>
+&nbsp;&nbsp;// Métodos que debe implementar cualquier clase que utilice esta interfaz<br>
+&nbsp;&nbsp;public function maullar();<br>
+&nbsp;&nbsp;public function ronronear();<br>
+&nbsp;&nbsp;public function trepar($objeto);<br>
+}<br>
+<br>
+// Definimos otra interfaz para mascotas<br>
+interface Mascota {<br>
+&nbsp;&nbsp;public function jugar();<br>
+&nbsp;&nbsp;public function comer();<br>
+&nbsp;&nbsp;public function dormir();<br>
+&nbsp;&nbsp;public function getNombre();<br>
+}<br>
+<br>
+// Implementando las interfaces<br>
+class GatoDomestico implements ComportamientoFelino, Mascota {<br>
+&nbsp;&nbsp;private $nombre;<br>
+&nbsp;&nbsp;private $edad;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementando métodos de ComportamientoFelino<br>
+&nbsp;&nbsp;public function maullar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function ronronear() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está ronroneando: Prrrrr...";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function trepar($objeto) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está trepando por {$objeto}";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Implementando métodos de Mascota<br>
+&nbsp;&nbsp;public function jugar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está jugando con un juguete";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function comer() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está comiendo su comida favorita";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function dormir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está durmiendo plácidamente";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getNombre() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $this->nombre;<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso en consola:</p>
+  <div class="example-box">
+    <code>
+$gato = new GatoDomestico("Whiskers", 3);<br>
+<br>
+echo $gato->maullar() . PHP_EOL;<br>
+echo $gato->ronronear() . PHP_EOL;<br>
+echo $gato->trepar("el árbol") . PHP_EOL;<br>
+echo $gato->jugar() . PHP_EOL;<br>
+echo $gato->comer() . PHP_EOL;<br>
+echo $gato->dormir() . PHP_EOL;
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Whiskers dice: ¡Miau!<br>
+Whiskers está ronroneando: Prrrrr...<br>
+Whiskers está trepando por el árbol<br>
+Whiskers está jugando con un juguete<br>
+Whiskers está comiendo su comida favorita<br>
+Whiskers está durmiendo plácidamente
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Type Hinting con Interfaces</span>
+  <p>Una de las principales ventajas de las interfaces es que permiten el "type hinting" (indicación de tipo) en parámetros de funciones. Esto posibilita recibir cualquier objeto que implemente la interfaz especificada:</p>
+  
+  <div class="example-box">
+    <code>
+// Función que acepta cualquier objeto que implemente la interfaz Mascota<br>
+function cuidarMascota(Mascota $mascota) {<br>
+&nbsp;&nbsp;echo "Cuidando a " . $mascota->getNombre() . PHP_EOL;<br>
+&nbsp;&nbsp;echo $mascota->comer() . PHP_EOL;<br>
+&nbsp;&nbsp;echo $mascota->jugar() . PHP_EOL;<br>
+&nbsp;&nbsp;echo $mascota->dormir() . PHP_EOL;<br>
+}<br>
+<br>
+// Podemos usar nuestra clase GatoDomestico<br>
+$gato = new GatoDomestico("Luna", 2);<br>
+cuidarMascota($gato);<br>
+<br>
+// Si creamos otra clase que implemente Mascota, también funcionaría<br>
+class Perro implements Mascota {<br>
+&nbsp;&nbsp;private $nombre;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function jugar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está persiguiendo una pelota";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function comer() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está comiendo croquetas";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function dormir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está roncando ZZZ...";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getNombre() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $this->nombre;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$perro = new Perro("Rex");<br>
+cuidarMascota($perro);
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Cuidando a Luna<br>
+Luna está comiendo su comida favorita<br>
+Luna está jugando con un juguete<br>
+Luna está durmiendo plácidamente<br>
+Cuidando a Rex<br>
+Rex está comiendo croquetas<br>
+Rex está persiguiendo una pelota<br>
+Rex está roncando ZZZ...
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Herencia Múltiple de Interfaces</span>
+  <p>A diferencia de las clases, las interfaces pueden heredar de múltiples interfaces utilizando la palabra clave <code>extends</code>:</p>
+  
+  <div class="example-box">
+    <code>
+interface Jugador {<br>
+&nbsp;&nbsp;public function jugarConJuguete($juguete);<br>
+}<br>
+<br>
+interface Trepador {<br>
+&nbsp;&nbsp;public function trepar($altura);<br>
+&nbsp;&nbsp;public function saltar($distancia);<br>
+}<br>
+<br>
+// Interfaz que hereda de múltiples interfaces<br>
+interface GatoJugador extends Jugador, Trepador {<br>
+&nbsp;&nbsp;public function perseguirLaser();<br>
+}<br>
+<br>
+// Una clase que implementa esta interfaz debe implementar TODOS los métodos<br>
+class GatitoJugueton implements GatoJugador {<br>
+&nbsp;&nbsp;private $nombre;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function jugarConJuguete($juguete) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} juega con {$juguete}";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function trepar($altura) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} trepa hasta {$altura} metros de altura";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function saltar($distancia) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} salta {$distancia} metros";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function perseguirLaser() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} persigue frenéticamente el punto láser";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso en consola:</p>
+  <div class="example-box">
+    <code>
+$gatito = new GatitoJugueton("Milo");<br>
+<br>
+echo $gatito->jugarConJuguete("ratón de peluche") . PHP_EOL;<br>
+echo $gatito->trepar(2) . PHP_EOL;<br>
+echo $gatito->saltar(1.5) . PHP_EOL;<br>
+echo $gatito->perseguirLaser() . PHP_EOL;
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Milo juega con ratón de peluche<br>
+Milo trepa hasta 2 metros de altura<br>
+Milo salta 1.5 metros<br>
+Milo persigue frenéticamente el punto láser
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Constantes en Interfaces</span>
+  <p>Las interfaces también pueden definir constantes, que serán accesibles desde las clases que implementen la interfaz:</p>
+  
+  <div class="example-box">
+    <code>
+interface CategoriaGato {<br>
+&nbsp;&nbsp;// Constantes<br>
+&nbsp;&nbsp;const TIPO_DOMESTICO = 'doméstico';<br>
+&nbsp;&nbsp;const TIPO_SALVAJE = 'salvaje';<br>
+&nbsp;&nbsp;const TIPO_CALLEJERO = 'callejero';<br>
+<br>
+&nbsp;&nbsp;public function getTipo();<br>
+}<br>
+<br>
+class GatoCallejero implements CategoriaGato {<br>
+&nbsp;&nbsp;public function getTipo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return self::TIPO_CALLEJERO;  // Usando la constante de la interfaz<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$gato = new GatoCallejero();<br>
+echo "Este gato es de tipo: " . $gato->getTipo() . PHP_EOL;<br>
+echo "Constantes disponibles: " . PHP_EOL;<br>
+echo "- " . CategoriaGato::TIPO_DOMESTICO . PHP_EOL;<br>
+echo "- " . CategoriaGato::TIPO_SALVAJE . PHP_EOL;<br>
+echo "- " . CategoriaGato::TIPO_CALLEJERO . PHP_EOL;
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Este gato es de tipo: callejero<br>
+Constantes disponibles: <br>
+- doméstico<br>
+- salvaje<br>
+- callejero
+    </code>
+  </div>
+</div>
+
+<div class="tip">
+  <strong>Consejo:</strong> Las interfaces son ideales para definir contratos que varias clases no relacionadas pueden implementar. Úsalas cuando necesites que diferentes clases compartan un comportamiento común, pero no necesariamente compartan una implementación común.
+</div>
+
+<div class="warning">
+  <strong>Importante:</strong> En PHP, todos los métodos declarados en una interfaz deben ser públicos (public). No pueden ser privados (private) ni protegidos (protected). Además, una clase debe implementar todos los métodos definidos en la interfaz; de lo contrario, se debe declarar como abstracta.
+</div>
+
+</body>
+</html>

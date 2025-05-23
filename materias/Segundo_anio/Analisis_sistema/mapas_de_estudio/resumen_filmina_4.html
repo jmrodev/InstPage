@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <title>Ponencia: Requerimientos del Sistema</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #222;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      h2 {
+        margin-top: 30px;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+      }
+      ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 5px;
+      }
+      blockquote {
+        margin: 20px 0;
+        padding: 10px 20px;
+        background-color: #f1f1f1;
+        border-left: 5px solid #ccc;
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>📢 Ponencia: Requerimientos del Sistema y Técnicas de Recolección</h1>
+
+    <h2>1. Introducción</h2>
+    <p>
+      En el marco del ciclo de vida del desarrollo de sistemas (SDLC), la fase
+      de análisis juega un papel fundamental. Es en esta instancia donde se
+      identifican y documentan los
+      <strong>requerimientos del sistema</strong>
+      , elementos clave para el éxito del proyecto. Una mala definición o
+      recolección inadecuada de estos puede comprometer todo el desarrollo.
+    </p>
+
+    <h2>2. ¿Qué son los Requerimientos del Sistema?</h2>
+    <p>
+      Un
+      <strong>requerimiento del sistema</strong>
+      es una característica o función que debe tener el sistema para satisfacer
+      las necesidades del negocio y de los usuarios. Estos sirven como base para
+      medir el éxito del producto final.
+    </p>
+    <h3>Tipos de requerimientos:</h3>
+    <ul>
+      <li>
+        <strong>Funcionales:</strong>
+        Qué hace el sistema.
+        <br />
+        <em>Ejemplo:</em>
+        permitir login, enviar correos, registrar usuarios.
+      </li>
+      <li>
+        <strong>No funcionales:</strong>
+        Cómo lo hace.
+        <br />
+        <em>Ejemplo:</em>
+        tiempo de respuesta, seguridad, escalabilidad.
+      </li>
+    </ul>
+
+    <h2>3. Desafíos en la Definición de Requerimientos</h2>
+    <ul>
+      <li>
+        <strong>Imprecisión:</strong>
+        El lenguaje natural es ambiguo.
+      </li>
+      <li>
+        <strong>Falta de acuerdo:</strong>
+        Diferentes stakeholders pueden tener interpretaciones distintas.
+      </li>
+      <li>
+        <strong>Arrastre organizacional:</strong>
+        Cambios en el personal o en la estructura afectan los requerimientos.
+      </li>
+    </ul>
+
+    <h2>4. Consideraciones Estratégicas</h2>
+    <ul>
+      <li>
+        <strong>Escalabilidad:</strong>
+        El sistema debe poder crecer con el negocio.
+      </li>
+      <li>
+        <strong>Seguridad:</strong>
+        Ha pasado de ser no funcional a funcional, por su criticidad en entornos
+        conectados.
+      </li>
+      <li>
+        <strong>Costo Total de Propiedad (TCO):</strong>
+        Considera el costo de desarrollo, mantenimiento, soporte y evolución del
+        sistema.
+      </li>
+    </ul>
+
+    <h2>5. Técnicas Basadas en Equipos</h2>
+    <h3>JAD (Desarrollo de Aplicaciones Conjuntas)</h3>
+    <p>
+      Reúne usuarios y desarrolladores para definir requerimientos en sesiones
+      colaborativas.
+    </p>
+    <p><strong>Ventajas:</strong></p>
+    <ul>
+      <li>Mejora la precisión y claridad.</li>
+      <li>Fomenta el compromiso del usuario.</li>
+    </ul>
+    <p><strong>Desventajas:</strong></p>
+    <ul>
+      <li>Puede ser costoso.</li>
+      <li>Difícil de manejar en grupos grandes.</li>
+    </ul>
+
+    <h3>RAD (Desarrollo Rápido de Aplicaciones)</h3>
+    <p>
+      Metodología ágil que combina análisis, diseño y construcción en ciclos
+      rápidos.
+    </p>
+    <p><strong>Ventajas:</strong></p>
+    <ul>
+      <li>Desarrollo veloz y centrado en el usuario.</li>
+    </ul>
+    <p><strong>Desventajas:</strong></p>
+    <ul>
+      <li>Puede comprometer la calidad o la visión a largo plazo.</li>
+    </ul>
+
+    <h2>6. Métodos Ágiles</h2>
+    <h3>¿Qué propone?</h3>
+    <ul>
+      <li>
+        Desarrollo
+        <strong>incremental</strong>
+        .
+      </li>
+      <li>Mejora continua.</li>
+      <li>Adaptación rápida al cambio.</li>
+    </ul>
+    <h3>Ejemplo: SCRUM</h3>
+    <ul>
+      <li>Sprints con entregables.</li>
+      <li>Comunicación constante.</li>
+      <li>Reuniones para ajustes frecuentes.</li>
+    </ul>
+    <blockquote>
+      ⚠️
+      <strong>Advertencia:</strong>
+      Requiere un equipo muy competente y comprometido.
+    </blockquote>
+
+    <h2>7. Recolección de Requerimientos</h2>
+    <h3>Principales técnicas:</h3>
+    <ol>
+      <li>
+        <strong>Entrevistas:</strong>
+        Planificadas, estructuradas y con análisis posterior.
+      </li>
+      <li>
+        <strong>Revisión documental:</strong>
+        Para entender el sistema actual y sus limitaciones.
+      </li>
+      <li>
+        <strong>Observación directa:</strong>
+        Detecta prácticas no documentadas.
+      </li>
+      <li>
+        <strong>Encuestas y cuestionarios:</strong>
+        Permiten recopilar opiniones masivas.
+      </li>
+      <li>
+        <strong>Tormenta de ideas:</strong>
+        Estimula creatividad y descubre necesidades ocultas.
+      </li>
+      <li>
+        <strong>Muestreo de datos del sistema actual:</strong>
+        Se analizan registros y documentos reales.
+      </li>
+      <li>
+        <strong>Investigación técnica:</strong>
+        Permite conocer soluciones modernas y mejores prácticas.
+      </li>
+    </ol>
+
+    <h2>8. Métodos Ágiles para Capturar Requerimientos</h2>
+    <ul>
+      <li>
+        <strong>Historias de usuario (User Stories):</strong>
+        "Como [tipo de usuario], quiero [acción] para [objetivo]".
+      </li>
+      <li>
+        <strong>Features:</strong>
+        Funcionalidades específicas a desarrollar.
+      </li>
+      <li>
+        <strong>Storyboards:</strong>
+        Flujos visuales de navegación y funcionalidad.
+      </li>
+      <li>
+        <strong>Escenarios:</strong>
+        Descripciones detalladas de casos prácticos.
+      </li>
+    </ul>
+
+    <h2>9. Conclusión</h2>
+    <p>La correcta identificación y recolección de requerimientos:</p>
+    <ul>
+      <li>Mejora la calidad del sistema.</li>
+      <li>Optimiza tiempos y costos.</li>
+      <li>Aumenta la satisfacción del usuario.</li>
+    </ul>
+    <blockquote>
+      🎯
+      <em>
+        Un sistema exitoso nace de requerimientos claros, consensuados y
+        continuamente refinados.
+      </em>
+    </blockquote>
+  </body>
+</html>

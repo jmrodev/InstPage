@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clase: Redirecciones y Comandos Linux</title>
+    <link rel="stylesheet" href="../../../../css/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Comandos y Redirecciones en Linux - Clase del Profesor</h1>
+        <nav class="breadcrumb">
+            <a href="../../../../index.html"><i class="fas fa-home"></i> Inicio</a> /
+            <a href="../index.html">EdiII</a> /
+            <a href="index.html">Comandos Linux</a> /
+            Clase del Profesor
+        </nav>
+    </header>
+
+    <main>
+        <div class="note">
+            <p>Esta página contiene los ejemplos y conceptos explicados por el profesor durante la clase sobre redirecciones, pipes y gestión de procesos en Linux.</p>
+        </div>
+
+        <section>
+            <h2>Fundamentos para Principiantes</h2>
+            
+            <div class="concept-box">
+                <h3>Introducción a la Terminal</h3>
+                <p>La terminal es una interfaz de texto que permite comunicarse directamente con el sistema operativo a través de comandos. A diferencia de las interfaces gráficas, la terminal ofrece mayor control y flexibilidad para realizar tareas en sistemas Linux.</p>
+                
+                <p>Los sistemas Linux se caracterizan por ser:</p>
+                <ul>
+                    <li><strong>Multiusuario</strong>: Varios usuarios pueden usar el sistema simultáneamente, cada uno con sus propios archivos y permisos.</li>
+                    <li><strong>Multiproceso</strong>: Puede ejecutar varios programas a la vez, gestionando eficientemente los recursos del sistema.</li>
+                </ul>
+            </div>
+            
+            <div class="concept-box">
+                <h3>Los tres flujos estándar</h3>
+                <p>En Linux, la comunicación con los programas se realiza a través de tres canales o "flujos estándar":</p>
+                <ul>
+                    <li><strong>stdin (0)</strong>: Canal de entrada estándar, normalmente conectado al teclado. Es por donde ingresan datos a un programa.</li>
+                    <li><strong>stdout (1)</strong>: Canal de salida estándar, normalmente conectado a la pantalla. Es donde los programas envían su salida normal.</li>
+                    <li><strong>stderr (2)</strong>: Canal de salida de errores, también normalmente conectado a la pantalla pero en un flujo separado. Es donde los programas envían los mensajes de error.</li>
+                </ul>
+                <p>Estos canales pueden ser redirigidos a archivos o a otros programas, lo que constituye una de las características más potentes de los sistemas Unix/Linux.</p>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Redirecciones Básicas</h2>
+            
+            <div class="concept-box">
+                <h3>Flujos estándar en Linux</h3>
+                <p>En Linux, todo se maneja como archivos, incluyendo las entradas y salidas del sistema:</p>
+                <ul>
+                    <li><strong>stdin (0)</strong>: Entrada estándar, normalmente conectada al teclado</li>
+                    <li><strong>stdout (1)</strong>: Salida estándar, normalmente conectada a la terminal</li>
+                    <li><strong>stderr (2)</strong>: Salida de error, también normalmente conectada a la terminal</li>
+                </ul>
+                <p>Los operadores de redirección nos permiten cambiar el origen o destino de estos flujos:</p>
+                <ul>
+                    <li><code>&gt;</code>: Redirecciona la salida estándar (sobrescribe el archivo)</li>
+                    <li><code>&gt;&gt;</code>: Redirecciona la salida estándar (añade al final del archivo)</li>
+                    <li><code>2&gt;</code>: Redirecciona la salida de errores</li>
+                    <li><code>&amp;&gt;</code>: Redirecciona tanto la salida estándar como la de errores</li>
+                    <li><code>2&gt;&amp;1</code>: Redirecciona la salida de errores al mismo lugar que la salida estándar</li>
+                </ul>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># Listar el contenido del directorio /dev</span>
+<span class="prompt">$</span> ls /dev
+<span class="output">autofs         hugetlb         rtc      tty18  tty37  tty56    vcsa
+block          hwrng           rtc0     tty19  tty38  tty57    vcsa1
+bsg            input           sda      tty2   tty39  tty58    vcsa2
+btrfs-control  kmsg            sda1     tty20  tty4   tty59    vcsa3
+bus            log             sda2     tty21  tty40  tty6     vcsa4
+cdrom          loop0           shm      tty22  tty41  tty60    vcsa5
+char           loop1           snapshot tty23  tty42  tty61    vcsa6
+console        loop2           snd      tty24  tty43  tty62    vfio
+cpu            loop3           stderr   tty25  tty44  tty63    vga_arbiter
+cpu_dma_latency loop4           stdin    tty26  tty45  tty7     vhci
+...</span>
+
+<span class="comment"># Demostración de stdin (entrada estándar)</span>
+<span class="prompt">$</span> cat
+<span class="comment"># Cuando ejecutas cat sin argumentos, toma la entrada del teclado (stdin)
+# Todo lo que escribas será repetido en la pantalla
+# Presiona Ctrl+D para terminar</span>
+
+<span class="comment"># Redirección de salida: guardar la salida en un archivo</span>
+<span class="prompt">$</span> ls > archivos.txt
+<span class="prompt">$</span> cat archivos.txt
+<span class="output">archivo1.txt
+archivo2.txt
+documentos
+...</span>
+
+<span class="comment"># Redirección de errores: capturar solo los errores</span>
+<span class="prompt">$</span> ls archivo_que_no_existe 2> errores.txt
+<span class="prompt">$</span> cat errores.txt
+<span class="output">ls: no se puede acceder a 'archivo_que_no_existe': No existe el archivo o el directorio</span>
+
+<span class="comment"># Redirección de errores a /dev/null (descartarlos)</span>
+<span class="prompt">$</span> ls archivo_que_no_existe 2> /dev/null
+<span class="comment"># No muestra ningún error</span>
+
+<span class="comment"># Redirección de salida y errores a un mismo archivo</span>
+<span class="prompt">$</span> ls archivo_que_no_existe archivo_existe.txt &> salida_completa.txt
+<span class="comment"># O alternativamente:</span>
+<span class="prompt">$</span> ls archivo_que_no_existe archivo_existe.txt > salida_completa.txt 2>&1
+            </div>
+        </section>
+        
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Comandos Básicos y Pipes</h2>
+            
+            <div class="concept-box">
+                <h3>¿Qué son las tuberías (pipes)?</h3>
+                <p>Las tuberías o pipes (<code>|</code>) permiten conectar la salida de un comando con la entrada de otro, creando flujos de procesamiento de datos. Esta es una de las características más potentes de los sistemas Unix/Linux, ya que permite combinar comandos simples para realizar tareas complejas.</p>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># El comando cat básico</span>
+<span class="prompt">$</span> cat archivo.txt
+<span class="output">Línea 1
+Línea 2
+Línea 3</span>
+
+<span class="comment"># Cat con múltiples archivos</span>
+<span class="prompt">$</span> cat archivo1.txt archivo2.txt
+<span class="output">Contenido de archivo1.txt
+...
+Contenido de archivo2.txt
+...</span>
+
+<span class="comment"># Crear un archivo con cat</span>
+<span class="prompt">$</span> cat > file.txt
+<span class="comment"># Escribe el contenido línea por línea
+# Presiona Ctrl+D para guardar y salir</span>
+<span class="output">Esta es una línea
+Esta es otra línea
+^D</span>
+
+<span class="comment"># ¿Por qué se usa Ctrl+D?</span>
+<span class="comment"># Ctrl+D envía un carácter EOF (End Of File), que indica el fin de la entrada</span>
+
+<span class="comment"># Usar pipe para contar líneas en un archivo</span>
+<span class="prompt">$</span> cat archivo.txt | wc -l
+<span class="output">3</span>
+
+<span class="comment"># Pipe con múltiples comandos</span>
+<span class="prompt">$</span> cat varios_archivos_texto | wc -l | less
+<span class="comment"># Esto muestra el número total de líneas en un paginador (less)</span>
+
+<span class="comment"># Combinar redirección de errores con pipes</span>
+<span class="prompt">$</span> ls archivo_forzado_error_porque_no_existe archivo_existe.txt 2> /dev/null | wc -l
+<span class="output">1</span>
+<span class="comment"># Solo cuenta archivo_existe.txt porque el error fue redirigido a /dev/null</span>
+
+<span class="prompt">$</span> ls archivo_forzado_error_porque_no_existe archivo_existe.txt 2>&1 | wc -l
+<span class="output">2</span>
+<span class="comment"># Cuenta tanto la línea de error como el archivo existente</span>
+
+<span class="prompt">$</span> ls archivo_forzado_error_porque_no_existe 2> /dev/null | wc -l
+<span class="output">0</span>
+<span class="comment"># No hay salida estándar, solo error (que fue redirigido a /dev/null)</span>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Procesamiento de Texto</h2>
+            <div class="terminal">
+<span class="comment"># Ordenar contenido de un archivo</span>
+<span class="prompt">$</span> sort file.txt
+<span class="output">Banana
+Fresa
+Manzana
+Naranja
+Uva</span>
+
+<span class="comment"># Redireccionar la salida ordenada a otro archivo</span>
+<span class="prompt">$</span> cat file.txt | sort > file2.txt
+<span class="prompt">$</span> cat file2.txt
+<span class="output">Banana
+Fresa
+Manzana
+Naranja
+Uva</span>
+
+<span class="comment"># Eliminar líneas duplicadas con uniq</span>
+<span class="prompt">$</span> cat file.txt
+<span class="output">Manzana
+Manzana
+Banana
+Fresa
+Fresa
+Uva</span>
+
+<span class="prompt">$</span> cat file.txt | uniq
+<span class="output">Manzana
+Banana
+Fresa
+Uva</span>
+
+<span class="comment"># Importante: uniq solo funciona con líneas consecutivas,
+# normalmente se usa junto con sort</span>
+<span class="prompt">$</span> cat file.txt | sort | uniq
+<span class="output">Banana
+Fresa
+Manzana
+Uva</span>
+
+<span class="comment"># Buscar texto con grep</span>
+<span class="prompt">$</span> cat file.txt | grep "Manzana"
+<span class="output">Manzana
+Manzana</span>
+
+<span class="comment"># Expresiones regulares con grep</span>
+<span class="prompt">$</span> cat file.txt | grep -E "F.*a"
+<span class="output">Fresa</span>
+
+<span class="comment"># Patrones comunes de expresiones regulares:</span>
+<span class="comment"># \w+ - Una o más letras, números o guiones bajos</span>
+<span class="comment"># \w? - Cero o una letra, número o guión bajo</span>
+<span class="comment"># \w* - Cero o más letras, números o guiones bajos</span>
+<span class="comment"># ^ - Inicio de línea</span>
+<span class="comment"># $ - Fin de línea</span>
+
+<span class="comment"># Ver primeras líneas de un archivo</span>
+<span class="prompt">$</span> head -n 5 file.txt
+<span class="output">Línea 1
+Línea 2
+Línea 3
+Línea 4
+Línea 5</span>
+
+<span class="comment"># Ver últimas líneas de un archivo</span>
+<span class="prompt">$</span> tail -n 5 file.txt
+<span class="output">Línea 96
+Línea 97
+Línea 98
+Línea 99
+Línea 100</span>
+
+<span class="comment"># Combinar comandos para archivos múltiples</span>
+<span class="prompt">$</span> cat file* | head -n 5
+<span class="comment"># Muestra las primeras 5 líneas de todos los archivos combinados</span>
+
+<span class="prompt">$</span> cat file* | tail -n 5
+<span class="comment"># Muestra las últimas 5 líneas de todos los archivos combinados</span>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Expresiones Regulares</h2>
+            <div class="concept-box">
+                <h3>Fundamentos de Expresiones Regulares</h3>
+                <p>Las expresiones regulares (regex) son patrones de búsqueda potentes utilizados para encontrar y manipular texto.</p>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># Caracteres básicos</span>
+<span class="prompt">$</span> grep "casa" archivo.txt         <span class="comment"># Busca la palabra "casa"</span>
+<span class="prompt">$</span> grep "c.sa" archivo.txt         <span class="comment"># Punto coincide con cualquier carácter</span>
+<span class="prompt">$</span> grep "^Inicio" archivo.txt      <span class="comment"># Líneas que comienzan con "Inicio"</span>
+<span class="prompt">$</span> grep "fin$" archivo.txt         <span class="comment"># Líneas que terminan con "fin"</span>
+
+<span class="comment"># Clases de caracteres</span>
+<span class="prompt">$</span> grep "[aeiou]" archivo.txt      <span class="comment"># Busca cualquier vocal</span>
+<span class="prompt">$</span> grep "[0-9]" archivo.txt        <span class="comment"># Busca cualquier dígito</span>
+<span class="prompt">$</span> grep "[^a-z]" archivo.txt       <span class="comment"># Busca caracteres que NO sean letras minúsculas</span>
+
+<span class="comment"># Cuantificadores</span>
+<span class="prompt">$</span> grep "ca*sa" archivo.txt        <span class="comment"># "a" 0 o más veces: csa, casa, caaasa, etc.</span>
+<span class="prompt">$</span> grep "ca\+sa" archivo.txt       <span class="comment"># "a" 1 o más veces: casa, caaasa, etc.</span>
+<span class="prompt">$</span> grep "ca\?sa" archivo.txt       <span class="comment"># "a" 0 o 1 vez: csa o casa</span>
+<span class="prompt">$</span> grep "ca\{2,4\}sa" archivo.txt  <span class="comment"># "a" entre 2 y 4 veces</span>
+            </div>
+
+            <div class="concept-box">
+                <h3>Expresiones Regulares Extendidas</h3>
+                <p>Las regex extendidas añaden capacidades adicionales para patrones más complejos.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Uso con grep -E o egrep</span>
+<span class="prompt">$</span> grep -E "casa|coche" archivo.txt      <span class="comment"># Alternancia: casa o coche</span>
+<span class="prompt">$</span> grep -E "(ab){3}" archivo.txt         <span class="comment"># Agrupación: ababab</span>
+
+<span class="comment"># Ejemplos prácticos</span>
+<span class="prompt">$</span> grep -E "^[0-9]{3}-[0-9]{3}-[0-9]{4}$" datos.txt  <span class="comment"># Números telefónicos</span>
+<span class="output">555-123-4567
+212-555-6789</span>
+
+<span class="prompt">$</span> grep -E "\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b" contacts.txt  <span class="comment"># Correos electrónicos</span>
+<span class="output">usuario@example.com
+soporte@empresa.co.uk</span>
+            </div>
+
+            <div class="concept-box">
+                <h3>Expresiones Regulares en Sed y Awk</h3>
+                <p>Sed y Awk usan expresiones regulares para transformaciones poderosas de texto.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Sed con regex</span>
+<span class="prompt">$</span> sed -E 's/([0-9]{4})-([0-9]{2})-([0-9]{2})/\3\/\2\/\1/' fechas.txt
+<span class="comment"># Convierte fechas de AAAA-MM-DD a DD/MM/AAAA</span>
+
+<span class="prompt">$</span> sed -E '/^$/d' archivo.txt       <span class="comment"># Elimina líneas vacías</span>
+
+<span class="comment"># Awk con regex</span>
+<span class="prompt">$</span> awk '/ERROR/ {print "Línea " NR ": " $0}' log.txt
+<span class="comment"># Muestra líneas con "ERROR" y su número</span>
+
+<span class="prompt">$</span> awk -F"," '$3 ~ /^[0-9]+$/ {sum+=$3} END {print "Total: " sum}' datos.csv
+<span class="comment"># Suma valores numéricos de la tercera columna</span>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Control de Procesos</h2>
+            <div class="concept-box">
+                <h3>Gestión de Trabajos</h3>
+                <p>Linux permite controlar procesos en ejecución, pasarlos a segundo plano, y recuperarlos según sea necesario.</p>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># Ejecutar en segundo plano</span>
+<span class="prompt">$</span> comando largo &
+<span class="output">[1] 1234</span>
+
+<span class="comment"># Listar trabajos</span>
+<span class="prompt">$</span> jobs
+<span class="output">[1]+ Running    comando largo &</span>
+
+<span class="comment"># Suspender proceso (Ctrl+Z)</span>
+<span class="prompt">$</span> find / -name "*.log" 
+^Z
+<span class="output">[1]+ Stopped    find / -name "*.log"</span>
+
+<span class="comment"># Reanudar en segundo plano</span>
+<span class="prompt">$</span> bg %1
+<span class="output">[1]+ find / -name "*.log" &</span>
+
+<span class="comment"># Traer a primer plano</span>
+<span class="prompt">$</span> fg %1
+            </div>
+
+            <div class="concept-box">
+                <h3>Monitoreo de Procesos</h3>
+                <p>Herramientas para visualizar y analizar los procesos en ejecución en el sistema.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Ver procesos</span>
+<span class="prompt">$</span> ps aux
+<span class="output">USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
+root         1  0.0  0.1 169844  9164 ?        Ss   Oct15   0:04 /sbin/init
+user      1234  2.3  0.4 457892 35624 pts/0    R+   10:15   0:02 comando largo</span>
+
+<span class="comment"># Ver árbol de procesos</span>
+<span class="prompt">$</span> pstree
+<span class="output">systemd─┬─ModemManager───2*[{ModemManager}]
+        ├─NetworkManager───2*[{NetworkManager}]
+        ├─accounts-daemon───2*[{accounts-daemon}]
+        ├─avahi-daemon───avahi-daemon
+        ├─bluetoothd</span>
+
+<span class="comment"># Monitoreo en tiempo real</span>
+<span class="prompt">$</span> top
+<span class="comment"># Muestra una tabla interactiva de procesos</span>
+
+<span class="prompt">$</span> htop
+<span class="comment"># Versión mejorada y colorida de top</span>
+
+<span class="comment"># Información detallada</span>
+<span class="prompt">$</span> ps -ef --forest
+<span class="comment"># Muestra jerarquía de procesos</span>
+            </div>
+
+            <div class="concept-box">
+                <h3>Señales y Control de Procesos</h3>
+                <p>Las señales permiten comunicarse con procesos en ejecución para controlar su comportamiento.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Terminar proceso</span>
+<span class="prompt">$</span> kill 1234                <span class="comment"># Envía SIGTERM (15)</span>
+<span class="prompt">$</span> kill -9 1234             <span class="comment"># Envía SIGKILL (9), forzando terminación</span>
+
+<span class="comment"># Señales comunes</span>
+<span class="prompt">$</span> kill -l
+<span class="output"> 1) SIGHUP       2) SIGINT       3) SIGQUIT      4) SIGILL
+ 5) SIGTRAP      6) SIGABRT      7) SIGBUS       8) SIGFPE
+ 9) SIGKILL     10) SIGUSR1     11) SIGSEGV     12) SIGUSR2
+13) SIGPIPE     14) SIGALRM     15) SIGTERM     16) SIGSTKFLT</span>
+
+<span class="comment"># Terminar por nombre</span>
+<span class="prompt">$</span> pkill firefox            <span class="comment"># Termina todos los procesos "firefox"</span>
+<span class="prompt">$</span> killall -9 apache2       <span class="comment"># Fuerza terminación de todos los procesos "apache2"</span>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Herramientas de Monitoreo y Diagnóstico</h2>
+            <div class="concept-box">
+                <h3>Monitoreo de Recursos del Sistema</h3>
+                <p>Linux proporciona diversas herramientas para monitorear el uso de CPU, memoria, disco y red.</p>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># Monitorización de uso de memoria</span>
+<span class="prompt">$</span> free -h
+<span class="output">              total        used        free      shared  buff/cache   available
+Mem:          15Gi       3.5Gi       8.1Gi       301Mi       3.9Gi        11Gi
+Swap:         8.0Gi          0B       8.0Gi</span>
+
+<span class="comment"># Uso de disco</span>
+<span class="prompt">$</span> df -h
+<span class="output">Filesystem      Size  Used Avail Use% Mounted on
+/dev/sda1       234G   45G  178G  21% /
+/dev/sdb1       932G  412G  520G  45% /media/datos</span>
+
+<span class="comment"># Espacio ocupado por directorios</span>
+<span class="prompt">$</span> du -sh /home/usuario/*
+<span class="output">128M    /home/usuario/Documentos
+1.2G    /home/usuario/Descargas
+4.5G    /home/usuario/Videos</span>
+
+<span class="comment"># Estadísticas de red</span>
+<span class="prompt">$</span> netstat -tuln
+<span class="comment"># Muestra puertos y conexiones de red</span>
+
+<span class="prompt">$</span> ip addr show
+<span class="comment"># Muestra interfaces de red y direcciones IP</span>
+            </div>
+
+            <div class="concept-box">
+                <h3>Herramientas de Diagnóstico Avanzado</h3>
+                <p>Herramientas para analizar, depurar y resolver problemas del sistema.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Monitoreo general</span>
+<span class="prompt">$</span> vmstat 1
+<span class="comment"># Estadísticas de la máquina virtual cada segundo</span>
+
+<span class="prompt">$</span> iostat -x 2
+<span class="comment"># Estadísticas de E/S extendidas cada 2 segundos</span>
+
+<span class="comment"># Depuración</span>
+<span class="prompt">$</span> strace ls -l
+<span class="comment"># Muestra todas las llamadas al sistema realizadas por "ls -l"</span>
+
+<span class="prompt">$</span> ltrace programa
+<span class="comment"># Muestra las llamadas a la biblioteca realizadas por "programa"</span>
+
+<span class="comment"># Análisis de red</span>
+<span class="prompt">$</span> tcpdump -i eth0 port 80
+<span class="comment"># Captura paquetes en la interfaz eth0 que usan el puerto 80</span>
+
+<span class="prompt">$</span> nmap -p 1-1000 192.168.1.1
+<span class="comment"># Escanea puertos 1-1000 en la IP 192.168.1.1</span>
+            </div>
+
+            <div class="concept-box">
+                <h3>Monitoreo de Logs del Sistema</h3>
+                <p>Linux mantiene registros detallados de eventos del sistema que son cruciales para el diagnóstico de problemas.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Logs comunes</span>
+<span class="prompt">$</span> journalctl -xe
+<span class="comment"># Muestra entradas recientes del journal, con explicaciones</span>
+
+<span class="prompt">$</span> tail -f /var/log/syslog
+<span class="comment"># Sigue en tiempo real el archivo de registro del sistema</span>
+
+<span class="prompt">$</span> grep "error" /var/log/apache2/error.log
+<span class="comment"># Busca errores en los logs de Apache</span>
+
+<span class="comment"># Análisis de logs</span>
+<span class="prompt">$</span> journalctl --since "1 hour ago" | grep "ERROR"
+<span class="comment"># Errores en la última hora</span>
+
+<span class="prompt">$</span> zgrep "Failed password" /var/log/auth.log*
+<span class="comment"># Busca intentos fallidos de autenticación en logs comprimidos y no comprimidos</span>
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Automatización de Tareas</h2>
+            <div class="concept-box">
+                <h3>Programación de Tareas con Cron</h3>
+                <p>Cron permite programar comandos para que se ejecuten automáticamente en momentos específicos.</p>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># Editar crontab</span>
+<span class="prompt">$</span> crontab -e
+
+<span class="comment"># Sintaxis de crontab</span>
+<span class="comment"># ┌───────────── minuto (0 - 59)</span>
+<span class="comment"># │ ┌───────────── hora (0 - 23)</span>
+<span class="comment"># │ │ ┌───────────── día del mes (1 - 31)</span>
+<span class="comment"># │ │ │ ┌───────────── mes (1 - 12)</span>
+<span class="comment"># │ │ │ │ ┌───────────── día de la semana (0 - 6) (Domingo a Sábado)</span>
+<span class="comment"># │ │ │ │ │</span>
+<span class="comment"># │ │ │ │ │</span>
+<span class="comment"># * * * * * comando a ejecutar</span>
+
+<span class="comment"># Ejemplos prácticos</span>
+<span class="comment"># Ejecutar a las 3 AM todos los días</span>
+0 3 * * * /home/usuario/scripts/backup.sh
+
+<span class="comment"># Ejecutar cada 15 minutos</span>
+*/15 * * * * /home/usuario/scripts/check-servers.sh
+
+<span class="comment"># Ejecutar primer día de cada mes a las 9:30 AM</span>
+30 9 1 * * /home/usuario/scripts/monthly-report.sh
+
+<span class="comment"># Ver tareas programadas</span>
+<span class="prompt">$</span> crontab -l
+            </div>
+
+            <div class="concept-box">
+                <h3>Automatización con Systemd Timers</h3>
+                <p>Systemd timers son una alternativa moderna a cron, con capacidades adicionales de registro y monitoreo.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Estructura: crear dos archivos en /etc/systemd/system/</span>
+<span class="comment"># 1. mi-tarea.service</span>
+[Unit]
+Description=Mi tarea de automatización
+
+[Service]
+Type=oneshot
+ExecStart=/home/usuario/scripts/mi-script.sh
+
+<span class="comment"># 2. mi-tarea.timer</span>
+[Unit]
+Description=Ejecuta mi-tarea cada 6 horas
+
+[Timer]
+OnBootSec=15min
+OnUnitActiveSec=6h
+AccuracySec=1min
+
+[Install]
+WantedBy=timers.target
+
+<span class="comment"># Activar timer</span>
+<span class="prompt">$</span> sudo systemctl enable mi-tarea.timer
+<span class="prompt">$</span> sudo systemctl start mi-tarea.timer
+
+<span class="comment"># Verificar timers</span>
+<span class="prompt">$</span> systemctl list-timers
+            </div>
+
+            <div class="concept-box">
+                <h3>Scripting para Automatización</h3>
+                <p>Los scripts de shell son herramientas potentes para automatizar tareas complejas y repetitivas.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Ejemplo de script de backup</span>
+<span class="prompt">$</span> cat backup.sh
+#!/bin/bash
+
+# Variables
+BACKUP_DIR="/backups"
+SOURCE_DIR="/home/usuario/datos"
+DATE=$(date +%Y-%m-%d)
+FILENAME="backup-$DATE.tar.gz"
+
+# Crear directorio si no existe
+mkdir -p $BACKUP_DIR
+
+# Crear respaldo
+tar -czf "$BACKUP_DIR/$FILENAME" "$SOURCE_DIR"
+
+# Eliminar respaldos antiguos (más de 30 días)
+find $BACKUP_DIR -name "backup-*.tar.gz" -mtime +30 -delete
+
+# Registrar resultado
+echo "Backup completado: $FILENAME" >> "$BACKUP_DIR/backup.log"
+
+<span class="comment"># Permisos y ejecución</span>
+<span class="prompt">$</span> chmod +x backup.sh
+<span class="prompt">$</span> ./backup.sh
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Seguridad en Linux</h2>
+            <div class="concept-box">
+                <h3>Gestión de Seguridad Básica</h3>
+                <p>Herramientas y prácticas para mantener un sistema Linux seguro.</p>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># Actualización del sistema</span>
+<span class="prompt">$</span> sudo apt update && sudo apt upgrade -y
+<span class="prompt">$</span> sudo dnf update -y
+
+<span class="comment"># Verificación de servicios en ejecución</span>
+<span class="prompt">$</span> sudo systemctl list-units --type=service --state=running
+<span class="prompt">$</span> sudo ss -tulpn
+
+<span class="comment"># Verificación de usuarios y sus privilegios</span>
+<span class="prompt">$</span> sudo getent passwd
+<span class="prompt">$</span> sudo grep -Po '^sudo.+:\K.*$' /etc/group
+<span class="prompt">$</span> sudo find / -perm -4000 -ls 2>/dev/null  # Archivos con SUID
+            </div>
+
+            <div class="concept-box">
+                <h3>Configuración de Cortafuegos</h3>
+                <p>Configuración de reglas de firewall para proteger el sistema.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Configuración básica de UFW</span>
+<span class="prompt">$</span> sudo ufw status
+<span class="prompt">$</span> sudo ufw enable
+<span class="prompt">$</span> sudo ufw default deny incoming
+<span class="prompt">$</span> sudo ufw default allow outgoing
+<span class="prompt">$</span> sudo ufw allow 22/tcp    # SSH
+<span class="prompt">$</span> sudo ufw allow 80/tcp    # HTTP
+<span class="prompt">$</span> sudo ufw allow 443/tcp   # HTTPS
+
+<span class="comment"># Configuración avanzada con iptables</span>
+<span class="prompt">$</span> sudo iptables -L
+<span class="prompt">$</span> sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW,ESTABLISHED -j ACCEPT
+<span class="prompt">$</span> sudo iptables -A OUTPUT -p tcp --sport 22 -m conntrack --ctstate ESTABLISHED -j ACCEPT
+<span class="prompt">$</span> sudo iptables -P INPUT DROP  # Política por defecto: rechazar
+<span class="prompt">$</span> sudo iptables-save > /etc/iptables/rules.v4  # Guardar reglas
+
+<span class="comment"># Configuración de firewalld (sistemas con RHEL/CentOS/Fedora)</span>
+<span class="prompt">$</span> sudo firewall-cmd --list-all
+<span class="prompt">$</span> sudo firewall-cmd --permanent --add-service=http
+<span class="prompt">$</span> sudo firewall-cmd --permanent --add-port=8080/tcp
+<span class="prompt">$</span> sudo firewall-cmd --reload
+            </div>
+
+            <div class="concept-box">
+                <h3>Auditoría y Monitorización de Seguridad</h3>
+                <p>Herramientas para detectar intrusiones y vulnerabilidades.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Configuración de auditd</span>
+<span class="prompt">$</span> sudo apt install auditd audispd-plugins
+<span class="prompt">$</span> sudo nano /etc/audit/auditd.conf
+<span class="prompt">$</span> sudo nano /etc/audit/audit.rules
+<span class="output"># Monitorizar cambios en archivos del sistema
+-w /etc/passwd -p wa -k identity
+-w /etc/group -p wa -k identity
+-w /etc/shadow -p wa -k identity
+-w /etc/sudoers -p wa -k sudoers
+-w /etc/ssh/sshd_config -p wa -k sshd</span>
+<span class="prompt">$</span> sudo systemctl restart auditd
+<span class="prompt">$</span> sudo ausearch -k identity
+<span class="prompt">$</span> sudo aureport --auth
+
+<span class="comment"># Escaneo de vulnerabilidades con OpenVAS</span>
+<span class="prompt">$</span> sudo apt install openvas
+<span class="prompt">$</span> sudo openvas-setup
+<span class="prompt">$</span> sudo openvas-check-setup
+<span class="prompt">$</span> sudo gvm-start
+<span class="prompt">$</span> firefox https://127.0.0.1:9392
+<span class="prompt">$</span> sudo openvas-feed-update
+
+<span class="comment"># Monitorización de la integridad de archivos con AIDE</span>
+<span class="prompt">$</span> sudo apt install aide
+<span class="prompt">$</span> sudo nano /etc/aide/aide.conf
+<span class="prompt">$</span> sudo aideinit
+<span class="prompt">$</span> sudo cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+<span class="prompt">$</span> sudo aide --check
+            </div>
+
+            <div class="concept-box">
+                <h3>Protección contra Intrusiones</h3>
+                <p>Configuración de herramientas para prevenir y detectar ataques.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Instalar y configurar Fail2ban</span>
+<span class="prompt">$</span> sudo apt install fail2ban
+<span class="prompt">$</span> sudo cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
+
+<span class="prompt">$</span> cat /etc/fail2ban/jail.local
+<span class="output">[DEFAULT]
+bantime = 3600
+findtime = 600
+maxretry = 5
+
+[sshd]
+enabled = true
+port = ssh
+filter = sshd
+logpath = /var/log/auth.log
+maxretry = 3</span>
+
+<span class="prompt">$</span> sudo systemctl restart fail2ban
+<span class="prompt">$</span> sudo fail2ban-client status sshd
+
+<span class="comment"># Configurar ClamAV para escaneo de malware</span>
+<span class="prompt">$</span> sudo apt install clamav clamav-daemon
+<span class="prompt">$</span> sudo freshclam
+<span class="prompt">$</span> sudo clamscan -r /home --infected --log=/var/log/clamav.log
+<span class="prompt">$</span> sudo systemctl enable clamav-daemon
+            </div>
+        </section>
+
+        <div class="section-divider"></div>
+
+        <section>
+            <h2>Seguridad Avanzada</h2>
+            <div class="concept-box">
+                <h3>Protección del Sistema</h3>
+                <p>Técnicas avanzadas para proteger sistemas Linux contra amenazas de seguridad.</p>
+            </div>
+            
+            <div class="terminal">
+<span class="comment"># Configuración de Iptables para protección avanzada</span>
+<span class="prompt">$</span> sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --set
+<span class="prompt">$</span> sudo iptables -A INPUT -p tcp --dport 22 -m conntrack --ctstate NEW -m recent --update --seconds 60 --hitcount 4 -j DROP
+<span class="prompt">$</span> sudo iptables -A INPUT -p tcp --tcp-flags ALL NONE -j DROP  # No TCP flags
+<span class="prompt">$</span> sudo iptables -A INPUT -p tcp --tcp-flags SYN,FIN SYN,FIN -j DROP  # SYN+FIN
+<span class="prompt">$</span> sudo iptables -A INPUT -p tcp --tcp-flags SYN,RST SYN,RST -j DROP  # SYN+RST
+<span class="prompt">$</span> sudo iptables-save | sudo tee /etc/iptables/rules.v4
+
+<span class="comment"># Implementación de SELinux</span>
+<span class="prompt">$</span> sudo apt install selinux-basics selinux-policy-default auditd
+<span class="prompt">$</span> sudo selinux-activate
+<span class="prompt">$</span> sudo touch /.autorelabel
+<span class="prompt">$</span> sudo reboot
+<span class="prompt">$</span> getenforce
+<span class="prompt">$</span> sudo setenforce 1  # Modo Enforcing
+<span class="prompt">$</span> sudo semanage port -a -t http_port_t -p tcp 8080  # Permitir puerto personalizado
+
+<span class="comment"># Implementación de AppArmor</span>
+<span class="prompt">$</span> sudo apt install apparmor-utils
+<span class="prompt">$</span> sudo aa-enforce /etc/apparmor.d/*
+<span class="prompt">$</span> sudo aa-genprof firefox
+<span class="prompt">$</span> sudo apparmor_status
+<span class="prompt">$</span> sudo nano /etc/apparmor.d/usr.bin.firefox
+<span class="prompt">$</span> sudo systemctl reload apparmor
+            </div>
+
+            <div class="concept-box">
+                <h3>Encriptación Avanzada</h3>
+                <p>Técnicas para implementar encriptación de disco completo y comunicaciones seguras.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Configuración de LUKS para cifrado de disco completo</span>
+<span class="prompt">$</span> sudo cryptsetup luksFormat /dev/sdb1
+<span class="prompt">$</span> sudo cryptsetup luksOpen /dev/sdb1 disco_seguro
+<span class="prompt">$</span> sudo mkfs.ext4 /dev/mapper/disco_seguro
+<span class="prompt">$</span> sudo mkdir -p /media/disco_seguro
+<span class="prompt">$</span> sudo mount /dev/mapper/disco_seguro /media/disco_seguro
+<span class="prompt">$</span> echo "disco_seguro UUID=$(sudo blkid -s UUID -o value /dev/sdb1) none luks" | sudo tee -a /etc/crypttab
+<span class="prompt">$</span> echo "/dev/mapper/disco_seguro /media/disco_seguro ext4 defaults 0 2" | sudo tee -a /etc/fstab
+
+<span class="comment"># Configuración de OpenVPN</span>
+<span class="prompt">$</span> sudo apt install openvpn easy-rsa
+<span class="prompt">$</span> make-cadir ~/openvpn-ca
+<span class="prompt">$</span> cd ~/openvpn-ca
+<span class="prompt">$</span> source vars
+<span class="prompt">$</span> ./clean-all
+<span class="prompt">$</span> ./build-ca
+<span class="prompt">$</span> ./build-key-server server
+<span class="prompt">$</span> ./build-key client1
+<span class="prompt">$</span> ./build-dh
+<span class="prompt">$</span> sudo cp ~/openvpn-ca/keys/{ca.crt,server.crt,server.key,dh2048.pem} /etc/openvpn/
+<span class="prompt">$</span> sudo openvpn --config /etc/openvpn/server.conf
+            </div>
+
+            <div class="concept-box">
+                <h3>Detección de Intrusiones</h3>
+                <p>Implementación y configuración de sistemas de detección de intrusiones (IDS).</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Instalación y configuración de Snort</span>
+<span class="prompt">$</span> sudo apt install snort
+<span class="prompt">$</span> sudo nano /etc/snort/snort.conf
+<span class="prompt">$</span> sudo snort -T -c /etc/snort/snort.conf
+<span class="prompt">$</span> sudo systemctl enable snort
+<span class="prompt">$</span> sudo systemctl start snort
+<span class="prompt">$</span> sudo snort -A console -q -c /etc/snort/snort.conf -i eth0
+
+<span class="comment"># Instalación y configuración de OSSEC</span>
+<span class="prompt">$</span> sudo apt install build-essential
+<span class="prompt">$</span> wget https://github.com/ossec/ossec-hids/archive/3.6.0.tar.gz
+<span class="prompt">$</span> tar -xzf 3.6.0.tar.gz
+<span class="prompt">$</span> cd ossec-hids-3.6.0
+<span class="prompt">$</span> sudo ./install.sh
+<span class="prompt">$</span> sudo /var/ossec/bin/ossec-control start
+<span class="prompt">$</span> sudo /var/ossec/bin/ossec-control status
+<span class="prompt">$</span> sudo tail -f /var/ossec/logs/alerts/alerts.log
+            </div>
+
+            <div class="concept-box">
+                <h3>Auditoría de Seguridad</h3>
+                <p>Herramientas y técnicas para realizar auditorías de seguridad en sistemas Linux.</p>
+            </div>
+
+            <div class="terminal">
+<span class="comment"># Configuración del sistema de auditoría</span>
+<span class="prompt">$</span> sudo apt install auditd audispd-plugins
+<span class="prompt">$</span> sudo nano /etc/audit/auditd.conf
+<span class="prompt">$</span> sudo nano /etc/audit/audit.rules
+<span class="output"># Monitorizar cambios en archivos del sistema
+-w /etc/passwd -p wa -k identity
+-w /etc/group -p wa -k identity
+-w /etc/shadow -p wa -k identity
+-w /etc/sudoers -p wa -k sudoers
+-w /etc/ssh/sshd_config -p wa -k sshd</span>
+<span class="prompt">$</span> sudo systemctl restart auditd
+<span class="prompt">$</span> sudo ausearch -k identity
+<span class="prompt">$</span> sudo aureport --auth
+
+<span class="comment"># Escaneo de vulnerabilidades con OpenVAS</span>
+<span class="prompt">$</span> sudo apt install openvas
+<span class="prompt">$</span> sudo openvas-setup
+<span class="prompt">$</span> sudo openvas-check-setup
+<span class="prompt">$</span> sudo gvm-start
+<span class="prompt">$</span> firefox https://127.0.0.1:9392
+<span class="prompt">$</span> sudo openvas-feed-update
+
+<span class="comment"># Monitorización de la integridad de archivos con AIDE</span>
+<span class="prompt">$</span> sudo apt install aide
+<span class="prompt">$</span> sudo nano /etc/aide/aide.conf
+<span class="prompt">$</span> sudo aideinit
+<span class="prompt">$</span> sudo cp /var/lib/aide/aide.db.new /var/lib/aide/aide.db
+<span class="prompt">$</span> sudo aide --check
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bar">
+            <button onclick="window.history.back()">⬅ Retroceder</button>
+            <button onclick="window.location.href='../../../../index.html'">🏠 Página de Inicio</button>
+        </div>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Instalación de Linux en Hardware Real con Ventoy</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.7;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 25px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h1 {
+        text-align: center;
+        border-bottom: 3px solid #4caf50;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        background-color: #e8f5e9;
+        padding: 12px;
+        border-left: 5px solid #4caf50;
+        margin-top: 40px;
+      }
+      .card {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin: 25px 0;
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        border-top: 4px solid #4caf50;
+      }
+      .warning {
+        background-color: #fff3e0;
+        padding: 15px;
+        border-left: 4px solid #ffa000;
+        margin: 20px 0;
+      }
+      .terminal {
+        background-color: #263238;
+        color: #eeffff;
+        padding: 12px;
+        border-radius: 5px;
+        font-family: 'Courier New', monospace;
+        overflow-x: auto;
+      }
+      .distro-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 25px 0;
+      }
+      .distro-table th,
+      .distro-table td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      .distro-table th {
+        background-color: #4caf50;
+        color: white;
+      }
+      .step {
+        margin-bottom: 15px;
+        position: relative;
+        padding-left: 30px;
+      }
+      .step:before {
+        content: '➔';
+        position: absolute;
+        left: 0;
+        color: #4caf50;
+        font-weight: bold;
+      }
+      .note {
+        background-color: #e3f2fd;
+        padding: 15px;
+        border-left: 4px solid #2196f3;
+        margin: 20px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Guía Completa: Instalación de Linux en Hardware Real con Ventoy</h1>
+
+    <div class="card">
+      <h2>📌 Requisitos Previos</h2>
+      <ul>
+        <li>
+          USB de
+          <strong>al menos 8GB</strong>
+        </li>
+        <li>Máquina objetivo (donde instalarás Linux)</li>
+        <li>Acceso a BIOS/UEFI (saber entrar en menú de arranque)</li>
+        <li>Backup de tus datos importantes</li>
+      </ul>
+    </div>
+
+    <h2>🚀 Paso 1: Preparar USB con Ventoy</h2>
+
+    <div class="step">
+      Descarga Ventoy desde
+      <a
+        href="https://www.ventoy.net"
+        target="_blank"
+      >
+        ventoy.net
+      </a>
+    </div>
+    <div class="step">
+      Ejecuta Ventoy2Disk (Windows) o Ventoy2Disk.sh (Linux)
+    </div>
+    <div class="step">
+      Selecciona tu USB y haz clic en
+      <strong>Install</strong>
+      (borrará todos los datos)
+    </div>
+
+    <div class="warning">
+      <strong>¡Atención!</strong>
+      Ventoy creará dos particiones: una para sus archivos y otra (opcional)
+      para almacenamiento.
+    </div>
+
+    <h2>💾 Paso 2: Añadir ISOs de Distribuciones</h2>
+
+    <div class="step">
+      Copia tus ISOs a la partición principal del USB (puedes organizarlas en
+      carpetas)
+    </div>
+    <div class="step">
+      ISOs recomendadas para esta guía:
+      <ul>
+        <li>
+          <strong>Manjaro</strong>
+          (KDE Plasma)
+        </li>
+        <li>
+          <strong>Ubuntu</strong>
+          (LTS)
+        </li>
+        <li>
+          <strong>Fedora</strong>
+          (Workstation)
+        </li>
+      </ul>
+    </div>
+
+    <div class="note">
+      <strong>Tip:</strong>
+      Puedes tener
+      <strong>múltiples ISOs</strong>
+      en el mismo USB y elegir cuál instalar.
+    </div>
+
+    <h2>🔧 Paso 3: Configuración de BIOS/UEFI</h2>
+
+    <div class="step">
+      Reinicia y entra a BIOS (F2, F12, ESC, DEL - depende del fabricante)
+    </div>
+    <div class="step">
+      Configuraciones cruciales:
+      <ul>
+        <li>
+          <strong>Desactivar Secure Boot</strong>
+          (para la mayoría de distribuciones)
+        </li>
+        <li>Modo UEFI o Legacy (CSM) según tu necesidad</li>
+        <li>Orden de arranque: USB primero</li>
+      </ul>
+    </div>
+
+    <div class="terminal">
+      # Para ver si el sistema arrancó en UEFI (en Linux live): ls
+      /sys/firmware/efi # Si existe el directorio, es UEFI
+    </div>
+
+    <h2>🐧 Paso 4: Particionado del Disco (Manual vs Automático)</h2>
+
+    <div class="card">
+      <h3>Esquema de particiones recomendado (para máquinas modernas UEFI):</h3>
+      <ul>
+        <li>
+          <strong>EFI System Partition (ESP)</strong>
+          : 512 MB (FAT32)
+        </li>
+        <li>
+          <strong>/</strong>
+          : El resto del espacio (ext4)
+        </li>
+        <li>
+          <strong>swap</strong>
+          : Opcional (memoria RAM x 2)
+        </li>
+      </ul>
+    </div>
+
+    <div class="warning">
+      <strong>¡Advertencia con discos NVMe!</strong>
+      <p>
+        Algunas distribuciones antiguas pueden tener problemas con controladores
+        NVMe. Verifica que tu distro soporte tu hardware.
+      </p>
+    </div>
+
+    <h2>🖥️ Paso 5: Particularidades por Distribución</h2>
+
+    <table class="distro-table">
+      <tr>
+        <th>Distribución</th>
+        <th>Particularidades de Instalación</th>
+        <th>Consejos</th>
+      </tr>
+      <tr>
+        <td><strong>Manjaro</strong></td>
+        <td>
+          <ul>
+            <li>Elige "Non-free drivers" para mejor soporte de hardware</li>
+            <li>Utiliza mhwd-config para gestionar controladores</li>
+          </ul>
+        </td>
+        <td>
+          Activa "Add offline user" para tener un usuario administrador por
+          defecto
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Ubuntu</strong></td>
+        <td>
+          <ul>
+            <li>Instalación más sencilla con opciones predeterminadas</li>
+            <li>Importante marcar "Install third-party software"</li>
+          </ul>
+        </td>
+        <td>
+          En dispositivos con poca RAM, usar Lubuntu (LXDE) en vez de la versión
+          estándar
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Fedora</strong></td>
+        <td>
+          <ul>
+            <li>Particionado automático con LVM por defecto</li>
+            <li>Seleccionar "Workstation" para escritorio completo</li>
+          </ul>
+        </td>
+        <td>En máquinas con NVIDIA, añadir RPM Fusion tras la instalación</td>
+      </tr>
+    </table>
+
+    <h2>🔄 Paso 6: Post-Instalación</h2>
+
+    <div class="step">Actualiza el sistema (comandos según distro):</div>
+    <div class="terminal">
+      # Manjaro / Arch sudo pacman -Syu # Ubuntu / Debian sudo apt update &&
+      sudo apt upgrade # Fedora sudo dnf upgrade
+    </div>
+
+    <div class="step">
+      Instala controladores propietarios si se necesita (NVIDIA, Wi-Fi, etc.)
+    </div>
+    <div class="step">Configura tu escritorio y apps esenciales</div>
+
+    <div class="note">
+      <strong>Tip:</strong>
+      Guarda tus configuraciones en `/etc/` para restaurar fácilmente en caso de
+      reinstalación. Comando útil:
+      <code>sudo cp -r /etc/ export_configs/</code>
+    </div>
+
+    <h2>🎉 Conclusión</h2>
+
+    <p>
+      Con Ventoy puedes tener múltiples distribuciones en un solo USB y
+      probarlas antes de instalar. La instalación en hardware real tiene algunas
+      complejidades adicionales (controladores, particionado), pero con esta
+      guía ya estás listo para dar el salto.
+    </p>
+
+    <div style="text-align: center; margin-top: 50px; font-size: 1.1em">
+      <p>
+        ¿Te gustaría una guía específica para alguna distro?
+        <strong>¡Déjame un comentario!</strong>
+      </p>
+    </div>
+  </body>
+</html>

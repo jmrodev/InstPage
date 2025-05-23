@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear ISO Personalizada de Manjaro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #16A085;
+            border-bottom: 2px solid #16A085;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2C3E50;
+            margin-top: 30px;
+        }
+        code {
+            background-color: #f4f4f4;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            border-left: 4px solid #16A085;
+        }
+        .alert {
+            background-color: #FCF8E3;
+            border-left: 4px solid #F39C12;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 3px;
+        }
+        .step {
+            background-color: #EBF5FB;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .step h3 {
+            margin-top: 0;
+            color: #2874A6;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guía para crear una ISO personalizada de Manjaro</h1>
+    
+    <p>Esta guía te mostrará el proceso completo para crear una versión personalizada de Manjaro Linux con tus programas preferidos preinstalados, utilizando la herramienta <code>mksquashfs</code>.</p>
+
+    <div class="alert">
+        <strong>Nota:</strong> Este proceso requiere conocimientos básicos de Linux y comandos de terminal. Se recomienda hacer una copia de seguridad de tus datos importantes antes de comenzar.
+    </div>
+
+    <h2>Requisitos previos</h2>
+    <ul>
+        <li>Un pendrive con Manjaro (Live USB)</li>
+        <li>Espacio suficiente en disco (mínimo 10GB libres)</li>
+        <li>Acceso a internet para descargar paquetes</li>
+        <li>Paquetes necesarios: <code>squashfs-tools</code>, <code>xorriso</code>, <code>arch-install-scripts</code></li>
+    </ul>
+
+    <div class="step">
+        <h3>Paso 1: Arrancar desde el Live USB</h3>
+        <p>Inicia tu computadora con el pendrive de Manjaro. Una vez que hayas arrancado en el entorno live, abre una terminal.</p>
+    </div>
+
+    <div class="step">
+        <h3>Paso 2: Actualizar el sistema e instalar herramientas necesarias</h3>
+        <pre>sudo pacman -Syu
+sudo pacman -S squashfs-tools xorriso arch-install-scripts</pre>
+    </div>
+
+    <div class="step">
+        <h3>Paso 3: Instalar los programas personalizados</h3>
+        <p>Instala los programas que quieres incluir en tu ISO personalizada:</p>
+        <pre>sudo pacman -S programa1 programa2 programa3</pre>
+        <p>También puedes usar AUR con yay si es necesario:</p>
+        <pre>yay -S programa_aur</pre>
+    </div>
+
+    <div class="step">
+        <h3>Paso 4: Preparar el entorno para crear la ISO</h3>
+        <p>Crea los directorios necesarios:</p>
+        <pre>sudo mkdir -p /mnt/customiso/squashfs
+sudo mkdir -p /mnt/customiso/iso</pre>
+    </div>
+
+    <div class="step">
+        <h3>Paso 5: Copiar el sistema actual</h3>
+        <p>Copia todo el sistema en vivo a un directorio temporal:</p>
+        <pre>sudo cp -a / /mnt/customiso/squashfs --exclude=/mnt --exclude=/proc --exclude=/sys --exclude=/dev --exclude=/run</pre>
+        <p>Este paso tomará tiempo dependiendo de tu sistema.</p>
+    </div>
+
+    <div class="step">
+        <h3>Paso 6: Limpiar archivos temporales</h3>
+        <p>Elimina archivos innecesarios para reducir el tamaño:</p>
+        <pre>sudo rm -rf /mnt/customiso/squashfs/var/cache/pacman/pkg/*
+sudo rm -rf /mnt/customiso/squashfs/var/log/*
+sudo rm -rf /mnt/customiso/squashfs/var/tmp/*
+sudo rm -rf /mnt/customiso/squashfs/tmp/*
+sudo rm -rf /mnt/customiso/squashfs/home/manjaro/.cache/*</pre>
+    </div>
+
+    <div class="step">
+        <h3>Paso 7: Montar la ISO original</h3>
+        <p>Monta la ISO original para acceder a los archivos de arranque:</p>
+        <pre>sudo mkdir -p /mnt/original
+sudo mount /run/media/manjaro/MANJARO_XFCE_*/manjaro-xfce-*.iso /mnt/original -o loop</pre>
+        <p>Ajusta la ruta según tu versión específica de Manjaro.</p>
+    </div>
+
+    <div class="step">
+        <h3>Paso 8: Copiar estructura de la ISO original</h3>
+        <pre>sudo cp -r /mnt/original/* /mnt/customiso/iso/</pre>
+    </div>
+
+    <div class="step">
+        <h3>Paso 9: Crear el sistema de archivos comprimido</h3>
+        <p>Este paso comprime tu sistema personalizado:</p>
+        <pre>sudo mksquashfs /mnt/customiso/squashfs /tmp/airootfs.sfs -comp xz -Xbcj x86</pre>
+        <p>Este proceso puede tomar bastante tiempo y consumir recursos significativos.</p>
+    </div>
+
+    <div class="step">
+        <h3>Paso 10: Reemplazar el sistema de archivos</h3>
+        <p>Identifica la ubicación correcta del archivo squashfs en la ISO original:</p>
+        <pre>sudo find /mnt/customiso/iso -name "*.sfs"</pre>
+        <p>Ahora reemplaza el archivo con tu versión personalizada:</p>
+        <pre>sudo rm /mnt/customiso/iso/manjaro/x86_64/airootfs.sfs
+sudo mv /tmp/airootfs.sfs /mnt/customiso/iso/manjaro/x86_64/airootfs.sfs</pre>
+        <p>Ajusta la ruta según tu versión específica de Manjaro.</p>
+    </div>
+
+    <div class="step">
+        <h3>Paso 11: Crear la nueva ISO</h3>
+        <pre>sudo xorriso -as mkisofs -iso-level 3 -rock -joliet \
+-volid "MANJARO_CUSTOM" \
+-appid "Manjaro Linux Custom Live/Rescue CD" \
+-publisher "Tu Nombre" \
+-preparer "prepared by you" \
+-eltorito-boot isolinux/isolinux.bin \
+-eltorito-catalog isolinux/boot.cat \
+-no-emul-boot -boot-load-size 4 -boot-info-table \
+-isohybrid-mbr /mnt/customiso/iso/isolinux/isohdpfx.bin \
+-output /home/manjaro/manjaro-custom.iso \
+/mnt/customiso/iso</pre>
+    </div>
+
+    <div class="step">
+        <h3>Paso 12: Transferir la ISO al pendrive</h3>
+        <p>Identifica tu pendrive (reemplaza sdX con el dispositivo correcto):</p>
+        <pre>lsblk</pre>
+        <p>Escribe la ISO en el pendrive:</p>
+        <pre>sudo dd if=/home/manjaro/manjaro-custom.iso of=/dev/sdX bs=4M status=progress</pre>
+        <div class="alert">
+            <strong>¡Atención!</strong> Asegúrate de identificar correctamente el dispositivo (sdX) o podrías sobrescribir datos importantes.
+        </div>
+    </div>
+
+    <h2>Solución de problemas comunes</h2>
+    <ul>
+        <li><strong>Error de espacio:</strong> Asegúrate de tener suficiente espacio libre en el disco.</li>
+        <li><strong>ISO no arranca:</strong> Verifica que has copiado correctamente todos los archivos de arranque.</li>
+        <li><strong>Problemas con paquetes:</strong> Algunos paquetes pueden requerir configuración adicional para funcionar correctamente en un entorno Live.</li>
+    </ul>
+
+    <h2>Alternativas más sencillas</h2>
+    <p>Si este método te parece complicado, considera estas alternativas:</p>
+    <ul>
+        <li><strong>Manjaro Architect:</strong> Una herramienta oficial de Manjaro que permite personalizar la instalación.</li>
+        <li><strong>Live USB persistente:</strong> Crear un pendrive con persistencia para guardar cambios entre reinicios.</li>
+    </ul>
+
+    <div class="alert">
+        <p>Recuerda que este proceso puede variar ligeramente según la versión específica de Manjaro que estés utilizando.</p>
+    </div>
+
+    <h2>Conclusión</h2>
+    <p>Ahora deberías tener una ISO personalizada de Manjaro con tus programas preferidos preinstalados. Esta ISO se puede utilizar para instalar Manjaro en otros equipos o como un sistema Live con tus herramientas listas para usar.</p>
+</body>
+</html>

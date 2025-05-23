@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Modificadores de Acceso en PHP: Public, Private y Protected</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #9c27b0;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #f3e5f5;
+      border-left: 5px solid #9c27b0;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #9c27b0;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.5rem 0;
+    }
+    .comparison-table th, .comparison-table td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
+    .comparison-table th {
+      background-color: #e1bee7;
+    }
+    .comparison-table tr:nth-child(even) {
+      background-color: #f5f5f5;
+    }
+    .tip {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔐 Modificadores de Acceso en PHP: Public, Private y Protected</h1>
+
+<div class="concept-box">
+  <span class="concept-title">¿Qué son los Modificadores de Acceso?</span>
+  <p>Los modificadores de acceso son palabras clave que determinan la visibilidad y accesibilidad de las propiedades (atributos) y métodos de una clase. Controlan desde dónde se puede acceder a estos elementos y son fundamentales para la encapsulación en la Programación Orientada a Objetos.</p>
+  
+  <p>PHP tiene tres modificadores de acceso:</p>
+  <ul>
+    <li><code>public</code>: Accesible desde cualquier parte</li>
+    <li><code>protected</code>: Accesible solo desde la clase que lo define y sus subclases</li>
+    <li><code>private</code>: Accesible solo desde la clase que lo define</li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Public</span>
+  <p>Los elementos declarados como <code>public</code> son accesibles desde cualquier parte del código, tanto dentro como fuera de la clase. No hay restricciones de acceso.</p>
+  
+  <div class="example-box">
+    <code>
+class Usuario {<br>
+&nbsp;&nbsp;public $nombre;  // Propiedad pública<br>
+<br>
+&nbsp;&nbsp;public function saludar() {  // Método público<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "¡Hola, soy $this->nombre!";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$usuario = new Usuario();<br>
+$usuario->nombre = "Ana";  // Acceso directo a la propiedad pública<br>
+echo $usuario->saludar();  // Llamada a método público: "¡Hola, soy Ana!"
+    </code>
+  </div>
+  
+  <p><strong>Uso recomendado:</strong> Use <code>public</code> para métodos y propiedades que:</p>
+  <ul>
+    <li>Forman parte de la interfaz pública de la clase que desea exponer al mundo exterior</li>
+    <li>Necesitan ser accesibles directamente desde fuera de la clase</li>
+    <li>Representan comportamientos o datos que no necesitan protección</li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Private</span>
+  <p>Los elementos declarados como <code>private</code> son accesibles <strong>únicamente</strong> desde dentro de la clase que los define. No pueden ser accedidos desde fuera de la clase ni desde clases heredadas.</p>
+  
+  <div class="example-box">
+    <code>
+class CuentaBancaria {<br>
+&nbsp;&nbsp;private $saldo;  // Propiedad privada<br>
+&nbsp;&nbsp;private $numeroCuenta;<br>
+<br>
+&nbsp;&nbsp;public function __construct($numero, $saldoInicial) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->numeroCuenta = $numero;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->saldo = $saldoInicial;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function depositar($cantidad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if ($cantidad > 0) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$this->saldo += $cantidad;  // Podemos acceder a $saldo aquí<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;return true;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return false;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getSaldo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return $this->saldo;  // Método para acceder a $saldo<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;private function validarOperacion() {  // Método privado<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// Lógica interna de validación<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$cuenta = new CuentaBancaria("123456", 1000);<br>
+// $cuenta->saldo = 2000;  // Error: No podemos acceder directamente a $saldo<br>
+// $cuenta->validarOperacion();  // Error: No podemos llamar a un método privado<br>
+<br>
+// Forma correcta:<br>
+$cuenta->depositar(500);<br>
+echo $cuenta->getSaldo();  // 1500
+    </code>
+  </div>
+  
+  <p><strong>Uso recomendado:</strong> Use <code>private</code> para métodos y propiedades que:</p>
+  <ul>
+    <li>Representan detalles de implementación internos</li>
+    <li>No deben ser accesibles o modificables directamente desde fuera</li>
+    <li>No deberían ser visibles ni siquiera para las clases hijas</li>
+    <li>Son específicos de esta clase y no tienen relevancia para el resto del sistema</li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Protected</span>
+  <p>Los elementos declarados como <code>protected</code> son accesibles desde la clase que los define y también desde todas las clases que heredan de ella (subclases). Sin embargo, no son accesibles desde fuera de estas clases.</p>
+  
+  <div class="example-box">
+    <code>
+class Animal {<br>
+&nbsp;&nbsp;public $nombre;<br>
+&nbsp;&nbsp;protected $edad;  // Propiedad protegida<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;protected function cumplirAnios() {  // Método protegido<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad++;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "$this->nombre ahora tiene $this->edad años.";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class Perro extends Animal {<br>
+&nbsp;&nbsp;public function celebrarCumpleaños() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "¡Fiesta para $this->nombre!";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->cumplirAnios();  // Podemos usar el método protegido<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo " Edad actual: $this->edad";  // Podemos acceder a la propiedad protegida<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$perro = new Perro("Rex", 3);<br>
+// $perro->edad = 4;  // Error: No podemos acceder directamente a $edad<br>
+// $perro->cumplirAnios();  // Error: No podemos llamar a un método protegido<br>
+<br>
+// Forma correcta:<br>
+$perro->celebrarCumpleaños();  // "¡Fiesta para Rex! Rex ahora tiene 4 años. Edad actual: 4"
+    </code>
+  </div>
+  
+  <p><strong>Uso recomendado:</strong> Use <code>protected</code> para métodos y propiedades que:</p>
+  <ul>
+    <li>Deben ser accesibles por las clases heredadas (subclases)</li>
+    <li>Forman parte de la implementación interna que las subclases pueden necesitar extender o modificar</li>
+    <li>Son conceptualmente parte de una funcionalidad que las clases hijas deberían poder utilizar</li>
+    <li>Se utilizan en implementaciones de patrones de diseño como Template Method</li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Comparación de Modificadores</span>
+  
+  <table class="comparison-table">
+    <thead>
+      <tr>
+        <th>Modificador</th>
+        <th>Clase actual</th>
+        <th>Clases hijas</th>
+        <th>Código externo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>public</code></td>
+        <td>✅ Accesible</td>
+        <td>✅ Accesible</td>
+        <td>✅ Accesible</td>
+      </tr>
+      <tr>
+        <td><code>protected</code></td>
+        <td>✅ Accesible</td>
+        <td>✅ Accesible</td>
+        <td>❌ No accesible</td>
+      </tr>
+      <tr>
+        <td><code>private</code></td>
+        <td>✅ Accesible</td>
+        <td>❌ No accesible</td>
+        <td>❌ No accesible</td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <div class="example-box">
+    <code>
+class Base {<br>
+&nbsp;&nbsp;public $publico = 'Accesible para todos';<br>
+&nbsp;&nbsp;protected $protegido = 'Accesible en esta clase y subclases';<br>
+&nbsp;&nbsp;private $privado = 'Solo accesible en esta clase';<br>
+<br>
+&nbsp;&nbsp;public function mostrarTodo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo $this->publico . "<br>";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo $this->protegido . "<br>";<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo $this->privado . "<br>";  // Puede acceder a todos<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class Derivada extends Base {<br>
+&nbsp;&nbsp;public function mostrarAccesibles() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo $this->publico . "<br>";     // Funciona<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo $this->protegido . "<br>";   // Funciona<br>
+&nbsp;&nbsp;&nbsp;&nbsp;// echo $this->privado . "<br>";  // Error: No accesible<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$base = new Base();<br>
+$derivada = new Derivada();<br>
+<br>
+// Desde código externo<br>
+echo $base->publico . "<br>";        // Funciona<br>
+// echo $base->protegido . "<br>";   // Error: No accesible<br>
+// echo $base->privado . "<br>";     // Error: No accesible<br>
+<br>
+$base->mostrarTodo();           // Muestra todo<br>
+$derivada->mostrarAccesibles();  // Muestra público y protegido
+    </code>
+  </div>
+</div>
+
+<div class="tip">
+  <strong>Recomendación de buenas prácticas:</strong> Comienza haciendo tus propiedades lo más restrictivas posible (normalmente <code>private</code>) y luego relaja la restricción solo cuando sea necesario. Proporciona métodos públicos (getters/setters) para acceder y modificar propiedades privadas de manera controlada. Esto maximiza la encapsulación y permite cambiar la implementación interna sin afectar al código cliente.
+</div>
+
+</body>
+</html>

@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comandos Básicos de Linux - Nivel 1</title>
+  <link rel="stylesheet" href="../../../../css/styles.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Comandos Básicos de Linux</h1>
+    <nav class="breadcrumb">
+      <a href="../../../../index.html"><i class="fas fa-home"></i> Inicio</a> /
+      <a href="../index.html">EdiII</a> /
+      <a href="index.html">Comandos Linux</a> / Nivel Básico
+    </nav>
+  </header>
+
+  <main>
+    <div class="note">
+      <p>
+        <i class="fas fa-exclamation-circle"></i> En esta sección aprenderás los comandos más básicos y fundamentales de
+        Linux. Estos comandos son la base para trabajar en la terminal y son
+        esenciales para cualquier administrador de sistemas o desarrollador.
+      </p>
+    </div>
+
+    <section>
+      <h2><i class="fas fa-laptop-code"></i> Introducción al Shell de Linux</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-terminal"></i> ¿Qué es Bash?</h3>
+        <p>
+          Bash (Bourne Again SHell) es un programa intérprete de comandos para
+          sistemas operativos Unix/Linux. Es una interfaz que permite al
+          usuario interactuar con el sistema operativo mediante comandos de
+          texto.
+        </p>
+
+        <p>
+          Cuando abres una terminal en Linux, normalmente estás usando Bash.
+          Es como un intermediario entre tú y el sistema: escribes comandos,
+          Bash los interpreta y luego el sistema los ejecuta.
+        </p>
+
+        <h3><i class="fas fa-linux"></i> ¿Por qué Linux?</h3>
+        <p>
+          Linux es un sistema operativo de código abierto basado en Unix que
+          ofrece diversas ventajas:
+        </p>
+        <ul>
+          <li>
+            <strong>Libre y gratuito:</strong> No requiere licencias costosas
+          </li>
+          <li>
+            <strong>Seguro:</strong> Menor vulnerabilidad a virus y malware
+          </li>
+          <li>
+            <strong>Estable:</strong> Funciona por largos períodos sin
+            necesidad de reinicio
+          </li>
+          <li>
+            <strong>Personalizable:</strong> Adaptable a diferentes
+            necesidades y recursos
+          </li>
+          <li>
+            <strong>Transparente:</strong> Su código fuente es accesible y
+            modificable
+          </li>
+        </ul>
+
+        <h3><i class="fas fa-window-maximize"></i> Terminales y Shells</h3>
+        <p>
+          La terminal es la ventana o aplicación que permite acceder al shell.
+          El shell (como Bash) es el programa que interpreta los comandos que
+          escribes y se comunica con el kernel de Linux para ejecutarlos.
+        </p>
+
+        <div class="terminal">
+          <span class="prompt">usuario@linux:~$</span> echo "Hola, estoy
+          usando Bash!"
+          <span class="output">Hola, estoy usando Bash!</span>
+        </div>
+
+        <p>
+          Cuando veas este símbolo <code>$</code> o <code>#</code> en la
+          terminal, significa que el sistema está esperando que ingreses un
+          comando.
+        </p>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-keyboard"></i> Comandos Básicos</h2>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-folder"></i> pwd - Print Working Directory</div>
+          <div class="tech-image">🗂️</div>
+          <p>
+            El comando <code>pwd</code> muestra la ruta completa del
+            directorio actual donde te encuentras.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              Es fundamental para orientarte en el sistema de archivos. Si te
+              sientes perdido o necesitas confirmar dónde estás antes de
+              realizar operaciones con archivos, <code>pwd</code> te da la
+              ubicación exacta.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">$</span> pwd
+            <span class="output">/home/usuario/Documentos</span>
+          </div>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Abre una terminal y ejecuta <code>pwd</code>. Anota la
+                ubicación.
+              </li>
+              <li>
+                Cambia a otro directorio usando <code>cd</code> y vuelve a
+                ejecutar <code>pwd</code>. ¿Qué diferencias notas?
+              </li>
+              <li>
+                Ejecuta <code>cd /</code> y luego <code>pwd</code>. ¿Qué
+                muestra ahora?
+              </li>
+              <li>
+                Vuelve a tu directorio personal con <code>cd ~</code> y
+                verifica con <code>pwd</code>.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-folder-open"></i> ls - Listar archivos</div>
+          <div class="tech-image">📁</div>
+          <p>
+            El comando <code>ls</code> es uno de los más utilizados. Muestra
+            el contenido de un directorio, permitiéndote ver qué archivos y
+            carpetas existen.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              Sin una interfaz gráfica, necesitas <code>ls</code> para "ver"
+              lo que hay en tu sistema. Es como abrir el explorador de
+              archivos pero en modo texto. Es el primer paso para interactuar
+              con los archivos del sistema.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">$</span> ls
+            <span class="output">Documentos Imágenes Música Videos</span>
+
+            <span class="prompt">$</span> ls -l
+            <span class="output">
+              total 4 drwxr-xr-x 2 usuario usuario 4096 ene 15 10:30
+              Documentos drwxr-xr-x 2 usuario usuario 4096 ene 15 10:30
+              Imágenes drwxr-xr-x 2 usuario usuario 4096 ene 15 10:30 Música
+              drwxr-xr-x 2 usuario usuario 4096 ene 15 10:30 Videos</span>
+
+            <span class="prompt">$</span> ls -a
+            <span class="output">
+              . .. .config Documentos Imágenes Música Videos</span>
+          </div>
+
+          <p><strong>Opciones comunes:</strong></p>
+          <ul>
+            <li>
+              <code>-l</code>: Muestra información detallada (permisos,
+              tamaño, fecha)
+            </li>
+            <li>
+              <code>-a</code>: Muestra archivos ocultos (comienzan con .)
+            </li>
+            <li>
+              <code>-h</code>: Muestra tamaños en formato legible (KB, MB, GB)
+            </li>
+            <li><code>-R</code>: Lista recursivamente subdirectorios</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Lista los archivos de tu directorio home con <code>ls</code>.
+              </li>
+              <li>
+                Usa <code>ls -la</code> para ver todos los archivos,
+                incluyendo ocultos, con sus detalles. ¿Cuántos archivos
+                ocultos encontraste?
+              </li>
+              <li>
+                Ejecuta <code>ls -lh /var/log</code>. ¿Qué tamaño tienen los
+                archivos más grandes?
+              </li>
+              <li>
+                Intenta <code>ls --color=auto</code>. ¿Qué diferencias notas
+                en la salida?
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-walking"></i> cd - Change Directory</div>
+          <div class="tech-image">🚶</div>
+          <p>
+            El comando <code>cd</code> permite cambiar de un directorio a
+            otro, navegando por el sistema de archivos.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              La navegación es fundamental en cualquier sistema. Con
+              <code>cd</code> puedes moverte entre carpetas para acceder a los
+              archivos que necesitas. Es como caminar por los pasillos de una
+              biblioteca para llegar a diferentes secciones.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="prompt">$</span> cd Documentos
+            <span class="prompt">$</span> pwd
+            <span class="output">/home/usuario/Documentos</span>
+
+            <span class="prompt">$</span> cd ..
+            <span class="prompt">$</span> pwd
+            <span class="output">/home/usuario</span>
+
+            <span class="prompt">$</span> cd /etc
+            <span class="prompt">$</span> pwd
+            <span class="output">/etc</span>
+
+            <span class="prompt">$</span> cd ~
+            <span class="prompt">$</span> pwd
+            <span class="output">/home/usuario</span>
+          </div>
+
+          <p><strong>Atajos útiles:</strong></p>
+          <ul>
+            <li><code>cd ~</code>: Ir al directorio home del usuario</li>
+            <li>
+              <code>cd ..</code>: Subir un nivel (ir al directorio padre)
+            </li>
+            <li><code>cd -</code>: Volver al directorio anterior</li>
+            <li><code>cd /</code>: Ir al directorio raíz del sistema</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Navega a tu directorio de Documentos (<code
+                  >cd ~/Documentos</code
+                >) y verifica con <code>pwd</code>.
+              </li>
+              <li>
+                Desde ahí, sube un nivel con <code>cd ..</code> y verifica
+                dónde estás.
+              </li>
+              <li>
+                Ve al directorio <code>/etc</code> y lista su contenido. Luego
+                vuelve a tu home con un solo comando.
+              </li>
+              <li>
+                Practica usando <code>cd -</code> para alternar entre dos
+                directorios diferentes.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-file"></i> cat - Concatenar y mostrar archivos</div>
+          <div class="tech-image">📄</div>
+          <p>
+            El comando <code>cat</code> (abreviatura de "concatenate") tiene
+            múltiples usos: mostrar contenido, crear archivos y concatenar
+            archivos.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              Es la forma más básica de ver el contenido de archivos de texto.
+              También permite crear archivos rápidamente y combinar varios
+              archivos en uno. Es una herramienta esencial para manipular
+              texto en la terminal.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment"># Mostrar contenido de un archivo</span>
+            <span class="prompt">$</span> cat archivo.txt
+            <span class="output">
+              Esta es la primera línea Esta es la segunda línea Esta es la
+              tercera línea</span>
+
+            <span class="comment"># Crear un nuevo archivo</span>
+            <span class="prompt">$</span> cat > nuevo.txt
+            <span class="comment">
+              # Escribe el contenido y presiona Ctrl+D para guardar</span>
+            <span class="output">
+              Este es un nuevo archivo Segunda línea ^D</span>
+
+            <span class="comment"># Concatenar dos archivos en uno nuevo</span>
+            <span class="prompt">$</span> cat archivo1.txt archivo2.txt >
+            combinado.txt <span class="prompt">$</span> cat combinado.txt
+            <span class="output">
+              Contenido de archivo1 Ahora viene el contenido de
+              archivo2</span>
+          </div>
+
+          <p><strong>Usos comunes:</strong></p>
+          <ul>
+            <li>Mostrar contenido: <code>cat archivo.txt</code></li>
+            <li>Crear archivo: <code>cat > nuevo.txt</code></li>
+            <li>
+              Concatenar archivos:
+              <code>cat archivo1.txt archivo2.txt > combinado.txt</code>
+            </li>
+            <li>
+              Mostrar con números de línea: <code>cat -n archivo.txt</code>
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Crea un archivo llamado <code>notas.txt</code> con
+                <code>cat > notas.txt</code> y escribe algunas líneas.
+              </li>
+              <li>
+                Visualiza el contenido de algún archivo de configuración:
+                <code>cat /etc/hostname</code>
+              </li>
+              <li>
+                Crea dos archivos de texto y luego concaténalos en un tercero.
+              </li>
+              <li>
+                Utiliza <code>cat -n archivo.txt</code> para ver las líneas
+                numeradas y <code>cat -A archivo.txt</code> para ver
+                caracteres especiales.
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-arrows-alt-h"></i> Redirecciones Básicas</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-route"></i> ¿Qué son las redirecciones?</h3>
+        <p>
+          Las redirecciones son una característica poderosa de Bash que
+          permite controlar dónde va la entrada y salida de los comandos. En
+          lugar de mostrar resultados en pantalla, puedes enviarlos a
+          archivos, o usar archivos como entrada para comandos.
+        </p>
+
+        <p>
+          Esta funcionalidad es fundamental para automatizar tareas y procesar
+          grandes cantidades de información.
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-exchange-alt"></i> stdin, stdout y stderr</div>
+          <div class="tech-image">↔️</div>
+          <p>
+            En Linux, todo es un archivo, incluso los flujos de entrada y
+            salida de datos. Hay tres flujos estándar:
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              Entender estos conceptos es crucial para la automatización y el
+              procesamiento de datos. Te permite controlar cómo los comandos
+              reciben y producen información, permitiendo construir procesos
+              complejos a partir de comandos simples.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # stdin (0): Entrada estándar (teclado)
+            </span>
+            <span class="prompt">$</span> cat < archivo.txt
+            <span class="output">Contenido del archivo</span>
+
+            <span class="comment">
+              # stdout (1): Salida estándar (terminal)
+            </span>
+            <span class="prompt">$</span> echo "Hola" > salida.txt
+            <span class="prompt">$</span> cat salida.txt
+            <span class="output">Hola</span>
+
+            <span class="comment"># stderr (2): Salida de error</span>
+            <span class="prompt">$</span> ls /directorio_inexistente 2>
+            errores.txt <span class="prompt">$</span> cat errores.txt
+            <span class="output">
+              ls: cannot access '/directorio_inexistente': No such file or
+              directory</span>
+          </div>
+
+          <p><strong>Flujos estándar:</strong></p>
+          <ul>
+            <li>
+              <strong>stdin (0)</strong>: Entrada estándar, generalmente el
+              teclado
+            </li>
+            <li>
+              <strong>stdout (1)</strong>: Salida estándar, generalmente la
+              terminal
+            </li>
+            <li>
+              <strong>stderr (2)</strong>: Salida de error, también va a la
+              terminal
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Crea un archivo con <code>echo "Línea 1" > test.txt</code>.
+                Luego añade otra línea con
+                <code>echo "Línea 2" >> test.txt</code>.
+              </li>
+              <li>
+                Ejecuta un comando que produzca un error y redirige el error a
+                un archivo: <code>ls /noexiste 2> error.log</code>
+              </li>
+              <li>
+                Redirecciona tanto la salida normal como los errores:
+                <code>ls /etc /noexiste > salida.txt 2> errores.txt</code>
+              </li>
+              <li>
+                Envía tanto la salida normal como los errores al mismo
+                archivo: <code>ls /etc /noexiste > todo.log 2>&1</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-arrow-right"></i> Operadores de Redirección</div>
+          <div class="tech-image">➡️</div>
+          <p>
+            Bash proporciona varios operadores para controlar las
+            redirecciones de entrada/salida.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlos?</strong>
+            <p>
+              Estos operadores son las herramientas que te permiten manipular
+              los flujos de datos. Son esenciales para guardar resultados,
+              filtrar información y crear scripts automatizados.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # > Redirección de salida (sobrescribe)
+            </span>
+            <span class="prompt">$</span> ls > lista_archivos.txt
+            <span class="prompt">$</span> cat lista_archivos.txt
+            <span class="output">Documentos Imágenes Música Videos</span>
+
+            <span class="comment"># >> Redirección de salida (añade)</span>
+            <span class="prompt">$</span> echo "Nueva línea" >>
+            lista_archivos.txt <span class="prompt">$</span> cat
+            lista_archivos.txt
+            <span class="output">
+              Documentos Imágenes Música Videos Nueva línea</span>
+
+            <span class="comment"># < Redirección de entrada</span>
+            <span class="prompt">$</span> wc -l < lista_archivos.txt
+            <span class="output">5</span>
+
+            <span class="comment"># 2> Redirección de errores</span>
+            <span class="prompt">$</span> ls /noexiste 2> errores.log
+          </div>
+
+          <p><strong>Operadores principales:</strong></p>
+          <ul>
+            <li><code>></code>: Redirige salida (sobrescribe el archivo)</li>
+            <li>
+              <code>>></code>: Redirige salida (añade al final del archivo)
+            </li>
+            <li><code><</code>: Redirige entrada</li>
+            <li><code>2></code>: Redirige errores</li>
+            <li>
+              <code>&></code> o <code>></code> archivo <code>2>&1</code>:
+              Redirige tanto salida como errores
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Practica la diferencia entre <code>></code> y <code>>></code>:
+                Crea un archivo y luego añade contenido sin perder lo
+                anterior.
+              </li>
+              <li>
+                Crea un archivo de 10 líneas y usa
+                <code>sort < archivo.txt > ordenado.txt</code> para crear una
+                versión ordenada.
+              </li>
+              <li>
+                Ejecuta
+                <code
+                  >find /etc -name "*.conf" > configs.txt 2> errores.txt</code
+                >
+                para buscar archivos y separar resultados de errores.
+              </li>
+              <li>
+                Crea un archivo que combine salida y errores:
+                <code>ls /bin /noexiste &> todo.log</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-eye"></i> Comandos de Visualización</h2>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-arrow-up"></i> head - Ver inicio de archivos</div>
+          <div class="tech-image">👆</div>
+          <p>
+            El comando <code>head</code> muestra las primeras líneas de un
+            archivo o entrada.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              A menudo necesitarás echar un vistazo rápido a archivos sin
+              verlos completos, especialmente si son grandes.
+              <code>head</code> es ideal para esto, permitiéndote ver solo el
+              principio, como revisar la primera página de un libro.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Mostrar las primeras 10 líneas (comportamiento
+              predeterminado)
+            </span>
+            <span class="prompt">$</span> head /etc/passwd
+            <span class="output">
+              root:x:0:0:root:/root:/bin/bash
+              daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+              bin:x:2:2:bin:/bin:/usr/sbin/nologin
+              sys:x:3:3:sys:/dev:/usr/sbin/nologin
+              sync:x:4:65534:sync:/bin:/bin/sync ...</span>
+
+            <span class="comment"># Mostrar las primeras 5 líneas</span>
+            <span class="prompt">$</span> head -n 5 archivo.txt
+            <span class="output">
+              Línea 1 Línea 2 Línea 3 Línea 4 Línea 5</span>
+
+            <span class="comment">
+              # Mostrar las primeras 3 líneas de múltiples archivos
+            </span>
+            <span class="prompt">$</span> head -n 3 archivo1.txt archivo2.txt
+            <span class="output">
+              ==> archivo1.txt <== Línea 1 Línea 2 Línea 3 ==> archivo2.txt
+              <== Línea 1 Línea 2 Línea 3</span>
+          </div>
+
+          <p><strong>Opciones útiles:</strong></p>
+          <ul>
+            <li>
+              <code>-n N</code>: Muestra las primeras N líneas (por defecto
+              10)
+            </li>
+            <li><code>-c N</code>: Muestra los primeros N bytes</li>
+            <li>
+              <code>-q</code>: No muestra nombres de archivos (en modo
+              silencioso)
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Examina el inicio de un archivo de registro:
+                <code>head /var/log/syslog</code> (puede requerir sudo)
+              </li>
+              <li>
+                Muestra solo las primeras 3 líneas de tu archivo
+                <code>.bashrc</code>: <code>head -n 3 ~/.bashrc</code>
+              </li>
+              <li>
+                Compara el inicio de dos archivos diferentes:
+                <code>head /etc/hostname /etc/hosts</code>
+              </li>
+              <li>
+                Guarda las primeras 20 líneas de un archivo grande en otro
+                archivo: <code>head -n 20 /etc/services > servicios.txt</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-arrow-down"></i> tail - Ver final de archivos</div>
+          <div class="tech-image">👇</div>
+          <p>
+            El comando <code>tail</code> muestra las últimas líneas de un
+            archivo o entrada.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              Es crucial para monitorear logs y archivos que crecen
+              continuamente. La opción <code>-f</code> es particularmente útil
+              para administradores de sistemas, ya que permite ver
+              actualizaciones en tiempo real, como vigilar la última página de
+              un libro mientras alguien sigue escribiéndolo.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Mostrar las últimas 10 líneas (comportamiento
+              predeterminado)
+            </span>
+            <span class="prompt">$</span> tail /etc/passwd
+            <span class="output">
+              nobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin
+              systemd-network:x:100:102:systemd Network
+              Management,,,:/run/systemd:/usr/sbin/nologin
+              systemd-resolve:x:101:103:systemd
+              Resolver,,,:/run/systemd:/usr/sbin/nologin
+              messagebus:x:102:106::/nonexistent:/usr/sbin/nologin ...</span>
+
+            <span class="comment"># Mostrar las últimas 5 líneas</span>
+            <span class="prompt">$</span> tail -n 5 archivo.txt
+            <span class="output">
+              Línea 6 Línea 7 Línea 8 Línea 9 Línea 10</span>
+
+            <span class="comment">
+              # Seguir un archivo en tiempo real (útil para logs)
+            </span>
+            <span class="prompt">$</span> tail -f /var/log/syslog
+            <span class="output">
+              [Continuará mostrando nuevas líneas a medida que se
+              añadan]</span>
+          </div>
+
+          <p><strong>Opciones útiles:</strong></p>
+          <ul>
+            <li>
+              <code>-n N</code>: Muestra las últimas N líneas (por defecto 10)
+            </li>
+            <li><code>-f</code>: Sigue el archivo en tiempo real (follow)</li>
+            <li><code>-c N</code>: Muestra los últimos N bytes</li>
+            <li>
+              <code>-q</code>: Modo silencioso, no muestra nombres de archivos
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Examina el final de un archivo de configuración:
+                <code>tail /etc/fstab</code>
+              </li>
+              <li>
+                Observa en tiempo real un archivo de registro:
+                <code>tail -f /var/log/syslog</code> (presiona Ctrl+C para
+                salir)
+              </li>
+              <li>
+                Muestra las últimas 15 líneas de tu historial de comandos:
+                <code>tail -n 15 ~/.bash_history</code>
+              </li>
+              <li>
+                Guarda las últimas 50 líneas de un archivo en otro:
+                <code
+                  >tail -n 50 /var/log/apt/history.log >
+                  ultimas_actualizaciones.txt</code
+                >
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-puzzle-piece"></i> Práctica Integrada</h2>
+      <div class="note">
+        <p>Ejercicios que combinan varios de los comandos aprendidos:</p>
+        <ol>
+          <li>
+            <strong>Exploración del sistema:</strong>
+            <div class="terminal">
+              <span class="prompt">$</span> cd /
+              <span class="prompt">$</span> ls -la > ~/exploracion.txt
+              <span class="prompt">$</span> head -n 20 ~/exploracion.txt
+              <span class="comment">
+                # Examina los primeros 20 resultados</span>
+            </div>
+            <p>
+              Este ejercicio te permite explorar la raíz del sistema, guardar
+              la información y revisar los resultados.
+            </p>
+          </li>
+          <li>
+            <strong>Creación y manipulación de archivos:</strong>
+            <div class="terminal">
+              <span class="prompt">$</span> cd ~
+              <span class="prompt">$</span> cat > practica.txt
+              <span class="comment">
+                # Escribe varias líneas y presiona Ctrl+D</span>
+              <span class="prompt">$</span> cat practica.txt
+              <span class="prompt">$</span> head -n 2 practica.txt >
+              inicio.txt <span class="prompt">$</span> tail -n 2 practica.txt
+              > fin.txt <span class="prompt">$</span> cat inicio.txt fin.txt >
+              completo.txt <span class="prompt">$</span> cat completo.txt
+            </div>
+            <p>
+              Aprenderás a crear archivos, extraer partes específicas y
+              combinarlas de nuevo.
+            </p>
+          </li>
+          <li>
+            <strong>Análisis de archivos del sistema:</strong>
+            <div class="terminal">
+              <spanclass="prompt">$</span> cd /etc
+              <span class="prompt">$</span> ls -l | head -n 15 >
+              ~/archivos_etc.txt <span class="prompt">$</span> cat
+              ~/archivos_etc.txt
+              
+                <span class="prompt">$</span> tail -n 5 ~/archivos_etc.txt
+                <span class="prompt">$</span> grep "conf" ~/archivos_etc.txt
+                <span class="output">
+                -rw-r--r-- 1 root root 1234 ene 15 10:30 archivo.conf
+                </span>
+                <span class="prompt">$</span> wc -l ~/archivos_etc.txt
+                <span class="output">15</span>
+                  </li>
+                  <li>
+                  <strong>Redirección y errores:</strong>
+                  <div class="terminal">
+                    <span class="prompt">$</span> ls /noexiste 2> ~/errores.log
+                    <span class="prompt">$</span> cat ~/errores.log
+                    <span class="output">
+                    ls: cannot access '/noexiste': No such file or directory
+                    </span>
+                    <span class="prompt">$</span> echo "Prueba completada" >> ~/errores.log
+                    <span class="prompt">$</span> cat ~/errores.log
+                    <span class="output">
+                    ls: cannot access '/noexiste': No such file or directory
+                    Prueba completada
+                    </span>
+                  </div>
+                  <p>
+                    Este ejercicio te ayudará a practicar la redirección de errores y la manipulación de archivos de log.
+                  </p>
+                  </li>
+                </ol>
+                </div>
+              </section>
+              </main>
+
+    <footer>
+      <div class="footer-bar">
+        <button onclick="window.location.href='00_index.html'">
+          ⬅ Nivel Anterior
+        </button>
+        <button onclick="window.location.href='02_intermedio.html'">
+          Siguiente Nivel ➡
+        </button>
+      </div>
+    </footer>
+              
+            </body>
+
+            </html>

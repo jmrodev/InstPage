@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Herencia en PHP con Gatitos</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #4caf50;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #4caf50;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .tip {
+      background-color: #fff8e1;
+      border-left: 5px solid #ffc107;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+    .warning {
+      background-color: #ffebee;
+      border-left: 5px solid #f44336;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🐱 Herencia en PHP con Gatitos</h1>
+
+<div class="concept-box">
+  <span class="concept-title">¿Qué es la Herencia?</span>
+  <p>La herencia es uno de los conceptos fundamentales de la Programación Orientada a Objetos (POO) que permite crear nuevas clases basadas en clases existentes. La clase nueva (subclase o clase hija) hereda propiedades y métodos de la clase existente (superclase o clase padre).</p>
+  
+  <p>La herencia establece una relación "es un tipo de" entre clases. Por ejemplo, un "GatoDomestico" es un tipo de "Gato", y un "Gato" es un tipo de "Animal".</p>
+  
+  <p>En PHP, la herencia se implementa utilizando la palabra clave <code>extends</code>.</p>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Sintaxis Básica</span>
+  <p>La sintaxis para crear una clase que hereda de otra es la siguiente:</p>
+  
+  <div class="example-box">
+    <code>
+class ClasePadre {<br>
+&nbsp;&nbsp;// Propiedades y métodos de la clase padre<br>
+}<br>
+<br>
+class ClaseHija extends ClasePadre {<br>
+&nbsp;&nbsp;// La clase hija hereda todo de la clase padre<br>
+&nbsp;&nbsp;// Y puede añadir sus propias propiedades y métodos<br>
+}
+    </code>
+  </div>
+  
+  <p>Un ejemplo práctico de herencia con gatitos en PHP:</p>
+  <div class="example-box">
+    <code>
+class Animal {<br>
+&nbsp;&nbsp;protected $nombre;<br>
+&nbsp;&nbsp;protected $edad;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function comer() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está comiendo.";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function dormir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está durmiendo ZZZ...";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Animal: {$this->nombre}, Edad: {$this->edad} años";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class Gato extends Animal {<br>
+&nbsp;&nbsp;private $color;<br>
+&nbsp;&nbsp;private $raza;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $color, $raza) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $edad);  // Llamar al constructor padre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->color = $color;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->raza = $raza;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function maullar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "¡{$this->nombre} dice: Miau miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function ronronear() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está ronroneando: Prrrrr...";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$infoBase = parent::getInfo();  // Reutilizar método padre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "$infoBase, Color: {$this->color}, Raza: {$this->raza}";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso de las clases en consola:</p>
+  <div class="example-box">
+    <code>
+// Crear instancia de la clase padre<br>
+$animal = new Animal("Criatura", 3);<br>
+echo $animal->getInfo() . PHP_EOL;<br>
+echo $animal->comer() . PHP_EOL;<br>
+echo $animal->dormir() . PHP_EOL;<br>
+<br>
+// Crear instancia de la clase hija<br>
+$gato = new Gato("Bigotes", 2, "Naranja", "Persa");<br>
+echo $gato->getInfo() . PHP_EOL;       // Método sobrescrito<br>
+echo $gato->comer() . PHP_EOL;         // Método heredado<br>
+echo $gato->dormir() . PHP_EOL;        // Método heredado<br>
+echo $gato->maullar() . PHP_EOL;       // Método propio<br>
+echo $gato->ronronear() . PHP_EOL;     // Método propio
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Animal: Criatura, Edad: 3 años<br>
+Criatura está comiendo.<br>
+Criatura está durmiendo ZZZ...<br>
+Animal: Bigotes, Edad: 2 años, Color: Naranja, Raza: Persa<br>
+Bigotes está comiendo.<br>
+Bigotes está durmiendo ZZZ...<br>
+¡Bigotes dice: Miau miau!<br>
+Bigotes está ronroneando: Prrrrr...
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Uso de parent::</span>
+  <p>La palabra clave <code>parent::</code> permite acceder a métodos y propiedades de la clase padre que han sido sobrescritos en la clase hija.</p>
+  
+  <p>Los usos más comunes de <code>parent::</code> son:</p>
+  <ul>
+    <li>Llamar al constructor de la clase padre desde el constructor de la clase hija</li>
+    <li>Acceder a un método de la clase padre que ha sido sobrescrito en la clase hija</li>
+  </ul>
+  
+  <div class="example-box">
+    <code>
+class GatoExotico extends Gato {<br>
+&nbsp;&nbsp;private $paisOrigen;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $color, $raza, $paisOrigen) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $edad, $color, $raza);  // Llamar al constructor de Gato<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->paisOrigen = $paisOrigen;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$infoGato = parent::getInfo();  // Obtener info de la clase Gato<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "$infoGato, País de origen: {$this->paisOrigen}";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$gatoExotico = new GatoExotico("Luna", 4, "Atigrado", "Bengalí", "India");<br>
+echo $gatoExotico->getInfo() . PHP_EOL;<br>
+// Resultado: Animal: Luna, Edad: 4 años, Color: Atigrado, Raza: Bengalí, País de origen: India
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Herencia Multinivel</span>
+  <p>PHP permite la herencia multinivel, donde una clase hereda de otra clase que a su vez hereda de otra clase. Esta estructura forma una jerarquía de clases.</p>
+  
+  <div class="example-box">
+    <code>
+class Animal {<br>
+&nbsp;&nbsp;protected $nombre;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function respirar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está respirando.";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class Gato extends Animal {<br>
+&nbsp;&nbsp;protected $colorPelo;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $colorPelo) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->colorPelo = $colorPelo;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function maullar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class GatoBebe extends Gato {<br>
+&nbsp;&nbsp;private $edad;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $colorPelo, $edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $colorPelo);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function maullar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miu miu! (maullido de gatito de {$this->edad} meses)";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function jugar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está jugando con una bola de lana.";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+$gatito = new GatoBebe("Copo", "Blanco", 3);<br>
+echo $gatito->respirar() . PHP_EOL;  // Método heredado de Animal<br>
+echo $gatito->maullar() . PHP_EOL;   // Método sobrescrito de Gato<br>
+echo $gatito->jugar() . PHP_EOL;     // Método propio de GatoBebe
+    </code>
+  </div>
+</div>
+
+<div class="tip">
+  <strong>Consejo:</strong> Utiliza la herencia cuando realmente exista una relación "es un tipo de" entre las clases. Si la relación es más del tipo "tiene un", considera usar composición en lugar de herencia.
+</div>
+
+<div class="warning">
+  <strong>Importante:</strong> PHP solo permite herencia simple, lo que significa que una clase solo puede heredar de una única clase. Si necesitas implementar herencia múltiple, considera utilizar interfaces o traits.
+</div>
+
+</body>
+</html>

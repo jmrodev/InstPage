@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Ventajas de Ventoy vs. Otras Herramientas</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h1 {
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 10px;
+        text-align: center;
+      }
+      h2 {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-left: 5px solid #3498db;
+        margin-top: 30px;
+      }
+      h3 {
+        color: #2980b9;
+        border-bottom: 1px dashed #ccc;
+        padding-bottom: 5px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 12px;
+        text-align: left;
+      }
+      th {
+        background-color: #3498db;
+        color: white;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+      .feature {
+        background-color: #e8f4f8;
+        padding: 15px;
+        border-radius: 5px;
+        margin: 15px 0;
+      }
+      .pros {
+        color: #27ae60;
+        font-weight: bold;
+      }
+      .cons {
+        color: #e74c3c;
+        font-weight: bold;
+      }
+      .note {
+        background-color: #fffde7;
+        padding: 15px;
+        border-left: 4px solid #ffd600;
+        margin: 20px 0;
+      }
+      .comparison-table {
+        overflow-x: auto;
+      }
+      .tech-box {
+        background-color: #f5f5f5;
+        border: 1px solid #ddd;
+        padding: 20px;
+        margin: 25px 0;
+        border-radius: 5px;
+      }
+      .tech-header {
+        color: #2c3e50;
+        font-size: 1.3em;
+        margin-bottom: 15px;
+        font-weight: bold;
+      }
+      .tech-feature {
+        margin-bottom: 10px;
+        padding-left: 15px;
+        position: relative;
+      }
+      .tech-feature:before {
+        content: '•';
+        position: absolute;
+        left: 0;
+        color: #3498db;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Ventajas de Ventoy frente a otras herramientas de USB booteable</h1>
+
+    <div class="note">
+      <p>
+        Ventoy es
+        <strong>revolucionario</strong>
+        porque permite
+        <strong>múltiples ISOs en un solo USB</strong>
+        sin necesidad de formatear cada vez. Comparémoslo con alternativas
+        populares como Rufus, UNetbootin, YUMI y BalenaEtcher.
+      </p>
+    </div>
+
+    <h2>🔹 Comparación de características principales</h2>
+
+    <div class="comparison-table">
+      <table>
+        <tr>
+          <th>Característica</th>
+          <th>Ventoy</th>
+          <th>Rufus</th>
+          <th>UNetbootin</th>
+          <th>YUMI</th>
+          <th>BalenaEtcher</th>
+        </tr>
+        <tr>
+          <td>Múltiples ISOs en un USB</td>
+          <td class="pros">✅ Sí (simplemente copiar)</td>
+          <td class="cons">❌ No</td>
+          <td class="cons">❌ No</td>
+          <td class="pros">✅ Sí (pero más lento)</td>
+          <td class="cons">❌ No</td>
+        </tr>
+        <tr>
+          <td>Requiere formatear para cada ISO</td>
+          <td class="pros">❌ No</td>
+          <td class="cons">✅ Sí</td>
+          <td class="cons">✅ Sí</td>
+          <td class="cons">Depende</td>
+          <td class="cons">✅ Sí</td>
+        </tr>
+        <tr>
+          <td>Soporte Windows</td>
+          <td class="pros">✅ Completo</td>
+          <td class="pros">✅ Completo</td>
+          <td class="cons">⚠️ Limitado</td>
+          <td class="pros">✅ Completo</td>
+          <td class="pros">✅ Completo</td>
+        </tr>
+        <tr>
+          <td>Soporte Linux</td>
+          <td class="pros">✅ Completo</td>
+          <td class="pros">✅ Completo</td>
+          <td class="pros">✅ Completo</td>
+          <td class="pros">✅ Completo</td>
+          <td class="pros">✅ Completo</td>
+        </tr>
+        <tr>
+          <td>Herramientas de rescate</td>
+          <td class="pros">✅ Sí</td>
+          <td class="pros">✅ Sí (1 a la vez)</td>
+          <td class="cons">❌ No</td>
+          <td class="pros">✅ Sí</td>
+          <td class="cons">❌ No</td>
+        </tr>
+        <tr>
+          <td>Persistencia en Linux</td>
+          <td class="pros">✅ Fácil (ventoy.json)</td>
+          <td class="cons">❌ No</td>
+          <td class="cons">Complejo</td>
+          <td class="cons">Complejo</td>
+          <td class="cons">❌ No</td>
+        </tr>
+        <tr>
+          <td>UEFI + Legacy BIOS</td>
+          <td class="pros">✅ Sí</td>
+          <td class="pros">✅ Sí</td>
+          <td class="cons">⚠️ Limitado</td>
+          <td class="pros">✅ Sí</td>
+          <td class="cons">❌ Solo UEFI</td>
+        </tr>
+        <tr>
+          <td>Usar USB como almacenamiento</td>
+          <td class="pros">✅ Sí</td>
+          <td class="cons">❌ No</td>
+          <td class="cons">❌ No</td>
+          <td class="cons">Depende</td>
+          <td class="cons">❌ No</td>
+        </tr>
+      </table>
+    </div>
+
+    <h2>🔹 Ventajas clave de Ventoy</h2>
+
+    <div class="feature">
+      <h3>1. Múltiples ISOs sin formatear</h3>
+      <p>
+        Simplemente
+        <strong>copia y pega</strong>
+        tus ISOs al USB. No necesitas reinstalar Ventoy ni perder tus datos.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>2. Compatibilidad universal</h3>
+      <p>
+        Funciona con
+        <strong>
+          Windows, Linux, macOS (imágenes DMG), y herramientas de rescate
+        </strong>
+        como Hiren's BootCD o Clonezilla.
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>3. Persistencia fácil en Linux</h3>
+      <p>
+        Configura almacenamiento persistente con un simple archivo
+        <code>ventoy.json</code>
+        y un archivo
+        <code>persistence.dat</code>
+        .
+      </p>
+    </div>
+
+    <div class="feature">
+      <h3>4. No destruye tu USB</h3>
+      <p>
+        Puedes usar el espacio restante para almacenar archivos normales
+        (documentos, música, etc.).
+      </p>
+    </div>
+
+    <h2>🔍 Comparación con alternativas</h2>
+
+    <h3>Rufus</h3>
+    <p>
+      <strong>Ventaja:</strong>
+      Más rápido para grabar
+      <strong>una sola ISO</strong>
+      (ideal para instaladores de Windows).
+    </p>
+    <p>
+      <strong>Desventaja:</strong>
+      No soporta múltiples ISOs sin formatear.
+    </p>
+
+    <h3>BalenaEtcher</h3>
+    <p>
+      <strong>Ventaja:</strong>
+      Interfaz
+      <strong>muy simple</strong>
+      para usuarios novatos.
+    </p>
+    <p>
+      <strong>Desventaja:</strong>
+      Solo UEFI, sin soporte para múltiples ISOs.
+    </p>
+
+    <h3>YUMI</h3>
+    <p>
+      <strong>Ventaja:</strong>
+      Soporta múltiples ISOs.
+    </p>
+    <p>
+      <strong>Desventaja:</strong>
+      Proceso más lento y complejo que Ventoy.
+    </p>
+
+    <h2>💡 Cuándo usar Ventoy</h2>
+    <ul>
+      <li>
+        Si necesitas
+        <strong>un USB con varios sistemas operativos</strong>
+        (Windows, Linux, etc.)
+      </li>
+      <li>
+        Si quieres
+        <strong>probdistribuciones Linux</strong>
+        sin quemar USBs constantemente
+      </li>
+      <li>
+        Si necesitas
+        <strong>herramientas de rescate</strong>
+        siempre a mano
+      </li>
+      <li>
+        Si quieres
+        <strong>usar el USB como almacenamiento normal</strong>
+        además de booteable
+      </li>
+    </ul>
+
+    <div class="tech-box">
+      <div class="tech-header">🔧 Explicación: Legacy BIOS vs. UEFI</div>
+
+      <div class="tech-feature">
+        <strong>Legacy BIOS (Modo CSM):</strong>
+        <p>
+          El sistema de arranque tradicional (desde 1980s).
+          <br />
+          - Usa
+          <strong>MBR</strong>
+          para particiones
+          <br />
+          - Limitado a
+          <strong>discos de 2TB</strong>
+          o menos
+          <br />
+          - No soporta características de seguridad modernas
+        </p>
+      </div>
+
+      <div class="tech-feature">
+        <strong>UEFI (Unified Extensible Firmware Interface):</strong>
+        <p>
+          El sistema de arranque moderno (reemplazó a BIOS).
+          <br />
+          - Usa
+          <strong>GPT</strong>
+          para particiones (soporta discos >2TB)
+          <br />
+          - Soporta
+          <strong>Secure Boot</strong>
+          (mayor seguridad)
+          <br />
+          - Arranque más rápido
+        </p>
+      </div>
+
+      <div class="tech-feature">
+        <strong>¿Por qué es importante para Ventoy?</strong>
+        <p>
+          Ventoy soporta
+          <strong>ambos modos</strong>
+          , lo que significa que funcionará en:
+          <br />
+          - Computadoras
+          <strong>modernas</strong>
+          (UEFI)
+          <br />
+          - Computadoras
+          <strong>viejas</strong>
+          (Legacy BIOS)
+          <br />
+          - Incluso con
+          <strong>Secure Boot activado</strong>
+          (configurable)
+        </p>
+      </div>
+
+      <div class="tech-feature">
+        <strong>Problemas comunes con otras herramientas:</strong>
+        <p>
+          - BalenaEtcher
+          <strong>solo funciona en UEFI</strong>
+          <br />
+          - Algunas herramientas requieren
+          <strong>configuración manual</strong>
+          para ambos modos
+          <br />
+          - Ventoy
+          <strong>detecta automáticamente</strong>
+          el modo correcto
+        </p>
+      </div>
+    </div>
+
+    <h2>🚀 Conclusión</h2>
+    <p>
+      Ventoy es la
+      <strong>mejor opción</strong>
+      si necesitas:
+    </p>
+    <ul>
+      <li>
+        Un
+        <strong>USB multiboot</strong>
+        con múltiples sistemas operativos
+      </li>
+      <li>
+        <strong>Compatibilidad máxima</strong>
+        (UEFI y Legacy BIOS)
+      </li>
+      <li>
+        <strong>Facilidad de uso</strong>
+        (copiar ISOs sin procesos complejos)
+      </li>
+    </ul>
+
+    <div class="note">
+      <p>
+        Descarga Ventoy desde su sitio oficial:
+        <a
+          href="https://www.ventoy.net"
+          target="_blank"
+        >
+          https://www.ventoy.net
+        </a>
+      </p>
+    </div>
+  </body>
+</html>

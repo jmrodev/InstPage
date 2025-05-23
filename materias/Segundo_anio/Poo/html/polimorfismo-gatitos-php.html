@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Polimorfismo en PHP con Gatitos</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #2196f3;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #e3f2fd;
+      border-left: 5px solid #2196f3;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #2196f3;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .tip {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+    .warning {
+      background-color: #fff3e0;
+      border-left: 5px solid #ff9800;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🐱 Polimorfismo en PHP con Gatitos</h1>
+
+<div class="concept-box">
+  <span class="concept-title">¿Qué es el Polimorfismo?</span>
+  <p>El polimorfismo es uno de los pilares fundamentales de la Programación Orientada a Objetos. La palabra polimorfismo viene del griego y significa "muchas formas". En programación, se refiere a la capacidad de los objetos de diferentes clases para responder al mismo mensaje o método de diferentes maneras.</p>
+  
+  <p>En términos más simples, el polimorfismo permite que:</p>
+  <ul>
+    <li>Objetos de diferentes clases puedan ser tratados como objetos de una clase común (normalmente una superclase)</li>
+    <li>El mismo método pueda comportarse de manera diferente según la clase que lo implemente</li>
+    <li>El código pueda trabajar con objetos de diferentes tipos a través de una interfaz común</li>
+  </ul>
+  
+  <p>En PHP, el polimorfismo se implementa principalmente a través de la herencia y las interfaces.</p>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Polimorfismo a través de Herencia</span>
+  <p>Un ejemplo clásico de polimorfismo es cuando varias clases heredan de una misma clase base y sobrescriben sus métodos para implementar comportamientos específicos.</p>
+  
+  <div class="example-box">
+    <code>
+class Gato {<br>
+&nbsp;&nbsp;protected $nombre;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function hacerSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function dormir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} duerme tranquilamente.";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class GatoSiames extends Gato {<br>
+&nbsp;&nbsp;// Sobrescribimos el método hacerSonido<br>
+&nbsp;&nbsp;public function hacerSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miiiiauuu! (maullido agudo y prolongado)";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class GatoPersa extends Gato {<br>
+&nbsp;&nbsp;// Sobrescribimos el método hacerSonido<br>
+&nbsp;&nbsp;public function hacerSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Mrrrrooww! (maullido grave y corto)";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// También sobrescribimos el método dormir<br>
+&nbsp;&nbsp;public function dormir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} duerme profundamente y ronca.";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>El polimorfismo nos permite tratar objetos de las clases <code>GatoSiames</code> y <code>GatoPersa</code> como objetos de la clase <code>Gato</code>:</p>
+  
+  <div class="example-box">
+    <code>
+// Función que acepta cualquier objeto de tipo Gato<br>
+function hacerQueElGatoHable($gato) {<br>
+&nbsp;&nbsp;// No nos importa qué tipo específico de gato sea<br>
+&nbsp;&nbsp;// Simplemente llamamos al método hacerSonido()<br>
+&nbsp;&nbsp;echo $gato->hacerSonido() . PHP_EOL;<br>
+}<br>
+<br>
+// Creamos diferentes tipos de gatos<br>
+$gato = new Gato("Misifu");<br>
+$siames = new GatoSiames("Luna");<br>
+$persa = new GatoPersa("Garfield");<br>
+<br>
+// Llamamos a la misma función con diferentes tipos de gatos<br>
+hacerQueElGatoHable($gato);    // Misifu dice: ¡Miau!<br>
+hacerQueElGatoHable($siames);  // Luna dice: ¡Miiiiauuu! (maullido agudo y prolongado)<br>
+hacerQueElGatoHable($persa);   // Garfield dice: ¡Mrrrrooww! (maullido grave y corto)
+    </code>
+  </div>
+  
+  <p>De manera similar, podemos crear un array de diferentes tipos de gatos y tratarlos de manera uniforme:</p>
+  
+  <div class="example-box">
+    <code>
+// Array con diferentes tipos de gatos<br>
+$gatitos = [<br>
+&nbsp;&nbsp;new Gato("Felix"),<br>
+&nbsp;&nbsp;new GatoSiames("Blanca"),<br>
+&nbsp;&nbsp;new GatoPersa("Pelusa")<br>
+];<br>
+<br>
+// Podemos iterar sobre ellos y llamar a los mismos métodos<br>
+foreach ($gatitos as $gato) {<br>
+&nbsp;&nbsp;echo $gato->hacerSonido() . PHP_EOL;<br>
+&nbsp;&nbsp;echo $gato->dormir() . PHP_EOL;<br>
+&nbsp;&nbsp;echo "----------" . PHP_EOL;<br>
+}<br>
+<br>
+/*<br>
+Resultado:<br>
+Felix dice: ¡Miau!<br>
+Felix duerme tranquilamente.<br>
+----------<br>
+Blanca dice: ¡Miiiiauuu! (maullido agudo y prolongado)<br>
+Blanca duerme tranquilamente.<br>
+----------<br>
+Pelusa dice: ¡Mrrrrooww! (maullido grave y corto)<br>
+Pelusa duerme profundamente y ronca.<br>
+----------<br>
+*/
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Polimorfismo con Interfaces</span>
+  <p>Otra forma de implementar polimorfismo en PHP es a través de interfaces. Una interfaz define un contrato que las clases deben cumplir al implementarla.</p>
+  
+  <div class="example-box">
+    <code>
+// Definimos una interfaz con métodos que deben implementar las clases<br>
+interface Mascota {<br>
+&nbsp;&nbsp;public function hacerSonido();<br>
+&nbsp;&nbsp;public function jugar();<br>
+}<br>
+<br>
+// Implementamos la interfaz en diferentes clases<br>
+class GatoDomestico implements Mascota {<br>
+&nbsp;&nbsp;private $nombre;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function hacerSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function jugar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} juega con una bola de lana.";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class PerroDomestico implements Mascota {<br>
+&nbsp;&nbsp;private $nombre;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function hacerSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Guau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function jugar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} juega a buscar la pelota.";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Ahora podemos usar polimorfismo con objetos que implementan la misma interfaz:</p>
+  
+  <div class="example-box">
+    <code>
+// Función que acepta cualquier objeto que implemente la interfaz Mascota<br>
+function interactuarConMascota(Mascota $mascota) {<br>
+&nbsp;&nbsp;echo $mascota->hacerSonido() . PHP_EOL;<br>
+&nbsp;&nbsp;echo $mascota->jugar() . PHP_EOL;<br>
+}<br>
+<br>
+// Creamos diferentes mascotas<br>
+$gato = new GatoDomestico("Bigotes");<br>
+$perro = new PerroDomestico("Rex");<br>
+<br>
+// Llamamos a la misma función con diferentes tipos de mascotas<br>
+interactuarConMascota($gato);<br>
+echo "----------" . PHP_EOL;<br>
+interactuarConMascota($perro);<br>
+<br>
+/*<br>
+Resultado:<br>
+Bigotes dice: ¡Miau!<br>
+Bigotes juega con una bola de lana.<br>
+----------<br>
+Rex dice: ¡Guau!<br>
+Rex juega a buscar la pelota.<br>
+*/
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Polimorfismo con Type Hinting</span>
+  <p>En PHP, podemos usar "type hinting" (sugerencia de tipo) para especificar el tipo de objetos que puede recibir una función o método. Esto nos permite aprovechar el polimorfismo de manera más segura.</p>
+  
+  <div class="example-box">
+    <code>
+// Clase base abstracta<br>
+abstract class Felino {<br>
+&nbsp;&nbsp;protected $nombre;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;abstract public function rugir();<br>
+<br>
+&nbsp;&nbsp;public function descansar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} está descansando.";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class GatoSalvaje extends Felino {<br>
+&nbsp;&nbsp;public function rugir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} emite un pequeño rugido: ¡Grrrr!";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class Tigre extends Felino {<br>
+&nbsp;&nbsp;public function rugir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} ruge con fuerza: ¡GRRRROAAAAR!";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+// Función que acepta cualquier objeto de tipo Felino<br>
+function escucharRugido(Felino $felino) {<br>
+&nbsp;&nbsp;echo $felino->rugir() . PHP_EOL;<br>
+}<br>
+<br>
+$gatoSalvaje = new GatoSalvaje("Silvestre");<br>
+$tigre = new Tigre("Rajah");<br>
+<br>
+escucharRugido($gatoSalvaje);  // Silvestre emite un pequeño rugido: ¡Grrrr!<br>
+escucharRugido($tigre);        // Rajah ruge con fuerza: ¡GRRRROAAAAR!
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Ejemplo Práctico: Santuario de Felinos</span>
+  <p>Veamos un ejemplo más completo que utiliza polimorfismo para crear un sistema de gestión de felinos en un santuario:</p>
+  
+  <div class="example-box">
+    <code>
+// Definimos una interfaz para acciones comunes<br>
+interface AccionesAnimal {<br>
+&nbsp;&nbsp;public function comer();<br>
+&nbsp;&nbsp;public function emitirSonido();<br>
+}<br>
+<br>
+// Clase abstracta Felino<br>
+abstract class Felino implements AccionesAnimal {<br>
+&nbsp;&nbsp;protected $nombre;<br>
+&nbsp;&nbsp;protected $edad;<br>
+&nbsp;&nbsp;protected $peso;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $peso) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->peso = $peso;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Nombre: {$this->nombre}, Edad: {$this->edad} años, Peso: {$this->peso} kg";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;// Método abstracto que debe ser implementado por las subclases<br>
+&nbsp;&nbsp;abstract public function getTipoHabitat();<br>
+}<br>
+<br>
+// Implementaciones concretas<br>
+class GatoDomestico extends Felino {<br>
+&nbsp;&nbsp;private $raza;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $peso, $raza) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $edad, $peso);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->raza = $raza;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function comer() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} come pienso de gato premium.";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function emitirSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} maúlla: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getTipoHabitat() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Casa o apartamento";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return parent::getInfo() . ", Raza: {$this->raza}";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class Leon extends Felino {<br>
+&nbsp;&nbsp;private $tamanioMelena;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $peso, $tamanioMelena) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $edad, $peso);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->tamanioMelena = $tamanioMelena;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function comer() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} devora grandes piezas de carne.";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function emitirSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} ruge potentemente: ¡¡GROOOOAR!!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getTipoHabitat() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Sabana amplia";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return parent::getInfo() . ", Tamaño de melena: {$this->tamanioMelena}";<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class Tigre extends Felino {<br>
+&nbsp;&nbsp;private $tipoRayas;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $peso, $tipoRayas) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $edad, $peso);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->tipoRayas = $tipoRayas;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function comer() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} se alimenta de carne fresca.";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function emitirSonido() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} emite un rugido grave: ¡GRRRAWRR!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getTipoHabitat() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Selva densa con agua cercana";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return parent::getInfo() . ", Tipo de rayas: {$this->tipoRayas}";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Ahora podemos crear una clase para el santuario que usa polimorfismo para gestionar diferentes tipos de felinos:</p>
+  
+  <div class="example-box">
+    <code>
+class SantuarioFelinos {<br>
+&nbsp;&nbsp;private $nombre;<br>
+&nbsp;&nbsp;private $felinos = [];<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function agregarFelino(Felino $felino) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->felinos[] = $felino;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Felino añadido al santuario {$this->nombre}." . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function alimentarATodos() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;foreach ($this->felinos as $felino) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo $felino->comer() . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function escucharSonidos() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;foreach ($this->felinos as $felino) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo $felino->emitirSonido() . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function mostrarInfoFelinos() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Información de felinos en el santuario {$this->nombre}:" . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;foreach ($this->felinos as $index => $felino) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo ($index + 1) . ". " . $felino->getInfo() . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "&nbsp;&nbsp;Hábitat recomendado: " . $felino->getTipoHabitat() . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso del sistema:</p>
+  
+  <div class="example-box">
+    <code>
+// Creamos el santuario<br>
+$santuario = new SantuarioFelinos("Patas Felices");<br>
+<br>
+// Añadimos diferentes tipos de felinos<br>
+$santuario->agregarFelino(new GatoDomestico("Luna", 5, 4.5, "Persa"));<br>
+$santuario->agregarFelino(new Leon("Simba", 8, 190, "Grande"));<br>
+$santuario->agregarFelino(new Tigre("Rajah", 6, 210, "Bengala"));<br>
+$santuario->agregarFelino(new GatoDomestico("Michi", 3, 3.8, "Callejero"));<br>
+<br>
+// Vemos la información de todos los felinos<br>
+$santuario->mostrarInfoFelinos();<br>
+echo "\n";<br>
+<br>
+// Alimentamos a todos los felinos<br>
+echo "Hora de comer:" . PHP_EOL;<br>
+$santuario->alimentarATodos();<br>
+echo "\n";<br>
+<br>
+// Escuchamos los sonidos de todos los felinos<br>
+echo "Sonidos de los felinos:" . PHP_EOL;<br>
+$santuario->escucharSonidos();
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Felino añadido al santuario Patas Felices.<br>
+Felino añadido al santuario Patas Felices.<br>
+Felino añadido al santuario Patas Felices.<br>
+Felino añadido al santuario Patas Felices.<br>
+Información de felinos en el santuario Patas Felices:<br>
+1. Nombre: Luna, Edad: 5 años, Peso: 4.5 kg, Raza: Persa<br>
+&nbsp;&nbsp;Hábitat recomendado: Casa o apartamento<br>
+2. Nombre: Simba, Edad: 8 años, Peso: 190 kg, Tamaño de melena: Grande<br>
+&nbsp;&nbsp;Hábitat recomendado: Sabana amplia<br>
+3. Nombre: Rajah, Edad: 6 años, Peso: 210 kg, Tipo de rayas: Bengala<br>
+&nbsp;&nbsp;Hábitat recomendado: Selva densa con agua cercana<br>
+4. Nombre: Michi, Edad: 3 años, Peso: 3.8 kg, Raza: Callejero<br>
+&nbsp;&nbsp;Hábitat recomendado: Casa o apartamento<br>
+<br>
+Hora de comer:<br>
+Luna come pienso de gato premium.<br>
+Simba devora grandes piezas de carne.<br>
+Rajah se alimenta de carne fresca.<br>
+Michi come pienso de gato premium.<br>
+<br>
+Sonidos de los felinos:<br>
+Luna maúlla: ¡Miau!<br>
+Simba ruge potentemente: ¡¡GROOOOAR!!<br>
+Rajah emite un rugido grave: ¡GRRRAWRR!<br>
+Michi maúlla: ¡Miau!
+    </code>
+  </div>
+</div>
+
+<div class="tip">
+  <strong>Consejo:</strong> El polimorfismo es especialmente útil para crear sistemas flexibles y extensibles. Al programar orientado a interfaces en lugar de implementaciones concretas, tu código será más fácil de mantener y ampliar en el futuro. Siempre que sea posible, prefiere la dependencia de abstracciones (clases abstractas o interfaces) en lugar de clases concretas.
+</div>
+
+</body>
+</html>

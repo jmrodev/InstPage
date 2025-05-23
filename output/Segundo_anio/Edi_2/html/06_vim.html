@@ -1,0 +1,4808 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <link rel="stylesheet" href="../../../../css/styles.css">
+    <title>Tutorial Completo de Vim: De principiante a experto</title>
+   </head>
+  <body>
+    <header>
+      <h1>Tutorial Completo de Vim: De principiante a experto</h1>
+      <p>
+        Una guía exhaustiva y progresiva para dominar el editor de texto más
+        potente
+      </p>
+    </header>
+
+    <nav>
+      <h2>Índice de contenidos</h2>
+      <ul>
+        <li>
+          <a href="#introduccion">Introducción a Vim</a>
+          <ul>
+            <li><a href="#por-que-vim">¿Por qué aprender Vim?</a></li>
+            <li><a href="#historia">Historia y filosofía</a></li>
+            <li><a href="#modalidad">El concepto de modalidad</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-1">Nivel 1: Primeros pasos en Vim</a>
+          <ul>
+            <li>
+              <a href="#instalacion">Instalación en diferentes sistemas</a>
+            </li>
+            <li>
+              <a href="#primeros-comandos">Comandos básicos para sobrevivir</a>
+            </li>
+            <li><a href="#modos-vim">Modos de Vim en detalle</a></li>
+            <li><a href="#vimtutor">Vimtutor: El primer entrenamiento</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-2">Nivel 2: Movimientos básicos y edición</a>
+          <ul>
+            <li>
+              <a href="#movimientos-basicos">Navegación en modo normal</a>
+            </li>
+            <li><a href="#edicion-basica">Comandos de edición básicos</a></li>
+            <li>
+              <a href="#combinando-comandos">Multiplicadores y movimientos</a>
+            </li>
+            <li><a href="#paginacion">Desplazamiento por el archivo</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-3">Nivel 3: Búsqueda, reemplazo y selección</a>
+          <ul>
+            <li><a href="#busqueda-basica">Búsqueda básica y avanzada</a></li>
+            <li>
+              <a href="#busqueda-reemplazo">Búsqueda y reemplazo global</a>
+            </li>
+            <li><a href="#modo-visual">Modo Visual: selección de texto</a></li>
+            <li>
+              <a href="#operador-movimiento">
+                Combinar operadores y movimientos
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-4">Nivel 4: Trabajando con múltiples archivos</a>
+          <ul>
+            <li>
+              <a href="#buffers">Buffers: gestión de archivos en memoria</a>
+            </li>
+            <li><a href="#ventanas">Ventanas divididas y layouts</a></li>
+            <li><a href="#pestanas">Organización con pestañas</a></li>
+            <li><a href="#netrw">Explorador de archivos Netrw</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-5">Nivel 5: Macros y automatización</a>
+          <ul>
+            <li><a href="#macros">Grabación y reproducción de macros</a></li>
+            <li><a href="#registros">Registros: portapapeles avanzados</a></li>
+            <li><a href="#marcas">Marcas y saltos</a></li>
+            <li><a href="#comandos-ex">Comandos Ex avanzados</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-6">Nivel 6: Personalización y plugins</a>
+          <ul>
+            <li><a href="#vimrc">El archivo .vimrc en profundidad</a></li>
+            <li><a href="#mapeos">Mapeos de teclas personalizados</a></li>
+            <li><a href="#plugins">Sistema de plugins y gestores</a></li>
+            <li><a href="#temas">Temas y personalización visual</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-7">Nivel 7: Técnicas avanzadas</a>
+          <ul>
+            <li><a href="#texto-objetos">Objetos de texto</a></li>
+            <li><a href="#fold">Plegado de código (folding)</a></li>
+            <li><a href="#autocompletar">Autocompletado y snippets</a></li>
+            <li>
+              <a href="#lenguajes">Soporte de lenguajes de programación</a>
+            </li>
+            <li><a href="#scripts">Scripting en Vim</a></li>
+          </ul>
+        </li>
+        <li>
+          <a href="#nivel-8">
+            Nivel 8: Dominio y optimización del flujo de trabajo
+          </a>
+          <ul>
+            <li><a href="#patrones">Patrones y antipatrones de uso</a></li>
+            <li><a href="#depuracion">Depuración de código</a></li>
+            <li>
+              <a href="#integracion">Integración con herramientas externas</a>
+            </li>
+            <li>
+              <a href="#optimizacion">Optimización del rendimiento de Vim</a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="#neovim">Neovim: El futuro de Vim</a></li>
+        <li><a href="#recursos">Recursos adicionales y comunidad</a></li>
+      </ul>
+    </nav>
+
+    <div class="progress-indicator">
+      <div class="level">1</div>
+      <div class="level">2</div>
+      <div class="level">3</div>
+      <div class="level">4</div>
+      <div class="level">5</div>
+      <div class="level">6</div>
+      <div class="level">7</div>
+      <div class="level">8</div>
+    </div>
+
+    <section id="introduccion">
+      <h2>Introducción a Vim</h2>
+      <p>
+        Vim (Vi IMproved) es mucho más que un simple editor de texto; es una
+        filosofía completa de edición que revoluciona la forma en que
+        interactuamos con el texto. Creado por Bram Moolenaar como una mejora
+        del editor Vi original, Vim se ha convertido en una herramienta
+        fundamental para programadores, escritores, administradores de sistemas
+        y cualquier persona que trabaje intensivamente con texto.
+      </p>
+
+      <div class="concept">
+        <p>
+          Vim no es solo un editor, sino una
+          <strong>filosofía de edición</strong>
+          basada en la eficiencia y la composición de comandos. Mientras otros
+          editores se centran en el ratón y menús, Vim apuesta por comandos de
+          teclado potentes y componibles que, una vez dominados, permiten editar
+          texto a velocidades vertiginosas.
+        </p>
+      </div>
+
+      <h3 id="por-que-vim">¿Por qué aprender Vim?</h3>
+      <p>
+        En una era de editores gráficos sofisticados, ¿por qué dedicar tiempo a
+        aprender Vim? Las razones son numerosas y convincentes:
+      </p>
+      <ul>
+        <li>
+          <strong>Eficiencia extraordinaria:</strong>
+          Una vez que superas la curva de aprendizaje inicial, la velocidad de
+          edición que alcanzarás con Vim es inigualable. Los usuarios
+          experimentados de Vim pueden realizar en segundos tareas que en otros
+          editores tomarían minutos.
+        </li>
+        <li>
+          <strong>Ubicuidad:</strong>
+          Vim está preinstalado en prácticamente todos los sistemas Unix y
+          Linux, lo que significa que siempre estará disponible cuando necesites
+          editar archivos en servidores remotos o sistemas mínimos.
+        </li>
+        <li>
+          <strong>Personalización extrema:</strong>
+          Cada aspecto de Vim puede ser configurado y adaptado a tus necesidades
+          específicas. Desde atajos de teclado hasta comportamientos complejos,
+          todo es ajustable.
+        </li>
+        <li>
+          <strong>Bajo consumo de recursos:</strong>
+          Vim es increíblemente ligero. Funciona a la perfección incluso en
+          hardware antiguo o limitado donde otros editores modernos podrían
+          ralentizarse.
+        </li>
+        <li>
+          <strong>Independencia del ratón:</strong>
+          Al permitir hacer todo desde el teclado, Vim elimina las ineficiencias
+          de alternar entre teclado y ratón, lo que no solo aumenta la velocidad
+          sino que también reduce la fatiga física.
+        </li>
+        <li>
+          <strong>Longevidad:</strong>
+          Los conocimientos que adquieras sobre Vim te servirán durante toda tu
+          carrera profesional. A diferencia de interfaces que cambian con cada
+          actualización, los fundamentos de Vim han permanecido estables durante
+          décadas.
+        </li>
+        <li>
+          <strong>Portabilidad:</strong>
+          Tu configuración de Vim puede viajar contigo fácilmente entre
+          diferentes máquinas y sistemas operativos.
+        </li>
+      </ul>
+
+      <div class="warning">
+        <p>
+          <strong>Advertencia sobre la curva de aprendizaje:</strong>
+          Vim tiene una curva de aprendizaje pronunciada al principio. Los
+          primeros días pueden ser frustrantes mientras tu cerebro y tus dedos
+          se adaptan a un paradigma completamente diferente de edición. Sin
+          embargo, esta guía está diseñada para suavizar ese proceso y la
+          recompensa por perseverar es enorme.
+        </p>
+      </div>
+
+      <h3 id="historia">Historia y filosofía de Vim</h3>
+      <p>
+        Para entender Vim, es útil conocer sus orígenes y la filosofía que lo
+        sustenta:
+      </p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-date">1976</div>
+          <div class="timeline-content">
+            <strong>Vi</strong>
+            - Creado por Bill Joy para BSD Unix. Su nombre viene de "Visual", ya
+            que era un editor visual que superaba a los editores línea por línea
+            previos.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">1988</div>
+          <div class="timeline-content">
+            <strong>Stevie</strong>
+            - "ST Editor for VI Enthusiasts", una implementación temprana de Vi
+            para el Atari ST.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">1991</div>
+          <div class="timeline-content">
+            <strong>Vim</strong>
+            - Bram Moolenaar lanza "Vi IMproved", inicialmente para Amiga, como
+            una expansión de Stevie.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2006</div>
+          <div class="timeline-content">
+            <strong>Vim 7.0</strong>
+            - Introduce características modernas como pestañas, corrección
+            ortográfica, y más.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2014</div>
+          <div class="timeline-content">
+            <strong>Neovim</strong>
+            - Surge como un fork de Vim enfocado en modernizar su base de código
+            y facilitar la extensibilidad.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2016</div>
+          <div class="timeline-content">
+            <strong>Vim 8.0</strong>
+            - Introduce soporte nativo para plugins asíncronos y más
+            características modernas.
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-date">2023</div>
+          <div class="timeline-content">
+            <strong>Vim 9.0</strong>
+            - Incorpora el nuevo lenguaje de script Vim9script para una mayor
+            eficiencia y rendimiento.
+          </div>
+        </div>
+      </div>
+
+      <p>La filosofía de Vim se basa en varios principios clave:</p>
+      <ul>
+        <li>
+          <strong>Eficiencia a través de la composición:</strong>
+          Pequeños comandos que pueden combinarse para realizar operaciones
+          complejas.
+        </li>
+        <li>
+          <strong>Modalidad:</strong>
+          Separar la inserción de texto de la manipulación del mismo.
+        </li>
+        <li>
+          <strong>Mnemotecnia:</strong>
+          Comandos que son fáciles de recordar (d para "delete", y para "yank",
+          etc.).
+        </li>
+        <li>
+          <strong>Minimalismo:</strong>
+          Hacer una cosa y hacerla bien, siguiendo la filosofía Unix.
+        </li>
+        <li>
+          <strong>Extensibilidad:</strong>
+          Capacidad para adaptarse a diferentes necesidades mediante plugins y
+          configuración.
+        </li>
+      </ul>
+
+      <h3 id="modalidad">El concepto de modalidad</h3>
+      <p>
+        La característica distintiva de Vim es su naturaleza modal. A diferencia
+        de la mayoría de los editores donde simplemente escribes y el texto
+        aparece, Vim tiene diferentes modos para diferentes tareas:
+      </p>
+
+      <div class="concept">
+        <p>
+          <strong>El principio de la modalidad:</strong>
+          La idea fundamental es separar el proceso de
+          <em>insertar texto</em>
+          del proceso de
+          <em>manipular texto</em>
+          . Esta separación es lo que permite a Vim ofrecer comandos tan
+          potentes para la manipulación de texto sin requerir combinaciones de
+          teclas complicadas.
+        </p>
+      </div>
+
+      <div class="vim-diagram">
+        <a href="https://gist.githubusercontent.com/darcyparker/1886716/raw/c1ee7657010278a787c6502b796a6766a40d56aa/vimModeStateDiagram.svg" target="_blank">Ver guia grafica de los modos de vim</a>
+        <p>
+          <em>
+            Diagrama de los principales modos de Vim y cómo se relacionan entre
+            sí
+          </em>
+        </p>
+      </div>
+
+      <p>Los modos principales de Vim incluyen:</p>
+
+      <div class="shortcut-category">
+        <div class="shortcut-box">
+          <h4>Modo Normal</h4>
+          <p>
+            El estado predeterminado de Vim. Aquí los caracteres que tecleas son
+            interpretados como comandos, no como texto a insertar.
+          </p>
+          <p>
+            <strong>Propósito:</strong>
+            Navegar, manipular texto, copiar, pegar, eliminar.
+          </p>
+          <p>
+            <strong>Entrar:</strong>
+            <span class="key">Esc</span>
+            desde cualquier otro modo.
+          </p>
+        </div>
+
+        <div class="shortcut-box">
+          <h4>Modo Inserción</h4>
+          <p>
+            Similar a otros editores, aquí los caracteres que tecleas se
+            insertan como texto.
+          </p>
+          <p>
+            <strong>Propósito:</strong>
+            Escribir y añadir texto nuevo.
+          </p>
+          <p>
+            <strong>Entrar:</strong>
+            <span class="key">i</span>
+            ,
+            <span class="key">a</span>
+            ,
+            <span class="key">o</span>
+            , etc. desde modo Normal.
+          </p>
+        </div>
+
+        <div class="shortcut-box">
+          <h4>Modo Visual</h4>
+          <p>
+            Permite seleccionar texto antes de realizar operaciones sobre él.
+          </p>
+          <p>
+            <strong>Propósito:</strong>
+            Seleccionar texto para copiarlo, eliminarlo, indentarlo, etc.
+          </p>
+          <p>
+            <strong>Entrar:</strong>
+            <span class="key">v</span>
+            ,
+            <span class="key">V</span>
+            , o
+            <span class="key">Ctrl+v</span>
+            desde modo Normal.
+          </p>
+        </div>
+
+        <div class="shortcut-box">
+          <h4>Modo Comando</h4>
+          <p>
+            Para ejecutar comandos específicos de Vim, como guardar, salir,
+            buscar, etc.
+          </p>
+          <p>
+            <strong>Propósito:</strong>
+            Operaciones a nivel de archivo y comandos especiales.
+          </p>
+          <p>
+            <strong>Entrar:</strong>
+            <span class="key">:</span>
+            ,
+            <span class="key">/</span>
+            , o
+            <span class="key">?</span>
+            desde modo Normal.
+          </p>
+        </div>
+      </div>
+
+      <p>
+        Esta estructura modal es la que inicialmente confunde a los nuevos
+        usuarios, pero también es la fuente del poder de Vim. En lugar de tener
+        que presionar combinaciones complejas de teclas como
+        Ctrl+Alt+Shift+Algo, simplemente cambias de modo y usas comandos simples
+        y mnemonicos.
+      </p>
+
+      <div class="example">
+        <p>
+          <strong>Ejemplo práctico de modalidad:</strong>
+          Para eliminar una palabra en un editor tradicional, posicionarías el
+          cursor al inicio de la palabra, mantendrías Shift presionado mientras
+          te desplazas para seleccionarla y luego presionarías Delete. En Vim,
+          simplemente posicionas el cursor en la palabra y tecleas
+          <span class="key">dw</span>
+          (delete word) en modo Normal. Esta diferencia se vuelve aún más
+          pronunciada con operaciones complejas.
+        </p>
+      </div>
+    </section>
+
+    <section id="nivel-1">
+      <h2>Nivel 1: Primeros pasos en Vim</h2>
+
+      <h3 id="instalacion">Instalación en diferentes sistemas</h3>
+      <p>
+        Antes de comenzar tu viaje con Vim, necesitas instalarlo en tu sistema.
+        Afortunadamente, el proceso es bastante sencillo:
+      </p>
+
+      <h4>Linux</h4>
+      <p>
+        En la mayoría de las distribuciones Linux, Vim puede no estar instalado
+        por defecto (aunque Vi suele estarlo), pero es fácil de instalar:
+      </p>
+      <pre>
+# Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install vim
+
+# Fedora/RHEL/CentOS
+sudo dnf install vim
+
+# Arch Linux
+sudo pacman -S vim
+
+# OpenSUSE
+sudo zypper install vim
+</pre
+      >
+
+      <h4>macOS</h4>
+      <p>
+        macOS viene con una versión básica de Vim preinstalada, pero puedes
+        obtener una versión más actualizada:
+      </p>
+      <pre>
+# Usando Homebrew
+brew install vim
+
+# Para la versión con interfaz gráfica
+brew install macvim
+</pre
+      >
+
+      <h4>Windows</h4>
+      <p>En Windows, necesitarás descargar el instalador:</p>
+      <ol>
+        <li>
+          Visita
+          <a href="https://www.vim.org/download.php">
+            https://www.vim.org/download.php
+          </a>
+        </li>
+        <li>Descarga el instalador para Windows</li>
+        <li>Ejecuta el instalador y sigue las instrucciones</li>
+      </ol>
+      <p>
+        Alternativamente, si tienes instalado Git para Windows, ya tienes una
+        versión de Vim incluida.
+      </p>
+
+      <h4>Verificando la instalación</h4>
+      <p>
+        Para verificar que Vim está correctamente instalado, abre una terminal
+        (o símbolo del sistema en Windows) y escribe:
+      </p>
+      <pre>
+vim --version
+</pre
+      >
+      <p>Esto mostrará la versión de Vim y las características compiladas.</p>
+
+      <h3 id="primeros-comandos">Comandos básicos para sobrevivir</h3>
+      <p>
+        Antes de profundizar en la edición avanzada, es crucial aprender los
+        comandos mínimos para no sentirse atrapado en Vim. Estos son los
+        comandos de "supervivencia":
+      </p>
+
+      <table>
+        <tr>
+          <th>Comando</th>
+          <th>Acción</th>
+          <th>Descripción detallada</th>
+        </tr>
+        <tr>
+          <td><code>vim archivo.txt</code></td>
+          <td>Abrir o crear archivo</td>
+          <td>
+            Inicia Vim y abre el archivo especificado. Si el archivo no existe,
+            se creará al guardar.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="key">i</span></td>
+          <td>Entrar en modo inserción</td>
+          <td>
+            Permite insertar texto antes de la posición actual del cursor.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="key">Esc</span></td>
+          <td>Volver al modo normal</td>
+          <td>
+            Sale del modo actual y regresa al modo normal para ejecutar
+            comandos.
+          </td>
+        </tr>
+        <tr>
+          <td><span class="command">:w</span></td>
+          <td>Guardar cambios</td>
+          <td>Escribe (Write) los cambios actuales al archivo.</td>
+        </tr>
+        <tr>
+          <td><span class="command">:q</span></td>
+          <td>Salir</td>
+          <td>
+            Cierra Vim si no hay cambios sin guardar. Si hay cambios, mostrará
+            un error.
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <span class="command">:wq</span>
+            o
+            <span class="key">ZZ</span>
+          </td>
+          <td>Guardar y salir</td>
+          <td>Guarda los cambios y cierra Vim en un solo comando.</td>
+        </tr>
+        <tr>
+          <td><span class="command">:q!</span></td>
+          <td>Forzar salida</td>
+          <td>
+            Sale de Vim descartando cualquier cambio no guardado. ¡Usar con
+            precaución!
+          </td>
+        </tr>
+        <tr>
+          <td><span class="command">:help</span></td>
+          <td>Obtener ayuda</td>
+          <td>
+            Abre el sistema de ayuda de Vim. Extremadamente útil cuando tienes
+            dudas.
+          </td>
+        </tr>
+      </table>
+
+      <div class="example">
+        <p>
+          <strong>Ejemplo práctico:</strong>
+          Supongamos que quieres crear un archivo llamado "notas.txt", escribir
+          un poco de texto, guardarlo y salir:
+        </p>
+        <ol>
+          <li>
+            Abre una terminal y escribe:
+            <code>vim notas.txt</code>
+          </li>
+          <li>
+            Presiona
+            <span class="key">i</span>
+            para entrar en modo inserción
+          </li>
+          <li>Escribe el texto que desees</li>
+          <li>
+            Presiona
+            <span class="key">Esc</span>
+            para volver al modo normal
+          </li>
+          <li>
+            Escribe
+            <span class="command">:wq</span>
+            y presiona Enter para guardar y salir
+          </li>
+        </ol>
+        <p>¡Felicidades! Has completado tu primera sesión de Vim.</p>
+      </div>
+
+      <div class="warning">
+        <p>
+          <strong>Nota importante:</strong>
+          Si alguna vez te sientes perdido dentro de Vim, recuerda que
+          <span class="key">Esc</span>
+          te llevará al modo normal y desde ahí puedes ejecutar
+          <span class="command">:q!</span>
+          para salir sin guardar o
+          <span class="command">:help</span>
+          para buscar ayuda.
+        </p>
+      </div>
+
+      <h3 id="modos-vim">Modos de Vim en detalle</h3>
+      <p>
+        Aunque ya hemos mencionado brevemente los modos de Vim en la
+        introducción, es importante entenderlos más a fondo, ya que forman la
+        base de cómo interactuamos con el editor:
+      </p>
+
+      <h4>Modo Normal (Modo Comando)</h4>
+      <p>
+        Es el modo predeterminado cuando abres Vim. En este modo, cada tecla es
+        un comando, no texto a insertar.
+      </p>
+      <ul>
+        <li>
+          <strong>Propósito:</strong>
+          Navegar por el documento, realizar operaciones de edición como copiar,
+          cortar, pegar, eliminar.
+        </li>
+        <li>
+          <strong>Cómo entrar:</strong>
+          Presionar
+          <span class="key">Esc</span>
+          desde cualquier otro modo.
+        </li>
+        <li>
+          <strong>Indicador:</strong>
+          No hay indicador específico, es el estado por defecto.
+        </li>
+      </ul>
+
+      <h4>Modo Inserción</h4>
+      <p>
+        Es el modo que más se parece a otros editores, donde las teclas que
+        presionas se insertan como texto.
+      </p>
+      <ul>
+        <li>
+          <strong>Propósito:</strong>
+          Escribir y añadir texto al documento.
+        </li>
+        <li>
+          <strong>Cómo entrar:</strong>
+          Desde el modo normal, hay varias opciones:
+          <ul>
+            <li>
+              <span class="key">i</span>
+              - Insertar antes del cursor
+            </li>
+            <li>
+              <span class="key">a</span>
+              - Insertar después del cursor
+            </li>
+            <li>
+              <span class="key">I</span>
+              - Insertar al inicio de la línea
+            </li>
+            <li>
+              <span class="key">A</span>
+              - Insertar al final de la línea
+            </li>
+            <li>
+              <span class="key">o</span>
+              - Insertar en una nueva línea debajo
+            </li>
+            <li>
+              <span class="key">O</span>
+              - Insertar en una nueva línea arriba
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Indicador:</strong>
+          En la parte inferior de la pantalla verás "-- INSERT --".
+        </li>
+      </ul>
+
+      <h4>Modo Visual</h4>
+      <p>
+        Permite seleccionar bloques de texto para realizar operaciones sobre
+        ellos.
+      </p>
+      <ul>
+        <li>
+          <strong>Propósito:</strong>
+          Seleccionar texto para copiarlo, eliminarlo, cambiarlo, etc.
+        </li>
+        <li>
+          <strong>Cómo entrar:</strong>
+          Desde el modo normal:
+          <ul>
+            <li>
+              <span class="key">v</span>
+              - Visual por caracteres
+            </li>
+            <li>
+              <span class="key">V</span>
+              - Visual por líneas
+            </li>
+            <li>
+              <span class="key">Ctrl+v</span>
+              - Visual por bloques (rectangular)
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Indicador:</strong>
+          En la parte inferior verás "-- VISUAL --", "-- VISUAL LINE --" o "--
+          VISUAL BLOCK --".
+        </li>
+      </ul>
+
+      <h4>Modo Comando (Ex)</h4>
+      <p>
+        Para ejecutar comandos más complejos, como guardar, salir, buscar,
+        reemplazar, etc.
+      </p>
+      <ul>
+        <li>
+          <strong>Propósito:</strong>
+          Ejecutar comandos Ex, operaciones a nivel de archivo.
+        </li>
+        <li>
+          <strong>Cómo entrar:</strong>
+          Desde el modo normal:
+          <ul>
+            <li>
+              <span class="key">:</span>
+              - Para comandos Ex
+            </li>
+            <li>
+              <span class="key">/</span>
+              - Para búsqueda hacia adelante
+            </li>
+            <li>
+              <span class="key">?</span>
+              - Para búsqueda hacia atrás
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Indicador:</strong>
+          Los caracteres ":", "/" o "?" aparecen en la línea inferior, seguidos
+          del comando que escribas.
+        </li>
+      </ul>
+
+      <h4>Modos Menos Utilizados</h4>
+      <p>Vim también tiene algunos modos menos comunes pero útiles:</p>
+      <ul>
+        <li>
+          <strong>Modo Reemplazo:</strong>
+          Reemplaza el texto existente mientras escribes. Se entra con
+          <span class="key">R</span>
+          desde modo normal.
+        </li>
+        <li>
+          <strong>Modo Terminal:</strong>
+          En versiones recientes de Vim, permite usar una terminal dentro de
+          Vim. Se accede con
+          <span class="command">:terminal</span>
+          .
+        </li>
+        <li>
+          <strong>Modo Selección:</strong>
+          Similar al modo visual pero se comporta más como las selecciones
+          estándar de Windows/Mac.
+        </li>
+      </ul>
+
+      <div class="vim-keys-diagram">
+        <pre>
+MODOS DE VIM:
++----------------+     +----------------+     +----------------+
+|                |     |                |     |                |
+|  MODO NORMAL   | --> |  MODO INSERT   | --> |  MODO NORMAL   |
+|                |     |                |     |                |
++----------------+     +----------------+     +----------------+
+        |                                            |
+        v                                            v
++----------------+     +----------------+     +----------------+
+|                |     |                |     |                |
+|  MODO VISUAL   | --> |  MODO COMANDO  | --> |     :wq!       |
+|                |     |                |     |    (SALIR)     |
++----------------+     +----------------+     +----------------+
+</pre
+        >
+      </div>
+
+      <h3 id="vimtutor">Vimtutor: El primer entrenamiento</h3>
+      <p>
+        Vim incluye un tutorial integrado llamado "Vimtutor" que es el punto de
+        partida perfecto para nuevos usuarios. Este tutorial interactivo te guía
+        a través de los conceptos básicos de Vim de manera práctica.
+      </p>
+
+      <h4>¿Cómo acceder a Vimtutor?</h4>
+      <p>Para iniciar Vimtutor, simplemente abre una terminal y escribe:</p>
+      <pre>vimtutor</pre>
+
+      <p>
+        En Windows, puedes ejecutarlo desde el menú de inicio o desde la línea
+        de comandos.
+      </p>
+
+      <div class="tip">
+        <p>
+          <strong>Consejo:</strong>
+          Completa Vimtutor al menos una vez antes de continuar con esta guía.
+          Toma aproximadamente 30 minutos y cubre muchos de los conceptos
+          fundamentales de manera práctica. Repítelo varias veces si es
+          necesario hasta que te sientas cómodo con los comandos básicos.
+        </p>
+      </div>
+
+      <h4>¿Qué cubre Vimtutor?</h4>
+      <p>Vimtutor cubre conceptos esenciales como:</p>
+      <ul>
+        <li>Movimientos básicos con h, j, k, l</li>
+        <li>Entrar y salir del editor</li>
+        <li>Edición de texto (eliminar, cambiar, insertar)</li>
+        <li>Búsqueda simple</li>
+        <li>Guardar y salir</li>
+      </ul>
+
+      <div class="exercise">
+        <p>
+          <strong>Ejercicio de nivel 1:</strong>
+          Abre Vimtutor y completa los primeros 3 capítulos. Luego, crea un
+          nuevo archivo con Vim y practica los comandos que has aprendido:
+          movimientos, inserción de texto, eliminar y deshacer cambios, guardar
+          y salir.
+        </p>
+      </div>
+
+      <p>
+        Si has llegado a este punto y has completado Vimtutor, ¡felicidades! Has
+        dado el primer paso importante en tu camino para dominar Vim. Ahora
+        pasaremos al siguiente nivel, donde aprenderás a moverte y editar texto
+        de manera más eficiente.
+      </p>
+    </section>
+
+    <section id="nivel-2">
+      <h2>Nivel 2: Movimientos básicos y edición</h2>
+
+      <p>
+        En este nivel, profundizaremos en las formas eficientes de moverse por
+        el texto y realizar ediciones básicas. La navegación eficiente es
+        fundamental para aprovechar al máximo Vim.
+      </p>
+
+      <h3 id="movimientos-basicos">Navegación en modo normal</h3>
+      <p>
+        El modo normal de Vim está diseñado para navegar y manipular texto. Los
+        comandos de movimiento son la base para muchas operaciones de edición.
+      </p>
+
+      <h4>Movimientos por caracteres</h4>
+      <div class="shortcut-category">
+        <div class="shortcut-box">
+          <h4>Navegación básica</h4>
+          <ul>
+            <li>
+              <span class="key">h</span>
+              - Mover el cursor un carácter a la izquierda
+            </li>
+            <li>
+              <span class="key">j</span>
+              - Mover el cursor una línea hacia abajo
+            </li>
+            <li>
+              <span class="key">k</span>
+              - Mover el cursor una línea hacia arriba
+            </li>
+            <li>
+              <span class="key">l</span>
+              - Mover el cursor un carácter a la derecha
+            </li>
+          </ul>
+        </div>
+
+        <div class="shortcut-box">
+          <h4>Movimientos por palabras</h4>
+          <ul>
+            <li>
+              <span class="key">w</span>
+              - Mover al inicio de la siguiente palabra
+            </li>
+            <li>
+              <span class="key">e</span>
+              - Mover al final de la palabra actual o siguiente
+            </li>
+            <li>
+              <span class="key">b</span>
+              - Mover al inicio de la palabra actual o anterior
+            </li>
+            <li>
+              <span class="key">ge</span>
+              - Mover al final de la palabra anterior
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tip">
+        <p>
+          <strong>Consejo:</strong>
+          Las versiones en mayúsculas de estos comandos (
+          <span class="key">W</span>
+          ,
+          <span class="key">E</span>
+          ,
+          <span class="key">B</span>
+          ) consideran como delimitadores solo los espacios en blanco, no la
+          puntuación, lo que permite movimientos más largos.
+        </p>
+      </div>
+
+      <h4>Movimientos dentro de la línea</h4>
+      <div class="shortcut-category">
+        <div class="shortcut-box">
+          <h4>Inicio y fin de línea</h4>
+          <ul>
+            <li>
+              <span class="key">0</span>
+              - Mover al primer carácter de la línea
+            </li>
+            <li>
+              <span class="key">^</span>
+              - Mover al primer carácter no-blanco de la línea
+            </li>
+            <li>
+              <span class="key">$</span>
+              - Mover al final de la línea
+            </li>
+            <li>
+              <span class="key">g_</span>
+              - Mover al último carácter no-blanco de la línea
+            </li>
+          </ul>
+        </div>
+
+        <div class="shortcut-box">
+          <h4>Movimientos por caracteres específicos</h4>
+          <ul>
+            <li>
+              <span class="key">f{char}</span>
+              - Mover hacia adelante hasta el carácter {char}
+            </li>
+            <li>
+              <span class="key">F{char}</span>
+              - Mover hacia atrás hasta el carácter {char}
+            </li>
+            <li>
+              <span class="key">t{char}</span>
+              - Mover hacia adelante justo antes del carácter {char}
+            </li>
+            <li>
+              <span class="key">T{char}</span>
+              - Mover hacia atrás justo después del carácter {char}
+            </li>
+            <li>
+              <span class="key">;</span>
+              - Repetir el último movimiento f, F, t o T
+            </li>
+            <li>
+              <span class="key">,</span>
+              - Repetir el último movimiento f, F, t o T en dirección opuesta
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="example">
+        <p>
+          <strong>Ejemplo práctico:</strong>
+          Imagina que tienes esta línea de código en Python y quieres mover el
+          cursor a la "r" en "return":
+        </p>
+        <pre>def suma(a, b): return a + b  # Esta función suma dos números</pre>
+        <p>
+          Podrías mover el cursor rápidamente con
+          <span class="key">fr</span>
+          (buscar hacia adelante hasta "r") o
+          <span class="key">tr</span>
+          (mover justo antes de "r").
+        </p>
+      </div>
+
+      <h4>Movimientos por párrafos y secciones</h4>
+      <ul>
+        <li>
+          <span class="key">{</span>
+          - Mover al párrafo anterior (separado por líneas en blanco)
+        </li>
+        <li>
+          <span class="key">}</span>
+          - Mover al párrafo siguiente
+        </li>
+        <li>
+          <span class="key">(</span>
+          - Mover a la oración anterior
+        </li>
+        <li>
+          <span class="key">)</span>
+          - Mover a la oración siguiente
+        </li>
+      </ul>
+
+      <div class="exercise">
+        <p>
+          <strong>Ejercicio de navegación:</strong>
+          Abre un archivo de texto con varios párrafos y practica moverte usando
+          los distintos comandos de navegación. Intenta llegar a puntos
+          específicos del texto usando la combinación más eficiente de comandos.
+        </p>
+      </div>
+
+      <h3 id="edicion-basica">Comandos de edición básicos</h3>
+      <p>
+        Ahora que sabes cómo moverte eficientemente, es hora de aprender a
+        modificar el texto.
+      </p>
+
+      <h4>Insertar texto</h4>
+      <p>
+        Ya conoces
+        <span class="key">i</span>
+        para insertar texto antes del cursor, pero hay más formas de entrar en
+        modo inserción:
+      </p>
+      <ul>
+        <li>
+          <span class="key">i</span>
+          - Insertar antes del cursor
+        </li>
+        <li>
+          <span class="key">a</span>
+          - Insertar después del cursor (append)
+        </li>
+        <li>
+          <span class="key">I</span>
+          - Insertar al inicio de la línea
+        </li>
+        <li>
+          <span class="key">A</span>
+          - Insertar al final de la línea
+        </li>
+        <li>
+          <span class="key">o</span>
+          - Crear una nueva línea debajo y entrar en modo inserción
+        </li>
+        <li>
+          <span class="key">O</span>
+          - Crear una nueva línea arriba y entrar en modo inserción
+        </li>
+        <li>
+          <span class="key">gi</span>
+          - Insertar en la última posición donde se realizó una inserción
+        </li>
+      </ul>
+
+      <h4>Eliminar y cambiar texto</h4>
+      <div class="shortcut-category">
+        <div class="shortcut-box">
+          <h4>Eliminar (cut)</h4>
+          <ul>
+            <li>
+              <span class="key">x</span>
+              - Eliminar carácter bajo el cursor
+            </li>
+            <li>
+              <span class="key">X</span>
+              - Eliminar carácter antes del cursor
+            </li>
+            <li>
+              <span class="key">dd</span>
+              - Eliminar línea completa
+            </li>
+            <li>
+              <span class="key">d{movimiento}</span>
+              - Eliminar desde el cursor hasta donde indique el movimiento
+            </li>
+            <li>
+              <span class="key">D</span>
+              - Eliminar desde el cursor hasta el final de la línea (equivale a
+              d$)
+            </li>
+          </ul>
+        </div>
+
+        <div class="shortcut-box">
+          <h4>Cambiar</h4>
+          <ul>
+            <li>
+              <span class="key">r{char}</span>
+              - Reemplazar el carácter bajo el cursor con {char}
+            </li>
+            <li>
+              <span class="key">R</span>
+              - Entrar en modo reemplazo (sobreescribir)
+            </li>
+            <li>
+              <span class="key">cc</span>
+              - Cambiar línea completa
+            </li>
+            <li>
+              <span class="key">c{movimiento}</span>
+              - Cambiar desde el cursor hasta donde indique el movimiento
+            </li>
+            <li>
+              <span class="key">C</span>
+              - Cambiar desde el cursor hasta el final de la línea (equivale a
+              c$)
+            </li>
+            <li>
+              <span class="key">s</span>
+              - Eliminar carácter bajo el cursor y entrar en modo inserción
+            </li>
+            <li>
+              <span class="key">S</span>
+              - Eliminar línea y entrar en modo inserción (equivale a cc)
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="example">
+        <p>
+          <strong>Ejemplo práctico:</strong>
+          Si tienes la línea
+          <code>const valor = 123;</code>
+          y quieres cambiar "123" por "456":
+        </p>
+        <ol>
+          <li>Coloca el cursor en "1"</li>
+          <li>
+            Presiona
+            <span class="key">ce</span>
+            (cambiar hasta el final de la palabra)
+          </li>
+          <li>Escribe "456"</li>
+          <li>
+            Presiona
+            <span class="key">Esc</span>
+            para volver al modo normal
+          </li>
+        </ol>
+      </div>
+
+      <h4>Copiar y pegar</h4>
+      <ul>
+        <li>
+          <span class="key">yy</span>
+          o
+          <span class="key">Y</span>
+          - Copiar (yank) línea completa
+        </li>
+        <li>
+          <span class="key">y{movimiento}</span>
+          - Copiar desde el cursor hasta donde indique el movimiento
+        </li>
+        <li>
+          <span class="key">p</span>
+          - Pegar después del cursor o en la línea siguiente
+        </li>
+        <li>
+          <span class="key">P</span>
+          - Pegar antes del cursor o en la línea anterior
+        </li>
+      </ul>
+
+      <h4>Deshacer y rehacer</h4>
+      <ul>
+        <li>
+          <span class="key">u</span>
+          - Deshacer el último cambio
+        </li>
+        <li>
+          <span class="key">Ctrl+r</span>
+          - Rehacer el último cambio deshecho
+        </li>
+        <li>
+          <span class="key">U</span>
+          - Deshacer todos los cambios en la línea actual
+        </li>
+      </ul>
+
+      <h3 id="combinando-comandos">Multiplicadores y movimientos</h3>
+      <p>
+        Una de las características más potentes de Vim es la combinación de
+        comandos con multiplicadores y movimientos.
+      </p>
+
+      <h4>Multiplicadores numéricos</h4>
+      <p>
+        Puedes anteponer un número a casi cualquier comando para repetirlo esa
+        cantidad de veces:
+      </p>
+      <ul>
+        <li>
+          <span class="key">5j</span>
+          - Mover 5 líneas hacia abajo
+        </li>
+        <li>
+          <span class="key">3dw</span>
+          - Eliminar 3 palabras
+        </li>
+        <li>
+          <span class="key">2y}</span>
+          - Copiar 2 párrafos
+        </li>
+        <li>
+          <span class="key">10x</span>
+          - Eliminar 10 caracteres
+        </li>
+      </ul>
+
+      <h4>La gramática de Vim</h4>
+      <p>
+        Vim sigue un patrón gramatical que una vez dominado, te permite "hablar"
+        el lenguaje de Vim:
+      </p>
+      <div class="concept">
+        <p><strong>Operador + [número] + movimiento</strong></p>
+        <ul>
+          <li>
+            <strong>Operador:</strong>
+            qué hacer (d = delete, c = change, y = yank)
+          </li>
+          <li>
+            <strong>Número:</strong>
+            cuántas veces (opcional)
+          </li>
+          <li>
+            <strong>Movimiento:</strong>
+            sobre qué texto actuar (w = word, } = paragraph, etc.)
+          </li>
+        </ul>
+      </div>
+
+      <div class="example">
+        <p><strong>Ejemplos de combinaciones poderosas:</strong></p>
+        <ul>
+          <li>
+            <span class="key">d2w</span>
+            - Eliminar 2 palabras
+          </li>
+          <li>
+            <span class="key">ci"</span>
+            - Cambiar el texto dentro de comillas
+          </li>
+          <li>
+            <span class="key">df.</span>
+            - Eliminar hasta el próximo punto
+          </li>
+          <li>
+            <span class="key">y$</span>
+            - Copiar desde el cursor hasta el final de la línea
+          </li>
+          <li>
+            <span class="key">3dd</span>
+            - Eliminar 3 líneas
+          </li>
+        </ul>
+      </div>
+
+      <h3 id="paginacion">Desplazamiento por el archivo</h3>
+      <p>
+        Para archivos más grandes, necesitas formas eficientes de desplazarte:
+      </p>
+
+      <h4>Desplazamiento por pantalla</h4>
+      <ul>
+        <li>
+          <span class="key">Ctrl+f</span>
+          - Avanzar una pantalla (Forward)
+        </li>
+        <li>
+          <span class="key">Ctrl+b</span>
+          - Retroceder una pantalla (Backward)
+        </li>
+        <li>
+          <span class="key">Ctrl+d</span>
+          - Avanzar media pantalla (Down)
+        </li>
+        <li>
+          <span class="key">Ctrl+u</span>
+          - Retroceder media pantalla (Up)
+        </li>
+        <li>
+          <span class="key">Ctrl+e</span>
+          - Desplazar una línea hacia abajo
+        </li>
+        <li>
+          <span class="key">Ctrl+y</span>
+          - Desplazar una línea hacia arriba
+        </li>
+      </ul>
+
+      <h4>Posicionamiento del cursor en la pantalla</h4>
+      <ul>
+        <li>
+          <span class="key">H</span>
+          - Mover el cursor a la parte superior de la pantalla (High)
+        </li>
+        <li>
+          <span class="key">M</span>
+          - Mover el cursor a la mitad de la pantalla (Middle)
+        </li>
+        <li>
+          <span class="key">L</span>
+          - Mover el cursor a la parte inferior de la pantalla (Low)
+        </li>
+        <li>
+          <span class="key">zt</span>
+          - Desplazar la vista para que la línea actual esté en la parte
+          superior
+        </li>
+        <li>
+          <span class="key">zz</span>
+          - Desplazar la vista para que la línea actual esté en el centro
+        </li>
+        <li>
+          <span class="key">zb</span>
+          - Desplazar la vista para que la línea actual esté en la parte
+          inferior
+        </li>
+      </ul>
+
+      <h4>Ir a una línea específica</h4>
+      <ul>
+        <li>
+          <span class="key">gg</span>
+          - Ir al inicio del archivo (línea 1)
+        </li>
+        <li>
+          <span class="key">G</span>
+          - Ir al final del archivo (última línea)
+        </li>
+        <li>
+          <span class="key">{número}G</span>
+          o
+          <span class="key">:{número}</span>
+          - Ir a la línea {número}
+        </li>
+        <li>
+          <span class="key">%</span>
+          - Ir al carácter correspondiente (paréntesis, corchetes, llaves, etc.)
+        </li>
+      </ul>
+
+      <div class="exercise">
+        <p>
+          <strong>Ejercicio de nivel 2:</strong>
+          Practica combinando comandos de edición con movimientos. Intenta
+          realizar las siguientes operaciones:
+        </p>
+        <ol>
+          <li>Eliminar desde el cursor hasta el final de la palabra</li>
+          <li>Cambiar una oración completa</li>
+          <li>Copiar un párrafo entero</li>
+          <li>Mover 3 palabras a la derecha y eliminar 2 palabras</li>
+          <li>
+            Ir al inicio del archivo, luego a la línea 10, y luego al final del
+            archivo
+          </li>
+        </ol>
+      </div>
+
+      <p>
+        ¡Excelente progreso! Has aprendido las técnicas fundamentales de
+        navegación y edición en Vim. Estos comandos forman la base de tu fluidez
+        en Vim. Practícalos hasta que se vuelvan instintivos. En el siguiente
+        nivel, aprenderemos técnicas más avanzadas de búsqueda, reemplazo y
+        selección.
+      </p>
+      <section id="nivel-3">
+        <h2>Nivel 3: Búsqueda, reemplazo y selección</h2>
+
+        <p>
+          En este nivel, aprenderás técnicas más avanzadas para encontrar y
+          manipular texto específico en tus archivos. Las capacidades de
+          búsqueda y reemplazo de Vim son extremadamente potentes cuando se
+          dominan correctamente.
+        </p>
+
+        <h3 id="busqueda-basica">Búsqueda básica y avanzada</h3>
+
+        <p>
+          La capacidad de encontrar rápidamente texto específico es esencial
+          para la edición eficiente. Vim ofrece potentes herramientas de
+          búsqueda.
+        </p>
+
+        <h4>Búsqueda básica</h4>
+        <ul>
+          <li>
+            <span class="key">/patrón</span>
+            - Buscar hacia adelante el "patrón" especificado
+          </li>
+          <li>
+            <span class="key">?patrón</span>
+            - Buscar hacia atrás el "patrón" especificado
+          </li>
+          <li>
+            <span class="key">n</span>
+            - Repetir la búsqueda en la misma dirección
+          </li>
+          <li>
+            <span class="key">N</span>
+            - Repetir la búsqueda en dirección opuesta
+          </li>
+          <li>
+            <span class="key">*</span>
+            - Buscar hacia adelante la palabra completa bajo el cursor
+          </li>
+          <li>
+            <span class="key">#</span>
+            - Buscar hacia atrás la palabra completa bajo el cursor
+          </li>
+          <li>
+            <span class="key">g*</span>
+            - Buscar hacia adelante la palabra parcial bajo el cursor
+          </li>
+          <li>
+            <span class="key">g#</span>
+            - Buscar hacia atrás la palabra parcial bajo el cursor
+          </li>
+        </ul>
+
+        <div class="example">
+          <p>
+            <strong>Ejemplo de búsqueda básica:</strong>
+            Supongamos que quieres encontrar todas las ocurrencias de "función"
+            en un archivo:
+          </p>
+          <ol>
+            <li>
+              Presiona
+              <span class="key">/</span>
+              para iniciar la búsqueda hacia adelante
+            </li>
+            <li>
+              Escribe
+              <code>función</code>
+            </li>
+            <li>
+              Presiona
+              <span class="key">Enter</span>
+              para ejecutar la búsqueda
+            </li>
+            <li>
+              Usa
+              <span class="key">n</span>
+              para ir a la siguiente coincidencia o
+              <span class="key">N</span>
+              para ir a la anterior
+            </li>
+          </ol>
+        </div>
+
+        <h4>Opciones de búsqueda</h4>
+        <p>
+          Vim permite modificar el comportamiento de la búsqueda con varias
+          opciones:
+        </p>
+        <ul>
+          <li>
+            <span class="command">:set ignorecase</span>
+            - Ignorar mayúsculas/minúsculas en las búsquedas
+          </li>
+          <li>
+            <span class="command">:set smartcase</span>
+            - Ignorar mayúsculas/minúsculas excepto cuando usas mayúsculas
+          </li>
+          <li>
+            <span class="command">:set hlsearch</span>
+            - Resaltar todos los resultados de la búsqueda
+          </li>
+          <li>
+            <span class="command">:set incsearch</span>
+            - Mostrar coincidencias mientras escribes la búsqueda
+          </li>
+          <li>
+            <span class="command">:nohlsearch</span>
+            o
+            <span class="key">:noh</span>
+            - Desactivar temporalmente el resaltado de búsqueda
+          </li>
+        </ul>
+
+        <div class="tip">
+          <p>
+            <strong>Consejo útil:</strong>
+            Muchos usuarios de Vim mapean
+            <span class="key">&lt;Esc&gt;&lt;Esc&gt;</span>
+            o alguna otra combinación de teclas a
+            <span class="command">:nohlsearch</span>
+            para desactivar rápidamente el resaltado de búsqueda cuando ya no lo
+            necesitan.
+          </p>
+        </div>
+
+        <h4>Expresiones regulares en Vim</h4>
+        <p>
+          Vim soporta expresiones regulares para búsquedas avanzadas con
+          patrones:
+        </p>
+
+        <table>
+          <tr>
+            <th>Patrón</th>
+            <th>Significado</th>
+            <th>Ejemplo</th>
+          </tr>
+          <tr>
+            <td><code>^</code></td>
+            <td>Inicio de línea</td>
+            <td>
+              <code>/^function</code>
+              - Busca "function" al inicio de la línea
+            </td>
+          </tr>
+          <tr>
+            <td><code>$</code></td>
+            <td>Final de línea</td>
+            <td>
+              <code>/;$</code>
+              - Busca líneas que terminan con ";"
+            </td>
+          </tr>
+          <tr>
+            <td><code>.</code></td>
+            <td>Cualquier carácter</td>
+            <td>
+              <code>/c.t</code>
+              - Encuentra "cat", "cot", "cut", etc.
+            </td>
+          </tr>
+          <tr>
+            <td><code>\s</code></td>
+            <td>Espacio en blanco</td>
+            <td>
+              <code>/function\s\+</code>
+              - "function" seguido de uno o más espacios
+            </td>
+          </tr>
+          <tr>
+            <td><code>[ ]</code></td>
+            <td>Clase de caracteres</td>
+            <td>
+              <code>/[aeiou]</code>
+              - Encuentra cualquier vocal
+            </td>
+          </tr>
+          <tr>
+            <td><code>\d</code></td>
+            <td>Dígito</td>
+            <td>
+              <code>/\d\{3}</code>
+              - Tres dígitos seguidos
+            </td>
+          </tr>
+          <tr>
+            <td><code>*</code></td>
+            <td>0 o más repeticiones</td>
+            <td>
+              <code>/ab*c</code>
+              - Encuentra "ac", "abc", "abbc", etc.
+            </td>
+          </tr>
+          <tr>
+            <td><code>\+</code></td>
+            <td>1 o más repeticiones</td>
+            <td>
+              <code>/ab\+c</code>
+              - Encuentra "abc", "abbc", etc. (pero no "ac")
+            </td>
+          </tr>
+          <tr>
+            <td><code>\?</code></td>
+            <td>0 o 1 repetición</td>
+            <td>
+              <code>/colou\?r</code>
+              - Encuentra "color" o "colour"
+            </td>
+          </tr>
+          <tr>
+            <td><code>\{n,m}</code></td>
+            <td>Entre n y m repeticiones</td>
+            <td>
+              <code>/\d\{3,5}</code>
+              - Entre 3 y 5 dígitos
+            </td>
+          </tr>
+          <tr>
+            <td><code>\|</code></td>
+            <td>Alternativa (O lógico)</td>
+            <td>
+              <code>/html\|css</code>
+              - Encuentra "html" o "css"
+            </td>
+          </tr>
+          <tr>
+            <td><code>\( \)</code></td>
+            <td>Agrupamiento</td>
+            <td>
+              <code>/\(html\|css\)\s\+file</code>
+              - "html file" o "css file"
+            </td>
+          </tr>
+        </table>
+
+        <div class="concept">
+          <p>
+            <strong>Diferencias con otras expresiones regulares:</strong>
+            Las expresiones regulares de Vim tienen algunas peculiaridades en
+            comparación con las usadas en Perl, Python u otros lenguajes. Por
+            ejemplo, muchos caracteres especiales deben escaparse con una barra
+            invertida (
+            <code>\</code>
+            ). En modo "very magic" (usando
+            <code>\v</code>
+            al inicio del patrón), la sintaxis se acerca más a las expresiones
+            regulares modernas.
+          </p>
+        </div>
+
+        <div class="example">
+          <p>
+            <strong>Ejemplo avanzado:</strong>
+            Para buscar una dirección de correo electrónico, podrías usar:
+          </p>
+          <pre>/\v[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}</pre>
+          <p>
+            El prefijo
+            <code>\v</code>
+            habilita el modo "very magic" que hace que la sintaxis sea más
+            similar a las expresiones regulares modernas.
+          </p>
+        </div>
+
+        <h3 id="busqueda-reemplazo">Búsqueda y reemplazo global</h3>
+
+        <p>
+          Una de las operaciones más potentes en Vim es la capacidad de buscar y
+          reemplazar texto en todo el archivo o en partes específicas:
+        </p>
+
+        <h4>Sintaxis básica</h4>
+        <pre>:[rango]s/{patrón}/{reemplazo}/[flags]</pre>
+
+        <ul>
+          <li>
+            <strong>rango</strong>
+            - Define las líneas donde se aplicará el comando (opcional)
+          </li>
+          <li>
+            <strong>s</strong>
+            - El comando substitute
+          </li>
+          <li>
+            <strong>patrón</strong>
+            - Lo que quieres encontrar (puede ser una expresión regular)
+          </li>
+          <li>
+            <strong>reemplazo</strong>
+            - El texto con el que quieres reemplazar el patrón
+          </li>
+          <li>
+            <strong>flags</strong>
+            - Modificadores adicionales (opcional)
+          </li>
+        </ul>
+
+        <h4>Rangos comunes</h4>
+        <ul>
+          <li>
+            <code>%</code>
+            - Todo el archivo
+          </li>
+          <li>
+            <code>5,20</code>
+            - Desde la línea 5 hasta la 20
+          </li>
+          <li>
+            <code>.,+5</code>
+            - Desde la línea actual hasta 5 líneas más abajo
+          </li>
+          <li>
+            <code>'&lt;,'&gt;</code>
+            - Selección visual (aparece automáticamente en modo visual)
+          </li>
+          <li>
+            <code>?patrón?,/patrón/</code>
+            - Desde la coincidencia anterior de "patrón" hasta la siguiente
+          </li>
+        </ul>
+
+        <h4>Flags comunes</h4>
+        <ul>
+          <li>
+            <code>g</code>
+            - Reemplazar todas las ocurrencias en la línea (global), no solo la
+            primera
+          </li>
+          <li>
+            <code>c</code>
+            - Confirmar cada sustitución
+          </li>
+          <li>
+            <code>i</code>
+            - Ignorar mayúsculas/minúsculas
+          </li>
+          <li>
+            <code>n</code>
+            - Mostrar el número de coincidencias sin realizar reemplazos
+          </li>
+        </ul>
+
+        <div class="example">
+          <p><strong>Ejemplos de búsqueda y reemplazo:</strong></p>
+          <ul>
+            <li>
+              <code>:s/viejo/nuevo/</code>
+              - Reemplaza la primera ocurrencia de "viejo" con "nuevo" en la
+              línea actual
+            </li>
+            <li>
+              <code>:s/viejo/nuevo/g</code>
+              - Reemplaza todas las ocurrencias de "viejo" con "nuevo" en la
+              línea actual
+            </li>
+            <li>
+              <code>:%s/viejo/nuevo/g</code>
+              - Reemplaza todas las ocurrencias en todo el archivo
+            </li>
+            <li>
+              <code>:%s/viejo/nuevo/gc</code>
+              - Reemplaza en todo el archivo, pero pide confirmación para cada
+              cambio
+            </li>
+            <li>
+              <code>:5,20s/\t/ /g</code>
+              - Reemplaza todos los tabuladores con 4 espacios desde la línea 5
+              a la 20
+            </li>
+          </ul>
+        </div>
+
+        <h4>Grupos de captura</h4>
+        <p>
+          Puedes usar grupos de captura para reutilizar partes del texto
+          encontrado:
+        </p>
+        <ul>
+          <li>
+            <code>\( \)</code>
+            - Define un grupo en el patrón de búsqueda
+          </li>
+          <li>
+            <code>\1, \2, etc.</code>
+            - Se refiere al primer grupo, segundo grupo, etc. en el reemplazo
+          </li>
+        </ul>
+
+        <div class="example">
+          <p>
+            <strong>Ejemplo con grupos de captura:</strong>
+            Para invertir "nombre apellido" a "apellido, nombre":
+          </p>
+          <pre>:%s/\(\w\+\) \(\w\+\)/\2, \1/g</pre>
+          <p>
+            Esto encuentra dos palabras separadas por un espacio y las invierte
+            con una coma en medio.
+          </p>
+        </div>
+
+        <div class="tip">
+          <p>
+            <strong>Consejo práctico:</strong>
+            Cuando trabajes con reemplazos complejos, primero prueba con el flag
+            <code>n</code>
+            para ver cuántas coincidencias encontrará sin realizar cambios:
+          </p>
+          <pre>:%s/patrón/reemplazo/gn</pre>
+          <p>
+            Una vez confirmado que el patrón es correcto, quita la
+            <code>n</code>
+            para realizar el reemplazo.
+          </p>
+        </div>
+
+        <h3 id="modo-visual">Modo Visual: selección de texto</h3>
+
+        <p>
+          El modo Visual de Vim te permite seleccionar texto visualmente antes
+          de ejecutar un comando sobre él. Es especialmente útil cuando
+          necesitas operar en bloques de texto que no se definen fácilmente con
+          los comandos de movimiento normales.
+        </p>
+
+        <h4>Tipos de modo Visual</h4>
+        <div class="shortcut-category">
+          <div class="shortcut-box">
+            <h4>Visual por caracteres</h4>
+            <p>
+              <span class="key">v</span>
+              - Selección a nivel de caracteres
+            </p>
+            <p>
+              Permite seleccionar caracteres individuales en cualquier
+              dirección.
+            </p>
+          </div>
+
+          <div class="shortcut-box">
+            <h4>Visual por líneas</h4>
+            <p>
+              <span class="key">V</span>
+              (mayúscula) - Selección a nivel de líneas completas
+            </p>
+            <p>
+              Selecciona líneas enteras, independientemente de la posición del
+              cursor en la línea.
+            </p>
+          </div>
+
+          <div class="shortcut-box">
+            <h4>Visual por bloques</h4>
+            <p>
+              <span class="key">Ctrl+v</span>
+              - Selección rectangular o por bloques
+            </p>
+            <p>
+              Permite seleccionar columnas rectangulares de texto, algo
+              imposible en la mayoría de los editores.
+            </p>
+          </div>
+        </div>
+
+        <h4>Operaciones en modo Visual</h4>
+        <p>
+          Una vez que has seleccionado texto en modo Visual, puedes aplicar
+          diversos comandos:
+        </p>
+        <ul>
+          <li>
+            <span class="key">d</span>
+            - Eliminar la selección
+          </li>
+          <li>
+            <span class="key">y</span>
+            - Copiar (yank) la selección
+          </li>
+          <li>
+            <span class="key">c</span>
+            - Cambiar (eliminar e insertar)
+          </li>
+          <li>
+            <span class="key">r</span>
+            - Reemplazar cada carácter con otro
+          </li>
+          <li>
+            <span class="key">&gt;</span>
+            - Añadir un nivel de indentación
+          </li>
+          <li>
+            <span class="key">&lt;</span>
+            - Quitar un nivel de indentación
+          </li>
+          <li>
+            <span class="key">~</span>
+            - Cambiar mayúsculas/minúsculas
+          </li>
+          <li>
+            <span class="key">U</span>
+            - Convertir a mayúsculas
+          </li>
+          <li>
+            <span class="key">u</span>
+            - Convertir a minúsculas
+          </li>
+          <li>
+            <span class="key">J</span>
+            - Unir líneas
+          </li>
+          <li>
+            <span class="key">:</span>
+            - Iniciar un comando Ex que se aplicará a las líneas seleccionadas
+          </li>
+        </ul>
+
+        <div class="example">
+          <p>
+            <strong>Ejemplo de edición en modo Visual por Bloques:</strong>
+            Supongamos que tienes varias líneas y quieres añadir un prefijo a
+            cada una:
+          </p>
+          <ol>
+            <li>Coloca el cursor al inicio de la primera línea</li>
+            <li>
+              Presiona
+              <span class="key">Ctrl+v</span>
+              para entrar en modo Visual por Bloques
+            </li>
+            <li>
+              Usa
+              <span class="key">j</span>
+              para seleccionar hacia abajo tantas líneas como necesites
+            </li>
+            <li>
+              Presiona
+              <span class="key">I</span>
+              para insertar al inicio del bloque
+            </li>
+            <li>Escribe el prefijo (por ejemplo, "// ")</li>
+            <li>
+              Presiona
+              <span class="key">Esc</span>
+              y el cambio se aplicará a todas las líneas
+            </li>
+          </ol>
+        </div>
+
+        <h4>Reseleccionar la última selección visual</h4>
+        <p>
+          Si quieres volver a seleccionar el texto que tenías seleccionado
+          previamente:
+        </p>
+        <ul>
+          <li>
+            <span class="key">gv</span>
+            - Reselecciona la última selección visual
+          </li>
+        </ul>
+
+        <div class="exercise">
+          <p>
+            <strong>Ejercicio de modo Visual:</strong>
+            Practica realizar estas operaciones:
+          </p>
+          <ol>
+            <li>
+              Selecciona un párrafo completo con
+              <span class="key">vip</span>
+              y cópialo
+            </li>
+            <li>
+              Selecciona varias líneas con
+              <span class="key">V</span>
+              y
+              <span class="key">j</span>
+              , luego indéntalas con
+              <span class="key">&gt;</span>
+            </li>
+            <li>
+              Usa el modo Visual por Bloques para comentar varias líneas de
+              código a la vez
+            </li>
+            <li>
+              Selecciona una palabra, cámbiale las mayúsculas/minúsculas con
+              <span class="key">~</span>
+            </li>
+          </ol>
+        </div>
+
+        <h3 id="operador-movimiento">Combinar operadores y movimientos</h3>
+
+        <p>
+          En el nivel anterior, aprendimos sobre la "gramática" básica de Vim
+          (operador + número + movimiento). Ahora profundizaremos en cómo
+          combinar estos elementos de manera más avanzada.
+        </p>
+
+        <h4>Movimientos textuales</h4>
+        <p>
+          Además de los movimientos básicos, hay movimientos más avanzados que
+          puedes combinar con operadores:
+        </p>
+        <ul>
+          <li>
+            <span class="key">iw</span>
+            - "inner word" (palabra interna, sin espacios)
+          </li>
+          <li>
+            <span class="key">aw</span>
+            - "a word" (una palabra, incluyendo espacio)
+          </li>
+          <li>
+            <span class="key">is</span>
+            - "inner sentence" (oración interna)
+          </li>
+          <li>
+            <span class="key">as</span>
+            - "a sentence" (una oración completa)
+          </li>
+          <li>
+            <span class="key">ip</span>
+            - "inner paragraph" (párrafo interno)
+          </li>
+          <li>
+            <span class="key">ap</span>
+            - "a paragraph" (un párrafo completo)
+          </li>
+        </ul>
+
+        <h4>Objetos de texto delimitados</h4>
+        <p>
+          Los objetos de texto delimitados permiten seleccionar texto entre
+          pares de caracteres:
+        </p>
+        <ul>
+          <li>
+            <span class="key">i(</span>
+            o
+            <span class="key">i)</span>
+            - Texto dentro de paréntesis
+          </li>
+          <li>
+            <span class="key">a(</span>
+            o
+            <span class="key">a)</span>
+            - Texto incluyendo paréntesis
+          </li>
+          <li>
+            <span class="key">i{</span>
+            o
+            <span class="key">i}</span>
+            - Texto dentro de llaves
+          </li>
+          <li>
+            <span class="key">a{</span>
+            o
+            <span class="key">a}</span>
+            - Texto incluyendo llaves
+          </li>
+          <li>
+            <span class="key">i[</span>
+            o
+            <span class="key">i]</span>
+            - Texto dentro de corchetes
+          </li>
+          <li>
+            <span class="key">a[</span>
+            o
+            <span class="key">a]</span>
+            - Texto incluyendo corchetes
+          </li>
+          <li>
+            <span class="key">i<</span>
+            o
+            <span class="key">i></span>
+            - Texto dentro de símbolos menor/mayor que
+          </li>
+          <li>
+            <span class="key">a<</span>
+            o
+            <span class="key">a></span>
+            - Texto incluyendo símbolos menor/mayor que
+          </li>
+          <li>
+            <span class="key">i"</span>
+            - Texto dentro de comillas dobles
+          </li>
+          <li>
+            <span class="key">a"</span>
+            - Texto incluyendo comillas dobles
+          </li>
+          <li>
+            <span class="key">i'</span>
+            - Texto dentro de comillas simples
+          </li>
+          <li>
+            <span class="key">a'</span>
+            - Texto incluyendo comillas simples
+          </li>
+          <li>
+            <span class="key">i`</span>
+            - Texto dentro de comillas invertidas
+          </li>
+          <li>
+            <span class="key">a`</span>
+            - Texto incluyendo comillas invertidas
+          </li>
+          <li>
+            <span class="key">it</span>
+            - Texto dentro de una etiqueta HTML/XML
+          </li>
+          <li>
+            <span class="key">at</span>
+            - Texto incluyendo la etiqueta HTML/XML
+          </li>
+        </ul>
+
+        <div class="concept">
+          <p>
+            <strong>La regla i vs a:</strong>
+            Los movimientos que comienzan con "i" (inner) seleccionan solo el
+            contenido interno, sin incluir los delimitadores. Los que comienzan
+            con "a" (a/an) incluyen también los delimitadores. Esto es
+            consistente en todos los objetos de texto.
+          </p>
+        </div>
+
+        <div class="example">
+          <p><strong>Ejemplos de combinaciones potentes:</strong></p>
+          <ul>
+            <li>
+              <span class="key">ci"</span>
+              - Change Inside Quotes - Cambiar el texto dentro de comillas
+            </li>
+            <li>
+              <span class="key">da{</span>
+              - Delete A Block - Eliminar un bloque incluyendo las llaves
+            </li>
+            <li>
+              <span class="key">yi(</span>
+              - Yank Inside Parentheses - Copiar el texto dentro de paréntesis
+            </li>
+            <li>
+              <span class="key">va]</span>
+              - Visual Around Brackets - Seleccionar visualmente un texto
+              incluyendo corchetes
+            </li>
+            <li>
+              <span class="key">dip</span>
+              - Delete Inner Paragraph - Eliminar un párrafo (sin las líneas en
+              blanco)
+            </li>
+            <li>
+              <span class="key">cit</span>
+              - Change Inner Tag - Cambiar el contenido dentro de una etiqueta
+              HTML
+            </li>
+          </ul>
+        </div>
+
+        <h4>Combinaciones avanzadas</h4>
+        <p>
+          La verdadera potencia de Vim reside en la capacidad de combinar estos
+          elementos de maneras complejas:
+        </p>
+        <ul>
+          <li>
+            <span class="key">2dap</span>
+            - Eliminar dos párrafos completos
+          </li>
+          <li>
+            <span class="key">cG</span>
+            - Cambiar desde la posición actual hasta el final del archivo
+          </li>
+          <li>
+            <span class="key">d/patrón</span>
+            - Eliminar desde la posición actual hasta el "patrón"
+          </li>
+          <li>
+            <span class="key">c{</span>
+            - Cambiar hasta el inicio del párrafo anterior
+          </li>
+          <li>
+            <span class="key">yi]</span>
+            - Copiar el contenido dentro de corchetes
+          </li>
+          <li>
+            <span class="key">dt.</span>
+            - Eliminar hasta el próximo punto (sin incluirlo)
+          </li>
+        </ul>
+
+        <div class="exercise">
+          <p>
+            <strong>Ejercicio de nivel 3:</strong>
+            Practica combinando operadores y movimientos avanzados. Intenta
+            realizar las siguientes operaciones:
+          </p>
+          <ol>
+            <li>
+              Eliminar todo el contenido dentro de un par de comillas sin
+              eliminar las comillas
+            </li>
+            <li>Cambiar todo el contenido dentro de una etiqueta HTML</li>
+            <li>
+              Copiar un párrafo entero incluyendo la línea en blanco siguiente
+            </li>
+            <li>
+              Seleccionar visualmente el contenido dentro de un par de
+              paréntesis
+            </li>
+            <li>
+              Eliminar desde la posición actual hasta la próxima aparición de
+              "fin"
+            </li>
+          </ol>
+        </div>
+
+        <div class="tip">
+          <p>
+            <strong>Consejo para construir el músculo de memoria:</strong>
+            Para dominar estas combinaciones, intenta pensar en "verbos"
+            (operadores) y "sustantivos" (movimientos). Por ejemplo,
+            <span class="key">d</span>
+            (eliminar) +
+            <span class="key">i</span>
+            (dentro de) +
+            <span class="key">"</span>
+            (comillas) = "eliminar dentro de las comillas". Esta forma de pensar
+            hace que los comandos de Vim sean más intuitivos y fáciles de
+            recordar.
+          </p>
+        </div>
+
+        <p>
+          Has completado el Nivel 3 y ahora posees herramientas poderosas para
+          buscar, seleccionar y manipular texto con precisión. La combinación de
+          búsquedas, reemplazos, modo visual y objetos de texto te permitirá
+          realizar ediciones complejas con muy pocos movimientos. En el
+          siguiente nivel, aprenderemos a trabajar con múltiples archivos
+          simultáneamente.
+        </p>
+      </section>
+      <section id="nivel4">
+        <h2>Nivel 4: Trabajando con múltiples archivos</h2>
+
+        <h3 id="buffers">Buffers: gestión de archivos en memoria</h3>
+
+        <p>
+          Un buffer en Vim es simplemente un archivo cargado en memoria. Vim
+          puede mantener múltiples buffers abiertos simultáneamente, lo que te
+          permite trabajar con varios archivos en una misma sesión.
+        </p>
+
+        <h4>Comandos básicos de buffers</h4>
+        <ul>
+          <li>
+            <span class="key">:ls</span>
+            o
+            <span class="key">:buffers</span>
+            - Listar todos los buffers abiertos
+          </li>
+          <li>
+            <span class="key">:bnext</span>
+            o
+            <span class="key">:bn</span>
+            - Ir al siguiente buffer
+          </li>
+          <li>
+            <span class="key">:bprevious</span>
+            o
+            <span class="key">:bp</span>
+            - Ir al buffer anterior
+          </li>
+          <li>
+            <span class="key">:bfirst</span>
+            o
+            <span class="key">:bf</span>
+            - Ir al primer buffer
+          </li>
+          <li>
+            <span class="key">:blast</span>
+            o
+            <span class="key">:bl</span>
+            - Ir al último buffer
+          </li>
+          <li>
+            <span class="key">:buffer N</span>
+            o
+            <span class="key">:bN</span>
+            - Ir al buffer número N
+          </li>
+          <li>
+            <span class="key">:buffer {nombre}</span>
+            - Ir al buffer por nombre (autocompletado con Tab)
+          </li>
+          <li>
+            <span class="key">:badd {archivo}</span>
+            - Añadir un archivo como buffer sin abrirlo
+          </li>
+          <li>
+            <span class="key">:bdelete</span>
+            o
+            <span class="key">:bd</span>
+            - Cerrar el buffer actual
+          </li>
+          <li>
+            <span class="key">:bdelete N</span>
+            o
+            <span class="key">:bdN</span>
+            - Cerrar el buffer número N
+          </li>
+          <li>
+            <span class="key">:ball</span>
+            - Abrir una ventana para cada buffer
+          </li>
+        </ul>
+
+        <div class="concept">
+          <p>
+            <strong>Buffer vs Archivo:</strong>
+            Es importante entender que un buffer es la representación en memoria
+            de un archivo. Los cambios realizados en un buffer no se guardan en
+            el archivo hasta que ejecutes el comando de guardado (
+            <span class="key">:w</span>
+            ). Puedes tener buffers que no corresponden a ningún archivo en
+            disco (por ejemplo, un buffer creado con
+            <span class="key">:enew</span>
+            ).
+          </p>
+        </div>
+
+        <div class="example">
+          <p><strong>Ejemplo de flujo de trabajo con buffers:</strong></p>
+          <ol>
+            <li>
+              Abre varios archivos con Vim:
+              <span class="key">
+                vim archivo1.txt archivo2.txt archivo3.txt
+              </span>
+            </li>
+            <li>
+              Lista los buffers:
+              <span class="key">:ls</span>
+              (verás tres buffers numerados)
+            </li>
+            <li>
+              Navega entre ellos:
+              <span class="key">:bn</span>
+              ,
+              <span class="key">:bp</span>
+              ,
+              <span class="key">:b2</span>
+              (ir al buffer 2)
+            </li>
+            <li>Haz cambios en cada buffer según necesites</li>
+            <li>
+              Guarda todos los buffers:
+              <span class="key">:wa</span>
+              (write all)
+            </li>
+          </ol>
+        </div>
+
+        <h3 id="ventanas">Ventanas divididas y layouts</h3>
+
+        <p>
+          Las ventanas en Vim permiten ver múltiples buffers simultáneamente
+          dividiendo la pantalla. Un mismo buffer puede mostrarse en múltiples
+          ventanas.
+        </p>
+
+        <h4>Comandos para dividir ventanas</h4>
+        <ul>
+          <li>
+            <span class="key">:split</span>
+            o
+            <span class="key">:sp [archivo]</span>
+            - Divide horizontalmente (muestra [archivo] o el actual)
+          </li>
+          <li>
+            <span class="key">:vsplit</span>
+            o
+            <span class="key">:vsp [archivo]</span>
+            - Divide verticalmente
+          </li>
+          <li>
+            <span class="key">Ctrl+w s</span>
+            - Divide horizontalmente
+          </li>
+          <li>
+            <span class="key">Ctrl+w v</span>
+            - Divide verticalmente
+          </li>
+          <li>
+            <span class="key">Ctrl+w n</span>
+            - Abre una nueva ventana con un buffer vacío
+          </li>
+        </ul>
+
+        <h4>Navegación entre ventanas</h4>
+        <ul>
+          <li>
+            <span class="key">Ctrl+w h</span>
+            - Ir a la ventana de la izquierda
+          </li>
+          <li>
+            <span class="key">Ctrl+w j</span>
+            - Ir a la ventana de abajo
+          </li>
+          <li>
+            <span class="key">Ctrl+w k</span>
+            - Ir a la ventana de arriba
+          </li>
+          <li>
+            <span class="key">Ctrl+w l</span>
+            - Ir a la ventana de la derecha
+          </li>
+          <li>
+            <span class="key">Ctrl+w w</span>
+            - Ir a la siguiente ventana (circular)
+          </li>
+          <li>
+            <span class="key">Ctrl+w p</span>
+            - Ir a la ventana previa (última activa)
+          </li>
+          <li>
+            <span class="key">Ctrl+w t</span>
+            - Ir a la ventana superior izquierda
+          </li>
+          <li>
+            <span class="key">Ctrl+w b</span>
+            - Ir a la ventana inferior derecha
+          </li>
+        </ul>
+
+        <h4>Manipulación de ventanas</h4>
+        <ul>
+          <li>
+            <span class="key">Ctrl+w =</span>
+            - Hacer todas las ventanas de igual tamaño
+          </li>
+          <li>
+            <span class="key">Ctrl+w _</span>
+            - Maximizar altura de la ventana actual
+          </li>
+          <li>
+            <span class="key">Ctrl+w |</span>
+            - Maximizar ancho de la ventana actual
+          </li>
+          <li>
+            <span class="key">Ctrl+w +</span>
+            - Aumentar altura de la ventana actual
+          </li>
+          <li>
+            <span class="key">Ctrl+w -</span>
+            - Reducir altura de la ventana actual
+          </li>
+          <li>
+            <span class="key">Ctrl+w ></span>
+            - Aumentar ancho de la ventana actual
+          </li>
+          <li>
+            <span class="key">Ctrl+w <</span>
+            - Reducir ancho de la ventana actual
+          </li>
+          <li>
+            <span class="key">Ctrl+w r</span>
+            - Rotar ventanas hacia abajo/derecha
+          </li>
+          <li>
+            <span class="key">Ctrl+w R</span>
+            - Rotar ventanas hacia arriba/izquierda
+          </li>
+          <li>
+            <span class="key">Ctrl+w x</span>
+            - Intercambiar con la siguiente ventana
+          </li>
+          <li>
+            <span class="key">Ctrl+w q</span>
+            o
+            <span class="key">:q</span>
+            - Cerrar la ventana actual
+          </li>
+          <li>
+            <span class="key">Ctrl+w o</span>
+            o
+            <span class="key">:only</span>
+            - Cerrar todas las ventanas excepto la actual
+          </li>
+        </ul>
+
+        <div class="tip">
+          <p>
+            <strong>Consejo para recordar:</strong>
+            Todos los comandos de ventana comienzan con
+            <span class="key">Ctrl+w</span>
+            (piensa en "window"). Para moverse entre ventanas, después de
+            <span class="key">Ctrl+w</span>
+            usa las mismas teclas de movimiento que usarías normalmente (h, j,
+            k, l).
+          </p>
+        </div>
+
+        <div class="example">
+          <p><strong>Ejemplo de layout para programación:</strong></p>
+          <ol>
+            <li>
+              Abre un archivo con Vim:
+              <span class="key">vim main.py</span>
+            </li>
+            <li>
+              Divide verticalmente para ver otro archivo:
+              <span class="key">:vsp utils.py</span>
+            </li>
+            <li>
+              En la ventana de utils.py, divide horizontalmente:
+              <span class="key">:sp config.py</span>
+            </li>
+            <li>
+              Ahora tienes un layout con main.py a la izquierda, y a la derecha
+              utils.py arriba y config.py abajo
+            </li>
+            <li>
+              Navega entre las ventanas con
+              <span class="key">Ctrl+w h/j/k/l</span>
+            </li>
+          </ol>
+        </div>
+
+        <h3 id="pestanas">Organización con pestañas</h3>
+
+        <p>
+          Las pestañas (tabs) en Vim funcionan de manera ligeramente diferente a
+          las de los navegadores web. Una pestaña de Vim contiene una o más
+          ventanas, lo que permite diferentes layouts en cada pestaña.
+        </p>
+
+        <h4>Comandos para pestañas</h4>
+        <ul>
+          <li>
+            <span class="key">:tabnew [archivo]</span>
+            - Crear una nueva pestaña (con archivo opcional)
+          </li>
+          <li>
+            <span class="key">:tabc</span>
+            - Cerrar la pestaña actual
+          </li>
+          <li>
+            <span class="key">:tabo</span>
+            - Cerrar todas las pestañas excepto la actual
+          </li>
+          <li>
+            <span class="key">:tabs</span>
+            - Listar todas las pestañas
+          </li>
+          <li>
+            <span class="key">:tabn</span>
+            o
+            <span class="key">gt</span>
+            - Ir a la siguiente pestaña
+          </li>
+          <li>
+            <span class="key">:tabp</span>
+            o
+            <span class="key">gT</span>
+            - Ir a la pestaña anterior
+          </li>
+          <li>
+            <span class="key">:tabfirst</span>
+            o
+            <span class="key">:tabr</span>
+            - Ir a la primera pestaña
+          </li>
+          <li>
+            <span class="key">:tablast</span>
+            - Ir a la última pestaña
+          </li>
+          <li>
+            <span class="key">Ngt</span>
+            - Ir a la pestaña número N
+          </li>
+          <li>
+            <span class="key">:tabm N</span>
+            - Mover la pestaña actual a la posición N (0 es la primera)
+          </li>
+        </ul>
+
+        <div class="concept">
+          <p>
+            <strong>Concepto de pestañas en Vim:</strong>
+            Las pestañas en Vim no son simplemente "archivos abiertos" como en
+            otros editores. Cada pestaña es como un "workspace" que puede
+            contener múltiples ventanas y layouts. Esto te permite tener
+            diferentes contextos de trabajo (por ejemplo, una pestaña para
+            código fuente, otra para documentación, otra para tests).
+          </p>
+        </div>
+
+        <div class="exercise">
+          <p>
+            <strong>Ejercicio de organización:</strong>
+            Crea un entorno de trabajo para un proyecto:
+          </p>
+          <ol>
+            <li>Abre una primera pestaña con el archivo principal</li>
+            <li>
+              Crea una segunda pestaña (
+              <span class="key">:tabnew</span>
+              ) y divide la ventana para ver archivos relacionados
+            </li>
+            <li>Crea una tercera pestaña para la documentación</li>
+            <li>
+              Practica la navegación entre pestañas con
+              <span class="key">gt</span>
+              y
+              <span class="key">gT</span>
+            </li>
+            <li>
+              Experimenta reordenando las pestañas con
+              <span class="key">:tabm</span>
+            </li>
+          </ol>
+        </div>
+
+        <h3 id="netrw">Explorador de archivos Netrw</h3>
+
+        <p>
+          Vim incluye un explorador de archivos incorporado llamado Netrw, que
+          te permite navegar por directorios y realizar operaciones básicas de
+          archivos sin salir del editor.
+        </p>
+
+        <h4>Abrir Netrw</h4>
+        <ul>
+          <li>
+            <span class="key">:Explore</span>
+            o
+            <span class="key">:E</span>
+            - Abre Netrw en el directorio del archivo actual
+          </li>
+          <li>
+            <span class="key">:Sexplore</span>
+            - Abre Netrw en un split horizontal
+          </li>
+          <li>
+            <span class="key">:Vexplore</span>
+            - Abre Netrw en un split vertical
+          </li>
+          <li>
+            <span class="key">:Texplore</span>
+            - Abre Netrw en una nueva pestaña
+          </li>
+          <li>
+            <span class="key">:e.</span>
+            - Explora el directorio actual
+          </li>
+          <li>
+            <span class="key">:e..</span>
+            - Explora el directorio padre
+          </li>
+        </ul>
+
+        <h4>Navegación en Netrw</h4>
+        <ul>
+          <li>
+            <span class="key">Enter</span>
+            - Abrir archivo o directorio
+          </li>
+          <li>
+            <span class="key">-</span>
+            - Subir un nivel de directorio
+          </li>
+          <li>
+            <span class="key">u</span>
+            - Ir al directorio previo en el historial
+          </li>
+          <li>
+            <span class="key">%</span>
+            - Crear nuevo archivo
+          </li>
+          <li>
+            <span class="key">d</span>
+            - Crear nuevo directorio
+          </li>
+          <li>
+            <span class="key">D</span>
+            - Eliminar archivo/directorio
+          </li>
+          <li>
+            <span class="key">R</span>
+            - Renombrar archivo/directorio
+          </li>
+          <li>
+            <span class="key">i</span>
+            - Cambiar estilo de vista
+          </li>
+          <li>
+            <span class="key">s</span>
+            - Cambiar el método de ordenación
+          </li>
+          <li>
+            <span class="key">x</span>
+            - Ver archivo con programa asociado
+          </li>
+          <li>
+            <span class="key">P</span>
+            - Abrir en ventana previa
+          </li>
+        </ul>
+
+        <div class="tip">
+          <p>
+            <strong>Consejo para Netrw:</strong>
+            Si quieres que Netrw se comporte más como un panel lateral (similar
+            a otros editores), puedes añadir estas líneas a tu .vimrc:
+          </p>
+          <pre>
+let g:netrw_banner = 0
+let g:netrw_liststyle = 3
+let g:netrw_browse_split = 4
+let g:netrw_altv = 1
+let g:netrw_winsize = 25
+        </pre
+          >
+          <p>
+            Y luego usar
+            <span class="key">:Vexplore</span>
+            para abrir un panel lateral.
+          </p>
+        </div>
+
+        <div class="exercise">
+          <p>
+            <strong>Ejercicio de Netrw:</strong>
+            Practica usando el explorador de archivos:
+          </p>
+          <ol>
+            <li>
+              Abre Netrw con
+              <span class="key">:Explore</span>
+            </li>
+            <li>Navega entre directorios</li>
+            <li>Crea un nuevo archivo y un nuevo directorio</li>
+            <li>
+              Cambia el estilo de vista con
+              <span class="key">i</span>
+              (prueba los diferentes modos)
+            </li>
+            <li>Abre un archivo en una ventana dividida</li>
+          </ol>
+        </div>
+
+        <p>
+          Has completado el Nivel 4 y ahora sabes cómo trabajar con múltiples
+          archivos, crear layouts complejos con ventanas divididas, organizar tu
+          trabajo con pestañas y navegar por el sistema de archivos sin salir de
+          Vim. Estas habilidades mejorarán drásticamente tu productividad al
+          manejar proyectos con múltiples archivos. En el siguiente nivel,
+          aprenderemos sobre macros y automatización para repetir tareas
+          complejas.
+        </p>
+      </section>
+      
+      <section id="nivel5">
+    <h2>Nivel 5: Macros y automatización</h2>
+
+    <h3 id="macros">Grabación y reproducción de macros</h3>
+    
+    <p>Las macros son una de las características más poderosas de Vim para automatizar tareas repetitivas. Te permiten grabar una secuencia de comandos y reproducirla exactamente tantas veces como sea necesario.</p>
+    
+    <h4>Comandos básicos de macros</h4>
+    <ul>
+        <li><span class="key">q{registro}</span> - Iniciar grabación de macro en el registro especificado (a-z)</li>
+        <li><span class="key">q</span> - Detener la grabación de la macro</li>
+        <li><span class="key">@{registro}</span> - Ejecutar la macro guardada en el registro especificado</li>
+        <li><span class="key">@@</span> - Volver a ejecutar la última macro ejecutada</li>
+        <li><span class="key">{número}@{registro}</span> - Ejecutar la macro {número} veces</li>
+    </ul>
+    
+    <div class="example">
+        <p><strong>Ejemplo de grabación y uso de una macro:</strong></p>
+        <ol>
+            <li>Posiciona el cursor al inicio de una línea donde quieras empezar</li>
+            <li>Presiona <span class="key">qa</span> para comenzar a grabar en el registro 'a'</li>
+            <li>Realiza la secuencia de edición (por ejemplo, añadir un prefijo, modificar algo, moverse a la siguiente línea)</li>
+            <li>Presiona <span class="key">q</span> para terminar la grabación</li>
+            <li>Ejecuta la macro con <span class="key">@a</span> o repítela en múltiples líneas con <span class="key">10@a</span></li>
+        </ol>
+    </div>
+    
+    <h4>Técnicas avanzadas de macros</h4>
+    <ul>
+        <li><strong>Macros recursivas:</strong> Puedes incluir dentro de una macro la llamada a la misma macro</li>
+        <li><strong>Edición de macros:</strong> Las macros se almacenan en registros que pueden ser editados</li>
+        <li><strong>Macros condicionales:</strong> Usar búsquedas dentro de las macros para hacerlas "inteligentes"</li>
+    </ul>
+    
+    <div class="tip">
+        <p><strong>Consejo para macros robustas:</strong> Al grabar macros, usa comandos absolutos (como <span class="key">0</span> para ir al inicio de la línea) en lugar de comandos relativos (como <span class="key">h</span> varias veces). Esto hace que las macros sean más confiables al ejecutarse en diferentes contextos.</p>
+    </div>
+    
+    <div class="exercise">
+        <p><strong>Ejercicio de macros:</strong> Imagina que tienes una lista de nombres y quieres convertirlos en un formato específico:</p>
+        <pre>
+Juan Pérez
+María García
+Carlos López
+        </pre>
+        <p>Y quieres convertirlos a:</p>
+        <pre>
+&#60;li&#62;&#60;a href="#juan-perez"&#62;Juan Pérez&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href="#maria-garcia"&#62;María García&#60;/a&#62;&#60;/li&#62;
+&#60;li&#62;&#60;a href="#carlos-lopez"&#62;Carlos López&#60;/a&#62;&#60;/li&#62;
+        </pre>
+        <p>Graba una macro que:</p>
+        <ol>
+            <li>Inserte <code>&lt;li&gt;&lt;a href="#</code> al inicio de la línea</li>
+            <li>Copie el nombre, lo convierta a minúsculas y reemplace espacios por guiones para el href</li>
+            <li>Complete el HTML con <code>"&gt;</code>, el nombre original y <code>&lt;/a&gt;&lt;/li&gt;</code></li>
+            <li>Avance a la siguiente línea</li>
+        </ol>
+    </div>
+    
+    <h3 id="registros">Registros: portapapeles avanzados</h3>
+    
+    <p>Los registros en Vim funcionan como múltiples portapapeles que pueden almacenar texto, comandos y macros. Hay varios tipos de registros para diferentes propósitos.</p>
+    
+    <h4>Tipos de registros</h4>
+    <ul>
+        <li><strong>Registros con nombre (a-z):</strong> Para almacenar texto o macros definidas por el usuario</li>
+        <li><strong>Registros con nombre en mayúsculas (A-Z):</strong> Añaden al contenido existente del registro correspondiente</li>
+        <li><strong>Registros numerados (0-9):</strong> Histórico automático de operaciones de eliminación y cambio</li>
+        <li><strong>Registro de texto eliminado (-):</strong> Pequeñas eliminaciones (menos de una línea)</li>
+        <li><strong>Registros con nombre especial:</strong> 
+            <ul>
+                <li><span class="key">""</span> - Registro por defecto (última eliminación o yanking)</li>
+                <li><span class="key">"*</span> y <span class="key">"+</span> - Portapapeles del sistema</li>
+                <li><span class="key">"_</span> - Registro "agujero negro" (descartar texto)</li>
+                <li><span class="key">"%</span> - Nombre del archivo actual</li>
+                <li><span class="key">"#</span> - Nombre del archivo alternativo</li>
+                <li><span class="key">":</span> - Último comando ejecutado</li>
+                <li><span class="key">".</span> - Último texto insertado</li>
+                <li><span class="key">"=</span> - Registro de expresiones (para cálculos)</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <h4>Usando registros</h4>
+    <ul>
+        <li><span class="key">"{registro}y</span> - Copiar (yank) al registro especificado</li>
+        <li><span class="key">"{registro}p</span> - Pegar desde el registro especificado</li>
+        <li><span class="key">"{registro}d</span> - Eliminar al registro especificado</li>
+        <li><span class="key">:reg</span> - Ver el contenido de todos los registros</li>
+        <li><span class="key">:reg {registros}</span> - Ver el contenido de registros específicos</li>
+    </ul>
+    
+    <div class="concept">
+        <p><strong>Concepto de registros:</strong> Los registros te permiten tener múltiples "portapapeles" independientes. Esto es especialmente útil cuando necesitas copiar varios fragmentos de texto diferentes y pegarlos en distintos lugares, sin tener que volver a copiarlos cada vez.</p>
+    </div>
+    
+    <div class="example">
+        <p><strong>Ejemplo de uso de registros:</strong></p>
+        <ol>
+            <li>Selecciona un fragmento de texto y cópialo al registro 'a': <span class="key">"ay</span></li>
+            <li>Selecciona otro fragmento de texto y cópialo al registro 'b': <span class="key">"by</span></li>
+            <li>Muévete a donde quieras pegar el primer fragmento: <span class="key">"ap</span></li>
+            <li>Muévete a donde quieras pegar el segundo fragmento: <span class="key">"bp</span></li>
+        </ol>
+    </div>
+    
+    <div class="tip">
+        <p><strong>Truco con el registro de expresiones:</strong> Puedes usar el registro <span class="key">"=</span> para realizar cálculos e insertar el resultado:</p>
+        <ol>
+            <li>En modo inserción, presiona <span class="key">Ctrl+r =</span></li>
+            <li>Escribe una expresión matemática como <span class="key">2*21+5</span></li>
+            <li>Presiona Enter y el resultado (47) se insertará en tu texto</li>
+        </ol>
+    </div>
+    
+    <h3 id="marcas">Marcas y saltos</h3>
+    
+    <p>Las marcas te permiten "guardar" posiciones específicas en tus archivos y regresar a ellas rápidamente, facilitando la navegación en documentos grandes.</p>
+    
+    <h4>Comandos de marcas</h4>
+    <ul>
+        <li><span class="key">m{a-zA-Z}</span> - Establecer una marca en la posición actual del cursor</li>
+        <li><span class="key">`{marca}</span> - Saltar exactamente a la posición de la marca</li>
+        <li><span class="key">'{marca}</span> - Saltar al inicio de la línea donde está la marca</li>
+        <li><span class="key">:marks</span> - Listar todas las marcas activas</li>
+        <li><span class="key">:delmarks {marcas}</span> - Eliminar marcas específicas</li>
+        <li><span class="key">:delmarks!</span> - Eliminar todas las marcas excepto marcas especiales</li>
+    </ul>
+    
+    <h4>Tipos de marcas</h4>
+    <ul>
+        <li><strong>Marcas locales (a-z):</strong> Específicas para cada buffer</li>
+        <li><strong>Marcas globales (A-Z):</strong> Funcionan entre buffers (puedes saltar entre archivos)</li>
+        <li><strong>Marcas especiales:</strong>
+            <ul>
+                <li><span class="key">`.</span> - Última posición de edición</li>
+                <li><span class="key">`"</span> - Última posición antes de cerrar el buffer</li>
+                <li><span class="key">`0</span> - Última posición editada al cerrar Vim</li>
+                <li><span class="key">`[</span> - Inicio del último texto cambiado o copiado</li>
+                <li><span class="key">`]</span> - Final del último texto cambiado o copiado</li>
+                <li><span class="key">`<</span> - Inicio de la última selección visual</li>
+                <li><span class="key">`></span> - Final de la última selección visual</li>
+            </ul>
+        </li>
+    </ul>
+    
+    <h4>Comandos de salto</h4>
+    <ul>
+        <li><span class="key">Ctrl+o</span> - Saltar a la posición anterior (historial de saltos)</li>
+        <li><span class="key">Ctrl+i</span> o <span class="key">Tab</span> - Saltar a la posición siguiente (historial de saltos)</li>
+        <li><span class="key">:jumps</span> - Ver la lista del historial de saltos</li>
+        <li><span class="key">g;</span> - Ir a la posición de cambio anterior</li>
+        <li><span class="key">g,</span> - Ir a la posición de cambio siguiente</li>
+        <li><span class="key">:changes</span> - Ver la lista de cambios</li>
+    </ul>
+    
+    <div class="exercise">
+        <p><strong>Ejercicio de marcas:</strong> Al editar un archivo largo:</p>
+        <ol>
+            <li>Marca la posición actual con <span class="key">ma</span></li>
+            <li>Navega a otro lugar del documento y marca con <span class="key">mb</span></li>
+            <li>Navega a una tercera posición y marca con <span class="key">mc</span></li>
+            <li>Practica saltar entre estas posiciones con <span class="key">`a</span>, <span class="key">`b</span> y <span class="key">`c</span></li>
+            <li>Usa <span class="key">Ctrl+o</span> y <span class="key">Ctrl+i</span> para navegar por el historial de saltos</li>
+        </ol>
+    </div>
+    
+    <h3 id="comandos-ex">Comandos Ex avanzados</h3>
+    
+    <p>Los comandos Ex (que comienzan con ":") ofrecen funcionalidades avanzadas para automatizar tareas complejas. Aquí veremos algunos comandos particularmente útiles.</p>
+    
+    <h4>Comandos para automatización</h4>
+    <ul>
+        <li><span class="key">:g/{patrón}/{comando}</span> - Ejecuta {comando} en todas las líneas que coinciden con {patrón}</li>
+        <li><span class="key">:v/{patrón}/{comando}</span> - Ejecuta {comando} en todas las líneas que NO coinciden con {patrón}</li>
+        <li><span class="key">:norm {comandos}</span> - Ejecuta {comandos} en modo normal en las líneas seleccionadas</li>
+        <li><span class="key">:{rango}sort</span> - Ordena las líneas en el rango</li>
+        <li><span class="key">:{rango}!{comando}</span> - Filtra las líneas a través de un comando externo</li>
+        <li><span class="key">:argdo {comando}</span> - Ejecuta {comando} en todos los archivos del arglist</li>
+        <li><span class="key">:bufdo {comando}</span> - Ejecuta {comando} en todos los buffers</li>
+        <li><span class="key">:windo {comando}</span> - Ejecuta {comando} en todas las ventanas</li>
+        <li><span class="key">:tabdo {comando}</span> - Ejecuta {comando} en todas las pestañas</li>
+    </ul>
+    
+    <div class="example">
+        <p><strong>Ejemplos de comandos Ex avanzados:</strong></p>
+        <ul>
+            <li><span class="key">:g/TODO/y A</span> - Copia todas las líneas que contienen "TODO" al registro 'a'</li>
+            <li><span class="key">:v/^import/d</span> - Elimina todas las líneas que NO empiezan con "import"</li>
+            <li><span class="key">:%norm I// </span> - Comenta todas las líneas añadiendo "//" al inicio</li>
+            <li><span class="key">:%sort u</span> - Ordena todas las líneas y elimina duplicados</li>
+            <li><span class="key">:.!date</span> - Reemplaza la línea actual con la salida del comando "date"</li>
+            <li><span class="key">:bufdo %s/foo/bar/ge | update</span> - Reemplaza "foo" por "bar" en todos los buffers y guarda</li>
+        </ul>
+    </div>
+    
+    <div class="concept">
+        <p><strong>El poderoso comando :global</strong></p>
+        <p>El comando <span class="key">:g</span> es extremadamente potente para procesamiento de texto. Su estructura es:</p>
+        <pre>:g/{patrón}/{comando}</pre>
+        <p>Donde {patrón} es una expresión regular y {comando} es cualquier comando Ex. Este comando busca en todo el archivo las líneas que coinciden con {patrón} y luego ejecuta {comando} en cada una de esas líneas.</p>
+    </div>
+    
+    <div class="exercise">
+        <p><strong>Ejercicio de automatización:</strong> Supongamos que tienes un archivo con entradas de registros y quieres procesar todas las entradas de error:</p>
+        <pre>
+INFO: Sistema iniciado correctamente
+ERROR: No se pudo conectar a la base de datos
+INFO: Procesando solicitud #1234
+ERROR: Tiempo de espera excedido
+INFO: Finalizando proceso
+        </pre>
+        <ol>
+            <li>Usa <span class="key">:g/ERROR/</span> para ver todas las líneas de error</li>
+            <li>Usa <span class="key">:g/ERROR/y A</span> para copiar todas las líneas de error al registro 'a'</li>
+            <li>Usa <span class="key">:g/ERROR/norm I[CRÍTICO] </span> para añadir un prefijo a las líneas de error</li>
+            <li>Prueba <span class="key">:v/ERROR/d</span> para eliminar todas las líneas que no son errores</li>
+        </ol>
+    </div>
+    
+    <p>Has completado el Nivel 5 y ahora dominas herramientas avanzadas de automatización en Vim. Las macros, registros, marcas y comandos Ex te permiten realizar tareas complejas con eficiencia y precisión. Estas técnicas te ayudarán a automatizar trabajos repetitivos y aumentar drásticamente tu productividad. En el siguiente nivel, aprenderemos a personalizar Vim y extender sus capacidades con plugins.</p>
+</section>
+
+
+<section id="nivel6">
+    <h2>Nivel 6: Personalización y plugins</h2>
+
+    <h3 id="vimrc">El archivo .vimrc en profundidad</h3>
+    
+    <p>El archivo <code>.vimrc</code> es el corazón de la personalización de Vim. Este archivo de configuración te permite definir ajustes, mapeos de teclas, comandos automáticos y más para crear un entorno de edición adaptado a tus necesidades.</p>
+    
+    <h4>Ubicación del archivo .vimrc</h4>
+    <ul>
+        <li><strong>En Linux/macOS:</strong> <code>~/.vimrc</code> (archivo) y <code>~/.vim/</code> (directorio)</li>
+        <li><strong>En Windows:</strong> <code>$HOME\_vimrc</code> (archivo) y <code>$HOME\vimfiles\</code> (directorio)</li>
+        <li><strong>En Neovim (Linux/macOS):</strong> <code>~/.config/nvim/init.vim</code></li>
+    </ul>
+    
+    <h4>Estructura básica de un .vimrc</h4>
+    <p>Un buen archivo .vimrc suele organizarse en secciones:</p>
+    <pre>
+" ===== Configuración general =====
+set nocompatible            " No ser compatible con Vi
+set encoding=utf-8          " Usar codificación UTF-8
+syntax enable               " Habilitar resaltado de sintaxis
+filetype plugin indent on   " Habilitar detección de tipo de archivo
+
+" ===== UI y apariencia =====
+set number                  " Mostrar números de línea
+set relativenumber          " Mostrar números relativos
+set cursorline              " Resaltar línea actual
+set laststatus=2            " Siempre mostrar barra de estado
+colorscheme desert          " Esquema de color
+
+" ===== Comportamiento de edición =====
+set expandtab               " Usar espacios en lugar de tabulaciones
+set tabstop=4               " Un tab = 4 espacios
+set shiftwidth=4            " Indentación = 4 espacios
+set autoindent              " Mantener indentación
+
+" ===== Búsqueda =====
+set incsearch               " Búsqueda incremental
+set hlsearch                " Resaltar resultados de búsqueda
+set ignorecase              " Ignorar mayúsculas/minúsculas en búsquedas
+set smartcase               " No ignorar mayúsculas si la búsqueda las incluye
+
+" ===== Mapeos de teclas =====
+let mapleader = "\&lt;Space&gt;"    " Tecla líder = Espacio
+nnoremap &lt;leader&gt;w :w&lt;CR&gt;       " Espacio+w para guardar
+
+" ===== Comandos automáticos =====
+augroup configgroup
+    autocmd!
+    autocmd FileType python setlocal tabstop=4 shiftwidth=4
+    autocmd FileType html setlocal tabstop=2 shiftwidth=2
+augroup END
+    </pre>
+    
+    <h4>Opciones comunes</h4>
+    <p>Algunas de las opciones más útiles para configurar en tu .vimrc:</p>
+    <ul>
+        <li><span class="key">set hidden</span> - Permite cambiar de buffer sin guardar</li>
+        <li><span class="key">set wildmenu</span> - Autocompletado mejorado para comandos</li>
+        <li><span class="key">set backspace=indent,eol,start</span> - Backspace funciona como se espera</li>
+        <li><span class="key">set clipboard=unnamed</span> - Integración con el portapapeles del sistema</li>
+        <li><span class="key">set scrolloff=8</span> - Mantener N líneas visibles arriba/abajo al desplazarse</li>
+        <li><span class="key">set history=1000</span> - Recordar más comandos y búsquedas</li>
+        <li><span class="key">set undofile</span> - Historial de deshacer persistente</li>
+        <li><span class="key">set showcmd</span> - Mostrar comandos parciales</li>
+        <li><span class="key">set showmode</span> - Mostrar el modo actual</li>
+        <li><span class="key">set visualbell</span> - Señal visual en lugar de sonido</li>
+    </ul>
+    
+    <div class="tip">
+        <p><strong>Consejo para gestionar tu .vimrc:</strong> Mantén tu archivo .vimrc comentado y organizado por secciones. Incluye comentarios explicando para qué sirve cada configuración, especialmente si no es obvia. Considera usar plegado de código con marcadores (<span class="key">fold markers</span>) para facilitar la navegación en un archivo extenso.</p>
+    </div>
+    
+    <div class="example">
+        <p><strong>Ejemplo de líneas útiles para .vimrc:</strong></p>
+        <pre>
+" Gestión de archivos temporales
+set backup
+set backupdir=~/.vim/backup//
+set directory=~/.vim/swap//
+set undodir=~/.vim/undo//
+
+" Mejorar usabilidad
+set mouse=a                " Habilitar uso del mouse
+set timeoutlen=500         " Reducir tiempo de espera para combinaciones de teclas
+set completeopt=menuone,longest,preview  " Opciones de autocompletado
+
+" Atajos útiles
+nnoremap Y y$              " Y copia hasta el final de la línea (como D y C)
+nnoremap n nzzzv           " n centra la pantalla en la búsqueda
+nnoremap N Nzzzv           " N centra la pantalla en la búsqueda
+
+" Abrir .vimrc rápidamente para editar
+nnoremap &lt;leader&gt;ev :vsplit $MYVIMRC&lt;CR&gt;
+" Recargar .vimrc después de editarlo
+nnoremap &lt;leader&gt;sv :source $MYVIMRC&lt;CR&gt;
+        </pre>
+    </div>
+    
+    <h3 id="mapeos">Mapeos de teclas personalizados</h3>
+    
+    <p>Los mapeos te permiten personalizar los comandos de Vim y crear atajos para operaciones comunes. Hay diferentes tipos de mapeos para cada modo de Vim.</p>
+    
+    <h4>Tipos de mapeos</h4>
+    <ul>
+        <li><span class="key">map</span> - Mapeo en modo normal, visual y operador pendiente</li>
+        <li><span class="key">nmap</span> - Mapeo solo en modo normal</li>
+        <li><span class="key">vmap</span> - Mapeo solo en modo visual</li>
+        <li><span class="key">imap</span> - Mapeo en modo inserción</li>
+        <li><span class="key">cmap</span> - Mapeo en modo comando</li>
+        <li><span class="key">tmap</span> - Mapeo en modo terminal</li>
+    </ul>
+    
+    <h4>Versiones no recursivas</h4>
+    <p>Para evitar bucles infinitos en los mapeos, es recomendable usar las versiones no recursivas:</p>
+    <ul>
+        <li><span class="key">noremap</span> - Versión no recursiva de map</li>
+        <li><span class="key">nnoremap</span> - Versión no recursiva de nmap</li>
+        <li><span class="key">vnoremap</span> - Versión no recursiva de vmap</li>
+        <li><span class="key">inoremap</span> - Versión no recursiva de imap</li>
+        <li><span class="key">cnoremap</span> - Versión no recursiva de cmap</li>
+        <li><span class="key">tnoremap</span> - Versión no recursiva de tmap</li>
+    </ul>
+    
+    <h4>Tecla líder</h4>
+    <p>La tecla líder actúa como un prefijo para mapeos personalizados, evitando conflictos con comandos integrados:</p>
+    <pre>
+let mapleader = "\&lt;Space&gt;"    " Establecer espacio como tecla líder
+" Ahora puedes usar &lt;leader&gt; en mapeos
+nnoremap &lt;leader&gt;w :write&lt;CR&gt;
+nnoremap &lt;leader&gt;q :quit&lt;CR&gt;
+nnoremap &lt;leader&gt;wq :wq&lt;CR&gt;
+    </pre>
+    
+    <h4>Teclas especiales en mapeos</h4>
+    <p>Algunas representaciones comunes para teclas especiales:</p>
+    <ul>
+        <li><span class="key">&lt;CR&gt;</span> - Enter (Carriage Return)</li>
+        <li><span class="key">&lt;Esc&gt;</span> - Escape</li>
+        <li><span class="key">&lt;Space&gt;</span> - Espacio</li>
+        <li><span class="key">&lt;Tab&gt;</span> - Tabulador</li>
+        <li><span class="key">&lt;BS&gt;</span> - Retroceso (Backspace)</li>
+        <li><span class="key">&lt;Up&gt;</span>, <span class="key">&lt;Down&gt;</span>, <span class="key">&lt;Left&gt;</span>, <span class="key">&lt;Right&gt;</span> - Flechas</li>
+        <li><span class="key">&lt;C-x&gt;</span> - Control + x</li>
+        <li><span class="key">&lt;A-x&gt;</span> o <span class="key">&lt;M-x&gt;</span> - Alt + x</li>
+        <li><span class="key">&lt;S-x&gt;</span> - Shift + x</li>
+    </ul>
+    
+    <div class="example">
+        <p><strong>Ejemplos de mapeos útiles:</strong></p>
+        <pre>
+" Moverse entre ventanas divididas con Ctrl + hjkl
+nnoremap &lt;C-h&gt; &lt;C-w&gt;h
+nnoremap &lt;C-j&gt; &lt;C-w&gt;j
+nnoremap &lt;C-k&gt; &lt;C-w&gt;k
+nnoremap &lt;C-l&gt; &lt;C-w&gt;l
+
+" Moverse entre líneas visibles (útil con wrap)
+nnoremap j gj
+nnoremap k gk
+
+" Mantener la selección visual al indentar
+vnoremap &lt; &lt;gv
+vnoremap &gt; &gt;gv
+
+" Guardar con Ctrl+s (requiere config adicional en terminal)
+nnoremap &lt;C-s&gt; :w&lt;CR&gt;
+inoremap &lt;C-s&gt; &lt;Esc&gt;:w&lt;CR&gt;
+
+" Cerrar buffer sin cerrar la ventana
+nnoremap &lt;leader&gt;bd :bp&lt;CR&gt;:bd #&lt;CR&gt;
+
+" Copiar al portapapeles del sistema
+vnoremap &lt;leader&gt;y "+y
+nnoremap &lt;leader&gt;Y "+yg_
+nnoremap &lt;leader&gt;y "+y
+        </pre>
+    </div>
+    
+    <div class="exercise">
+        <p><strong>Ejercicio de mapeos:</strong> Crea los siguientes mapeos personalizados en tu .vimrc:</p>
+        <ol>
+            <li>Un mapeo para alternar números de línea (<span class="key">:set number!</span>)</li>
+            <li>Un mapeo para limpiar el resaltado de búsqueda (<span class="key">:nohlsearch</span>)</li>
+            <li>Un mapeo para formatear todo el archivo (<span class="key">gg=G</span>)</li>
+            <li>Un mapeo para envolver el párrafo actual (usando <span class="key">gqap</span>)</li>
+            <li>Un mapeo en modo inserción para salir rápidamente al modo normal</li>
+        </ol>
+    </div>
+    
+    <h3 id="plugins">Sistema de plugins y gestores</h3>
+    
+    <p>Los plugins extienden la funcionalidad de Vim, añadiendo nuevas características y mejorando las existentes. Existen varios gestores de plugins que facilitan la instalación y actualización.</p>
+    
+    <h4>Gestores de plugins populares</h4>
+    <ul>
+        <li><strong>vim-plug:</strong> Minimalista y rápido, con carga bajo demanda</li>
+        <li><strong>Vundle:</strong> Uno de los primeros gestores modernos</li>
+        <li><strong>Pathogen:</strong> Simple, gestiona cada plugin en su propio directorio</li>
+        <li><strong>dein.vim:</strong> Gestor asincrónico de alta velocidad</li>
+        <li><strong>packer.nvim:</strong> Gestor específico para Neovim, en Lua</li>
+    </ul>
+    
+    <h4>Ejemplo de configuración con vim-plug</h4>
+    <pre>
+" Instalación automática de vim-plug si no existe
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
+" Plugins
+call plug#begin('~/.vim/plugged')
+
+" Interfaz y apariencia
+Plug 'morhetz/gruvbox'                " Esquema de colores
+Plug 'vim-airline/vim-airline'        " Barra de estado mejorada
+Plug 'preservim/nerdtree'             " Explorador de archivos
+
+" Edición y navegación
+Plug 'tpope/vim-surround'             " Manipular pares (paréntesis, comillas, etc.)
+Plug 'tpope/vim-commentary'           " Comentar/descomentar código
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }  " Buscador difuso
+Plug 'junegunn/fzf.vim'               " Integración de fzf con Vim
+
+" Programación
+Plug 'dense-analysis/ale'             " Linting y corrección de errores
+Plug 'neoclide/coc.nvim', {'branch': 'release'}  " Autocompletado
+Plug 'sheerun/vim-polyglot'           " Soporte para múltiples lenguajes
+
+" Git
+Plug 'tpope/vim-fugitive'             " Integración con Git
+Plug 'airblade/vim-gitgutter'         " Mostrar cambios git en el margen
+
+call plug#end()
+
+" Configuración de plugins
+colorscheme gruvbox                   " Activar esquema de colores
+let g:airline_powerline_fonts = 1     " Usar fuentes Powerline en Airline
+let NERDTreeShowHidden = 1            " Mostrar archivos ocultos en NERDTree
+
+" Mapeos para plugins
+nnoremap &lt;C-n&gt; :NERDTreeToggle&lt;CR&gt;    " Ctrl+n para abrir/cerrar NERDTree
+nnoremap &lt;leader&gt;f :Files&lt;CR&gt;         " <leader>f para buscar archivos con fzf
+    </pre>
+    
+    <h4>Plugins esenciales por categoría</h4>
+    <ul>
+        <li><strong>Navegación de archivos:</strong> NERDTree, fzf.vim, vim-vinegar</li>
+        <li><strong>Edición de código:</strong> vim-surround, vim-commentary, auto-pairs</li>
+        <li><strong>Autocompletado:</strong> coc.nvim, YouCompleteMe, Supertab</li>
+        <li><strong>Linting y diagnóstico:</strong> ALE, Syntastic</li>
+        <li><strong>Integración con Git:</strong> vim-fugitive, vim-gitgutter, gitsigns.nvim</li>
+        <li><strong>Esquemas de color:</strong> gruvbox, Nord, Solarized, dracula</li>
+        <li><strong>UI mejorada:</strong> vim-airline, lightline, lualine</li>
+        <li><strong>Snippets:</strong> UltiSnips, vim-snippets</li>
+        <li><strong>Motion y búsqueda:</strong> vim-easymotion, vim-sneak</li>
+    </ul>
+    
+    <div class="tip">
+        <p><strong>Consejo para plugins:</strong> No instales demasiados plugins al principio. Comienza con unos pocos esenciales y ve añadiendo más según tus necesidades específicas. Cada plugin añade complejidad y puede afectar al rendimiento. Asegúrate de entender la funcionalidad básica de Vim antes de depender demasiado de plugins.</p>
+    </div>
+    
+    <div class="exercise">
+        <p><strong>Ejercicio de plugins:</strong> Configura un entorno básico con plugins:</p>
+        <ol>
+            <li>Instala un gestor de plugins (recomendado: vim-plug)</li>
+            <li>Añade y configura un esquema de color</li>
+            <li>Instala NERDTree para la navegación de archivos</li>
+            <li>Añade vim-surround para edición mejorada</li>
+            <li>Configura algunos mapeos básicos para tus nuevos plugins</li>
+        </ol>
+    </div>
+    
+    <h3 id="personalizacion">Temas y personalización visual</h3>
+    
+    <p>Personalizar la apariencia de Vim puede mejorar tu experiencia y reducir la fatiga visual durante largas sesiones de edición.</p>
+    
+    <h4>Personalización visual básica</h4>
+    <ul>
+        <li><span class="key">:colorscheme {nombre}</span> - Cambiar el esquema de colores</li>
+        <li><span class="key">:highlight {grupo} {atributos}</span> - Personalizar colores específicos</li>
+        <li><span class="key">:set background=dark</span> o <span class="key">:set background=light</span> - Ajustar para fondos oscuros o claros</li>
+    </ul>
+    
+    <h4>Destacados grupos de resaltado comunes</h4>
+    <ul>
+        <li><strong>Normal</strong> - Texto normal</li>
+        <li><strong>Comment</strong> - Comentarios en código</li>
+        <li><strong>String</strong> - Cadenas de texto</li>
+        <li><strong>Keyword</strong> - Palabras clave del lenguaje</li>
+        <li><strong>Function</strong> - Nombres de funciones</li>
+        <li><strong>LineNr</strong> - Números de línea</li>
+        <li><strong>CursorLine</strong> - Línea donde está el cursor</li>
+        <li><strong>Search</strong> - Texto resaltado en búsquedas</li>
+        <li><strong>ErrorMsg</strong> - Mensajes de error</li>
+    </ul>
+    
+    <h4>Personalización de la interfaz</h4>
+    <pre>
+" Personalización básica de la UI
+set guifont=JetBrains\ Mono:h12    " Fuente para GVim/MacVim
+set linespace=2                     " Espacio entre líneas
+set termguicolors                   " Usar colores de GUI en terminal
+set colorcolumn=80                  " Columna vertical en columna 80
+highlight ColorColumn ctermbg=235 guibg=#2c2d27
+
+" Eliminar elementos de la interfaz (útil para GVim/MacVim)
+set guioptions-=m                   " Quitar barra de menú
+set guioptions-=T                   " Quitar barra de herramientas
+set guioptions-=r                   " Quitar barra de desplazamiento derecha
+set guioptions-=L                   " Quitar barra de desplazamiento izquierda
+
+" Personalizar la barra de estado
+set statusline=%f                   " Ruta al archivo
+set statusline+=\ %y                " Tipo de archivo
+set statusline+=%=                  " Cambiar al lado derecho
+set statusline+=%l,%c               " Posición del cursor (línea, columna)
+set statusline+=\ %P                " Porcentaje a través del archivo
+    </pre>
+    
+    <h4>Creación de tu propio esquema de colores</h4>
+    <p>Si quieres crear tu propio esquema de colores:</p>
+    <ol>
+        <li>Crea un archivo en <code>~/.vim/colors/mischema.vim</code></li>
+        <li>Define los grupos de resaltado con <code>highlight</code></li>
+        <li>Actívalo con <code>:colorscheme mischema</code></li>
+    </ol>
+    
+    <div class="example">
+        <p><strong>Ejemplo de personalización avanzada:</strong></p>
+        <pre>
+" Cambiar el cursor según el modo
+if &term =~ "xterm\\|rxvt"
+  " Modo inserción: línea vertical
+  let &t_SI = "\&lt;Esc&gt;[6 q"
+  " Modo normal: bloque
+  let &t_EI = "\&lt;Esc&gt;[2 q"
+endif
+
+" Resaltar espacios en blanco al final de la línea
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+
+" Personalizar colores para diff
+highlight DiffAdd    ctermbg=22 guibg=#003300
+highlight DiffDelete ctermbg=52 guibg=#330000
+highlight DiffChange ctermbg=17 guibg=#000033
+highlight DiffText   ctermbg=19 guibg=#0000ff
+        </pre>
+    </div>
+    
+    <div class="concept">
+        <p><strong>La filosofía de personalización de Vim:</strong> Uno de los mayores beneficios de Vim es su extrema capacidad de personalización. Sin embargo, la mejor estrategia es personalizar progresivamente a medida que desarrollas tu flujo de trabajo. Comienza con una configuración mínima y añade opciones según tus necesidades reales, no solo porque parezcan interesantes.</p>
+    </div>
+    
+    <p>Has completado el Nivel 6 y ahora puedes personalizar completamente tu entorno Vim. Desde mapeos de teclas hasta esquemas de colores y plugins avanzados, tienes las herramientas para construir un editor perfectamente adaptado a tu flujo de trabajo. En el próximo nivel, exploraremos técnicas avanzadas para llevar tus habilidades de edición al siguiente nivel.</p>
+</section>
+<section id="nivel7">
+    <h2>Nivel 7: Técnicas avanzadas</h2>
+
+    <h3 id="objetos-texto">Objetos de texto</h3>
+    
+    <p>Los objetos de texto son una de las características más potentes de Vim, ya que permiten seleccionar o actuar sobre "bloques lógicos" de texto en lugar de caracteres individuales o líneas.</p>
+    
+    <h4>Sintaxis básica</h4>
+    <p>Los objetos de texto se usan con los comandos de operador siguiendo este patrón:</p>
+    <pre>
+{operador}{a/i}{objeto}
+    </pre>
+    <p>Donde:</p>
+    <ul>
+        <li><strong>operador:</strong> es el comando (d, c, y, v, etc.)</li>
+        <li><strong>a/i:</strong> "a" (around/alrededor) incluye delimitadores, "i" (inner/interior) solo el contenido</li>
+        <li><strong>objeto:</strong> el tipo de objeto de texto (palabra, frase, párrafo, etc.)</li>
+    </ul>
+    
+    <h4>Objetos de texto comunes</h4>
+    <table>
+        <tr>
+            <th>Objeto</th>
+            <th>Descripción</th>
+            <th>Ejemplo</th>
+        </tr>
+        <tr>
+            <td>w</td>
+            <td>Palabra</td>
+            <td><code>diw</code> - Eliminar la palabra actual (inner)</td>
+        </tr>
+        <tr>
+            <td>W</td>
+            <td>Palabra WORD (delimitada por espacios)</td>
+            <td><code>yaW</code> - Copiar la PALABRA actual con espacios (around)</td>
+        </tr>
+        <tr>
+            <td>s</td>
+            <td>Sentencia (frase)</td>
+            <td><code>cis</code> - Cambiar la frase actual</td>
+        </tr>
+        <tr>
+            <td>p</td>
+            <td>Párrafo</td>
+            <td><code>vip</code> - Seleccionar el párrafo actual (inner)</td>
+        </tr>
+        <tr>
+            <td>b / (</td>
+            <td>Bloque entre paréntesis</td>
+            <td><code>ci(</code> - Cambiar el contenido entre paréntesis</td>
+        </tr>
+        <tr>
+            <td>B / {</td>
+            <td>Bloque entre llaves</td>
+            <td><code>da{</code> - Eliminar el bloque con llaves incluidas</td>
+        </tr>
+        <tr>
+            <td>[ / ]</td>
+            <td>Bloque entre corchetes</td>
+            <td><code>yi[</code> - Copiar el contenido entre corchetes</td>
+        </tr>
+        <tr>
+            <td>&lt; / &gt;</td>
+            <td>Bloque entre etiquetas angulares</td>
+            <td><code>va&lt;</code> - Seleccionar etiqueta angular con contenido</td>
+        </tr>
+        <tr>
+            <td>'</td>
+            <td>Comillas simples</td>
+            <td><code>ci'</code> - Cambiar el contenido entre comillas simples</td>
+        </tr>
+        <tr>
+            <td>"</td>
+            <td>Comillas dobles</td>
+            <td><code>yi"</code> - Copiar el contenido entre comillas dobles</td>
+        </tr>
+        <tr>
+            <td>`</td>
+            <td>Comillas invertidas</td>
+            <td><code>di`</code> - Eliminar el contenido entre comillas invertidas</td>
+        </tr>
+        <tr>
+            <td>t</td>
+            <td>Etiqueta HTML/XML</td>
+            <td><code>vat</code> - Seleccionar etiqueta HTML con sus contenidos</td>
+        </tr>
+    </table>
+    
+    <div class="example">
+        <p><strong>Ejemplos de uso de objetos de texto:</strong></p>
+        <pre>
+" Editando esta línea: function calculateTotal(price, quantity) {
+"                        cursor en la 'c' de calculateTotal
+ciw       " Cambiar la palabra 'calculateTotal'
+ci(       " Cambiar el contenido entre paréntesis: 'price, quantity'
+da{       " Eliminar el bloque completo de función incluidas las llaves
+ya)       " Copiar todo el contenido entre paréntesis, incluidos los paréntesis
+
+" Editando un documento HTML: &lt;p&gt;Este es un &lt;strong&gt;párrafo&lt;/strong&gt; de prueba.&lt;/p&gt;
+"                             cursor en la 'p' de párrafo
+cit       " Cambiar el contenido dentro de las etiquetas strong
+vat       " Seleccionar etiqueta strong completa con su contenido
+di&lt;       " Eliminar el contenido entre etiquetas angulares
+        </pre>
+    </div>
+    
+    <div class="tip">
+        <p><strong>Consejo para objetos de texto:</strong> Dominar los objetos de texto es crucial para editar de manera eficiente. Intenta usar combinaciones como <code>ci"</code> (cambiar dentro de comillas) o <code>di{</code> (eliminar dentro de llaves) en lugar de posicionar manualmente el cursor y usar múltiples comandos. Esto reduce significativamente el tiempo de edición y mejora la precisión.</p>
+    </div>
+    
+    <div class="exercise">
+        <p><strong>Ejercicio de objetos de texto:</strong> En un archivo de prueba, practica estas combinaciones:</p>
+        <ol>
+            <li>Usa <code>ciw</code> para cambiar una palabra específica</li>
+            <li>Utiliza <code>dap</code> para eliminar un párrafo completo</li>
+            <li>Prueba <code>ci{</code> para cambiar el contenido dentro de llaves</li>
+            <li>Usa <code>yi"</code> para copiar texto entre comillas dobles</li>
+            <li>Practica <code>vat</code> para seleccionar una etiqueta HTML completa</li>
+        </ol>
+    </div>
+    
+    <h3 id="folding">Plegado de código (folding)</h3>
+    
+    <p>El plegado de código permite ocultar temporalmente secciones del código para facilitar la navegación y mantener la visibilidad solo en las partes relevantes.</p>
+    
+    <h4>Métodos de plegado</h4>
+    <p>Vim ofrece varios métodos de plegado, configurables con <code>:set foldmethod=</code>:</p>
+    <ul>
+        <li><span class="key">manual</span> - Pliegues creados manualmente (predeterminado)</li>
+        <li><span class="key">indent</span> - Pliegues basados en el nivel de indentación</li>
+        <li><span class="key">syntax</span> - Pliegues basados en la sintaxis del archivo</li>
+        <li><span class="key">marker</span> - Pliegues definidos por marcadores en el texto</li>
+        <li><span class="key">expr</span> - Pliegues definidos por expresión personalizada</li>
+        <li><span class="key">diff</span> - Pliegues para secciones sin cambios en modo diff</li>
+    </ul>
+    
+    <h4>Comandos básicos de plegado</h4>
+    <ul>
+        <li><span class="key">zf{motion}</span> - Crear un pliegue manual (ej. <code>zf3j</code> para 3 líneas)</li>
+        <li><span class="key">zo</span> - Abrir un pliegue</li>
+        <li><span class="key">zc</span> - Cerrar un pliegue</li>
+        <li><span class="key">za</span> - Alternar un pliegue (abrir si está cerrado, cerrar si está abierto)</li>
+        <li><span class="key">zR</span> - Abrir todos los pliegues</li>
+        <li><span class="key">zM</span> - Cerrar todos los pliegues</li>
+        <li><span class="key">zj</span> - Moverse al siguiente pliegue</li>
+        <li><span class="key">zk</span> - Moverse al pliegue anterior</li>
+        <li><span class="key">zd</span> - Eliminar el pliegue actual</li>
+        <li><span class="key">zE</span> - Eliminar todos los pliegues</li>
+    </ul>
+    
+    <h4>Configuración de plegado en .vimrc</h4>
+    <pre>
+" Configuración general de plegado
+set foldmethod=indent     " Método de plegado basado en indentación
+set foldnestmax=10        " Máximo nivel de anidamiento de pliegues
+set nofoldenable          " No plegar al abrir el archivo
+set foldlevel=2           " Nivel de pliegue inicial
+
+" Plegado específico por tipo de archivo
+autocmd FileType python setlocal foldmethod=indent
+autocmd FileType javascript,typescript,json setlocal foldmethod=syntax
+autocmd FileType vim setlocal foldmethod=marker
+
+" Marcadores de plegado personalizados
+" Para usar con foldmethod=marker
+" {{{ Sección 1
+" Contenido de la sección 1
+" }}}
+" {{{ Sección 2
+" Contenido de la sección 2
+" }}}
+    </pre>
+    
+    <div class="example">
+        <p><strong>Ejemplo de uso de plegado:</strong></p>
+        <pre>
+" En un archivo Python con esta estructura:
+def function1():
+    print("Línea 1")
+    print("Línea 2")
+    print("Línea 3")
+    
+def function2():
+    if condition:
+        print("Condición verdadera")
+        for i in range(10):
+            print(i)
+    else:
+        print("Condición falsa")
+
+" Con foldmethod=indent:
+" - Posiciona el cursor en function1
+za       " Alternar el pliegue (cerrarlo)
+" - Posiciona el cursor en function2
+zo       " Abrir el pliegue si está cerrado
+" - Con el cursor dentro del bloque if
+za       " Alternar solo ese bloque
+zR       " Abrir todos los pliegues del archivo
+zM       " Cerrar todos los pliegues del archivo
+        </pre>
+    </div>
+    
+    <div class="tip">
+        <p><strong>Consejo para plegado:</strong> Para código extenso, configura <code>foldmethod=syntax</code> en lenguajes con buen soporte de sintaxis, o <code>foldmethod=indent</code> cuando la estructura se basa en indentación. Para documentos de configuración o notas personales, considera usar <code>foldmethod=marker</code> con marcadores explícitos como <code>{{{</code> y <code>}}}</code>.</p>
+    </div>
+    
+    <h3 id="autocompletado">Autocompletado y snippets</h3>
+    
+    <p>Vim ofrece diversas formas de autocompletado que aceleran la escritura de código y reducen errores tipográficos.</p>
+    
+    <h4>Autocompletado integrado en Vim</h4>
+    <p>Comandos de autocompletado disponibles en modo inserción:</p>
+    <ul>
+        <li><span class="key">Ctrl-n</span> - Completar palabra, busca adelante</li>
+        <li><span class="key">Ctrl-p</span> - Completar palabra, busca atrás</li>
+        <li><span class="key">Ctrl-x Ctrl-l</span> - Completar línea entera</li>
+        <li><span class="key">Ctrl-x Ctrl-f</span> - Completar nombre de archivo</li>
+        <li><span class="key">Ctrl-x Ctrl-d</span> - Completar definiciones</li>
+        <li><span class="key">Ctrl-x Ctrl-i</span> - Completar palabras de archivos incluidos</li>
+        <li><span class="key">Ctrl-x Ctrl-]</span> - Completar desde etiquetas</li>
+        <li><span class="key">Ctrl-x Ctrl-k</span> - Completar desde diccionario</li>
+        <li><span class="key">Ctrl-x Ctrl-o</span> - Omni-completion (específico del lenguaje)</li>
+    </ul>
+    
+    <h4>Configuración de autocompletado</h4>
+    <pre>
+" Configuración básica de autocompletado
+set completeopt=menuone,longest,preview   " Opciones de menú de autocompletado
+set complete+=kspell                       " Autocompletado con corrector ortográfico
+set shortmess+=c                           " No mostrar mensajes de coincidencia
+set infercase                              " Ajustar mayúsculas/minúsculas al completar
+set dictionary+=/usr/share/dict/words      " Usar diccionario del sistema
+
+" Mejorar experiencia de autocompletado
+inoremap &lt;expr&gt; &lt;Tab&gt; pumvisible() ? "\&lt;C-n&gt;" : "\&lt;Tab&gt;"
+inoremap &lt;expr&gt; &lt;S-Tab&gt; pumvisible() ? "\&lt;C-p&gt;" : "\&lt;S-Tab&gt;"
+inoremap &lt;expr&gt; &lt;CR&gt; pumvisible() ? "\&lt;C-y&gt;" : "\&lt;CR&gt;"
+    </pre>
+    
+    <h4>Snippets con plugins</h4>
+    <p>Los snippets son fragmentos de código reutilizables que se expanden al escribir una abreviatura y presionar una tecla de activación.</p>
+    
+    <p>Plugins populares para snippets:</p>
+    <ul>
+        <li><strong>UltiSnips:</strong> Motor de snippets potente y rápido</li>
+        <li><strong>SnipMate:</strong> Inspirado en TextMate, más simple</li>
+        <li><strong>vim-snippets:</strong> Colección de snippets predefinidos</li>
+        <li><strong>coc-snippets:</strong> Snippets para el plugin coc.nvim</li>
+    </ul>
+    
+    <p>Configuración básica de UltiSnips:</p>
+    <pre>
+" Configuración de UltiSnips
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+
+let g:UltiSnipsExpandTrigger="&lt;tab&gt;"
+let g:UltiSnipsJumpForwardTrigger="&lt;tab&gt;"
+let g:UltiSnipsJumpBackwardTrigger="&lt;s-tab&gt;"
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "mycustomsnippets"]
+    </pre>
+    
+    <p>Ejemplo de un snippet personalizado para Python (archivo <code>~/.vim/mycustomsnippets/python.snippets</code>):</p>
+    <pre>
+snippet def "Function definition" b
+def ${1:function_name}(${2:parameters}):
+    """
+    ${3:Docstring}
+    """
+    ${0:pass}
+endsnippet
+
+snippet class "Class definition" b
+class ${1:ClassName}(${2:object}):
+    """
+    ${3:Docstring}
+    """
+    
+    def __init__(self, ${4:parameters}):
+        ${0:pass}
+endsnippet
+    </pre>
+    
+    <div class="example">
+        <p><strong>Ejemplo de uso de autocompletado y snippets:</strong></p>
+        <pre>
+" En un archivo Python, escribiendo una función:
+def calc&lt;Ctrl-n&gt;  " Autocompletará 'calculate' si existe en el buffer
+
+" Con UltiSnips instalado:
+def&lt;Tab&gt;      " Expandirá el snippet 'def', con marcadores para función y parámetros
+class&lt;Tab&gt;    " Expandirá el snippet 'class'
+
+" Autocompletado de archivo:
+open('~/doc&lt;Ctrl-x&gt;&lt;Ctrl-f&gt;  " Mostrará archivos que coincidan con ~/doc
+        </pre>
+    </div>
+    
+    <div class="tip">
+        <p><strong>Consejo para autocompletado:</strong> Para desarrollo profesional, considera usar un plugin avanzado como coc.nvim o YouCompleteMe. Estos proporcionan autocompletado inteligente específico de lenguaje, navegación de código y otras funciones de IDE. Para configuraciones más ligeras, el autocompletado nativo de Vim combinado con UltiSnips puede ser suficiente.</p>
+    </div>
+    
+    <h3 id="lenguajes">Soporte de lenguajes de programación</h3>
+    
+    <p>Vim puede configurarse para proporcionar un soporte robusto para casi cualquier lenguaje de programación, con características como resaltado de sintaxis, indentación inteligente y herramientas específicas.</p>
+    
+    <h4>Mejoras para lenguajes de programación</h4>
+    <ul>
+        <li><strong>Resaltado de sintaxis:</strong> Activado con <code>syntax on</code></li>
+        <li><strong>Indentación:</strong> <code>filetype plugin indent on</code></li>
+        <li><strong>Linting:</strong> Verificación de sintaxis y estilo en tiempo real</li>
+        <li><strong>Formato de código:</strong> Aplicación automática de estilo de código</li>
+        <li><strong>Completado inteligente:</strong> Basado en contexto y definiciones</li>
+        <li><strong>Salto a definición:</strong> Navegación rápida entre definiciones</li>
+        <li><strong>Renombrado de símbolo:</strong> Cambio de nombre en todo el proyecto</li>
+    </ul>
+    
+    <h4>Configuración específica por lenguaje</h4>
+    <p>Usando <code>ftplugin</code> para configurar cada lenguaje independientemente:</p>
+    <pre>
+" En ~/.vim/ftplugin/python.vim
+setlocal tabstop=4
+setlocal shiftwidth=4
+setlocal expandtab
+setlocal autoindent
+setlocal smartindent
+setlocal foldmethod=indent
+setlocal textwidth=88
+setlocal colorcolumn=88
+setlocal commentstring=#\ %s
+
+" En ~/.vim/ftplugin/javascript.vim
+setlocal tabstop=2
+setlocal shiftwidth=2
+setlocal expandtab
+setlocal foldmethod=syntax
+setlocal colorcolumn=80
+setlocal commentstring=//\ %s
+    </pre>
+    
+    <h4>Plugins específicos por lenguaje</h4>
+    <p>Algunos plugins para mejorar el soporte de lenguajes:</p>
+    <pre>
+" Python
+Plug 'python-mode/python-mode'   " Conjunto completo de herramientas para Python
+Plug 'davidhalter/jedi-vim'      " Autocompletado y navegación para Python
+
+" JavaScript/TypeScript
+Plug 'pangloss/vim-javascript'   " Soporte mejorado para JavaScript
+Plug 'leafgarland/typescript-vim' " Soporte de sintaxis para TypeScript
+Plug 'maxmellon/vim-jsx-pretty'  " Soporte para React JSX
+
+" Go
+Plug 'fatih/vim-go'              " Suite completa para desarrollo en Go
+
+" Rust
+Plug 'rust-lang/rust.vim'        " Soporte para Rust
+
+" Esquema de colores específico de sintaxis
+Plug 'nvim-treesitter/nvim-treesitter' " Resaltado semántico (Neovim)
+    </pre>
+    
+    <h4>Configuración para LSP (Language Server Protocol)</h4>
+    <p>LSP proporciona funciones avanzadas de IDE en Vim/Neovim:</p>
+    <pre>
+" Para Vim con coc.nvim
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+
+" Configuración básica de coc.nvim
+let g:coc_global_extensions = [
+  \ 'coc-json',
+  \ 'coc-tsserver',
+  \ 'coc-pyright',
+  \ 'coc-html',
+  \ 'coc-css',
+  \ 'coc-rust-analyzer',
+  \ 'coc-snippets'
+  \ ]
+
+" Mapeos para coc.nvim
+nmap &lt;silent&gt; gd &lt;Plug&gt;(coc-definition)
+nmap &lt;silent&gt; gy &lt;Plug&gt;(coc-type-definition)
+nmap &lt;silent&gt; gi &lt;Plug&gt;(coc-implementation)
+nmap &lt;silent&gt; gr &lt;Plug&gt;(coc-references)
+nmap &lt;silent&gt; [g &lt;Plug&gt;(coc-diagnostic-prev)
+nmap &lt;silent&gt; ]g &lt;Plug&gt;(coc-diagnostic-next)
+nmap &lt;leader&gt;rn &lt;Plug&gt;(coc-rename)
+nmap &lt;leader&gt;f &lt;Plug&gt;(coc-format)
+
+" Para Neovim con built-in LSP
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/nvim-cmp'    " Autocompletado
+    </pre>
+    
+    <div class="example">
+        <p><strong>Ejemplo de flujo de trabajo para Python:</strong></p>
+        <pre>
+" Con coc.nvim instalado y coc-pyright configurado:
+" - Navegación de código
+gd        " Ir a definición de función/clase bajo el cursor
+gr        " Ver todas las referencias
+&lt;leader&gt;rn  " Renombrar símbolo (función, variable, etc.)
+
+" - Autocompletado
+" Escribe 'import os' y presiona Ctrl-Space para autocompletado
+" Escribe 'os.' y verás métodos/propiedades disponibles
+
+" - Diagnósticos (errores, advertencias)
+[g        " Ir al error/advertencia anterior
+]g        " Ir al error/advertencia siguiente
+&lt;leader&gt;f  " Formatear el código según estándares
+        </pre>
+    </div>
+    
+    <div class="tip">
+        <p><strong>Consejo para desarrolladores:</strong> Para desarrollo serio, configura LSP con coc.nvim (Vim) o el LSP nativo (Neovim). Estos proporcionan funcionalidades similares a IDEs como autocompletado inteligente, navegación de código, refactorizaciones y diagnósticos en tiempo real. Combina esto con plugins específicos de tu lenguaje para una experiencia de desarrollo óptima.</p>
+    </div>
+    
+    <h3 id="scripting">Scripting en Vim</h3>
+    
+    <p>Vim tiene su propio lenguaje de scripting llamado Vimscript (o Vim script) que permite extender y personalizar el editor creando funciones, comandos y plugins.</p>
+    
+    <h4>Elementos básicos de Vimscript</h4>
+    <ul>
+        <li><strong>Variables:</strong> <code>let name = "value"</code></li>
+        <li><strong>Condicionales:</strong> <code>if/elseif/else/endif</code></li>
+        <li><strong>Ciclos:</strong> <code>for/while/endfor/endwhile</code></li>
+        <li><strong>Funciones:</strong> <code>function/endfunction</code></li>
+        <li><strong>Listas:</strong> <code>let lista = [1, 2, 3]</code></li>
+        <li><strong>Diccionarios:</strong> <code>let dict = {'clave': 'valor'}</code></li>
+    </ul>
+    
+    <h4>Ejemplo de función básica</h4>
+    <pre>
+" Función para insertar la fecha actual
+function! InsertDate()
+    " Obtener la fecha con formato YYYY-MM-DD
+    let l:date = strftime('%Y-%m-%d')
+    " Insertar la fecha en la posición actual
+    execute "normal! a" . l:date
+endfunction
+
+" Crear un comando para llamar a la función
+command! Date call InsertDate()
+
+" Mapear a una tecla
+nnoremap &lt;F5&gt; :call InsertDate()&lt;CR&gt;
+    </pre>
+    
+    <h4>Interacción con el usuario</h4>
+    <pre>
+" Pedir información al usuario
+function! CreateHeader()
+    let l:title = input('Título del documento: ')
+    let l:author = input('Autor: ')
+    let l:date = strftime('%Y-%m-%d')
+    
+    " Crear el encabezado
+    call append(0, ['/*', ' * ' . l:title, ' * Autor: ' . l:author, ' * Fecha: ' . l:date, ' */'])
+    call append(5, '')
+endfunction
+
+command! Header call CreateHeader()
+    </pre>
+    
+    <h4>Automatización con autocomandos</h4>
+    <pre>
+" Autocomandos agrupados
+augroup custom_file_settings
+    autocmd!
+    " Establecer tipo de archivo para extensiones personalizadas
+    autocmd BufNewFile,BufRead *.template set filetype=html
+    " Ejecutar linter al guardar archivos JavaScript
+    autocmd BufWritePost *.js silent !eslint --fix %
+    " Insertar encabezado en nuevos archivos de script
+    autocmd BufNewFile *.sh call append(0, '#!/bin/bash')
+augroup END
+    </pre>
+    
+    <h4>Creación de un plugin simple</h4>
+    <p>Estructura básica de un plugin Vim (en <code>~/.vim/plugin/mi_plugin.vim</code>):</p>
+    <pre>
+" Plugin: MiPlugin
+" Autor: Tu Nombre
+" Versión: 1.0
+
+" Evitar cargar el plugin varias veces
+if exists('g:loaded_mi_plugin')
+    finish
+endif
+let g:loaded_mi_plugin = 1
+
+" Configuración por defecto
+if !exists('g:mi_plugin_opcion')
+    let g:mi_plugin_opcion = 'valor_defecto'
+endif
+
+" Función principal del plugin
+function! s:FuncionPrincipal()
+    echo "Plugin ejecutándose con opción: " . g:mi_plugin_opcion
+    " Lógica del plugin
+endfunction
+
+" Definir comando
+command! MiPlugin call s:FuncionPrincipal()
+
+" Mapeos opcionales
+if !exists('g:mi_plugin_no_maps')
+    nnoremap &lt;leader&gt;mp :MiPlugin&lt;CR&gt;
+endif
+    </pre>
+    
+    <div class="example">
+        <p><strong>Ejemplo de script para alternar entre dos estilos de código:</strong></p>
+        <pre>
+" Función para alternar entre estilo de código
+function! ToggleCodeStyle()
+    if &expandtab
+        " Cambiar a estilo con tabulaciones
+        setlocal noexpandtab
+        setlocal tabstop=4
+        setlocal shiftwidth=4
+        echo "Estilo: Tabulaciones"
+    else
+        " Cambiar a estilo con espacios
+        setlocal expandtab
+        setlocal tabstop=2
+        setlocal shiftwidth=2
+        echo "Estilo: Espacios (2)"
+    endif
+endfunction
+
+" Crear comando y mapeo
+command! ToggleStyle call ToggleCodeStyle()
+nnoremap &lt;leader&gt;ts :ToggleStyle&lt;CR&gt;
+        </pre>
+    </div>
+    
+    <div class="tip">
+        <p><strong>Consejo para scripting:</strong> Antes de crear un plugin desde cero, revisa si ya existe uno que cumpla tu necesidad. Si decides crear uno, comienza con funciones simples en tu archivo .vimrc, y cuando crezcan, muévelas a un plugin adecuado. Usa "<code>:help</code>" extensivamente para aprender las funciones de Vimscript y mantén tu código modular para facilitar mantenimiento.</p>
+    </div>
+    
+    <p>Has completado el Nivel 7 y ahora dominas técnicas avanzadas que te convierten en un usuario experto de Vim. Desde objetos de texto hasta scripting, tienes herramientas para adaptar Vim a cualquier flujo de trabajo de programación. En el siguiente nivel, exploraremos cómo optimizar tu entorno y flujo de trabajo para alcanzar la máxima productividad.</p>
+</section>
+<section id="nivel8">
+    <h1>Nivel 8: Dominio y optimización del flujo de trabajo</h1>
+
+    <p>En este nivel final, aprenderás a optimizar tu experiencia con Vim para lograr la máxima productividad y eficiencia en tu flujo de trabajo diario.</p>
+
+    <h2 id="patrones-antipatrones">Patrones y antipatrones de uso</h2>
+
+    <p>El dominio de Vim implica no solo conocer los comandos, sino también entender los patrones de uso eficientes y evitar prácticas que reducen la productividad.</p>
+
+    <h3>Patrones efectivos</h3>
+    <ul>
+        <li><strong>Composición de comandos:</strong> Combinar operadores y movimientos (ej. <code>d3w</code>, <code>ct;</code>)</li>
+        <li><strong>Macro grabación para tareas repetitivas:</strong> <code>qa...q</code> y <code>@a</code></li>
+        <li><strong>Uso de registros con propósito:</strong> Registros nombrados para contenido importante</li>
+        <li><strong>Modo visual solo cuando es necesario:</strong> Preferir operadores con movimientos</li>
+        <li><strong>Búsqueda precisa:</strong> Usar <code>/</code> con patrones específicos en lugar de navegación manual</li>
+        <li><strong>Edición incremental:</strong> Realizar cambios pequeños y verificables</li>
+        <li><strong>Uso de marcas para navegación:</strong> Establecer marcas en puntos importantes del código</li>
+        <li><strong>Repetición inteligente:</strong> Utilizar <code>.</code> para repetir la última acción de edición</li>
+        <li><strong>Comandos de línea adecuados:</strong> Usar <code>:g/patrón/comando</code> para operaciones globales</li>
+    </ul>
+
+    <h3>Antipatrones a evitar</h3>
+    <ul>
+        <li><strong>Movimiento ineficiente:</strong> Evitar repetir <code>h</code>, <code>j</code>, <code>k</code>, <code>l</code> muchas veces</li>
+        <li><strong>Uso excesivo del modo visual:</strong> Más lento que combinar operadores y movimientos</li>
+        <li><strong>Ignorar registros innombrados:</strong> Desaprovechar el historial de eliminaciones y yankeos</li>
+        <li><strong>Editar sin plan:</strong> Realizar cambios sin una estrategia clara</li>
+        <li><strong>Navegar sin marcas ni búsquedas:</strong> Perder tiempo localizando posiciones</li>
+        <li><strong>Mapeos innecesarios:</strong> Crear atajos para comandos que rara vez se usan</li>
+        <li><strong>Configuración excesiva:</strong> Sobrecargar .vimrc con opciones innecesarias</li>
+        <li><strong>Desconocer los comandos integrados:</strong> Reimplementar funcionalidad existente</li>
+    </ul>
+
+    <div class="example">
+        <p><strong>Ejemplo de patrones eficientes vs. ineficientes:</strong></p>
+        <pre>
+# Tarea: Eliminar 5 palabras y reemplazarlas
+
+# Patrón ineficiente:
+# (Presionar 'x' repetidamente para eliminar caracteres uno por uno)
+x x x x x x x x x x x x x x x x x x x x  # (muchas pulsaciones)
+i Nueva frase &lt;Esc&gt;
+
+# Patrón eficiente:
+d5w    # Eliminar 5 palabras de una vez
+i Nueva frase &lt;Esc&gt;
+
+# Tarea: Cambiar todas las instancias de "error" por "excepción"
+
+# Patrón ineficiente:
+# (Buscar manualmente cada instancia, eliminar y reescribir)
+/error&lt;Enter&gt;
+cw excepción &lt;Esc&gt;
+n
+cw excepción &lt;Esc&gt;
+n
+... (repetir para cada instancia)
+
+# Patrón eficiente:
+:%s/error/excepción/g    # Reemplazar todas las instancias de una vez
+        </pre>
+    </div>
+
+    <div class="tip">
+        <p><strong>Consejo para patrones eficientes:</strong> Antes de realizar una tarea repetitiva, pregúntate: "¿Hay una forma más eficiente de hacer esto en Vim?". Casi siempre la respuesta es afirmativa. Invierte tiempo en aprender los comandos de manipulación de texto globales, uso de macros y búsqueda avanzada para aumentar drásticamente tu eficiencia.</p>
+    </div>
+
+    <h2 id="depuracion">Depuración de código</h2>
+
+    <p>Vim puede convertirse en una poderosa herramienta de depuración cuando se configura correctamente, permitiéndote identificar y corregir errores sin salir del editor.</p>
+
+    <h3>Integración con depuradores externos</h3>
+
+    <p>Vim puede integrarse con depuradores populares como GDB, LLDB, PDB y otros a través de plugins.</p>
+
+    <pre>
+" Integración con depuradores
+Plug 'puremourning/vimspector'           " Depurador multilenguaje con interfaz gráfica
+Plug 'sakhnik/nvim-gdb'                  " Integración directa con GDB (para Neovim)
+Plug 'vim-vdebug/vdebug'                 " Depurador para PHP, Python, Ruby, etc.
+    </pre>
+
+    <h3>Configuración básica de Vimspector</h3>
+
+    <pre>
+" Configuración básica de Vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = ['debugpy', 'vscode-cpptools', 'CodeLLDB']
+
+" Mapeos personalizados para Vimspector
+nmap &lt;leader&gt;dd &lt;Plug&gt;VimspectorContinue
+nmap &lt;leader&gt;ds &lt;Plug&gt;VimspectorStop
+nmap &lt;leader&gt;dr &lt;Plug&gt;VimspectorRestart
+nmap &lt;leader&gt;dp &lt;Plug&gt;VimspectorPause
+nmap &lt;leader&gt;db &lt;Plug&gt;VimspectorToggleBreakpoint
+nmap &lt;leader&gt;dB &lt;Plug&gt;VimspectorToggleConditionalBreakpoint
+nmap &lt;leader&gt;dn &lt;Plug&gt;VimspectorStepOver
+nmap &lt;leader&gt;di &lt;Plug&gt;VimspectorStepInto
+nmap &lt;leader&gt;do &lt;Plug&gt;VimspectorStepOut
+    </pre>
+
+    <h3>Archivo de configuración de Vimspector (.vimspector.json)</h3>
+
+    <pre>
+{
+  "configurations": {
+    "Python: Run current file": {
+      "adapter": "debugpy",
+      "filetypes": ["python"],
+      "configuration": {
+        "name": "Python: Run current file",
+        "type": "python",
+        "request": "launch",
+        "program": "${file}",
+        "args": [],
+        "stopOnEntry": true,
+        "console": "integratedTerminal"
+      }
+    },
+    "C/C++: Debug current file": {
+      "adapter": "vscode-cpptools",
+      "filetypes": ["cpp", "c"],
+      "configuration": {
+        "name": "C/C++: Debug current file",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${fileDirname}/${fileBasenameNoExtension}",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "stopAtEntry": true,
+        "MIMode": "gdb"
+      }
+    }
+  }
+}
+    </pre>
+
+    <h3>Herramientas de depuración integradas en Vim</h3>
+
+    <ul>
+        <li><strong>Loclist y Quickfix:</strong> Para navegar por errores y advertencias</li>
+        <li><strong>:make y compiladores:</strong> Para compilar código y capturar errores</li>
+        <li><strong>:grep y herramientas similares:</strong> Para buscar patrones en el código</li>
+    </ul>
+
+    <pre>
+" Configuración de compilación y captura de errores
+set makeprg=make\ -j4
+autocmd FileType python setlocal makeprg=python\ %
+autocmd FileType go setlocal makeprg=go\ build
+
+" Abrir automáticamente la ventana quickfix después de :make o :grep
+autocmd QuickFixCmdPost [^l]* cwindow
+autocmd QuickFixCmdPost l* lwindow
+
+" Mapeos para navegación de errores en quickfix
+nnoremap &lt;leader&gt;cn :cnext&lt;CR&gt;
+nnoremap &lt;leader&gt;cp :cprev&lt;CR&gt;
+nnoremap &lt;leader&gt;cc :cclose&lt;CR&gt;
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de flujo de depuración con Vimspector:</strong></p>
+        <pre>
+" Suponiendo que tenemos un archivo Python con un error lógico:
+
+# En el archivo Python problema.py:
+def dividir(a, b):
+    return a / b  # Podría causar división por cero
+
+números = [10, 5, 0, 2]
+for num in números:
+    resultado = dividir(100, num)
+    print(f"100 / {num} = {resultado}")
+
+" Flujo de trabajo de depuración:
+" 1. Configurar Vimspector para Python
+" 2. Establecer un punto de interrupción en la línea de división
+&lt;leader&gt;db     " Establecer breakpoint en la línea 'return a / b'
+
+" 3. Iniciar depuración
+&lt;leader&gt;dd     " Iniciar depuración
+
+" 4. Cuando se detiene en el breakpoint, examinar variables
+:VimspectorEval a     " Evaluar variable 'a'
+:VimspectorEval b     " Evaluar variable 'b'
+
+" 5. Avanzar paso a paso
+&lt;leader&gt;dn     " Paso sobre (step over)
+&lt;leader&gt;di     " Paso dentro (step into)
+
+" 6. Continuar hasta el siguiente breakpoint
+&lt;leader&gt;dd     " Continuar
+
+" 7. Detener depuración cuando se encuentra el problema
+&lt;leader&gt;ds     " Detener depuración
+        </pre>
+    </div>
+
+    <div class="tip">
+        <p><strong>Consejo para depuración:</strong> Para una depuración eficiente, combina herramientas externas con capacidades internas de Vim. Usa Vimspector para código complejo que requiere inspección detallada, pero para errores simples, las listas quickfix con linters y compiladores suelen ser más rápidas. Configura atajos de teclado consistentes para todas tus herramientas de depuración para mantener un flujo de trabajo fluido.</p>
+    </div>
+
+    <h2 id="integracion">Integración con herramientas externas</h2>
+
+    <p>Una de las mayores fortalezas de Vim es su capacidad para integrarse con herramientas externas del ecosistema de desarrollo.</p>
+
+    <h3>Control de versiones (Git)</h3>
+
+    <p>Vim puede integrarse perfectamente con Git mediante plugins especializados:</p>
+
+    <pre>
+" Plugins para Git
+Plug 'tpope/vim-fugitive'           " Interfaz Git completa dentro de Vim
+Plug 'airblade/vim-gitgutter'       " Muestra cambios en margen izquierdo
+Plug 'junegunn/gv.vim'              " Visualizador de historial Git
+Plug 'rhysd/git-messenger.vim'      " Ver información de commit para la línea actual
+    </pre>
+
+    <p>Comandos de vim-fugitive:</p>
+
+    <pre>
+:Git               " Ejecutar un comando Git
+:Git commit        " Crear un commit
+:Git push          " Enviar cambios al remoto
+:Git pull          " Obtener cambios del remoto
+:Git blame         " Ver quién modificó cada línea
+:Gdiffsplit        " Ver diferencias en split
+    </pre>
+
+    <h3>Terminales y REPL (Read-Eval-Print Loop)</h3>
+
+    <p>Integración con terminales para ejecutar comandos sin salir de Vim:</p>
+
+    <pre>
+" Terminal integrada en Vim 8+ y Neovim
+" En Vim 8+
+nnoremap &lt;leader&gt;t :terminal&lt;CR&gt;
+" En Neovim
+nnoremap &lt;leader&gt;t :split | terminal&lt;CR&gt;
+
+" Plugins para REPL
+Plug 'jpalardy/vim-slime'           " Enviar código a un REPL
+Plug 'metakirby5/codi.vim'          " REPL interactivo en línea
+Plug 'jalvesaq/vimcmdline'          " Enviar líneas a intérprete externo
+
+" Configuración de vim-slime
+let g:slime_target = "tmux"         " Usar tmux como destino
+let g:slime_paste_file = "$HOME/.slime_paste"
+let g:slime_default_config = {"socket_name": "default", "target_pane": "{right-of}"}
+    </pre>
+
+    <h3>Gestión de proyectos y buscadores de archivos</h3>
+
+    <pre>
+" Plugins para navegación de proyectos
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'             " Buscador difuso integrado con fzf
+Plug 'preservim/nerdtree'           " Explorador de archivos en árbol
+Plug 'liuchengxu/vista.vim'         " Explorador de etiquetas y símbolos
+Plug 'mhinz/vim-startify'           " Pantalla de inicio con proyectos recientes
+
+" Configuración de fzf
+nnoremap &lt;C-p&gt; :Files&lt;CR&gt;
+nnoremap &lt;leader&gt;b :Buffers&lt;CR&gt;
+nnoremap &lt;leader&gt;h :History&lt;CR&gt;
+nnoremap &lt;leader&gt;t :Tags&lt;CR&gt;
+nnoremap &lt;leader&gt;g :Rg&lt;CR&gt;
+    </pre>
+
+    <h3>Herramientas de linting y formateo de código</h3>
+
+    <pre>
+" Plugins para linting y formateo
+Plug 'dense-analysis/ale'           " Linting asíncrono y fijación
+Plug 'sbdchd/neoformat'             " Formateo de código con herramientas externas
+
+" Configuración de ALE
+let g:ale_fixers = {
+\   '*': ['remove_trailing_lines', 'trim_whitespace'],
+\   'python': ['black', 'isort'],
+\   'javascript': ['eslint', 'prettier'],
+\   'rust': ['rustfmt'],
+\}
+let g:ale_fix_on_save = 1
+let g:ale_linters = {
+\   'python': ['flake8', 'pylint'],
+\   'javascript': ['eslint'],
+\}
+let g:ale_sign_error = '✗'
+let g:ale_sign_warning = '⚠'
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de flujo de trabajo integrado:</strong></p>
+        <pre>
+" Supongamos que estamos trabajando en un proyecto Python con Git
+
+" 1. Navegar y abrir archivos rápidamente
+&lt;C-p&gt;               " Abrir buscador fzf
+" Escribir parte del nombre del archivo y presionar Enter
+
+" 2. Editar el código con soporte LSP (usando coc.nvim)
+" Autocompletado aparece mientras escribimos
+&lt;leader&gt;f           " Formatear el archivo según estándares
+
+" 3. Ver errores y advertencias de ALE
+]g                  " Ir al siguiente error
+[g                  " Ir al error anterior
+
+" 4. Ver cambios en Git
+:Git diff           " Ver cambios en todo el archivo
+]c                  " Ir al siguiente cambio (con vim-gitgutter)
+[c                  " Ir al cambio anterior
+
+" 5. Probar el código en terminal integrada
+&lt;leader&gt;t           " Abrir terminal
+# python script.py   " Ejecutar el script en la terminal
+
+" 6. Confirmar y subir cambios
+:Git add %          " Añadir archivo actual
+:Git commit         " Crear commit (se abre editor para mensaje)
+:Git push           " Enviar cambios al repositorio remoto
+        </pre>
+    </div>
+
+    <div class="tip">
+        <p><strong>Consejo para integración:</strong> Cuando diseñes tu flujo de trabajo integrado, elige herramientas que funcionen bien juntas y crea un sistema cohesivo. Por ejemplo, usa FZF para navegación rápida, coc.nvim o ALE para diagnósticos en tiempo real, una terminal integrada para pruebas y vim-fugitive para gestión de Git. Crea atajos consistentes que no entren en conflicto entre sí y documéntalos en tu .vimrc para referencia futura.</p>
+    </div>
+
+    <h2 id="optimizacion-rendimiento">Optimización del rendimiento de Vim</h2>
+
+    <p>Un editor rápido y receptivo es crucial para mantener una experiencia de desarrollo fluida. Estos son algunos consejos para optimizar Vim.</p>
+
+    <h3>Análisis y mejora del tiempo de inicio</h3>
+
+    <p>Vim puede volverse lento en el inicio debido a plugins pesados o configuraciones ineficientes:</p>
+
+    <pre>
+" Perfil del tiempo de inicio
+" Usa en línea de comandos: vim --startuptime startup.log
+
+" Carga perezosa de plugins
+Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'fatih/vim-go', {'for': 'go'}
+
+" Agrupar configuraciones relacionadas con autocomandos
+augroup vimrc
+    autocmd!
+    " Tus autocomandos aquí
+augroup END
+
+" Evitar plugins lentos en archivos grandes
+let g:loaded_matchparen = 1        " Deshabilitar resaltado de paréntesis
+autocmd BufReadPre * if getfsize(expand("%")) > 10000000 | syntax off | endif
+    </pre>
+
+    <h3>Optimización de plugins</h3>
+
+    <pre>
+" Limitar el número de plugins
+" Evaluar regularmente qué plugins son realmente necesarios
+
+" Configuraciones para plugins pesados
+" Para Coc.nvim
+let g:coc_start_at_startup = 0
+autocmd FileType python,javascript,typescript,json,html,css call coc#rpc#start_server()
+
+" Para plugins que escanean buffers
+let g:gutentags_file_list_command = 'rg --files'
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+    </pre>
+
+    <h3>Mejoras generales de rendimiento</h3>
+
+    <pre>
+" Configuraciones de rendimiento general
+set lazyredraw                     " No redibujar en operaciones no tipificadas
+set regexpengine=1                 " Usar motor de regexp antiguo (más rápido)
+set synmaxcol=200                  " Solo resaltar los primeros 200 caracteres de cada línea
+set nocursorline                   " Deshabilitar resaltado de línea actual (puede ser lento)
+set norelativenumber               " Usar solo números de línea absolutos
+set ttimeoutlen=10                 " Reducir retraso al cambiar de modos
+
+" Solo para Neovim
+if has('nvim')
+    set shada='20,<50,s10          " Limitar tamaño de shada
+    set inccommand=nosplit         " Previsualización de sustitución
+endif
+    </pre>
+
+    <h3>Manejo de archivos grandes</h3>
+
+    <pre>
+" Configuraciones para archivos grandes
+" Crear archivo ~/.vim/plugin/largefile.vim
+let g:large_file = 10485760        " 10MB
+
+" Detectar archivos grandes automáticamente
+augroup LargeFile
+    autocmd!
+    autocmd BufReadPre * let f=expand("<afile>") |
+                      \ if getfsize(f) > g:large_file |
+                      \   set eventignore+=FileType |
+                      \   setlocal noswapfile bufhidden=unload buftype=nowrite undolevels=-1 |
+                      \   set eventignore-=FileType |
+                      \ endif
+augroup END
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de diagnóstico de rendimiento:</strong></p>
+        <pre>
+" Para identificar problemas de rendimiento durante el uso:
+
+:profile start profile.log
+:profile func *
+:profile file *
+" [Realizar operaciones lentas aquí]
+:profile pause
+:noautocmd qall!
+
+" Revisar profile.log para encontrar las funciones más lentas
+
+" Para medir tiempo de respuesta:
+:verbose map &lt;leader&gt;    " Ver qué mapeos están definidos y desde dónde
+:scriptnames             " Ver scripts cargados
+:autocmd                 " Ver autocomandos activos
+        </pre>
+    </div>
+
+    <div class="tip">
+        <p><strong>Consejo para optimización:</strong> El rendimiento de Vim suele deteriorarse gradualmente a medida que se añaden más plugins y configuraciones. Establece un hábito de revisar tu rendimiento mensualmente: mide el tiempo de inicio, verifica el uso de memoria y busca operaciones lentas. Elimina o reemplaza plugins pesados por alternativas más ligeras, y considera cambiar a Neovim para operaciones asíncronas si eres un usuario intensivo.</p>
+    </div>
+
+    <h2 id="neovim">Neovim: El futuro de Vim</h2>
+
+    <p>Neovim es un fork de Vim que tiene como objetivo mejorar la extensibilidad, la usabilidad y refactorizar la base de código para mantenimiento a largo plazo.</p>
+
+    <h3>Diferencias clave con Vim</h3>
+
+    <ul>
+        <li><strong>Arquitectura multiproceso:</strong> Operaciones asíncronas para mejor rendimiento</li>
+        <li><strong>API RPC:</strong> Permite a clientes externos controlar Neovim</li>
+        <li><strong>Mejor terminal integrada:</strong> Terminal más robusta con modo terminal</li>
+        <li><strong>LSP nativo:</strong> Soporte incorporado para Language Server Protocol</li>
+        <li><strong>Lua como lenguaje principal:</strong> Alternativa moderna a Vimscript</li>
+        <li><strong>Mejor soporte de plugins:</strong> API más limpia para desarrolladores</li>
+        <li><strong>UI desacoplada:</strong> Interfaz de usuario separada del núcleo del editor</li>
+    </ul>
+
+    <h3>Migración de Vim a Neovim</h3>
+
+    <p>Neovim mantiene compatibilidad con la mayoría de las configuraciones de Vim:</p>
+
+    <pre>
+" Tu archivo init.vim puede importar tu .vimrc existente
+set runtimepath^=~/.vim runtimepath+=~/.vim/after
+let &packpath = &runtimepath
+source ~/.vimrc
+
+" Configuraciones específicas de Neovim
+if has('nvim')
+    " Terminal mejorada
+    tnoremap &lt;Esc&gt; &lt;C-\&gt;&lt;C-n&gt;
+    tnoremap &lt;C-v&gt;&lt;Esc&gt; &lt;Esc&gt;
+    
+    " Cursor diferente por modo
+    set guicursor=n-v-c:block,i-ci-ve:ver25,r-cr:hor20,o:hor50
+                \,a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor
+                \,sm:block-blinkwait175-blinkoff150-blinkon175
+    
+    " Previsualización de comandos
+    set inccommand=split
+endif
+    </pre>
+
+    <h3>Configuración con Lua</h3>
+
+    <p>Neovim permite usar Lua para configuración, que es más rápido y potente:</p>
+
+    <pre>
+-- Ejemplo de init.lua básico
+-- Configuración básica
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.smartindent = true
+vim.opt.wrap = false
+vim.opt.incsearch = true
+vim.opt.termguicolors = true
+
+-- Tecla líder
+vim.g.mapleader = " "
+
+-- Mapeos básicos
+vim.keymap.set('n', '&lt;leader&gt;e', ':Explore&lt;CR&gt;')
+vim.keymap.set('n', '&lt;leader&gt;w', ':w&lt;CR&gt;')
+vim.keymap.set('n', '&lt;leader&gt;q', ':q&lt;CR&gt;')
+
+-- Instalar gestor de paquetes
+local install_path = vim.fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
+  vim.fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+end
+
+-- Configuración de plugins con Packer
+require('packer').startup(function()
+  use 'wbthomason/packer.nvim'
+  use 'neovim/nvim-lspconfig' -- LSP nativo
+  use 'hrsh7th/nvim-cmp'      -- Autocompletado
+  use 'nvim-treesitter/nvim-treesitter' -- Resaltado semántico
+end)
+
+-- Configuración de LSP
+local lspconfig = require('lspconfig')
+lspconfig.pyright.setup {}
+lspconfig.tsserver.setup {}
+    </pre>
+
+    <h3>Ecosistema específico de Neovim</h3>
+
+    <pre>
+-- Plugins exclusivos de Neovim que aprovechan sus capacidades
+-- En tu configuración de Packer:
+use {
+  'nvim-telescope/telescope.nvim', -- Buscador avanzado
+  requires = { {'nvim-lua/plenary.nvim'} }
+}
+use 'nvim-treesitter/nvim-treesitter' -- Análisis de código
+use 'folke/which-key.nvim'        -- Ayuda interactiva de teclas
+use 'lewis6991/gitsigns.nvim'     -- Integración con Git
+use 'nvim-lualine/lualine.nvim'   -- Barra de estado
+use 'akinsho/bufferline.nvim'     -- Línea de buffers
+use 'folke/zen-mode.nvim'         -- Modo concentración
+use {
+  'nvim-neo-tree/neo-tree.nvim',  -- Explorador de archivos moderno
+  requires = {
+    'nvim-lua/plenary.nvim',
+    'kyazdani42/nvim-web-devicons',
+    'MunifTanjim/nui.nvim',
+  }
+}
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de configuración de LSP en Neovim:</strong></p>
+        <pre>
+-- Configuración de LSP nativo en Neovim (init.lua)
+
+-- Instalar language servers:
+-- npm install -g pyright typescript-language-server
+-- go install golang.org/x/tools/gopls@latest
+
+-- Configuración de LSP
+local lspconfig = require('lspconfig')
+
+-- Mapeos globales para LSP
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', '&lt;leader&gt;rn', vim.lsp.buf.rename)
+vim.keymap.set('n', '&lt;leader&gt;ca', vim.lsp.buf.code_action)
+vim.keymap.set('n', '[d', vim.diagnostic.goto_prev)
+vim.keymap.set('n', ']d', vim.diagnostic.goto_next)
+
+-- Configurar servidores individuales
+lspconfig.pyright.setup{
+  settings = {
+    python = {
+      analysis = {
+        typeCheckingMode = "basic",
+        autoSearchPaths = true,
+        useLibraryCodeForTypes = true
+      }
+    }
+  }
+}
+
+lspconfig.tsserver.setup{}
+lspconfig.gopls.setup{}
+
+-- Configuración de autocompletado con nvim-cmp
+local cmp = require('cmp')
+cmp.setup({
+  mapping = cmp.mapping.preset.insert({
+    ['&lt;C-b&gt;'] = cmp.mapping.scroll_docs(-4),
+    ['&lt;C-f&gt;'] = cmp.mapping.scroll_docs(4),
+    ['&lt;C-Space&gt;'] = cmp.mapping.complete(),
+    ['&lt;C-e&gt;'] = cmp.mapping.abort(),
+    ['&lt;CR&gt;'] = cmp.mapping.confirm({ select = true })
+  }),
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' }
+  })
+})
+        </pre>
+    </div>
+
+
+    <h3 id="depuracion">Depuración de código</h3>
+
+    <p>Vim puede convertirse en una poderosa herramienta de depuración cuando se configura correctamente, permitiéndote identificar y corregir errores sin salir del editor.</p>
+
+    <h4>Integración con depuradores externos</h4>
+
+    <p>Vim puede integrarse con depuradores populares como GDB, LLDB, PDB y otros a través de plugins.</p>
+
+    <pre>
+" Integración con depuradores
+Plug 'puremourning/vimspector'           " Depurador multilenguaje con interfaz gráfica
+Plug 'sakhnik/nvim-gdb'                  " Integración directa con GDB (para Neovim)
+Plug 'vim-vdebug/vdebug'                 " Depurador para PHP, Python, Ruby, etc.
+    </pre>
+
+    <h4>Configuración básica de Vimspector</h4>
+
+    <pre>
+" Configuración básica de Vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+let g:vimspector_install_gadgets = ['debugpy', 'vscode-cpptools', 'CodeLLDB']
+
+" Mapeos personalizados para Vimspector
+nmap &lt;leader&gt;dd &lt;Plug&gt;VimspectorContinue
+nmap &lt;leader&gt;ds &lt;Plug&gt;VimspectorStop
+nmap &lt;leader&gt;dr &lt;Plug&gt;VimspectorRestart
+nmap &lt;leader&gt;dp &lt;Plug&gt;VimspectorPause
+nmap &lt;leader&gt;db &lt;Plug&gt;VimspectorToggleBreakpoint
+nmap &lt;leader&gt;dB &lt;Plug&gt;VimspectorToggleConditionalBreakpoint
+nmap &lt;leader&gt;dn &lt;Plug&gt;VimspectorStepOver
+nmap &lt;leader&gt;di &lt;Plug&gt;VimspectorStepInto
+nmap &lt;leader&gt;do &lt;Plug&gt;VimspectorStepOut
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de flujo de depuración con Vimspector:</strong></p>
+        <pre>
+" Suponiendo que tenemos un archivo Python con un error lógico:
+
+# En el archivo Python problema.py:
+def dividir(a, b):
+    return a / b  # Podría causar división por cero
+
+números = [10, 5, 0, 2]
+for num in números:
+    resultado = dividir(100, num)
+    print(f"100 / {num} = {resultado}")
+
+" Flujo de trabajo de depuración:
+" 1. Configurar Vimspector para Python
+" 2. Establecer un punto de interrupción en la línea de división
+&lt;leader&gt;db     " Establecer breakpoint en la línea 'return a / b'
+
+" 3. Iniciar depuración
+&lt;leader&gt;dd     " Iniciar depuración
+
+" 4. Cuando se detiene en el breakpoint, examinar variables
+:VimspectorEval a     " Evaluar variable 'a'
+:VimspectorEval b     " Evaluar variable 'b'
+
+" 5. Avanzar paso a paso
+&lt;leader&gt;dn     " Paso sobre (step over)
+&lt;leader&gt;di     " Paso dentro (step into)
+
+" 6. Continuar hasta el siguiente breakpoint
+&lt;leader&gt;dd     " Continuar
+
+" 7. Detener depuración cuando se encuentra el problema
+&lt;leader&gt;ds     " Detener depuración
+        </pre>
+    </div>
+
+    <div class="tip">
+        <p><strong>Consejo para depuración:</strong> Para una depuración eficiente, combina herramientas externas con capacidades internas de Vim. Usa Vimspector para código complejo que requiere inspección detallada, pero para errores simples, las listas quickfix con linters y compiladores suelen ser más rápidas. Configura atajos de teclado consistentes para todas tus herramientas de depuración para mantener un flujo de trabajo fluido.</p>
+    </div>
+
+    <h3 id="integracion">Integración con herramientas externas</h3>
+
+    <p>Una de las mayores fortalezas de Vim es su capacidad para integrarse con herramientas externas del ecosistema de desarrollo.</p>
+
+    <h4>Control de versiones (Git)</h4>
+
+    <p>Vim puede integrarse perfectamente con Git mediante plugins especializados:</p>
+
+    <pre>
+" Plugins para Git
+Plug 'tpope/vim-fugitive'           " Interfaz Git completa dentro de Vim
+Plug 'airblade/vim-gitgutter'       " Muestra cambios en margen izquierdo
+Plug 'junegunn/gv.vim'              " Visualizador de historial Git
+Plug 'rhysd/git-messenger.vim'      " Ver información de commit para la línea actual
+    </pre>
+
+    <h4>Terminales y REPL (Read-Eval-Print Loop)</h4>
+
+    <p>Integración con terminales para ejecutar comandos sin salir de Vim:</p>
+
+    <pre>
+" Terminal integrada en Vim 8+ y Neovim
+" En Vim 8+
+nnoremap &lt;leader&gt;t :terminal&lt;CR&gt;
+" En Neovim
+nnoremap &lt;leader&gt;t :split | terminal&lt;CR&gt;
+
+" Plugins para REPL
+Plug 'jpalardy/vim-slime'           " Enviar código a un REPL
+Plug 'metakirby5/codi.vim'          " REPL interactivo en línea
+Plug 'jalvesaq/vimcmdline'          " Enviar líneas a intérprete externo
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de flujo de trabajo integrado:</strong></p>
+        <pre>
+" Supongamos que estamos trabajando en un proyecto Python con Git
+
+" 1. Navegar y abrir archivos rápidamente
+&lt;C-p&gt;               " Abrir buscador fzf
+" Escribir parte del nombre del archivo y presionar Enter
+
+" 2. Editar el código con soporte LSP (usando coc.nvim)
+" Autocompletado aparece mientras escribimos
+&lt;leader&gt;f           " Formatear el archivo según estándares
+
+" 3. Ver errores y advertencias de ALE
+]g                  " Ir al siguiente error
+[g                  " Ir al error anterior
+
+" 4. Ver cambios en Git
+:Git diff           " Ver cambios en todo el archivo
+]c                  " Ir al siguiente cambio (con vim-gitgutter)
+[c                  " Ir al cambio anterior
+
+" 5. Probar el código en terminal integrada
+&lt;leader&gt;t           " Abrir terminal
+# python script.py   " Ejecutar el script en la terminal
+
+" 6. Confirmar y subir cambios
+:Git add %          " Añadir archivo actual
+:Git commit         " Crear commit (se abre editor para mensaje)
+:Git push           " Enviar cambios al repositorio remoto
+        </pre>
+    </div>
+
+    <h3 id="optimizacion">Optimización del rendimiento de Vim</h3>
+
+    <p>Un editor rápido y receptivo es crucial para mantener una experiencia de desarrollo fluida. Estos son algunos consejos para optimizar Vim.</p>
+
+    <h4>Análisis y mejora del tiempo de inicio</h4>
+
+    <pre>
+" Perfil del tiempo de inicio
+" Usa en línea de comandos: vim --startuptime startup.log
+
+" Carga perezosa de plugins
+Plug 'preservim/nerdtree', {'on': 'NERDTreeToggle'}
+Plug 'fatih/vim-go', {'for': 'go'}
+
+" Agrupar configuraciones relacionadas con autocomandos
+augroup vimrc
+    autocmd!
+    " Tus autocomandos aquí
+augroup END
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de diagnóstico de rendimiento:</strong></p>
+        <pre>
+" Para identificar problemas de rendimiento durante el uso:
+
+:profile start profile.log
+:profile func *
+:profile file *
+" [Realizar operaciones lentas aquí]
+:profile pause
+:noautocmd qall!
+
+" Revisar profile.log para encontrar las funciones más lentas
+        </pre>
+    </div>
+
+    <div class="tip">
+        <p><strong>Consejo para optimización:</strong> El rendimiento de Vim suele deteriorarse gradualmente a medida que se añaden más plugins y configuraciones. Establece un hábito de revisar tu rendimiento mensualmente: mide el tiempo de inicio, verifica el uso de memoria y busca operaciones lentas. Elimina o reemplaza plugins pesados por alternativas más ligeras, y considera cambiar a Neovim para operaciones asíncronas si eres un usuario intensivo.</p>
+    </div>
+
+    <h3 id="neovim">Neovim: El futuro de Vim</h3>
+
+    <p>Neovim es un fork de Vim que tiene como objetivo mejorar la extensibilidad, la usabilidad y refactorizar la base de código para mantenimiento a largo plazo.</p>
+
+    <h4>Diferencias clave con Vim</h4>
+
+    <ul>
+        <li><strong>Arquitectura multiproceso:</strong> Operaciones asíncronas para mejor rendimiento</li>
+        <li><strong>API RPC:</strong> Permite a clientes externos controlar Neovim</li>
+        <li><strong>Mejor terminal integrada:</strong> Terminal más robusta con modo terminal</li>
+        <li><strong>LSP nativo:</strong> Soporte incorporado para Language Server Protocol</li>
+        <li><strong>Lua como lenguaje principal:</strong> Alternativa moderna a Vimscript</li>
+    </ul>
+
+    <h4>Configuración con Lua</h4>
+
+    <pre>
+-- Ejemplo de init.lua básico
+-- Configuración básica
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.smartindent = true
+vim.opt.wrap = false
+    </pre>
+
+    <div class="example">
+        <p><strong>Ejemplo de configuración de LSP en Neovim:</strong></p>
+        <pre>
+-- Configuración de LSP nativo en Neovim (init.lua)
+
+-- Instalar language servers:
+-- npm install -g pyright typescript-language-server
+-- go install golang.org/x/tools/gopls@latest
+
+-- Configuración de LSP
+local lspconfig = require('lspconfig')
+
+-- Mapeos globales para LSP
+vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.keymap.set('n', 'gr', vim.lsp.buf.references)
+vim.keymap.set('n', 'K', vim.lsp.buf.hover)
+vim.keymap.set('n', '&lt;leader&gt;rn', vim.lsp.buf.rename)
+        </pre>
+    </div>
+
+    <h2 id="recursos">Recursos adicionales y comunidad</h2>
+
+    <p>Para continuar tu viaje con Vim, aquí tienes algunos recursos valiosos que te ayudarán a perfeccionar tus habilidades.</p>
+
+    <h3>Documentación oficial</h3>
+    <ul>
+        <li><strong>:help</strong> - La documentación incorporada de Vim es exhaustiva</li>
+        <li><a href="https://www.vim.org/docs.php">Documentación oficial de Vim</a></li>
+        <li><a href="https://neovim.io/doc/">Documentación de Neovim</a></li>
+    </ul>
+
+    <h3>Comunidades en línea</h3>
+    <ul>
+        <li><a href="https://www.reddit.com/r/vim/">r/vim en Reddit</a></li>
+        <li><a href="https://www.reddit.com/r/neovim/">r/neovim en Reddit</a></li>
+        <li><a href="https://vi.stackexchange.com/">Vi and Vim Stack Exchange</a></li>
+        <li>Canal #vim en IRC (Libera.Chat)</li>
+    </ul>
+
+    <h3>Libros recomendados</h3>
+    <ul>
+        <li>"Practical Vim" por Drew Neil</li>
+        <li>"Modern Vim" por Drew Neil</li>
+        <li>"Learning the vi and Vim Editors" por Robbins, Hannah, y Lamb</li>
+        <li>"Vim for Humans" por Vincent Jousse</li>
+    </ul>
+
+    <h3>Cursos y tutoriales en línea</h3>
+    <ul>
+        <li><a href="https://vimcasts.org/">Vimcasts</a> - Screencasts sobre Vim</li>
+        <li><a href="https://vim-adventures.com/">Vim Adventures</a> - Juego para aprender Vim</li>
+        <li><a href="https://www.openvim.com/">OpenVim</a> - Tutorial interactivo</li>
+        <li><a href="https://www.vimgolf.com/">VimGolf</a> - Desafíos para practicar eficiencia</li>
+    </ul>
+
+    <div class="tip">
+        <p><strong>Consejo final:</strong> El dominio de Vim es un viaje continuo. Incluso después de años de uso, siempre hay algo nuevo que aprender o una forma más eficiente de realizar una tarea. La clave es la práctica constante y la curiosidad por seguir mejorando.</p>
+    </div>
+
+    <footer>
+        <p>¡Has completado el tutorial completo de Vim! Ahora tienes las herramientas para convertirte en un usuario experto.</p>
+        <p>Recuerda que dominar Vim lleva tiempo, pero el esfuerzo vale la pena por la productividad que ganarás.</p>
+        <p>&copy; 2025 - Tutorial Completo de Vim</p>
+    </footer>
+</section>
+  </body>
+</html>

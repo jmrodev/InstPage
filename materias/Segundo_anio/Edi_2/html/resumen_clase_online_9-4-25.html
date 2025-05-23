@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Comandos Básicos de Linux - Tutorial Completo</title>
+    <link rel="stylesheet" href="../../../../css/styles.css" />
+  </head>
+  <body>
+    <h1>Comandos Básicos de Linux - Tutorial Completo</h1>
+
+    <div class="section">
+      <h2>1. Manipulación de Archivos con cat</h2>
+
+      <h3>El comando cat</h3>
+      <p>
+        El comando <span class="command">cat</span> (concatenate) se utiliza
+        principalmente para mostrar el contenido de archivos, pero también se
+        puede usar para crear archivos simples.
+      </p>
+
+      <h3>Visualización de archivos</h3>
+      <pre>cat file.txt</pre>
+      <p>Muestra todo el contenido del archivo "file.txt" en la terminal.</p>
+
+      <h3>Usando cat como editor simple</h3>
+      <pre>cat > file.txt</pre>
+      <p>
+        Inicia la creación de un nuevo archivo. Todo lo que escribas se guardará
+        en "file.txt". Para finalizar y guardar, presiona <code>Ctrl+D</code>.
+      </p>
+
+      <div class="note">
+        <p>
+          <strong>¿Por qué Ctrl+D?</strong> Esta combinación envía una señal EOF
+          (End Of File) al sistema. Técnicamente, Ctrl+D envía un carácter ASCII
+          EOT (End of Transmission), con valor decimal 4 (la 'D' es la cuarta
+          letra del alfabeto). Esta convención se mantiene por razones
+          históricas y de consistencia.
+        </p>
+      </div>
+
+      <h3>Añadir contenido a un archivo existente</h3>
+      <pre>cat >> file.txt</pre>
+      <p>
+        Añade texto al final del archivo existente. Para finalizar, presiona
+        <code>Ctrl+D</code>.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>2. Ordenamiento de Datos</h2>
+
+      <h3>El comando sort</h3>
+      <p>
+        El comando <span class="command">sort</span> ordena líneas de texto.
+      </p>
+
+      <pre>sort file.txt</pre>
+      <p>
+        Muestra el contenido de "file.txt" ordenado alfabéticamente por líneas.
+      </p>
+
+      <h3>Opciones comunes de sort</h3>
+      <ul>
+        <li><code>-r</code>: Orden inverso (descendente)</li>
+        <li><code>-n</code>: Ordenamiento numérico</li>
+        <li><code>-f</code>: Ignora mayúsculas y minúsculas</li>
+        <li>
+          <code>-u</code>: Elimina duplicados (muestra solo líneas únicas)
+        </li>
+        <li><code>-k N</code>: Ordena según la columna N</li>
+      </ul>
+
+      <h3>Ejemplos con tuberías (pipes)</h3>
+      <pre>cat file.txt | sort</pre>
+      <p>Lee el contenido de "file.txt" y lo envía a sort para ordenarlo.</p>
+
+      <pre>cat file.txt | sort > file2.txt</pre>
+      <p>
+        Ordena el contenido de "file.txt" y guarda el resultado en "file2.txt".
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>3. Eliminación de Duplicados</h2>
+
+      <h3>El comando uniq</h3>
+      <p>
+        El comando <span class="command">uniq</span> filtra líneas duplicadas
+        consecutivas.
+      </p>
+
+      <div class="example">
+        <p><strong>Comparación:</strong></p>
+        <p>
+          <code>cat file.txt</code> - Muestra todo el contenido, incluyendo
+          duplicados.
+        </p>
+        <p>
+          <code>cat file.txt | uniq</code> - Muestra solo la primera ocurrencia
+          de líneas idénticas que aparecen consecutivamente.
+        </p>
+      </div>
+
+      <div class="note">
+        <p>
+          Es importante entender que <code>uniq</code> solo elimina líneas
+          duplicadas consecutivas. Para eliminar todos los duplicados
+          independientemente de su posición, primero debes ordenar el archivo:
+        </p>
+        <pre>cat file.txt | sort | uniq</pre>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>4. Búsqueda de Patrones</h2>
+
+      <h3>El comando grep</h3>
+      <p>
+        El comando <span class="command">grep</span> busca patrones específicos
+        en archivos o en la entrada estándar.
+      </p>
+
+      <pre>cat file.txt | grep texto</pre>
+      <p>
+        Muestra solo las líneas de "file.txt" que contienen la palabra "texto".
+      </p>
+
+      <h3>Expresiones Regulares con grep</h3>
+      <pre>cat file.txt | grep -E EXPRESIÓN</pre>
+      <p>
+        La opción <code>-E</code> habilita el uso de expresiones regulares
+        extendidas.
+      </p>
+
+      <h3>Patrones comunes de expresiones regulares</h3>
+      <table>
+        <tr>
+          <th>Patrón</th>
+          <th>Significado</th>
+        </tr>
+        <tr>
+          <td><code>\w+</code></td>
+          <td>Coincide con una o más letras, números o guiones bajos</td>
+        </tr>
+        <tr>
+          <td><code>\w?</code></td>
+          <td>Coincide con cero o una letra, número o guión bajo</td>
+        </tr>
+        <tr>
+          <td><code>\w*</code></td>
+          <td>Coincide con cero o más letras, números o guiones bajos</td>
+        </tr>
+        <tr>
+          <td><code>^</code></td>
+          <td>Coincide con el inicio de una línea</td>
+        </tr>
+        <tr>
+          <td><code>$</code></td>
+          <td>Coincide con el fin de una línea</td>
+        </tr>
+        <tr>
+          <td><code>.*</code></td>
+          <td>
+            Coincide con cualquier carácter (excepto salto de línea) cero o más
+            veces
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="section">
+      <h2>5. Visualización Parcial de Archivos</h2>
+
+      <h3>Los comandos head y tail</h3>
+
+      <pre>head -n 5 file.txt</pre>
+      <p>Muestra las primeras 5 líneas del archivo "file.txt".</p>
+
+      <pre>tail -n 5 file.txt</pre>
+      <p>Muestra las últimas 5 líneas del archivo "file.txt".</p>
+
+      <h3>Combinando con otros comandos</h3>
+      <pre>cat file* | head -n 5</pre>
+      <p>
+        Muestra las primeras 5 líneas de la concatenación de todos los archivos
+        que empiezan con "file".
+      </p>
+
+      <pre>cat file* | tail -n 5</pre>
+      <p>
+        Muestra las últimas 5 líneas de la concatenación de todos los archivos
+        que empiezan con "file".
+      </p>
+
+      <h3>Monitorización de archivos</h3>
+      <pre>tail -n 0 -f file.txt</pre>
+      <p>
+        Monitorea continuamente el archivo "file.txt" y muestra las nuevas
+        líneas que se añaden en tiempo real. Útil para archivos de registro
+        (logs).
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>6. Duplicación de Salida</h2>
+
+      <h3>El comando tee</h3>
+      <p>
+        El comando <span class="command">tee</span> permite mostrar la salida en
+        pantalla y guardarla en un archivo simultáneamente.
+      </p>
+
+      <pre>
+cat file.txt | sort | tee file_ordenado.txt | uniq > file_sin_duplicados.txt</pre
+      >
+      <p>Esta secuencia:</p>
+      <ol>
+        <li>Lee el contenido de "file.txt"</li>
+        <li>Ordena su contenido</li>
+        <li>
+          Guarda el contenido ordenado en "file_ordenado.txt" y también lo envía
+          al siguiente comando
+        </li>
+        <li>
+          Elimina duplicados consecutivos y guarda el resultado en
+          "file_sin_duplicados.txt"
+        </li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>7. Impresión de Texto y Variables</h2>
+
+      <h3>El comando echo</h3>
+      <p>
+        El comando <span class="command">echo</span> muestra texto en la
+        terminal.
+      </p>
+
+      <pre>echo "Hola Mundo"</pre>
+      <p>Muestra: Hola Mundo</p>
+
+      <h3>Redirección con echo</h3>
+      <pre>echo "texto" > archivo.txt</pre>
+      <p>
+        Escribe "texto" en el archivo "archivo.txt", sobrescribiendo cualquier
+        contenido previo.
+      </p>
+
+      <h3>Expresiones aritméticas</h3>
+      <pre>echo $(( 1+1 ))</pre>
+      <p>Calcula 1+1 y muestra el resultado: 2</p>
+
+      <pre>x=$(( 1+1 ))</pre>
+      <p>Asigna el resultado de 1+1 a la variable x.</p>
+
+      <pre>echo x</pre>
+      <p>Muestra literalmente la letra "x"</p>
+
+      <pre>echo $x</pre>
+      <p>Muestra el valor almacenado en la variable x, que sería 2</p>
+
+      <h3>Otras operaciones aritméticas</h3>
+      <pre>echo $(( 10/3 ))</pre>
+      <p>División entera, muestra: 3</p>
+
+      <pre>echo $(( 10%3 ))</pre>
+      <p>Módulo (resto de la división), muestra: 1</p>
+
+      <h3>Expansión de comodines</h3>
+      <pre>echo texto*</pre>
+      <p>
+        Muestra todos los archivos que empiezan con "texto" en el directorio
+        actual.
+      </p>
+
+      <pre>echo "texto*"</pre>
+      <p>
+        Muestra literalmente "texto*" porque las comillas previenen la
+        expansión.
+      </p>
+
+      <h3>Expansión de comandos</h3>
+      <pre>echo "La fecha es: $(date)"</pre>
+      <p>Muestra un texto que incluye el resultado del comando date.</p>
+    </div>
+
+    <div class="section">
+      <h2>8. Expansiones y Rangos</h2>
+
+      <h3>Expansión de llaves</h3>
+      <pre>echo file{01..05}</pre>
+      <p>Genera y muestra: file01 file02 file03 file04 file05</p>
+
+      <pre>echo file{01..05}*</pre>
+      <p>
+        Genera los nombres file01 hasta file05 y busca archivos que coincidan
+        con estos patrones.
+      </p>
+
+      <pre>echo file{1,3,8,9}</pre>
+      <p>Muestra: file1 file3 file8 file9</p>
+
+      <pre>echo file{1,3,8,9{1,2,3}}</pre>
+      <p>Muestra: file1 file3 file8 file91 file92 file93</p>
+    </div>
+
+    <div class="section">
+      <h2>9. Gestión de Procesos</h2>
+
+      <h3>Visualización de procesos</h3>
+
+      <pre>ps</pre>
+      <p>Muestra los procesos de la sesión actual.</p>
+
+      <pre>ps ax</pre>
+      <p>Muestra todos los procesos del sistema en formato simple.</p>
+
+      <pre>ps aux</pre>
+      <p>
+        Muestra todos los procesos del sistema con información detallada,
+        incluyendo usuario y uso de recursos.
+      </p>
+
+      <pre>top</pre>
+      <p>
+        Muestra los procesos en ejecución en tiempo real, ordenados por uso de
+        CPU por defecto.
+      </p>
+
+      <h3>Binarios vs Procesos</h3>
+      <p>
+        Un <strong>binario</strong> (como el comando <code>ls</code>) es un
+        archivo ejecutable compilado almacenado en el disco duro.
+      </p>
+      <p>
+        Un <strong>proceso en ejecución</strong> es una instancia de un programa
+        (binario) que se ha cargado en memoria y está siendo ejecutado por el
+        sistema operativo.
+      </p>
+      <p>
+        Ejemplo: Cuando abres tres veces la calculadora, el mismo binario se
+        carga tres veces en memoria, creando tres procesos independientes.
+      </p>
+
+      <h3>Pausar la ejecución</h3>
+      <pre>sleep 10m</pre>
+      <p>Pausa la ejecución durante 10 minutos.</p>
+
+      <h3>Trabajos en segundo plano</h3>
+      <pre>sleep 5m &</pre>
+      <p>
+        El símbolo <code>&</code> al final ejecuta el comando en segundo plano,
+        permitiéndote seguir usando la terminal.
+      </p>
+
+      <pre>jobs</pre>
+      <p>
+        Muestra los trabajos (procesos) en segundo plano de la sesión actual de
+        terminal.
+      </p>
+
+      <pre>fg</pre>
+      <p>Trae el trabajo más reciente en segundo plano al primer plano.</p>
+
+      <pre>fg %3</pre>
+      <p>
+        Trae el trabajo número 3 (según lo muestra <code>jobs</code>) al primer
+        plano.
+      </p>
+
+      <h3>Control de procesos</h3>
+      <p>
+        <code>Ctrl+Z</code>: Pausa el proceso en ejecución y lo coloca en
+        segundo plano.
+      </p>
+
+      <pre>bg</pre>
+      <p>
+        Continúa la ejecución del proceso pausado más reciente, pero en segundo
+        plano.
+      </p>
+
+      <pre>bg %1</pre>
+      <p>Continúa la ejecución del trabajo número 1 en segundo plano.</p>
+
+      <div class="note">
+        <p>
+          <strong>Nota:</strong> <code>jobs</code> muestra solo los trabajos de
+          la terminal actual, mientras que <code>ps aux</code> muestra todos los
+          procesos del sistema.
+        </p>
+      </div>
+    </div>
+
+    <div class="section">
+      <h2>10. Terminación de Procesos</h2>
+
+      <h3>Señales del sistema</h3>
+      <p>
+        Linux utiliza "señales" para comunicarse con los procesos en ejecución.
+      </p>
+
+      <h3>El comando kill</h3>
+      <pre>kill PID</pre>
+      <p>
+        Envía una señal SIGTERM (terminar) al proceso con el ID especificado.
+      </p>
+
+      <pre>killall nombre_programa</pre>
+      <p>Termina todos los procesos con el nombre especificado.</p>
+
+      <h3>Principales señales</h3>
+      <table>
+        <tr>
+          <th>Señal</th>
+          <th>Número</th>
+          <th>Función</th>
+        </tr>
+        <tr>
+          <td>SIGTERM</td>
+          <td>15</td>
+          <td>
+            Señal de terminación estándar, permite al proceso limpiar recursos
+          </td>
+        </tr>
+        <tr>
+          <td>SIGKILL</td>
+          <td>9</td>
+          <td>Termina forzosamente un proceso (no puede ser ignorada)</td>
+        </tr>
+        <tr>
+          <td>SIGSTOP</td>
+          <td>19</td>
+          <td>Detiene temporalmente un proceso (puede continuarse)</td>
+        </tr>
+        <tr>
+          <td>SIGCONT</td>
+          <td>18</td>
+          <td>Continúa un proceso detenido</td>
+        </tr>
+      </table>
+
+      <pre>kill -s SIGSTOP numero</pre>
+      <p>Detiene temporalmente el proceso con el PID especificado.</p>
+
+      <pre>kill -s SIGCONT numero</pre>
+      <p>Continúa la ejecución de un proceso detenido.</p>
+
+      <h3>Cuándo usar cada señal</h3>
+      <ul>
+        <li>
+          <strong>SIGTERM</strong>: Uso normal para terminar procesos (permite
+          limpieza)
+        </li>
+        <li>
+          <strong>SIGKILL</strong>: Cuando un proceso no responde a SIGTERM
+        </li>
+        <li><strong>SIGSTOP</strong>: Para detener temporalmente un proceso</li>
+        <li><strong>SIGCONT</strong>: Para reanudar un proceso detenido</li>
+      </ul>
+
+      <p>
+        Comparación: La X de cerrar en una interfaz gráfica normalmente envía
+        SIGTERM, permitiendo que el programa se cierre adecuadamente.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>11. Otros Comandos Importantes</h2>
+
+      <h3>chmod - Cambio de permisos</h3>
+      <p>
+        El comando <span class="command">chmod</span> (change mode) permite
+        modificar los permisos de archivos y directorios en sistemas Unix/Linux.
+      </p>
+
+      <h4>Sintaxis básica:</h4>
+      <pre>chmod [opciones] modo archivo(s)</pre>
+
+      <h4>Modo simbólico:</h4>
+      <pre>
+chmod u+x archivo.sh  # Añade permiso de ejecución al usuario propietario
+chmod g-w archivo.txt # Quita permiso de escritura al grupo
+chmod o=r archivo.txt # Asigna solo permiso de lectura a otros
+chmod a+r archivo.txt # Añade permiso de lectura a todos</pre
+      >
+
+      <p>Donde:</p>
+      <ul>
+        <li><code>u</code>: usuario propietario</li>
+        <li><code>g</code>: grupo</li>
+        <li><code>o</code>: otros</li>
+        <li><code>a</code>: todos (user, group, others)</li>
+        <li><code>+</code>: añadir permiso</li>
+        <li><code>-</code>: quitar permiso</li>
+        <li><code>=</code>: asignar exactamente esos permisos</li>
+        <li><code>r</code>: lectura (4)</li>
+        <li><code>w</code>: escritura (2)</li>
+        <li><code>x</code>: ejecución (1)</li>
+      </ul>
+
+      <h4>Modo octal:</h4>
+      <pre>
+chmod 755 archivo.sh  # rwxr-xr-x
+chmod 644 archivo.txt # rw-r--r--</pre
+      >
+
+      <h3>tar - Empaquetado de archivos</h3>
+      <p>
+        El comando <span class="command">tar</span> (tape archive) crea,
+        mantiene y extrae archivos de un archivo tar (formato de empaquetado).
+      </p>
+
+      <h4>Opciones principales:</h4>
+      <ul>
+        <li><code>-c</code>: Crear un nuevo archivo</li>
+        <li><code>-x</code>: Extraer archivos</li>
+        <li><code>-f</code>: Especificar nombre del archivo</li>
+        <li><code>-v</code>: Modo verbose (muestra progreso)</li>
+        <li><code>-z</code>: Comprimir con gzip</li>
+        <li><code>-j</code>: Comprimir con bzip2</li>
+        <li><code>-J</code>: Comprimir con xz</li>
+      </ul>
+
+      <h4>Ejemplos:</h4>
+      <pre>
+tar -cvf archivo.tar directorio/      # Crear archivo tar
+tar -xvf archivo.tar                   # Extraer archivo tar
+tar -czvf archivo.tar.gz directorio/   # Crear archivo tar comprimido con gzip
+tar -xzvf archivo.tar.gz               # Extraer archivo tar.gz
+tar -cjvf archivo.tar.bz2 directorio/  # Crear archivo tar comprimido con bzip2
+tar -xjvf archivo.tar.bz2              # Extraer archivo tar.bz2
+tar -cJvf archivo.tar.xz directorio/   # Crear archivo tar comprimido con xz
+tar -xJvf archivo.tar.xz               # Extraer archivo tar.xz</pre
+      >
+
+      <h3>Compresión de archivos</h3>
+
+      <h4>gzip</h4>
+      <p>Formato de compresión más común y rápido, aunque no tan eficiente.</p>
+      <pre>
+gzip archivo.txt          # Comprime a archivo.txt.gz
+gzip -d archivo.txt.gz    # Descomprime (-d o --decompress)
+gzip -k archivo.txt       # Mantiene archivo original (-k o --keep)
+gzip -9 archivo.txt       # Máxima compresión (1-9, siendo 9 la máxima)</pre
+      >
+
+      <h4>bzip2</h4>
+      <p>Mejor tasa de compresión que gzip, pero más lento.</p>
+      <pre>
+bzip2 archivo.txt         # Comprime a archivo.txt.bz2
+bzip2 -d archivo.txt.bz2  # Descomprime
+bzip2 -k archivo.txt      # Mantiene archivo original</pre
+      >
+
+      <h4>xz</h4>
+      <p>La mejor compresión de los tres, pero también la más lenta.</p>
+      <pre>
+xz archivo.txt            # Comprime a archivo.txt.xz
+xz -d archivo.txt.xz      # Descomprime
+xz -k archivo.txt         # Mantiene archivo original
+xz -9 archivo.txt         # Máxima compresión</pre
+      >
+
+      <h3>printenv - Variables de entorno</h3>
+      <p>
+        El comando <span class="command">printenv</span> muestra las variables
+        de entorno del sistema.
+      </p>
+
+      <h4>Uso:</h4>
+      <pre>
+printenv                  # Muestra todas las variables de entorno
+printenv HOME             # Muestra el valor de la variable HOME
+printenv | grep PATH      # Filtra para mostrar solo variables que contengan PATH</pre
+      >
+
+      <h4>Variables comunes:</h4>
+      <ul>
+        <li><code>HOME</code>: Directorio del usuario</li>
+        <li><code>PATH</code>: Rutas donde se buscan los ejecutables</li>
+        <li><code>USER</code>: Nombre del usuario actual</li>
+        <li><code>SHELL</code>: Shell actualmente en uso</li>
+        <li><code>PWD</code>: Directorio actual de trabajo</li>
+      </ul>
+
+      <h3>read - Lectura de entrada</h3>
+      <p>
+        El comando <span class="command">read</span> lee una línea desde la
+        entrada estándar y la asigna a variables.
+      </p>
+
+      <h4>Ejemplos:</h4>
+      <pre>
+read nombre                    # Lee entrada y la asigna a la variable 'nombre'
+echo "Hola $nombre"            # Usa la variable
+
+read -p "Tu nombre: " nombre   # Muestra un prompt antes de leer
+read -s contraseña             # Lectura silenciosa (no muestra lo que se escribe)
+read -t 5 respuesta            # Tiempo de espera de 5 segundos
+read -n 1 opcion               # Lee solo un carácter</pre
+      >
+
+      <h4>En scripts:</h4>
+      <pre>
+#!/bin/bash
+read -p "Nombre del archivo: " archivo
+touch "$archivo"
+echo "Archivo $archivo creado."</pre
+      >
+
+      <h3>shutdown - Apagado y reinicio</h3>
+      <p>Permite apagar, reiniciar o suspender el sistema de forma segura.</p>
+
+      <h4>Sintaxis:</h4>
+      <pre>shutdown [opciones] tiempo [mensaje]</pre>
+
+      <h4>Ejemplos comunes:</h4>
+      <pre>
+shutdown -h now           # Apaga el sistema inmediatamente (-h = halt)
+shutdown -r now           # Reinicia el sistema inmediatamente (-r = reboot)
+shutdown -h +10           # Apaga el sistema en 10 minutos
+shutdown -c               # Cancela un apagado programado
+shutdown -h 23:30         # Apaga el sistema a las 23:30</pre
+      >
+
+      <h4>Alternativas:</h4>
+      <ul>
+        <li><code>poweroff</code>: Apaga inmediatamente</li>
+        <li><code>reboot</code>: Reinicia inmediatamente</li>
+        <li><code>halt</code>: Detiene el sistema</li>
+        <li>
+          <code>systemctl suspend</code>: Suspende el sistema (en sistemas con
+          systemd)
+        </li>
+        <li>
+          <code>systemctl hibernate</code>: Hiberna el sistema (en sistemas con
+          systemd)
+        </li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>12. Conceptos de Sistemas Unix/Linux</h2>
+
+      <h3>Sistema multiusuario</h3>
+      <p>
+        Un sistema multiusuario permite que varios usuarios utilicen el sistema
+        simultáneamente, cada uno con sus propios archivos y permisos.
+      </p>
+
+      <h3>Sistema multiproceso</h3>
+      <p>
+        Un sistema multiproceso permite ejecutar múltiples programas al mismo
+        tiempo, asignando recursos de CPU entre ellos.
+      </p>
+    </div>
+  </body>
+</html>

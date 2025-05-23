@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <title>Guía Completa de Ventoy para Windows y Linux</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h1 {
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+      }
+      h2 {
+        background-color: #f8f9fa;
+        padding: 8px;
+        border-left: 4px solid #3498db;
+      }
+      code {
+        background-color: #f0f0f0;
+        padding: 2px 5px;
+        border-radius: 3px;
+        font-family: Consolas, monospace;
+      }
+      pre {
+        background-color: #f8f8f8;
+        padding: 10px;
+        border-radius: 5px;
+        overflow-x: auto;
+      }
+      .note {
+        background-color: #e7f5fe;
+        border-left: 4px solid #3498db;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      .warning {
+        background-color: #fff3cd;
+        border-left: 4px solid #ffc107;
+        padding: 10px;
+        margin: 10px 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 20px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+      }
+      th {
+        background-color: #f2f2f2;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>
+      Primer paso:preparacion de un disco externo o pendrive usb para poner la
+      imagen ISO del sistema a instalar
+    </h1>
+    <h2>Guía Completa de Ventoy para Windows y Linux</h2>
+
+    <div class="note">
+      <p>
+        <strong>Ventoy</strong>
+        es una herramienta de código abierto que permite crear unidades USB
+        booteables con múltiples ISOs de sistemas operativos, herramientas de
+        recuperación y más, sin necesidad de formatear cada vez que quieras
+        cambiar la ISO.
+      </p>
+    </div>
+
+    <h2>1. Descarga e Instalación</h2>
+
+    <h3>Para Windows</h3>
+    <ol>
+      <li>
+        <strong>Descargar Ventoy</strong>
+        :
+        <ul>
+          <li>
+            Ve al sitio oficial:
+            <a
+              href="https://www.ventoy.net"
+              target="_blank"
+            >
+              https://www.ventoy.net
+            </a>
+          </li>
+          <li>
+            Descarga la versión para Windows (
+            <code>ventoy-x.x.xx-windows.zip</code>
+            ).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Extraer y ejecutar</strong>
+        :
+        <ul>
+          <li>Descomprime el archivo ZIP.</li>
+          <li>
+            Abre
+            <code>Ventoy2Disk.exe</code>
+            (como administrador).
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Instalar en USB</strong>
+        :
+        <ul>
+          <li>Selecciona tu unidad USB.</li>
+          <li>
+            Haz clic en
+            <strong>Install</strong>
+            (esto borrará todos los datos del USB).
+          </li>
+          <li>Espera a que termine.</li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Para Linux</h3>
+    <ol>
+      <li>
+        <strong>Descargar Ventoy</strong>
+        :
+        <p>Desde la terminal:</p>
+        <pre>
+wget https://github.com/ventoy/Ventoy/releases/download/vx.x.xx/ventoy-x.x.xx-linux.tar.gz</pre
+        >
+        <p>
+          (Reemplaza
+          <code>x.x.xx</code>
+          con la última versión).
+        </p>
+      </li>
+      <li>
+        <strong>Extraer y ejecutar</strong>
+        :
+        <pre>
+tar -xzf ventoy-x.x.xx-linux.tar.gz
+cd ventoy-x.x.xx
+sudo ./Ventoy2Disk.sh -i /dev/sdX</pre
+        >
+        <p>
+          (Reemplaza
+          <code>/dev/sdX</code>
+          con tu dispositivo USB, ej.
+          <code>/dev/sdb</code>
+          ).
+        </p>
+      </li>
+    </ol>
+
+    <h2>2. Copiar ISOs al USB</h2>
+    <ul>
+      <li>
+        Después de instalar Ventoy, tu USB tendrá dos particiones:
+        <ul>
+          <li>
+            <strong>Ventoy (FAT32)</strong>
+            : Aquí copias tus ISOs.
+          </li>
+          <li>
+            <strong>Otra partición (opcional)</strong>
+            : Para almacenar otros archivos.
+          </li>
+        </ul>
+      </li>
+      <li>Simplemente arrastra y suelta tus archivos ISO en la unidad USB.</li>
+      <li>Puedes organizarlas en carpetas (Ventoy las detectará).</li>
+    </ul>
+
+    <h2>3. Arrancar desde el USB</h2>
+    <ol>
+      <li>Reinicia tu computadora.</li>
+      <li>
+        Entra en el menú de arranque (BIOS/UEFI) (usualmente
+        <code>F12</code>
+        ,
+        <code>ESC</code>
+        ,
+        <code>F2</code>
+        , etc.).
+      </li>
+      <li>Selecciona tu USB.</li>
+      <li>Ventoy mostrará un menú con todas las ISOs disponibles.</li>
+      <li>
+        Selecciona una y presiona
+        <code>Enter</code>
+        para iniciar.
+      </li>
+    </ol>
+
+    <h2>4. Funciones Avanzadas</h2>
+
+    <h3>Persistencia en Linux (Live USB con almacenamiento persistente)</h3>
+    <ul>
+      <li>Algunas distribuciones (como Ubuntu) permiten persistencia.</li>
+      <li>
+        Crea un archivo llamado
+        <code>ventoy.json</code>
+        en la raíz del USB con:
+        <pre>
+{
+    "persistence": [
+        {
+            "image": "/ubuntu-22.04.iso",
+            "backend": "/persistence.dat"
+        }
+    ]
+}</pre
+        >
+      </li>
+      <li>
+        Luego, crea un archivo
+        <code>persistence.dat</code>
+        con:
+        <pre>
+dd if=/dev/zero of=persistence.dat bs=1M count=4096  # 4GB
+mkfs.ext4 persistence.dat</pre
+        >
+      </li>
+    </ul>
+
+    <h3>Opciones de arranque</h3>
+    <ul>
+      <li>
+        <strong>
+          Tecla
+          <code>F1</code>
+        </strong>
+        : Mostrar ayuda.
+      </li>
+      <li>
+        <strong>
+          Tecla
+          <code>F2</code>
+        </strong>
+        : Buscar ISOs por nombre.
+      </li>
+      <li>
+        <strong>
+          Tecla
+          <code>F3</code>
+        </strong>
+        : Modo lista/gráfico.
+      </li>
+      <li>
+        <strong>
+          Tecla
+          <code>F5</code>
+        </strong>
+        : Ver checksum de la ISO.
+      </li>
+    </ul>
+
+    <h3>Actualizar Ventoy sin perder ISOs</h3>
+    <ul>
+      <li>
+        Ejecuta
+        <code>Ventoy2Disk.exe</code>
+        (Windows) o
+        <code>Ventoy2Disk.sh</code>
+        (Linux) y selecciona
+        <strong>Update</strong>
+        .
+      </li>
+    </ul>
+
+    <h2>5. Solución de Problemas</h2>
+    <ul>
+      <li>
+        <strong>No aparece el USB en Ventoy</strong>
+        :
+        <ul>
+          <li>Verifica que esté formateado como GPT/MBR según tu BIOS/UEFI.</li>
+        </ul>
+      </li>
+      <li>
+        <strong>ISO no arranca</strong>
+        :
+        <ul>
+          <li>Prueba con otra ISO o verifica su integridad.</li>
+          <li>
+            Algunas ISOs requieren modo
+            <code>Legacy BIOS</code>
+            o
+            <code>UEFI</code>
+            .
+          </li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Descargas de Ventoy 1.1.05 (Febrero 2025)</h2>
+    <table>
+      <tr>
+        <th>Archivo</th>
+        <th>SHA-256 (Hash)</th>
+        <th>Fecha</th>
+        <th>Tamaño</th>
+      </tr>
+      <tr>
+        <td><code>ventoy-1.1.05-windows.zip</code></td>
+        <td>
+          <code>
+            3dc1f0a5209c6fa260af9f08951bc4421127b56d4efa3edd2c979af74b1941e5
+          </code>
+        </td>
+        <td>2025-02-24</td>
+        <td>15 MB</td>
+      </tr>
+      <tr>
+        <td><code>ventoy-1.1.05-linux.tar.gz</code></td>
+        <td>
+          <code>
+            3379c99890359dcff55aab7f7b3286f87c988d1da2fd616e6a9e305fb0a1de9e
+          </code>
+        </td>
+        <td>2025-02-24</td>
+        <td>19 MB</td>
+      </tr>
+      <tr>
+        <td><code>ventoy-1.1.05-livecd.iso</code></td>
+        <td>
+          <code>
+            6718cc9656fa479a682b2463e8b3c79ca82aee469859c4b06d9a537715867ebc
+          </code>
+        </td>
+        <td>2025-02-24</td>
+        <td>186 MB</td>
+      </tr>
+    </table>
+
+    <h3>Enlaces Oficiales de Descarga</h3>
+    <p>
+      El sitio web oficial (
+      <a
+        href="https://www.ventoy.net"
+        target="_blank"
+      >
+        ventoy.net
+      </a>
+      ) puede estar saturado, por lo que se recomienda usar estos mirrors:
+    </p>
+    <ol>
+      <li>
+        <strong>SourceForge</strong>
+        :
+        <ul>
+          <li>
+            <a
+              href="https://sourceforge.net/projects/ventoy/files"
+              target="_blank"
+            >
+              https://sourceforge.net/projects/ventoy/files
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li>
+        <strong>Página Oficial (Alternativo)</strong>
+        :
+        <ul>
+          <li>
+            <a
+              href="https://www.ventoy.net/en/download.html"
+              target="_blank"
+            >
+              https://www.ventoy.net/en/download.html
+            </a>
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <div class="warning">
+      <h3>Notas Importantes</h3>
+      <ul>
+        <li>
+          <strong>Verificación de Seguridad</strong>
+          :
+          <ul>
+            <li>
+              Siempre verifica el
+              <strong>SHA-256</strong>
+              de los archivos descargados (especialmente en mirrors no
+              oficiales).
+            </li>
+            <li>
+              En Windows, usa herramientas como
+              <code>CertUtil</code>
+              :
+              <pre>certUtil -hashfile ventoy-1.1.05-windows.zip SHA256</pre>
+            </li>
+            <li>
+              En Linux, usa
+              <code>sha256sum</code>
+              :
+              <pre>sha256sum ventoy-1.1.05-linux.tar.gz</pre>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <strong>Historial de Versiones</strong>
+          :
+          <ul>
+            <li>
+              Consulta el historial completo de releases en:
+              <a
+                href="https://www.ventoy.net/en/history.html"
+                target="_blank"
+              >
+                https://www.ventoy.net/en/history.html
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <h2>Conclusión</h2>
+    <p>
+      Ventoy es una herramienta poderosa para administrar múltiples ISOs en un
+      solo USB. Es compatible con la mayoría de distribuciones Linux, Windows,
+      herramientas de rescate y más.
+    </p>
+    <p>¡Espero que esta guía te sea útil! 🚀</p>
+  </body>
+</html>

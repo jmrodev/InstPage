@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Clases, Objetos e Instancias en PHP</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #e3f2fd;
+      border-left: 5px solid #2196f3;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #2196f3;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .tip {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🔹 Clases, Objetos e Instancias en PHP</h1>
+
+<div class="concept-box">
+  <span class="concept-title">Class (Clase)</span>
+  <p>Una clase es una plantilla o modelo que define las características y comportamientos comunes que tendrán los objetos creados a partir de ella. Podemos pensar en una clase como un "molde" para crear objetos.</p>
+  <p>Las clases contienen atributos (variables) y métodos (funciones) que definen las propiedades y comportamientos de los objetos que se crearán a partir de ellas.</p>
+  
+  <div class="example-box">
+    <code>
+class Gato {<br>
+&nbsp;&nbsp;// Atributos (propiedades)<br>
+&nbsp;&nbsp;public $nombre;<br>
+&nbsp;&nbsp;public $color;<br>
+&nbsp;&nbsp;public $edad;<br>
+<br>
+&nbsp;&nbsp;// Métodos (comportamientos)<br>
+&nbsp;&nbsp;public function maullar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "$this->nombre dice: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function dormir() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "$this->nombre está durmiendo ZZZ...";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>En este ejemplo, <code>Gato</code> es una clase que define tres atributos (nombre, color y edad) y dos métodos (maullar y dormir).</p>
+  
+  <p>Puntos importantes sobre las clases:</p>
+  <ul>
+    <li>La definición comienza con la palabra clave <code>class</code> seguida del nombre de la clase (por convención, en PHP se usa PascalCase para los nombres de clases).</li>
+    <li>El cuerpo de la clase está delimitado por llaves <code>{ }</code>.</li>
+    <li>Las clases pueden contener propiedades (variables) y métodos (funciones).</li>
+    <li>La palabra clave <code>$this</code> se refiere a la instancia actual del objeto.</li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Objeto</span>
+  <p>Un objeto es una instancia específica de una clase. Si una clase es el molde, el objeto es el producto final creado a partir de ese molde. Cada objeto tiene sus propios valores para los atributos definidos en la clase.</p>
+  <p>Los objetos pueden interactuar entre sí y cada uno mantiene su propio estado (valores de sus atributos).</p>
+  
+  <div class="example-box">
+    <code>
+// Creamos un objeto de la clase Gato<br>
+$mi_gato = new Gato();<br>
+<br>
+// Asignamos valores a sus atributos<br>
+$mi_gato->nombre = "Pelusa";<br>
+$mi_gato->color = "Gris";<br>
+$mi_gato->edad = 3;<br>
+<br>
+// Usamos sus métodos<br>
+$mi_gato->maullar();  // Salida: "Pelusa dice: ¡Miau!"<br>
+$mi_gato->dormir();   // Salida: "Pelusa está durmiendo ZZZ..."
+    </code>
+  </div>
+  
+  <p>Aquí, <code>$mi_gato</code> es un objeto específico de la clase <code>Gato</code> con sus propios valores de atributos.</p>
+  
+  <p>Características de los objetos:</p>
+  <ul>
+    <li>Son creados (instanciados) usando la palabra clave <code>new</code> seguida del nombre de la clase.</li>
+    <li>Se accede a sus propiedades y métodos usando el operador flecha (<code>-></code>).</li>
+    <li>Cada objeto tiene su propio conjunto de valores para las propiedades definidas en la clase.</li>
+    <li>Los objetos son independientes entre sí; modificar un objeto no afecta a otros objetos de la misma clase.</li>
+  </ul>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Instancia</span>
+  <p>Una instancia es un término que se utiliza como sinónimo de objeto. Cuando decimos "crear una instancia de una clase", nos referimos a crear un objeto específico basado en esa clase utilizando la palabra clave <code>new</code>.</p>
+  <p>Cada instancia es independiente de otras instancias de la misma clase, lo que significa que pueden tener diferentes valores para sus atributos.</p>
+  
+  <div class="example-box">
+    <code>
+// Creamos dos instancias diferentes de la clase Gato<br>
+$gato1 = new Gato();<br>
+$gato1->nombre = "Bigotes";<br>
+$gato1->color = "Negro";<br>
+<br>
+$gato2 = new Gato();<br>
+$gato2->nombre = "Michi";<br>
+$gato2->color = "Naranja";<br>
+<br>
+$gato1->maullar();  // Salida: "Bigotes dice: ¡Miau!"<br>
+$gato2->maullar();  // Salida: "Michi dice: ¡Miau!"
+    </code>
+  </div>
+  
+  <p>En este ejemplo, <code>$gato1</code> y <code>$gato2</code> son dos instancias diferentes de la misma clase <code>Gato</code>.</p>
+  
+  <p>Relación entre clases e instancias:</p>
+  <ul>
+    <li>Una clase puede tener múltiples instancias (objetos).</li>
+    <li>Podemos considerar la clase como una "fábrica" que produce objetos similares pero independientes.</li>
+    <li>Todas las instancias comparten la misma estructura (propiedades y métodos), pero cada una tiene sus propios valores.</li>
+    <li>La memoria se asigna solo cuando se crea una instancia, no cuando se define la clase.</li>
+  </ul>
+</div>
+
+<div class="tip">
+  <strong>Consejo práctico:</strong> Al diseñar tus clases, piensa en ellas como representaciones de conceptos o entidades del mundo real. Las propiedades son características (como nombre, color) y los métodos son acciones que esta entidad puede realizar (como maullar, dormir). Este enfoque hace que tu código sea más intuitivo y mantenible.
+</div>
+
+</body>
+</html>

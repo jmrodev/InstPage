@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Guía Completa de Bash y Linux: Tutoriales en Video</title>
+    <link rel="stylesheet" href="../../../../css/styles.css" />
+  </head>
+  <body>
+    <h1>Guía Completa de Bash y Linux: Tutoriales en Video</h1>
+
+    <div class="navigation">
+      <a href="#bash1">Fundamentos Bash</a>
+      <a href="#bash2">Flujo de Datos</a>
+      <a href="#bash3">Scripts Avanzados</a>
+      <a href="#bash4">Subshells y Control</a>
+      <a href="#bash5">Procesos y Daemons</a>
+      <a href="#extra">Comandos Esenciales</a>
+    </div>
+
+    <div id="bash1" class="video-container">
+      <div class="video-title">
+        Bash 1: Fundamentos de la Terminal Linux - Comandos Básicos y Primeros
+        Scripts
+      </div>
+
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/4_ub6614dwY"
+          title="Fundamentos de Bash - Primeros pasos con la terminal Linux"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-description">
+        <h3>
+          Introducción a Bash: Un Lenguaje de Programación para Automatización
+        </h3>
+        <p>
+          El presentador del video, cuya experiencia y conocimientos no se
+          especifican, introduce el lenguaje de programación Bash, destacando su
+          uso en automatizaciones y scripts, especialmente en equipos de
+          infraestructura. A pesar de que algunos lo consideran no un verdadero
+          lenguaje de programación, se enfatiza que Bash es valioso para
+          realizar tareas cotidianas de manera eficiente. Se presentan ejemplos
+          prácticos de comandos básicos y se explica cómo instalar un entorno de
+          Linux en una máquina virtual para comenzar a utilizar Bash. El enfoque
+          se centra en la interacción con el sistema operativo Linux y la
+          creación de scripts que facilitan tareas repetitivas.
+        </p>
+
+        <h4>Puntos Clave:</h4>
+        <ul>
+          <li>
+            <strong>Definición y Utilidad de Bash</strong>: Lenguaje de
+            programación de línea de comandos para interacción con Linux.
+          </li>
+          <li>
+            <strong>Configuración del Entorno</strong>: Instalación de Linux en
+            máquina virtual para practicar.
+          </li>
+          <li>
+            <strong>Comandos Básicos</strong>: Introducción a <code>ls</code>,
+            <code>echo</code> y otros comandos fundamentales.
+          </li>
+          <li>
+            <strong>Argumentos en Scripts</strong>: Uso de <code>$1</code>,
+            <code>$2</code> para pasar parámetros a scripts.
+          </li>
+          <li>
+            <strong>Extracción de Datos</strong>: Ejemplos con
+            <code>curl</code> para obtener información de páginas web.
+          </li>
+          <li>
+            <strong>Estructuras de Control</strong>: Uso de condicionales
+            <code>if</code> para toma de decisiones.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="bash2" class="video-container">
+      <div class="video-title">
+        Bash 2: Comandos Intermedios y Flujo de Datos - Manipulación de
+        Información
+      </div>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/0D6MOPyPq-c"
+          title="Comandos intermedios de Bash - Aprendiendo flujo de datos"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-description">
+        <h3>Conceptos Avanzados de Bash: Funciones, Bucles y Condiciones</h3>
+        <p>
+          El presentador del video, un educador en programación con experiencia
+          práctica en Bash, explora conceptos avanzados de este lenguaje de
+          scripting. Con un enfoque en la simplicidad y la eficiencia, enseña a
+          los espectadores cómo utilizar funciones, bucles y condiciones en Bash
+          para mejorar su programación. Su metodología se basa en ejemplos
+          prácticos que permiten a los usuarios comprender mejor la estructura y
+          la lógica detrás de los scripts.
+        </p>
+
+        <h4>Puntos Clave:</h4>
+        <ul>
+          <li>
+            <strong>Uso de Argumentos</strong>: Cómo pasar y procesar parámetros
+            a scripts.
+          </li>
+          <li>
+            <strong>Bucles For</strong>: Iteración sobre múltiples argumentos
+            con <code>for user in "$@"</code>.
+          </li>
+          <li>
+            <strong>Funciones en Bash</strong>: Creación y uso de funciones como
+            <code>greet</code> para modularidad.
+          </li>
+          <li>
+            <strong>Estructuras Case</strong>: Manejo de múltiples condiciones
+            con <code>case</code>.
+          </li>
+          <li>
+            <strong>Bucles While</strong>: Ejecución repetida de acciones
+            mientras se cumpla una condición.
+          </li>
+          <li>
+            <strong>Opciones con getopts</strong>: Manejo flexible de parámetros
+            en línea de comandos.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="bash3" class="video-container">
+      <div class="video-title">
+        Bash 3: Scripts y Automatización - Entrada/Salida y Redirección
+      </div>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/BTm__-_YrSw"
+          title="Scripts y automatización en Bash - Gestión de entrada y salida"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-description">
+        <h3>Comprendiendo la Entrada, Salida y Error Estándar en Linux</h3>
+        <p>
+          En este video, el presentador, con un enfoque en el sistema operativo
+          Linux y su gestión de comandos, desglosa los conceptos de entrada
+          estándar, salida estándar y error estándar. A través de ejemplos
+          prácticos, el ponente demuestra cómo estos componentes fundamentales
+          funcionan en la ejecución de comandos, utilizando el comando
+          <code>cat</code> como ilustración principal.
+        </p>
+
+        <h4>Puntos Clave:</h4>
+        <ul>
+          <li>
+            <strong>Flujos Estándar</strong>: Entrada (0), Salida (1) y Error
+            (2) y sus funcionamientos.
+          </li>
+          <li>
+            <strong>Comando cat</strong>: Ejemplos prácticos mostrando contenido
+            de archivos con <code>cat /etc/passwd</code>.
+          </li>
+          <li>
+            <strong>Manejo de Errores</strong>: Cómo capturar y gestionar
+            mensajes de error en la terminal.
+          </li>
+          <li>
+            <strong>Redirección</strong>: Uso de <code>></code> para guardar
+            salida en archivos.
+          </li>
+          <li>
+            <strong>Captura de Errores</strong>: Redirección del descriptor 2
+            con <code>2></code> para errores.
+          </li>
+          <li>
+            <strong>Tuberías (Pipes)</strong>: Conexión de comandos con
+            <code>|</code> para procesar datos.
+          </li>
+          <li>
+            <strong>/dev/null</strong>: Descarte de salidas no deseadas
+            enviándolas a este dispositivo.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="bash4" class="video-container">
+      <div class="video-title">
+        Bash 4: Estructuras de Control y Subshells - Aislamiento de Procesos
+      </div>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/WghoDJG1fFw"
+          title="Estructuras de control en Bash - Trabajando con subshells"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-description">
+        <h3>Entendiendo las Subshells en Bash: Parent y Child Shells</h3>
+        <p>
+          En este video, el presentador, un experto en programación con un
+          enfoque particular en Bash, explora el concepto de subshells y cómo
+          estas estructuras funcionan dentro del entorno de comandos. A lo largo
+          del video, se abordan diferentes tipos de subshells, incluidas las
+          "child shells" y su utilidad en la ejecución de comandos sin afectar
+          el entorno del shell padre.
+        </p>
+
+        <h4>Puntos Clave:</h4>
+        <ul>
+          <li>
+            <strong>Tipos de Subshells</strong>: Diferencias entre child y
+            parent shells.
+          </li>
+          <li>
+            <strong>Aislamiento de Variables</strong>: Las variables no se
+            heredan de parent a child shell.
+          </li>
+          <li>
+            <strong>Creación de Subshells</strong>: Uso del comando
+            <code>bash</code> para iniciar nuevos procesos.
+          </li>
+          <li>
+            <strong>Encadenamiento de Comandos</strong>: Ejecución de múltiples
+            comandos en una subshell.
+          </li>
+          <li>
+            <strong>Operaciones Aritméticas</strong>: Cálculos numéricos dentro
+            de paréntesis con <code>$(( ))</code>.
+          </li>
+          <li>
+            <strong>Práctica Recomendada</strong>: Importancia de experimentar
+            con diferentes ejecuciones.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="bash5" class="video-container">
+      <div class="video-title">
+        Bash 5: Gestión de Procesos y Daemons - Técnicas Avanzadas
+      </div>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/EUFaCB1DBlM"
+          title="Gestión de procesos en Bash - Técnicas para administración de daemons"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-description">
+        <h3>Gestión Eficiente de Procesos en Bash: Background y Foreground</h3>
+        <p>
+          Pablo, un experto en programación y sistemas operativos, presenta la
+          tercera parte de su serie sobre Bash, enfocándose en la gestión de
+          trabajos y procesos en Linux. Con un enfoque práctico, Pablo demuestra
+          cómo ejecutar comandos de manera eficiente sin bloquear la terminal,
+          utilizando métodos como la ejecución en segundo plano y el comando
+          <code>trap</code> para manejar señales.
+        </p>
+
+        <h4>Puntos Clave:</h4>
+        <ul>
+          <li>
+            <strong>Procesos en Segundo Plano</strong>: Uso de
+            <code>&</code> para ejecutar sin bloquear la terminal.
+          </li>
+          <li>
+            <strong>Monitoreo con Jobs</strong>: Comando <code>jobs</code> para
+            listar procesos en background.
+          </li>
+          <li>
+            <strong>Manejo de Señales</strong>: <code>trap</code> para capturar
+            y responder a señales como SIGINT.
+          </li>
+          <li>
+            <strong>Control de Procesos</strong>: <code>Control+Z</code> para
+            suspender y <code>bg</code> para continuar en segundo plano.
+          </li>
+          <li>
+            <strong>Desasociación</strong>: <code>disown</code> para desvincular
+            procesos del terminal actual.
+          </li>
+          <li>
+            <strong>Screen</strong>: Creación de sesiones virtuales persistentes
+            para ejecuciones prolongadas.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div id="extra" class="video-container">
+      <div class="video-title">
+        Tutorial Especial: Comandos Esenciales de Linux para el Uso Diario
+      </div>
+      <div class="video-wrapper">
+        <iframe
+          src="https://www.youtube.com/embed/oWq4gJYSZQY"
+          title="Comandos esenciales de Linux - Guía práctica para uso diario"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="video-description">
+        <h3>Dominando la Terminal: Un Enfoque Práctico y Efectivo</h3>
+        <p>
+          Alexia, especialista en sistemas, presenta un tutorial integral sobre
+          el uso de la terminal, dirigido a usuarios de todos los niveles. Con
+          una sólida formación en tecnología y años de experiencia en el campo,
+          Alexia ha desarrollado un método de enseñanza que combina teoría y
+          práctica, permitiendo a los espectadores dominar comandos
+          fundamentales de manera sencilla y efectiva.
+        </p>
+
+        <h4>Puntos Clave:</h4>
+        <ul>
+          <li>
+            <strong>Tipos de Terminal</strong>: Explicación de emuladores como
+            terminal de Apple o xterm.
+          </li>
+          <li>
+            <strong>Rutas Absolutas vs. Relativas</strong>: Diferencias y usos
+            prácticos en navegación.
+          </li>
+          <li>
+            <strong>Comandos Básicos</strong>: <code>pwd</code> y
+            <code>touch</code> para ubicación y creación de archivos.
+          </li>
+          <li>
+            <strong>Variable PATH</strong>: Configuración para ejecutar comandos
+            sin especificar rutas completas.
+          </li>
+          <li>
+            <strong>Parámetros Posicionales</strong>: Manipulación de texto con
+            herramientas como <code>awk</code>.
+          </li>
+          <li>
+            <strong>Piping y Redirección</strong>: Encadenamiento de comandos
+            para transformación de datos.
+          </li>
+          <li>
+            <strong>Visualización de Archivos</strong>: <code>cat</code>,
+            <code>head</code> y <code>tail</code> para mostrar contenidos.
+          </li>
+          <li>
+            <strong>Atajos de Teclado</strong>: <code>Ctrl+R</code> para
+            búsqueda en historial y <code>Ctrl+L</code> para limpiar pantalla.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="navigation">
+      <a href="#bash1">Fundamentos Bash</a>
+      <a href="#bash2">Flujo de Datos</a>
+      <a href="#bash3">Scripts Avanzados</a>
+      <a href="#bash4">Subshells y Control</a>
+      <a href="#bash5">Procesos y Daemons</a>
+      <a href="#extra">Comandos Esenciales</a>
+    </div>
+
+    <footer>
+      <p>© 2023 Tutoriales de Bash y Linux. Todos los derechos reservados.</p>
+      <p>
+        Para sugerencias o consultas sobre los comandos mencionados, deje un
+        comentario en los videos respectivos.
+      </p>
+    </footer>
+  </body>
+</html>

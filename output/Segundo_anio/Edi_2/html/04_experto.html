@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    />
+    <title>Comandos de Linux para Expertos - Nivel 4</title>
+    <link
+        rel="stylesheet"
+        href="../../../../css/styles.css"
+    />
+</head>
+<body>
+    <header>
+        <h1>Comandos de Linux para Expertos</h1>
+        <nav class="breadcrumb">
+            <a href="../../../../index.html"><i class="fas fa-home"></i> Inicio</a>
+            /
+            <a href="../index.html">EdiII</a>
+            /
+            <a href="index.html">Comandos Linux</a>
+            / Nivel Experto
+        </nav>
+    </header>
+
+    <main>
+        <div class="note">
+            <p>
+                <i class="fas fa-exclamation-circle"></i> Esta sección profundiza en comandos, técnicas y herramientas de
+                nivel experto en Linux. Estos conceptos avanzados te permitirán
+                dominar por completo el sistema operativo, automatizar tareas
+                complejas y resolver problemas a nivel profesional. Prepárate para llevar tus habilidades de Linux al siguiente nivel.
+            </p>
+        </div>
+
+        <section>
+            <h2><i class="fas fa-code"></i> Scripting Avanzado en Bash</h2>
+
+            <div class="concept-box">
+                <h3><i class="fas fa-robot"></i> El poder de la automatización con scripts</h3>
+                <p>
+                    El shell scripting es el corazón de la automatización en Linux. A través de scripts de Bash
+                    puedes orquestar la ejecución de múltiples comandos, implementar lógica condicional sofisticada y
+                    automatizar tareas repetitivas, transformando procesos manuales en flujos de trabajo eficientes y autónomos.
+                </p>
+
+                <p>
+                    En este nivel experto, se espera que un usuario de Linux pueda desarrollar
+                    scripts robustos que no solo ejecuten tareas, sino que también gestionen errores de forma elegante,
+                    procesen datos de diversas fuentes de manera inteligente y se adapten a diferentes escenarios sin intervención.
+                </p>
+            </div>
+
+            <div class="tech-container">
+                <div class="tech-box">
+                    <div class="tech-title"><i class="fas fa-cogs"></i> Estructuras de control avanzadas</div>
+                    <div class="tech-image">🔄</div>
+                    <p>
+                        Las estructuras de control en Bash son fundamentales para dotar a tus scripts de inteligencia y adaptabilidad,
+                        permitiendo la toma de decisiones complejas y la ejecución selectiva de bloques de código.
+                    </p>
+
+                    <div class="why-learn">
+                        <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlas?</strong>
+                        <p>
+                            Dominar las estructuras avanzadas de control te capacita para construir scripts
+                            resilientes que pueden anticipar y manejar condiciones inesperadas, manipular datos de forma inteligente
+                            y bifurcar la ejecución basándose en múltiples criterios. Sin estas herramientas, tus scripts serían
+                            secuenciales y vulnerables a fallos ante la diversidad de situaciones que pueden surgir en un entorno real.
+                        </p>
+                    </div>
+
+                    <div class="script-box">
+                        <span class="comment">#!/bin/bash</span>
+                        <span class="comment"># Ejemplo de estructura case</span>
+                        <span class="prompt">read</span> <span class="prompt">-p</span> "Ingrese un comando (backup/status/update): " comando
+                        <span class="prompt">case</span> "<span class="output">$comando</span>" <span class="prompt">in</span>
+                        <span class="output">  backup)</span>
+                        <span class="output">    echo "Iniciando backup..."</span>
+                        <span class="output">    </span><span class="comment"># Código para el backup</span>
+                        <span class="output">    ;;</span>
+                        <span class="output">  status)</span>
+                        <span class="output">    echo "Verificando estado del sistema..."</span>
+                        <span class="prompt">    if</span> <span class="prompt">systemctl</span> is-active --quiet apache2; <span class="prompt">then</span>
+                        <span class="output">      echo "El servidor web está activo"</span>
+                        <span class="prompt">    else</span>
+                        <span class="output">      echo "El servidor web está inactivo"</span>
+                        <span class="prompt">    fi</span>
+                        <span class="output">    ;;</span>
+                        <span class="output">  update)</span>
+                        <span class="output">    echo "Actualizando el sistema..."</span>
+                        <span class="output">    </span><span class="comment"># Código para actualización</span>
+                        <span class="output">    ;;</span>
+                        <span class="output">  *)</span>
+                        <span class="output">    echo "Comando no reconocido: </span><span class="output">$comando</span><span class="output>"</span>
+                        <span class="prompt">    exit</span> 1
+                        <span class="output">    ;;</span>
+                        <span class="prompt">esac</span>
+
+                        <span class="comment"># Ejemplo de bucle for con múltiples fuentes</span>
+                        <span class="prompt">echo</span> "Verificando espacio en discos:"
+                        <span class="prompt">for</span> disco <span class="prompt">in</span> /dev/sd{a,b,c}; <span class="prompt">do</span>
+                        <span class="prompt">  if</span> <span class="prompt">[</span> <span class="prompt">-e</span> "<span class="output">$disco</span>" <span class="prompt">]</span>; <span class="prompt">then</span>
+                        <span class="output">    </span><span class="prompt">echo</span> <span class="prompt">-n</span> "<span class="output">$disco</span>: "
+                        <span class="output">    </span><span class="prompt">df</span> <span class="prompt">-h</span> "<span class="output">$disco</span>" 2>/dev/null | <span class="prompt">grep</span> <span class="prompt">-v</span> Filesystem || <span class="prompt">echo</span> "No montado"
+                        <span class="prompt">  fi</span>
+                        <span class="prompt">done</span>
+
+                        <span class="comment"># Ejemplo de bucle while con lectura de archivo</span>
+                        <span class="prompt">echo</span> "Procesando usuarios:"
+                        <span class="prompt">while</span> IFS=: <span class="prompt">read</span> <span class="prompt">-r</span> usuario _ uid gid _ home shell; <span class="prompt">do</span>
+                        <span class="prompt">  if</span> <span class="prompt">[</span> "<span class="output">$uid</span>" <span class="prompt">-ge</span> 1000 <span class="prompt">]</span> && <span class="prompt">[</span> "<span class="output">$uid</span>" <span class="prompt">-lt</span> 60000 <span class="prompt">]</span>; <span class="prompt">then</span>
+                        <span class="output">    </span><span class="prompt">echo</span> "Usuario: <span class="output">$usuario</span>, UID: <span class="output">$uid</span>, Home: <span class="output">$home</span>, Shell: <span class="output">$shell</span>"
+                        <span class="prompt">  fi</span>
+                        <span class="prompt">done</span> < /etc/passwd
+                    </div>
+
+                    <p><strong>Estructuras de control en Bash:</strong></p>
+                    <ul>
+                        <li><code>if/elif/else</code>: Evaluación condicional de bloques de código.</li>
+                        <li><code>case</code>: Selección de una acción basada en el valor de una variable.</li>
+                        <li><code>for</code>: Iteración a través de una lista de elementos o un rango numérico.</li>
+                        <li><code>while</code>: Ejecución repetida de un bloque de código mientras una condición sea verdadera.</li>
+                        <li><code>until</code>: Ejecución repetida de un bloque de código hasta que una condición sea verdadera.</li>
+                        <li><code>select</code>: Creación de menús interactivos para la selección de opciones.</li>
+                        <li>Expansiones: <code>{a,b,c}</code> (generación de combinaciones), <code>{1..10}</code> (generación de secuencias numéricas).</li>
+                    </ul>
+
+                    <div class="exercise-box">
+                        <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+                        <ol>
+                            <li>Crea un script que tome un directorio como argumento y muestre los 5 archivos más grandes dentro de él, ordenados por tamaño.</li>
+                            <li>Escribe un script que lea un archivo CSV línea por línea y, basándose en el valor de la primera columna, ejecute una acción específica definida en el script.</li>
+                            <li>Implementa un menú interactivo utilizando la estructura <code>select</code> que ofrezca al usuario varias opciones para ejecutar diferentes comandos del sistema (por ejemplo, mostrar la memoria libre, listar los procesos en ejecución, etc.).</li>
+                            <li>Desarrolla un script que itere sobre todos los usuarios del sistema definidos en <code>/etc/passwd</code> y verifique si su directorio de inicio existe y tiene los permisos de lectura, escritura y ejecución correctos para el propietario.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="tech-box">
+                    <div class="tech-title"><i class="fas fa-puzzle-piece"></i> Funciones y modularización</div>
+                    <div class="tech-image">🧩</div>
+                    <p>
+                        Las funciones en Bash permiten encapsular bloques de código para su reutilización, promoviendo la organización y el mantenimiento eficiente de scripts complejos.
+                    </p>
+
+                    <div class="why-learn">
+                        <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlas?</strong>
+                        <p>
+                            Al igual que en otros lenguajes de programación, las funciones son esenciales para escribir código limpio,
+                            reutilizable y fácil de mantener. Permiten descomponer problemas complejos en módulos más pequeños y manejables,
+                            evitando la redundancia de código y simplificando la depuración y futuras modificaciones de tus scripts.
+                        </p>
+                    </div>
+
+                    <div class="script-box">
+                        <span class="comment">#!/bin/bash</span>
+
+                        <span class="comment"># Definición de funciones con parámetros y valor de retorno</span>
+                        <span class="prompt">verificar_espacio</span>() {
+                        <span class="output">  local directorio="</span><span class="output"><span class="math-inline">1</span\><span class\="output\>"</span\>
+<span class\="output"\>  local minimo\="</span\><span class\="output"\></span>{2:-100}</span><span class="output>" </span><span class="comment"># Valor por defecto: 100MB</span>
+                        <span class="comment">  # Obtener espacio libre en MB</span>
+                        <span class="output">  local espacio_libre=$(</span><span class="prompt">df</span> <span class="prompt">-m</span> "<span class="output">$directorio</span>" | <span class="prompt">awk</span> 'NR==2 {print $4}')
+                        <span class="prompt">  if</span> <span class="prompt">[</span> "<span class="output">$espacio_libre</span>" <span class="prompt">-lt</span> "<span class="output">$minimo</span>" <span class="prompt">]</span>; <span class="prompt">then</span>
+                        <span class="output">    </span><span class="prompt">echo</span> "ADVERTENCIA: Queda poco espacio en <span class="output">$directorio</span> (<span class="output">$espacio_libre</span> MB)"
+                        <span class="prompt">    return</span> 1
+                        <span class="prompt">  else</span>
+                        <span class="output">    </span><span class="prompt">echo</span> "Espacio suficiente en <span class="output">$directorio</span> (<span class="output">$espacio_libre</span> MB)"
+                        <span class="prompt">    return</span> 0
+                        <span class="prompt">  fi</span>
+                        }
+
+                        <span class="comment"># Función para log con timestamp</span>
+                        <span class="prompt">log</span>() {
+                        <span class="output">  local nivel="</span><span class="output">$1</span><span class="output>"</span>
+                        <span class="output">  local mensaje="</span><span class="output"><span class="math-inline">2</span\><span class\="output\>"</span\>
+<span class\="output"\>  local timestamp\=</span>(</span><span class="prompt">date</span> '+%Y-%m-%d %H:%M:%S')
+                        <span class="prompt">  echo</span> "[<span class="output">$timestamp</span>] [<span class="output">$nivel</span>] <span class="output">$mensaje</span>" >> "/var/log/miscript.log"
+                        <span class="comment">  # Si es error, también mostrar en stderr</span>
+                        <span class="prompt">  if</span> <span class="prompt">[</span> "<span class="output">$nivel</span>" = "ERROR" <span class="prompt">]</span>; <span class="prompt">then</span>
+                        <span class="output">    </span><span class="prompt">echo</span> "[<span class="output">$timestamp</span>] [<span class="output">$nivel</span>] <span class="output">$mensaje</span>" >&2
+                        <span classprompt">  fi</span>
+                        }
+
+                        <span class="comment"># Función para limpieza antes de salir</span>
+                        <span class="prompt">limpiar</span>() {
+                        <span class="output">  </span><span class="prompt">echo</span> "Realizando limpieza..."
+                        <span class="prompt">  </span><span class="prompt">[</span> <span class="prompt">-f</span> "<span class="output">$TEMP_FILE</span>" <span class="prompt">]</span> && <span class="prompt">rm</span> "<span class="output">$TEMP_FILE</span>"
+                        <span class="prompt">  log</span> "INFO" "Script finalizado, recursos liberados"
+                        }
+
+                        <span class="comment"># Registrar función de limpieza para que se ejecute al salir</span>
+                        <span class="prompt">trap</span> limpiar EXIT
+
+                        <span class="comment"># Uso de las funciones</span>
+                        <span class="prompt">TEMP_FILE</span>=$(<span class="prompt">mktemp</span>)
+                        <span class="prompt">log</span> "INFO" "Script iniciado con PID <span class="output">$$</span>"
+
+                        <span class="prompt">verificar_espacio</span> "/home" 500
+                        <span class="prompt">if</span> <span class="prompt">[</span> <span class="output">$?</span> <span class="prompt">-eq</span> 0 <span class="prompt">]</span>; <span class="prompt">then</span>
+                        <span class="output">  </span><span class="prompt">echo</span> "Procediendo con la operación..."
+                        <span class="output">  </span><span class="prompt">log</span> "INFO" "Verificación de espacio exitosa"
+                        <span class="prompt">else</span>
+                        <span class="output">  </span><span class="prompt">log</span> "ERROR" "Espacio insuficiente para continuar"
+                        <span class="prompt">  exit</span> 1
+                        <span class="prompt">fi</span>
+                    </div>
+
+                    <p><strong>Características avanzadas de funciones:</strong></p>
+                    <ul>
+                        <li>Variables locales con <code>local</code> para limitar su alcance dentro de la función.</li>
+                        <li>Parámetros posicionales (<code>$1</code>, <code>$2</code>, ...) para acceder a los argumentos pasados a la función.</li>
+                        <li>Definición de parámetros con valores por defecto utilizando <code>${parametro:-valor_por_defecto}</code>.</li>
+                        <li>Retorno de valores utilizando el comando <code>return</code>, cuyo estado de salida puede ser capturado con <code>$?</code>.</li>
+                        <li>Captura de la salida de una función utilizando la sustitución de comandos: <code>$(funcion argumentos)</code>.</li>
+                        <li>Uso de <code>trap</code> para definir acciones a ejecutar ante ciertas señales o al salir del script, ideal para tareas de limpieza.</li>
+                    </ul>
+
+                    <div class="exercise-box">
+                        <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+                        <ol>
+                            <li>Crea un script que incluya funciones para realizar tareas comunes de administración del sistema, como verificar el espacio libre en disco, listar los procesos en ejecución y mostrar la carga promedio del sistema. El script principal debe llamar a estas funciones según la opción que elija el usuario.</li>
+                            <li>Implementa un sistema de registro (logging) dentro de un script utilizando funciones. Debes tener funciones separadas para registrar mensajes de nivel INFO, WARNING y ERROR, y cada mensaje debe incluir una marca de tiempo.</li>
+                            <li>Escribe una función de validación que tome un parámetro (por ejemplo, una dirección de correo electrónico o un número de teléfono) y devuelva un código de estado (0 para válido, 1 para inválido) después de realizar una verificación básica de formato.</li>
+                            <li>Desarrolla una "biblioteca" de funciones reutilizables en un archivo separado (por ejemplo, <code>funciones_utiles.sh</code>) y crea un script principal que importe y utilice estas funciones mediante el comando <code>source</code>.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="tech-box">
+                    <div class="tech-title"><i class="fas fa-bug"></i> Depuración y Manejo de Errores</div>
+                    <div class="tech-image">🐛</div>
+                    <p>
+                        Un script robusto no solo realiza su tarea, sino que también anticipa y maneja errores de manera controlada, proporcionando información útil para la depuración.
+                    </p>
+
+                    <div class="script-box">
+                        <span class="comment">#!/bin/bash</span>
+
+                        <span class="comment"># Habilitar modo de depuración para ver cada comando ejecutado</span>
+                        <span class="prompt">set</span> <span class="prompt">-x</span>
+
+                        <span class="comment"># Asegurarse de que el script termine si un comando falla</span>
+                        <span class="prompt">set</span> <span class="prompt">-e</span>
+
+                        <span class="comment"># Asegurarse de que los errores en las tuberías también causen la salida</span>
+                        <span class="prompt">set</span> <span class="prompt">-o</span> pipefail
+
+                        <span class="comment"># Función para manejar errores</span>
+                        <span class="prompt">manejar_error</span>() {
+                        <span class="output">  </span><span class="prompt">echo</span> "ERROR en línea <span class="output">$1</span> ejecutando: <span class="output">$2</span>" >&2
+                        <span class="prompt">  exit</span> 1
+                        }
+
+                        <span class="comment"># Capturar errores y llamar a la función manejar_error</span>
+                        <span class="prompt">trap</span> 'manejar_error <span class="output">$LINENO</span> "<span class="output">$BASH_COMMAND</span>"' ERR
+
+                        <span class="comment"># Ejemplo de validación de parámetros</span>
+                        <span class="prompt">if</span> <span class="prompt">[</span> <span class="output">$#</span> <span class="prompt">-lt</span> 1 <span class="prompt">]</span>; <span class="prompt">then</span>
+                        <span class="output">  </span><span class="prompt">echo</span> "Uso: <span class="output">$0</span> archivo" >&2
+                        <span class="prompt">  exit</span> 1
+                        <span class="prompt">fi</span>
+
+                        <span class="prompt">archivo</span>="<span class="output">$1</span>"
+                        <span class="prompt">cat</span> "<span class="output">$archivo</span>" <span class="comment"># Este comando fallará si el archivo no existe, y el trap se activará</span>
+                    </div>
+
+                    <p><strong>Técnicas de depuración y manejo de errores:</strong></p>
+                    <ul>
+                        <li><code>set -x</code>: Activa el modo de depuración, mostrando cada comando antes de su ejecución.</li>
+                        <li><code>set -e</code>: Hace que el script termine inmediatamente si un comando falla (devuelve un código de salida diferente de cero).</li>
+                        <li><code>set -o pipefail</code>: En una tubería de comandos, hace que el script termine si cualquier comando en la tubería falla.</li>
+                        <li><code>trap</code>: Permite especificar comandos para ser ejecutados al recibir ciertas señales (como errores, salida del script, etc.). <code>trap 'comando' SEÑAL</code>. La señal <code>ERR</code> se activa cuando un comando devuelve un código de salida no cero.</li>
+                        <li>Validación exhaustiva de las entradas del usuario y los parámetros del script para prevenir comportamientos inesperados o vulnerabilidades de seguridad.</li>
+                    </ul>
+
+                    <div class="exercise-box">
+                        <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+                        <ol>
+                            <li>Crea un script que intente realizar una operación que podría fallar (por ejemplo, eliminar un archivo que quizás no exista). Utiliza <code>set -e</code> y observa el comportamiento del script cuando la operación falla. Modifica el script para usar <code>trap</code> y capturar el error, mostrando un mensaje informativo en lugar de terminar abruptamente.</li>
+                            <li>Escribe un script que tome un número como entrada del usuario. Implementa una validación para asegurar que la entrada sea realmente un número. Si no lo es, muestra un mensaje de error y termina el script.</li>
+                            <li>Desarrolla un script que ejecute una serie de comandos en una tubería. Utiliza <code>set -o pipefail</code> y simula un fallo en uno de los comandos de la tubería para observar cómo afecta la ejecución del script.</li>
+                            <li>Implementa una función en un script que realice una tarea y devuelva un código de salida específico para indicar éxito o diferentes tipos de errores. En el script principal, llama a esta función y utiliza el código de salida (<code>$?</code>) para decidir qué acción tomar a continuación.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="tech-box">
+                    <div class="tech-title"><i class="fas fa-search"></i> Evaluación de comandos y expansiones</div>
+                    <div class="tech-image">🔍</div>
+                    <p>
+                        Bash ofrece potentes mecanismos para manipular strings, evaluar expresiones aritméticas y expandir variables de formas avanzadas, permitiendo una sintaxis concisa y poderosa.
+                    </p>
+
+                    <div class="why-learn">
+                        <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlas?</strong>
+                        <p>
+                            Dominar las técnicas avanzadas de expansión y evaluación te permite escribir scripts más eficientes y legibles,
+                            realizar operaciones complejas sobre datos de texto y variables directamente en la shell, y adaptar el comportamiento
+                            de tus scripts de manera dinámica basada en el entorno o las entradas.
+                        </p>
+                    </div>
+
+                    <div class="script-box">
+                        <span class="comment">#!/bin/bash</span>
+
+                        <span class="comment"># Ejemplo de manipulación avanzada de strings</span>
+                        <span class="prompt">archivo</span>="documento.principal.txt.backup"
+                        <span class="prompt">echo</span> "Nombre base: <span class="output">${archivo%.*}</span>" <span class="comment"># documento.principal.txt</span>
+                        <span class="prompt">echo</span> "Extensión: <span class="output">${archivo##*.}</span>" <span class="comment"># backup</span>
+                        <span class="prompt">echo</span> "Sin prefijo: <span class="output">${archivo#documento.}</span>" <span class="comment"># principal.txt.backup</span>
+                        <span class="prompt">echo</span> "Reemplazo: <span class="output">${archivo/principal/secundario}</span>" <span class="comment"># documento.secundario.txt.backup</span>
+
+                        <span class="comment"># Expansión de variables con valores por defecto</span>
+                        <span class="prompt">directorio</span>="<span class="output">${1:-$(pwd)}</span>" <span class="comment"># Usa el primer parámetro o el directorio actual</span>
+                        <span class="prompt">usuario</span>="<span class="output">${SUDO_USER:-$USER}</span>" <span class="comment"># Usa SUDO_USER si existe, o USER si no</span>
+                        <span class="prompt">memoria</span>="<span class="output">${RAM_MINIMA:=512}</span>" <span class="comment"># Asigna 512 si RAM_MINIMA no está definida</span>
+
+                        <span class="comment"># Sustitución de comandos</span>
+                        <span class="prompt">usuarios</span>=$(<span class="prompt">cut</span> <span class="prompt">-d:</span> <span class="prompt">-f1</span> /etc/passwd | <span class="prompt">sort</span>)
+                        <span class="prompt">echo</span> "Primer usuario: $(<span class="prompt">echo</span> "<span class="output">$usuarios</span>" | <span class="prompt">head</span> <span class="prompt">-1</span>)"
+
+                        <span class="comment"># Evaluación aritmética</span>
+                        <span class="prompt">num1</span>=10
+                        <span class="prompt">num2</span>=5
+                        <span class="prompt">echo</span> "Suma: $((num1 + num2))"
+                        <span class="prompt">echo</span> "Producto: $((num1 * num2))"
+                    </div>
+
+                    <p><strong>Técnicas avanzadas de expansión:</strong></p>
+                    <ul>
+                        <li>Sustitución de comandos: <code>$(comando)</code> o <code>`comando`</code> ejecuta el comando y reemplaza la salida en la línea.</li>
+                        <li>Evaluación aritmética: <code>$((expresión))</code> realiza operaciones aritméticas.</li>
+                        <li>Expansión de llaves: <code>{inicio..fin}</code> para generar secuencias, <code>{op1,op2,op3}</code> para generar combinaciones.</li>
+                        <li>Manipulación de strings:
+                            <ul>
+                                <li><code>${var#patrón}</code>: Elimina el prefijo más corto que coincide con el patrón.</li>
+                                <li><code>${var##patrón}</code>: Elimina el prefijo más largo que coincide con el patrón.</li>
+                                <li><code>${var%patrón}</code>: Elimina el sufijo más corto que coincide con el patrón.</li>
+                                <li><code>${var%%patrón}</code>: Elimina el sufijo más largo que coincide con el patrón.</li>
+                                <li><code>${var/patrón/reemplazo}</code>: Reemplaza la primera coincidencia del patrón.</li>
+                                <li><code>${var//patrón/reemplazo}</code>: Reemplaza todas las coincidencias del patrón.</li>
+                            </ul>
+                        </li>
+                        <li>Valores por defecto de variables:
+                            <ul>
+                                <li><code>${var:-valor}</code>: Usa <code>valor</code> si <code>var</code> no está definida o está vacía.</li>
+                                <li><code>${var:=valor}</code>: Asigna <code>valor</code> a <code>var</code> si no está definida o vacía, y luego usa <code>valor</code>.</li>
+                                <li><code>${var:?mensaje}</code>: Muestra un error con <code>mensaje</code> y sale si <code>var</code> no está definida o vacía.</li>
+                                <li><code>${var:+valor}</code>: Usa <code>valor</code> si <code>var</code> está definida y no está vacía, sino usa nada.</li>
+                            </ul>
+                        </li>
+                        <li>Indirección de variables: <code>${!nombre_de_variable}</code> usa el valor de <code>nombre_de_variable</code> como el nombre de otra variable cuyo valor se recupera.</li>
+                        <li>Expansión de substrings: <code>${var:posición:longitud}</code> extrae una subcadena.</li>
+                    </ul>
+
+                    <div class="exercise-box">
+                        <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+                        <ol>
+                            <li>Crea un script que utilice la expansión de llaves para generar una serie de directorios con nombres como <code>backup-01</code>, <code>backup-02</code>, ..., <code>backup-10</code>.</li>
+                            <li>Escribe un script que tome un nombre de archivo como entrada y utilice la manipulación de strings para extraer el nombre base (sin extensión) y la extensión del archivo.</li>
+                            <li>Implementa un sistema de configuración simple en un script donde las variables de configuración pueden ser definidas por el usuario a través de variables de entorno. Utiliza los valores por defecto de las variables Bash para asegurar que el script tenga valores predeterminados si las variables de entorno no están definidas.</li>
+                            <li>Desarrolla un script que utilice la indirección de variables para acceder a un conjunto de variables cuyos nombres están almacenados en otra variable. Por ejemplo, si tienes una variable <code>var_name="user_list"</code> y otra variable <code>user_list="alice,bob,charlie"</code>, usa la indirección para acceder al valor de <code>user_list</code>.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="tech-box">
+                    <div class="tech-title"><i class="fas fa-shield-alt"></i> Seguridad en Scripts Bash</div>
+                    <div class="tech-image">🔒</div>
+                    <p>
+                        La seguridad es primordial al escribir scripts, especialmente aquellos que interactúan con el sistema o manejan datos sensibles. Es crucial protegerse contra inyecciones de comandos y otras vulnerabilidades.
+                    </p>
+
+                    <div class="script-box">
+                        <span class="comment">#!/bin/bash</span>
+
+                        <span class="comment"># Validación de entradas para evitar inyección de comandos</span>
+                        <span class="prompt">read</span> <span class="prompt">-p</span> "Ingrese un nombre de archivo: " archivo
+                        <span class="prompt">if</span> [[ "<span class="output">$archivo</span>" =~ ^[a-zA-Z0-9._-]+$ ]]; <span class="prompt">then</span>
+                        <span class="output">  </span><span class="prompt">echo</span> "Procesando archivo: <span class="output">$archivo</span>"
+                        <span class="comment">  # Seguro para usar en comandos</span>
+                        <span class="prompt">  cat</span> "<span class="output">$archivo</span>"
+                        <span class="prompt">else</span>
+                        <span class="output">  </span><span class="prompt">echo</span> "ERROR: Nombre de archivo inválido." >&2
+                        <span class="prompt">  exit</span> 1
+                        <span class="prompt">fi</span>
+
+                        <span class="comment"># Usar rutas absolutas para comandos críticos</span>
+                        <span class="prompt">/bin/rm</span> -f "/tmp/archivo_temporal"
+
+                        <span class="comment"># Evitar el uso de eval</span>
+                        <span class="comment"># peligroso: eval "comando_$opcion"</span>
+
+                        <span class="comment"># Usar IFS para prevenir la división de palabras no intencionada</span>
+                        <span class="prompt">IFS</span>=$'\n'
+                        <span class="prompt">for</span> linea <span class="prompt">in</span> $(<span class="prompt">cat</span> "archivo_con_espacios.txt"); <span class="prompt">do</span>
+                        <span class="output">  </span><span class="comment"># Procesar cada línea de forma segura</span>
+                        <span class="output">  </span><span class="prompt">echo</span> "Línea: <span class="output">$linea</span>"
+                        <span class="prompt">done</span>
+
+                        <span class="comment"># Usar printf para formatear la salida de forma segura</span>
+                        <span class="prompt">nombre</span>="Usuario con 'caracteres especiales'"
+                        <span class="prompt">printf</span> "%s\n" "<span class="output">$nombre</span>"
+                    </div>
+
+                    <p><strong>Buenas prácticas de seguridad:</strong></p>
+                    <ul>
+                        <li>Validar todas las entradas del usuario para prevenir inyección de comandos.</li>
+                        <li>Usar rutas absolutas para comandos críticos para evitar depender de la variable <code>$PATH</code>.</li>
+                        <li>Evitar el uso de <code>eval</code>, ya que puede ejecutar código arbitrario.</li>
+                        <li>Usar <code>IFS</code> para controlar cómo se dividen las cadenas de texto, evitando la división de palabras no intencionada.</li>
+                        <li>Utilizar <code>printf</code> para formatear la salida de forma segura, especialmente cuando se incluyen datos del usuario.</li>
+                        <li>Ejecutar scripts con el menor privilegio posible. Evitar ejecutarlos como root a menos que sea absolutamente necesario.</li>
+                        <li>Utilizar <code>set -euo pipefail</code> para detectar errores y terminar el script en caso de problemas.</li>
+                    </ul>
+
+                    <div class="exercise-box">
+                        <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+                        <ol>
+                            <li>Crea un script que solicite al usuario un nombre de archivo y luego intente mostrar el contenido del archivo. Implementa una validación robusta para asegurar que el nombre del archivo solo contenga caracteres alfanuméricos, puntos y guiones bajos. Si el nombre del archivo no es válido, muestra un mensaje de error y sal del script.</li>
+                            <li>Escribe un script que tome un comando como entrada del usuario y luego lo ejecute. Implementa medidas de seguridad para prevenir la inyección de comandos. Por ejemplo, puedes permitir solo un conjunto limitado de comandos predefinidos o usar una función que "escape" los caracteres especiales en la entrada del usuario.</li>
+                            <li>Desarrolla un script que procese una lista de nombres de usuario almacenada en un archivo. Utiliza <code>IFS</code> para leer el archivo línea por línea y <code>printf</code> para mostrar cada nombre de usuario de forma segura.</li>
+                            <li>Implementa un script que tome una cadena de búsqueda como entrada del usuario y la use para buscar archivos en un directorio. Asegúrate de usar <code>find</code> de forma segura, evitando la inyección de opciones adicionales en la búsqueda.</li>
+                        </ol>
+                    </div>
+                </div>
+
+                <div class="tech-box">
+                    <div class="tech-title"><i class="fas fa-bolt"></i> Optimización de Scripts</div>
+                    <div class="tech-image">⚡</div>
+                    <p>
+                        La eficiencia es clave en scripts avanzados. Aprender a optimizar el rendimiento mediante la paralelización, la minimización de procesos y la gestión eficiente de recursos es fundamental.
+                    </p>
+
+                    <div class="script-box">
+                        <span class="comment">#!/bin/bash</span>
+
+                        <span class="comment"># Ejemplo de paralelización con xargs</span>
+                        <span class="prompt">echo</span> "Procesando archivos en paralelo:"
+                        <span class="prompt">find</span> /ruta/a/archivos -type f -name "*.log" | <span class="prompt">xargs</span> <span class="prompt">-n</span> 1 <span class="prompt">-P</span> 4 gzip
+
+                        <span class="comment"># Evitar bucles innecesarios</span>
+                        <span class="comment"># Ineficiente:</span>
+                        <span class="comment"># for archivo in $(ls /ruta/a/archivos); do ... done</span>
+                        <span class="comment"># Eficiente:</span>
+                        <span class="prompt">find</span> /ruta/a/archivos -type f -print0 | <span class="prompt">while</span> <span class="prompt">IFS</span>= <span class="prompt">read</span> <span class="prompt">-r</span> <span class="prompt">-d</span> $'\0' archivo; <span class="prompt">do</span>
+                        <span class="output">  </span><span class="comment"># Procesar $archivo</span>
+                        <span class="prompt">done</span>
+
+                        <span class="comment"># Minimizar el uso de subshells</span>
+                        <span class="comment"># Ineficiente:</span>
+                        <span class="comment"># for usuario in $(cat /etc/passwd | cut -d: -f1); do ... done</span>
+                        <span class="comment"># Eficiente:</span>
+                        <span class="prompt">while</span> <span class="prompt">IFS</span>=: <span class="prompt">read</span> <span class="prompt">-r</span> usuario _; <span class="prompt">do</span>
+                        <span class="output">  </span><span class="comment"># Procesar $usuario</span>
+                        <span class="prompt">done</span> < /etc/passwd
+
+                        <span class="comment"># Preferir comandos internos de Bash</span>
+                        <span class="comment"># Ineficiente:</span>
+                        <span class="comment"># var=$(echo "cadena" | wc -c)</span>
+                        <span class="comment"># Eficiente:</span>
+                        <span class="prompt">var</span>="${#cadena}"
+                    </div>
+
+                    <p><strong>Consejos de optimización:</strong></p>
+                    <ul>
+                        <li>Utilizar <code>xargs</code> o <code>parallel</code> para ejecutar tareas en paralelo, aprovechando múltiples núcleos de la CPU.</li>
+                        <li>Evitar bucles innecesarios; usar herramientas como <code>find</code> y <code>grep</code> para realizar operaciones masivas de forma eficiente.</li>
+                        <li>Minimizar el uso de subshells (<code>$()</code> o ``) cuando no sean estrictamente necesarios, ya que crean un nuevo proceso.</li>
+                        <li>Preferir los comandos internos de Bash sobre las herramientas externas siempre que sea posible, ya que los comandos internos son más rápidos.</li>
+                        <li>Usar la redirección y las tuberías de forma inteligente para evitar la creación de archivos temporales.</li>
+                    </ul>
+
+                    <div class="exercise-box">
+                        <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+                        <ol>
+                            <li>Crea un script que comprima todos los archivos de registro en un directorio, utilizando <code>xargs</code> para paralelizar el proceso de compresión. Mide el tiempo de ejecución del script con y sin paralelización para comparar el rendimiento.</li>
+                            <li>Escribe un script que procese un archivo de texto grande, realizando una serie de operaciones en cada línea (por ejemplo, extraer ciertos campos, realizar cálculos, etc.). Optimiza el script para evitar bucles innecesarios y compara el rendimiento de la versión optimizada con la versión original.</li>
+                            <li>Desarrolla un script que realice una serie de operaciones en un conjunto de archivos. Utiliza subshells para realizar algunas de las operaciones y luego optimiza el script para minimizar o eliminar el uso de subshells. Compara el rendimiento de ambas versiones.</li>
+                            <li>Implementa un script que realice una serie de manipulaciones de cadenas de texto. Optimiza el script para utilizar comandos internos de Bash en lugar de herramientas externas (como <code>echo</code>, <code>wc</code>, <code>cut</code>, etc.) siempre que sea posible. Mide el tiempo de ejecución de ambas versiones para observar la mejora en el rendimiento.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2><i class="fas fa-tasks"></i> Automatización y Programación de Tareas</h2>
+
+            <div class="concept-box">
+                <h3><i class="fas fa-calendar-check"></i> Administrando tareas programadas</h3>
+                <p>
+                    La automatización es un pilar fundamental en la administración de sistemas Linux. Programar tareas para que se ejecuten automáticamente a intervalos regulares o en momentos específicos permite optimizar el tiempo y asegurar la ejecución consistente de procesos críticos.
+                </p>
+
+                <p>
+                    Los usuarios expertos de Linux no solo dominan la programación de tareas, sino que también comprenden las sutilezas de la gestión de entornos de ejecución, el manejo de salidas y errores, y las estrategias para garantizar la confiabilidad y el mantenimiento de las tareas programadas.
+                </p>
+            </div>
+
+            <div class="tech-container">
+                <div class="tech-box">
+                    <div class="tech-title"><i class="fas fa-clock"></i> cron y crontab avanzado</div>
+                    <div class="tech-image">🕒</div>
+                    <p>
+                        Cron es el demonio de programación de tareas estándar en sistemas Linux, permitiendo la ejecución automática de comandos y scripts a intervalos regulares.
+                    </p>
+
+                    <div class="why-learn">
+                        <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías dominarlo?</strong>
+                        <p>
+                            La capacidad de programar tareas con precisión y confiabilidad es esencial para la administración eficiente de sistemas. Cron permite automatizar una amplia gama de tareas, desde copias de seguridad rutinarias hasta el monitoreo del sistema y la generación de informes, liberando tiempo y reduciendo el riesgo de errores humanos.
+                        </p>
+                    </div>
+
+                    <div class="terminal">
+                        <span class="comment"># Editar el crontab del usuario actual</span>
+                        <span class="prompt">$</span>
+                        crontab -e
+
+                        <span class="comment"># Formato de crontab: minuto hora día-mes mes día-semana comando</span>
+                        <span class="output">
+                            # Ejecutar a las 3:30 AM todos los días
+                            30 3 * * * /ruta/al/script_backup.sh
+
+                            # Ejecutar cada 15 minutos en horario laboral (Lun-Vie, 9-17)
+                            */15 9-17 * * 1-5 /ruta/al/script_monitoreo.sh
+
+                            # Ejecutar el primer día de cada mes a medianoche
+                            0 0 1 * * /ruta/al/script_mensual.sh
+
+                            # Ejecutar cada domingo a las 2 AM
+                            0 2 * * 0 /ruta/al/script_semanal.sh
+                        </span>
+
+                        <span class="comment"># Ver las tareas programadas</span>
+                        <span class="prompt">$</span>
+                        crontab -l
+                        <span class="output">[muestra las entradas del crontab]</span>
+
+                        <span class="comment"># Ver las tareas programadas de otro usuario (como root)</span>
+                        <span class="prompt">#</span>
+                        crontab -u otroUsuario -l
+                    </div>
+
+                    <p><strong>Características avanzadas de cron:</strong></p>
+                    <ul>
+                        <li>Expresiones especiales: <code>@yearly</code>, <code>@annually</code>, <code>@monthly</code>, <code>@weekly</code>, <code>@daily</code>, <code>@midnight</code>, <code>@hourly</code>, <code>@reboot</code>.</li>
+                        <li>Variables de entorno en crontab: <code>SHELL</code>, <code>PATH</code>, <code>MAILTO</code>.</li>
+                        <li>Redirección de la salida y errores de los comandos programados.</li>
+                        <li>Directorios especiales: <code>/etc/cron.d/</code>, <code>/etc/cron.daily/</code>, <code>/etc/cron.hourly/</code>, <code>/etc/cron.monthly/</code>, <code>/etc/cron.weekly/</code>.</li>
+                        <li>Restricciones de acceso de usuarios a cron: <code>/etc/cron.allow</code>, <code>/etc/cron.deny</code>.</li>
+                        <li>Uso de <code>anacron</code> para sistemas que no están encendidos las 24 horas del día.</li>
+                    </ul>
+
+                    <div class="script-box">
+                        <span class="comment"># Ejemplo de crontab avanzado</span>
+
+                        <span class="comment"># Configurar variables de entorno</span>
+                        <span class="prompt">SHELL</span>=/bin/bash
+                        <span class="prompt">PATH</span>=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+                        <span class="prompt">MAILTO</span>=admin@ejemplo.com
+
+                        <span class="comment"># Redirección de salida y errores a archivos de log</span>
+                        0 2 * * * /scripts/backup_db.sh >> /var/log/backup_db.log 2>&1
+
+                        <span class="comment"># Usar hora específica con entorno completo</span>
+                        0 5 * * * . $HOME/.profile; /scripts/informe_diario.sh
+
+                        <span class="comment"># Ejecutar con prioridad baja usando nice</span>
+                        30 3 * * * nice -n 19 /scripts/tarea_pesada.sh
+
+                        <span class="comment"># Configurar lock para evitar ejecuciones simultáneas</span>
+                        45 * * * * flock -n /tmp/script.lock /scripts/cada_hora.sh
+
+                        <span class="comment"># Encadenar comandos con verificación de condiciones</span>
+                        0 1 * * * [ $(date +\%d) -eq 1 ] && /scripts/primer_dia_mes.sh
+
+                        <span class="comment"># Usar variantes de horario</span>
+                        0 0 * * * [ $(date +\%u) -eq 6 ] && /scripts/fin_de_semana.sh
+
+                        <span class="comment"># Ejecutar al iniciar el sistema</span>
+                        @reboot /scripts/inicio_sistema.sh
+                    </div>
+
+                    <div class="exercise-box">
+                        <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+                        <ol>
+                            <li>Configura una tarea cron que realice una copia de seguridad de tus documentos cada viernes a las 18:00 y envíe un correo electrónico de notificación al administrador.</li>
+                            <li>Crea un crontab que ejecute diferentes scripts según el día de la semana: un script para mantenimiento diario, otro para análisis semanal y un tercero para limpieza mensual.</li>
+                            <li>Implementa un sistema de rotación de logs para un script ejecutado por cron, utilizando la herramienta <code>logrotate</code> para gestionar los archivos de registro.</li>
+                            <li>Configura un script para ser ejecutado por cron que verifique primero si otra instancia del mismo script ya está en ejecución y, de ser así, termine su propia ejecución para evitar conflictos.</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-bar">
+            <button onclick="window.location.href='03_avanzado.html'">
+                ⬅ Nivel Anterior
+            </button>
+            <button onclick="window.location.href='index.html'">
+                Volver al Índice
+            </button>
+        </div>
+    </footer>
+</body>
+</html>

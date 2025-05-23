@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>Markmap</title>
+<style>
+* {
+  margin: 0;
+  padding: 0;
+}
+#mindmap {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/style.css">
+</head>
+<body>
+<svg id="mindmap"></svg>
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-view@0.18.10/dist/browser/index.js"></script><script src="https://cdn.jsdelivr.net/npm/markmap-toolbar@0.18.10/dist/index.js"></script><script>(()=>{setTimeout(()=>{const{markmap:x,mm:K}=window,P=new x.Toolbar;P.attach(K);const F=P.render();F.setAttribute("style","position:absolute;bottom:20px;right:20px"),document.body.append(F)})})()</script><script>((b,L,T,D)=>{const H=b();window.mm=H.Markmap.create("svg#mindmap",(L||H.deriveOptions)(D),T)})(()=>window.markmap,null,{"content":"&#x1f4e2; Ponencia: Requerimientos del Sistema y T&#xe9;cnicas de Recolecci&#xf3;n","children":[{"content":"1. Introducci&#xf3;n","children":[],"payload":{"tag":"h2","lines":"2,3"}},{"content":"2. &#xbf;Qu&#xe9; son los Requerimientos del Sistema?","children":[{"content":"Tipos de requerimientos:","children":[{"content":"<strong>Funcionales:</strong> Qu&#xe9; hace el sistema.<br>\n<em>Ejemplo:</em> permitir login, enviar correos, registrar usuarios.","children":[],"payload":{"tag":"li","lines":"13,15"}},{"content":"<strong>No funcionales:</strong> C&#xf3;mo lo hace.<br>\n<em>Ejemplo:</em> tiempo de respuesta, seguridad, escalabilidad.","children":[],"payload":{"tag":"li","lines":"15,18"}}],"payload":{"tag":"h3","lines":"12,13"}}],"payload":{"tag":"h2","lines":"8,9"}},{"content":"3. Desaf&#xed;os en la Definici&#xf3;n de Requerimientos","children":[{"content":"<strong>Imprecisi&#xf3;n:</strong> El lenguaje natural es ambiguo.","children":[],"payload":{"tag":"li","lines":"22,23"}},{"content":"<strong>Falta de acuerdo:</strong> Diferentes stakeholders pueden tener interpretaciones distintas.","children":[],"payload":{"tag":"li","lines":"23,24"}},{"content":"<strong>Arrastre organizacional:</strong> Cambios en el personal o en la estructura afectan los requerimientos.","children":[],"payload":{"tag":"li","lines":"24,26"}}],"payload":{"tag":"h2","lines":"20,21"}},{"content":"4. Consideraciones Estrat&#xe9;gicas","children":[{"content":"<strong>Escalabilidad:</strong> El sistema debe poder crecer con el negocio.","children":[],"payload":{"tag":"li","lines":"30,31"}},{"content":"<strong>Seguridad:</strong> Ha pasado de ser no funcional a funcional, por su criticidad en entornos conectados.","children":[],"payload":{"tag":"li","lines":"31,32"}},{"content":"<strong>Costo Total de Propiedad (TCO):</strong> Considera el costo de desarrollo, mantenimiento, soporte y evoluci&#xf3;n del sistema.","children":[],"payload":{"tag":"li","lines":"32,34"}}],"payload":{"tag":"h2","lines":"28,29"}},{"content":"5. T&#xe9;cnicas Basadas en Equipos","children":[{"content":"JAD (Desarrollo de Aplicaciones Conjuntas)","children":[{"content":"","children":[{"content":"Mejora la precisi&#xf3;n y claridad.","children":[],"payload":{"tag":"li","lines":"43,44"}},{"content":"Fomenta el compromiso del usuario.","children":[],"payload":{"tag":"li","lines":"44,46"}}],"payload":{"tag":"ul","lines":"43,46"}},{"content":"","children":[{"content":"Puede ser costoso.","children":[],"payload":{"tag":"li","lines":"47,48"}},{"content":"Dif&#xed;cil de manejar en grupos grandes.","children":[],"payload":{"tag":"li","lines":"48,50"}}],"payload":{"tag":"ul","lines":"47,50"}}],"payload":{"tag":"h3","lines":"38,39"}},{"content":"RAD (Desarrollo R&#xe1;pido de Aplicaciones)","children":[{"content":"Desarrollo veloz y centrado en el usuario.","children":[],"payload":{"tag":"li","lines":"57,59"}},{"content":"Puede comprometer la calidad o la visi&#xf3;n a largo plazo.","children":[],"payload":{"tag":"li","lines":"60,62"}}],"payload":{"tag":"h3","lines":"52,53"}}],"payload":{"tag":"h2","lines":"36,37"}},{"content":"6. M&#xe9;todos &#xc1;giles","children":[{"content":"&#xbf;Qu&#xe9; propone?","children":[{"content":"Desarrollo <strong>incremental</strong>.","children":[],"payload":{"tag":"li","lines":"68,69"}},{"content":"Mejora continua.","children":[],"payload":{"tag":"li","lines":"69,70"}},{"content":"Adaptaci&#xf3;n r&#xe1;pida al cambio.","children":[],"payload":{"tag":"li","lines":"70,72"}}],"payload":{"tag":"h3","lines":"66,67"}},{"content":"Ejemplo: SCRUM","children":[{"content":"Sprints con entregables.","children":[],"payload":{"tag":"li","lines":"74,75"}},{"content":"Comunicaci&#xf3;n constante.","children":[],"payload":{"tag":"li","lines":"75,76"}},{"content":"Reuniones para ajustes frecuentes.","children":[],"payload":{"tag":"li","lines":"76,78"}}],"payload":{"tag":"h3","lines":"72,73"}}],"payload":{"tag":"h2","lines":"64,65"}},{"content":"7. Recolecci&#xf3;n de Requerimientos","children":[{"content":"Principales t&#xe9;cnicas:","children":[{"content":"1. \n<p data-lines=\"86,87\"><strong>Entrevistas</strong></p>","children":[{"content":"Planificadas, estructuradas y con an&#xe1;lisis posterior.","children":[],"payload":{"tag":"li","lines":"87,89"}}],"payload":{"tag":"li","lines":"86,89","listIndex":1}},{"content":"2. \n<p data-lines=\"89,90\"><strong>Revisi&#xf3;n documental</strong></p>","children":[{"content":"Para entender el sistema actual y sus limitaciones.","children":[],"payload":{"tag":"li","lines":"90,92"}}],"payload":{"tag":"li","lines":"89,92","listIndex":2}},{"content":"3. \n<p data-lines=\"92,93\"><strong>Observaci&#xf3;n directa</strong></p>","children":[{"content":"Detecta pr&#xe1;cticas no documentadas.","children":[],"payload":{"tag":"li","lines":"93,95"}}],"payload":{"tag":"li","lines":"92,95","listIndex":3}},{"content":"4. \n<p data-lines=\"95,96\"><strong>Encuestas y cuestionarios</strong></p>","children":[{"content":"Permiten recopilar opiniones masivas.","children":[],"payload":{"tag":"li","lines":"96,98"}}],"payload":{"tag":"li","lines":"95,98","listIndex":4}},{"content":"5. \n<p data-lines=\"98,99\"><strong>Tormenta de ideas</strong></p>","children":[{"content":"Estimula creatividad y descubre necesidades ocultas.","children":[],"payload":{"tag":"li","lines":"99,101"}}],"payload":{"tag":"li","lines":"98,101","listIndex":5}},{"content":"6. \n<p data-lines=\"101,102\"><strong>Muestreo de datos del sistema actual</strong></p>","children":[{"content":"Se analizan registros y documentos reales.","children":[],"payload":{"tag":"li","lines":"102,104"}}],"payload":{"tag":"li","lines":"101,104","listIndex":6}},{"content":"7. \n<p data-lines=\"104,105\"><strong>Investigaci&#xf3;n t&#xe9;cnica</strong></p>","children":[{"content":"Permite conocer soluciones modernas y mejores pr&#xe1;cticas.","children":[],"payload":{"tag":"li","lines":"105,107"}}],"payload":{"tag":"li","lines":"104,107","listIndex":7}}],"payload":{"tag":"h3","lines":"84,85"}}],"payload":{"tag":"h2","lines":"82,83"}},{"content":"8. M&#xe9;todos &#xc1;giles para Capturar Requerimientos","children":[{"content":"<strong>Historias de usuario (User Stories):</strong>","children":[{"content":"&quot;Como [tipo de usuario], quiero [acci&#xf3;n] para [objetivo]&quot;.","children":[],"payload":{"tag":"li","lines":"112,113"}}],"payload":{"tag":"li","lines":"111,113"}},{"content":"<strong>Features:</strong> Funcionalidades espec&#xed;ficas a desarrollar.","children":[],"payload":{"tag":"li","lines":"113,114"}},{"content":"<strong>Storyboards:</strong> Flujos visuales de navegaci&#xf3;n y funcionalidad.","children":[],"payload":{"tag":"li","lines":"114,115"}},{"content":"<strong>Escenarios:</strong> Descripciones detalladas de casos pr&#xe1;cticos.","children":[],"payload":{"tag":"li","lines":"115,117"}}],"payload":{"tag":"h2","lines":"109,110"}},{"content":"9. Conclusi&#xf3;n","children":[{"content":"Mejora la calidad del sistema.","children":[],"payload":{"tag":"li","lines":"123,124"}},{"content":"Optimiza tiempos y costos.","children":[],"payload":{"tag":"li","lines":"124,125"}},{"content":"Aumenta la satisfacci&#xf3;n del usuario.","children":[],"payload":{"tag":"li","lines":"125,127"}}],"payload":{"tag":"h2","lines":"119,120"}}],"payload":{"tag":"h1","lines":"0,1"}},null)</script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Ponencia: Requerimientos del Sistema</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      line-height: 1.6;
+      margin: 0;
+      padding: 20px;
+      background-color: #f9f9f9;
+      color: #333;
+    }
+    h1, h2, h3 {
+      color: #222;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-top: 30px;
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 5px;
+    }
+    ul {
+      margin: 10px 0;
+      padding-left: 20px;
+    }
+    li {
+      margin-bottom: 5px;
+    }
+    blockquote {
+      margin: 20px 0;
+      padding: 10px 20px;
+      background-color: #f1f1f1;
+      border-left: 5px solid #ccc;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+  <h1>📢 Ponencia: Requerimientos del Sistema y Técnicas de Recolección</h1>
+
+  <h2>1. Introducción</h2>
+  <p>En el marco del ciclo de vida del desarrollo de sistemas (SDLC), la fase de análisis juega un papel fundamental. Es en esta instancia donde se identifican y documentan los <strong>requerimientos del sistema</strong>, elementos clave para el éxito del proyecto. Una mala definición o recolección inadecuada de estos puede comprometer todo el desarrollo.</p>
+
+  <h2>2. ¿Qué son los Requerimientos del Sistema?</h2>
+  <p>Un <strong>requerimiento del sistema</strong> es una característica o función que debe tener el sistema para satisfacer las necesidades del negocio y de los usuarios. Estos sirven como base para medir el éxito del producto final.</p>
+  <h3>Tipos de requerimientos:</h3>
+  <ul>
+    <li><strong>Funcionales:</strong> Qué hace el sistema.<br><em>Ejemplo:</em> permitir login, enviar correos, registrar usuarios.</li>
+    <li><strong>No funcionales:</strong> Cómo lo hace.<br><em>Ejemplo:</em> tiempo de respuesta, seguridad, escalabilidad.</li>
+  </ul>
+
+  <h2>3. Desafíos en la Definición de Requerimientos</h2>
+  <ul>
+    <li><strong>Imprecisión:</strong> El lenguaje natural es ambiguo.</li>
+    <li><strong>Falta de acuerdo:</strong> Diferentes stakeholders pueden tener interpretaciones distintas.</li>
+    <li><strong>Arrastre organizacional:</strong> Cambios en el personal o en la estructura afectan los requerimientos.</li>
+  </ul>
+
+  <h2>4. Consideraciones Estratégicas</h2>
+  <ul>
+    <li><strong>Escalabilidad:</strong> El sistema debe poder crecer con el negocio.</li>
+    <li><strong>Seguridad:</strong> Ha pasado de ser no funcional a funcional, por su criticidad en entornos conectados.</li>
+    <li><strong>Costo Total de Propiedad (TCO):</strong> Considera el costo de desarrollo, mantenimiento, soporte y evolución del sistema.</li>
+  </ul>
+
+  <h2>5. Técnicas Basadas en Equipos</h2>
+  <h3>JAD (Desarrollo de Aplicaciones Conjuntas)</h3>
+  <p>Reúne usuarios y desarrolladores para definir requerimientos en sesiones colaborativas.</p>
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Mejora la precisión y claridad.</li>
+    <li>Fomenta el compromiso del usuario.</li>
+  </ul>
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>Puede ser costoso.</li>
+    <li>Difícil de manejar en grupos grandes.</li>
+  </ul>
+
+  <h3>RAD (Desarrollo Rápido de Aplicaciones)</h3>
+  <p>Metodología ágil que combina análisis, diseño y construcción en ciclos rápidos.</p>
+  <p><strong>Ventajas:</strong></p>
+  <ul>
+    <li>Desarrollo veloz y centrado en el usuario.</li>
+  </ul>
+  <p><strong>Desventajas:</strong></p>
+  <ul>
+    <li>Puede comprometer la calidad o la visión a largo plazo.</li>
+  </ul>
+
+  <h2>6. Métodos Ágiles</h2>
+  <h3>¿Qué propone?</h3>
+  <ul>
+    <li>Desarrollo <strong>incremental</strong>.</li>
+    <li>Mejora continua.</li>
+    <li>Adaptación rápida al cambio.</li>
+  </ul>
+  <h3>Ejemplo: SCRUM</h3>
+  <ul>
+    <li>Sprints con entregables.</li>
+    <li>Comunicación constante.</li>
+    <li>Reuniones para ajustes frecuentes.</li>
+  </ul>
+  <blockquote>⚠️ <strong>Advertencia:</strong> Requiere un equipo muy competente y comprometido.</blockquote>
+
+  <h2>7. Recolección de Requerimientos</h2>
+  <h3>Principales técnicas:</h3>
+  <ol>
+    <li><strong>Entrevistas:</strong> Planificadas, estructuradas y con análisis posterior.</li>
+    <li><strong>Revisión documental:</strong> Para entender el sistema actual y sus limitaciones.</li>
+    <li><strong>Observación directa:</strong> Detecta prácticas no documentadas.</li>
+    <li><strong>Encuestas y cuestionarios:</strong> Permiten recopilar opiniones masivas.</li>
+    <li><strong>Tormenta de ideas:</strong> Estimula creatividad y descubre necesidades ocultas.</li>
+    <li><strong>Muestreo de datos del sistema actual:</strong> Se analizan registros y documentos reales.</li>
+    <li><strong>Investigación técnica:</strong> Permite conocer soluciones modernas y mejores prácticas.</li>
+  </ol>
+
+  <h2>8. Métodos Ágiles para Capturar Requerimientos</h2>
+  <ul>
+    <li><strong>Historias de usuario (User Stories):</strong> "Como [tipo de usuario], quiero [acción] para [objetivo]".</li>
+    <li><strong>Features:</strong> Funcionalidades específicas a desarrollar.</li>
+    <li><strong>Storyboards:</strong> Flujos visuales de navegación y funcionalidad.</li>
+    <li><strong>Escenarios:</strong> Descripciones detalladas de casos prácticos.</li>
+  </ul>
+
+  <h2>9. Conclusión</h2>
+  <p>La correcta identificación y recolección de requerimientos:</p>
+  <ul>
+    <li>Mejora la calidad del sistema.</li>
+    <li>Optimiza tiempos y costos.</li>
+    <li>Aumenta la satisfacción del usuario.</li>
+  </ul>
+  <blockquote>🎯 <em>Un sistema exitoso nace de requerimientos claros, consensuados y continuamente refinados.</em></blockquote>
+</body>
+</html>

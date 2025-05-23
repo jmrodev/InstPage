@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programación Orientada a Objetos</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #3498db;
+        }
+        code {
+            background-color: #f8f8f8;
+            padding: 2px 5px;
+            border-radius: 3px;
+            font-family: Consolas, monospace;
+        }
+        pre {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: Consolas, monospace;
+        }
+        .highlight {
+            background-color: #fffacd;
+            padding: 10px;
+            border-left: 4px solid #ffd700;
+            margin: 20px 0;
+        }
+        .example {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>Programación Orientada a Objetos</h1>
+    
+    <p>La Programación Orientada a Objetos (POO) es un paradigma de programación que utiliza "objetos" para modelar entidades del mundo real. Estos objetos contienen datos (atributos) y código (métodos) para manipular esos datos.</p>
+
+    <div class="highlight">
+        <p><strong>Conceptos fundamentales:</strong> Clases, objetos, encapsulamiento, herencia, polimorfismo, abstracción, sobrecarga de constructores y destrucción de objetos.</p>
+    </div>
+
+    <h2>Diferencias de sintaxis entre lenguajes</h2>
+    
+    <p>Cada lenguaje de programación tiene su propia sintaxis para trabajar con objetos:</p>
+    
+    <ul>
+        <li>En <strong>JavaScript</strong> se usa el punto: <code>objeto.propiedad</code></li>
+        <li>En <strong>PHP</strong> se usa la flecha: <code>$objeto->propiedad</code></li>
+    </ul>
+    
+    <h2>Clases y objetos</h2>
+    
+    <p>Una <strong>clase</strong> es como un molde para crear objetos. Define las propiedades y comportamientos que tendrán sus instancias.</p>
+    
+    <p>Un <strong>objeto</strong> es una instancia de una clase. Primero se instancia la clase y después se utilizan sus propiedades y métodos.</p>
+    
+    <div class="example">
+        <h3>Ejemplo en JavaScript:</h3>
+        <pre>
+class Persona {
+    constructor(nombre, edad) {
+        this._nombre = nombre;
+        this._edad = edad;
+    }
+    
+    // Métodos
+    saludar() {
+        return `Hola, soy ${this._nombre} y tengo ${this._edad} años`;
+    }
+}
+
+// Crear un objeto (instancia)
+const persona1 = new Persona("Ana", 28);
+console.log(persona1.saludar()); // "Hola, soy Ana y tengo 28 años"
+        </pre>
+    </div>
+    
+    <h2>Encapsulamiento</h2>
+    
+    <p>El encapsulamiento oculta cómo está implementada una clase, exponiendo solo lo necesario. Permite proteger los datos y proporcionar una interfaz controlada para acceder a ellos.</p>
+    
+    <h3>Getters y Setters</h3>
+    
+    <p>Son métodos especiales que permiten leer (get) o modificar (set) propiedades de un objeto de manera controlada:</p>
+    
+    <div class="example">
+        <pre>
+class Persona {
+    constructor(nombre, edad) {
+        this._nombre = nombre;
+        this._edad = edad;
+    }
+    
+    // Getters
+    get nombre() {
+        return this._nombre;
+    }
+    
+    get edad() {
+        return this._edad;
+    }
+    
+    // Setters
+    set nombre(nuevoNombre) {
+        this._nombre = nuevoNombre;
+    }
+    
+    set edad(nuevaEdad) {
+        if (nuevaEdad >= 0) {
+            this._edad = nuevaEdad;
+        } else {
+            console.log("La edad no puede ser negativa");
+        }
+    }
+}
+
+const persona1 = new Persona("Carlos", 30);
+console.log(persona1.nombre); // Carlos
+persona1.nombre = "Miguel";
+console.log(persona1.nombre); // Miguel
+
+persona1.edad = -5; // "La edad no puede ser negativa"
+console.log(persona1.edad); // 30 (no cambió)
+        </pre>
+    </div>
+    
+    <h2>Parámetros por valor vs por referencia</h2>
+    
+    <p>Al pasar datos a funciones, existen dos modalidades:</p>
+    
+    <ul>
+        <li><strong>Por valor (copia):</strong> Se copia el valor (típico en tipos primitivos)</li>
+        <li><strong>Por referencia:</strong> Se pasa la dirección de memoria (en PHP usando &)</li>
+    </ul>
+    
+    <div class="example">
+        <h3>Ejemplo en PHP:</h3>
+        <pre>
+function suma(int $a, int $b, int &$c) {
+    $c = $a + $b;
+}
+
+$Z = 0;
+$X = 5;
+$Y = 6;
+suma($X, $Y, $Z);
+echo $Z; // Mostrará 11
+        </pre>
+    </div>
+    
+    <h2>Mensajes o Métodos</h2>
+
+    <p>Los objetos se comunican entre sí enviando "mensajes" (llamadas a métodos). En PHP se usa la flecha <code>-></code> para invocar un método del objeto:</p>
+
+    <div class="example">
+        <pre>
+class Calculadora {
+    public function sumar($a, $b) {
+        return $a + $b;
+    }
+}
+
+$calc = new Calculadora();
+$resultado = $calc->sumar(5, 3); // Enviando el mensaje "sumar" al objeto
+echo $resultado; // 8
+        </pre>
+    </div>
+    
+    <h2>Clases Abstractas y Concretas</h2>
+    
+    <p><strong>Clases abstractas:</strong> No se pueden instanciar directamente, sirven como base para otras clases.</p>
+    
+    <p><strong>Clases concretas:</strong> Implementan los métodos de las clases abstractas y pueden ser instanciadas.</p>
+    
+    <div class="example">
+        <h3>Ejemplo en JavaScript (simulando clases abstractas):</h3>
+        <pre>
+class FiguraGeometrica {
+    constructor() {
+        if (this.constructor === FiguraGeometrica) {
+            throw new Error("No se puede instanciar una clase abstracta");
+        }
+    }
+    
+    calcularArea() {
+        throw new Error("Método abstracto debe ser implementado");
+    }
+}
+
+class Rectangulo extends FiguraGeometrica {
+    constructor(base, altura) {
+        super();
+        this.base = base;
+        this.altura = altura;
+    }
+    
+    calcularArea() {
+        return this.base * this.altura;
+    }
+}
+
+// const figura = new FiguraGeometrica(); // Error
+const rectangulo = new Rectangulo(5, 10);
+console.log(rectangulo.calcularArea()); // 50
+        </pre>
+    </div>
+    
+    <h2>Herencia</h2>
+    
+    <p>La herencia permite crear nuevas clases basadas en clases existentes, heredando sus atributos y métodos.</p>
+    
+    <div class="example">
+        <pre>
+class Animal {
+    constructor(nombre) {
+        this.nombre = nombre;
+    }
+    
+    hablar() {
+        return "El animal hace un sonido";
+    }
+}
+
+class Perro extends Animal {
+    constructor(nombre, raza) {
+        super(nombre);
+        this.raza = raza;
+    }
+    
+    hablar() {
+        return "¡Guau guau!";
+    }
+}
+
+const miPerro = new Perro("Firulais", "Labrador");
+console.log(miPerro.nombre); // Firulais
+console.log(miPerro.hablar()); // ¡Guau guau!
+        </pre>
+    </div>
+    
+    <h2>Polimorfismo</h2>
+    
+    <p>El polimorfismo permite que objetos de diferentes clases respondan al mismo método de diferentes maneras. Es la capacidad de un objeto para comportarse de múltiples formas según el contexto.</p>
+    
+    <div class="example">
+        <pre>
+class Vehiculo {
+    mover() {
+        return "El vehículo se está moviendo";
+    }
+}
+
+class Coche extends Vehiculo {
+    mover() {
+        return "El coche está conduciendo";
+    }
+}
+
+class Barco extends Vehiculo {
+    mover() {
+        return "El barco está navegando";
+    }
+}
+
+const vehiculos = [new Coche(), new Barco()];
+
+vehiculos.forEach(vehiculo => {
+    console.log(vehiculo.mover());
+});
+// "El coche está conduciendo"
+// "El barco está navegando"
+        </pre>
+    </div>
+    
+    <h2>Sobrecarga del Constructor</h2>
+    
+    <p>La sobrecarga del constructor permite crear múltiples constructores con diferentes parámetros. En JavaScript se simula con parámetros opcionales o valores predeterminados:</p>
+    
+    <div class="example">
+        <pre>
+class Producto {
+    constructor(nombre, precio = 0, cantidad = 1) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
+    }
+    
+    calcularTotal() {
+        return this.precio * this.cantidad;
+    }
+}
+
+// Diferentes formas de instanciar
+const producto1 = new Producto("Laptop", 1200, 2);
+const producto2 = new Producto("Mouse", 25);        // cantidad = 1 por defecto
+const producto3 = new Producto("Teclado");          // precio = 0, cantidad = 1 por defecto
+
+console.log(producto1.calcularTotal()); // 2400
+console.log(producto2.calcularTotal()); // 25
+console.log(producto3.calcularTotal()); // 0
+        </pre>
+    </div>
+    
+    <h2>Destrucción de Objetos</h2>
+    
+    <p>La destrucción de objetos es el proceso de liberar recursos cuando un objeto ya no es necesario. En lenguajes con recolección automática de basura como JavaScript, no es necesario destruir explícitamente los objetos, pero en otros puede haber destructores:</p>
+    
+    <div class="example">
+        <h3>En PHP (con destructor):</h3>
+        <pre>
+class Archivo {
+    private $manejador;
+    
+    public function __construct($nombreArchivo) {
+        $this->manejador = fopen($nombreArchivo, 'w');
+        echo "Archivo abierto\n";
+    }
+    
+    public function escribir($texto) {
+        fwrite($this->manejador, $texto);
+    }
+    
+    public function __destruct() {
+        fclose($this->manejador);
+        echo "Archivo cerrado automáticamente\n";
+    }
+}
+
+// Uso
+{
+    $archivo = new Archivo("test.txt");
+    $archivo->escribir("Hola mundo");
+    // Al salir de este bloque, se llama automáticamente al destructor
+}
+        </pre>
+    </div>
+    
+    <h3>En JavaScript:</h3>
+    <div class="example">
+        <pre>
+class ConexionBD {
+    constructor() {
+        this.conexion = { estado: "abierta" };
+        console.log("Conexión abierta");
+    }
+    
+    // Método explícito para cerrar recursos
+    cerrar() {
+        this.conexion.estado = "cerrada";
+        console.log("Conexión cerrada manualmente");
+    }
+}
+
+// Uso
+const conexion = new ConexionBD();
+// Hacer operaciones...
+conexion.cerrar(); // Limpieza manual de recursos
+
+// En JavaScript, el recolector de basura se encargará de eliminar objetos no referenciados
+// cuando ya no sean accesibles, pero recursos externos como conexiones deben cerrarse explícitamente
+        </pre>
+    </div>
+    
+    <h2>Conclusión</h2>
+    
+    <p>La Programación Orientada a Objetos es una herramienta poderosa para crear código más organizado, reutilizable y fácil de mantener. Dominar estos conceptos te permitirá diseñar soluciones más robustas y flexibles a problemas complejos.</p>
+    
+    <div class="highlight">
+        <p><strong>Recuerda:</strong> Las clases son como moldes y los objetos son las instancias creadas a partir de esos moldes. El encapsulamiento protege los datos, la herencia permite la reutilización de código, el polimorfismo proporciona flexibilidad, y los constructores y destructores controlan el ciclo de vida de los objetos.</p>
+    </div>
+</body>
+</html>

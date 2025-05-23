@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelado de Datos y Procesos: Diagramas de Flujo de Datos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 900px;
+            margin: 0 auto;
+            padding:.20px;
+        }
+        h1 {
+            color: #1a365d;
+            text-align: center;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1a365d;
+        }
+        h2 {
+            color: #2c5282;
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        h3 {
+            color: #2b6cb0;
+        }
+        .section {
+            margin-bottom: 30px;
+            padding: 20px;
+            background-color: #f8fafc;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .important {
+            background-color: #ebf8ff;
+            border-left: 4px solid #4299e1;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .not-allowed {
+            background-color: #fff5f5;
+            border-left: 4px solid #f56565;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .allowed {
+            background-color: #f0fff4;
+            border-left: 4px solid #48bb78;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            padding: 12px;
+            border: 1px solid #e2e8f0;
+            text-align: left;
+        }
+        th {
+            background-color: #edf2f7;
+        }
+        ul, ol {
+            padding-left: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Modelado de Datos y Procesos</h1>
+    
+    <div class="section">
+        <h2>Fundamentos del Modelado</h2>
+        <p>El análisis de sistemas utiliza dos tipos principales de modelos:</p>
+        <ul>
+            <li><strong>Modelo Lógico</strong>: Muestra "QUÉ" debe hacer el sistema sin preocuparse por la implementación física.</li>
+            <li><strong>Modelo Físico</strong>: Describe "CÓMO" se construirá el sistema en la práctica.</li>
+        </ul>
+        <p>Muchos analistas siguen el enfoque de "cuatro-modelos":</p>
+        <ol>
+            <li>Modelo físico del sistema actual</li>
+            <li>Modelo lógico del sistema actual</li>
+            <li>Modelo lógico del nuevo sistema</li>
+            <li>Modelo físico del nuevo sistema</li>
+        </ol>
+        <p>Este enfoque permite entender claramente el sistema existente antes de mejorarlo.</p>
+    </div>
+    
+    <div class="section">
+        <h2>Diagramas de Flujo de Datos (DFD)</h2>
+        <p>Los DFD son herramientas gráficas que muestran cómo los datos se transforman a través del sistema.</p>
+        <div class="important">
+            <p><strong>Importante</strong>: Los DFD muestran el movimiento de datos, no la lógica de programación o los pasos del procesamiento.</p>
+        </div>
+        
+        <h3>Componentes Principales de los DFD</h3>
+        
+        <h4>1. Procesos</h4>
+        <ul>
+            <li>Transforman datos de entrada en salida con diferente contenido o forma</li>
+            <li>Se nombran con verbo + sustantivo (ej: "CALCULAR COMISIÓN")</li>
+            <li>Funcionan como "cajas negras" que ocultan la lógica interna</li>
+            <li>Se pueden "ampliar" para mostrar su funcionamiento interno en DFDs de mayor detalle</li>
+        </ul>
+        
+        <h4>2. Flujos de Datos</h4>
+        <ul>
+            <li>Son las rutas por donde viajan los datos entre puntos del sistema</li>
+            <li>Se nombran con sustantivo + adjetivo (ej: "FACTURA DE PAGO")</li>
+            <li>Pueden representar un solo dato o un conjunto de ellos</li>
+        </ul>
+        
+        <h4>3. Almacenamientos de Datos</h4>
+        <ul>
+            <li>Guardan datos que serán usados posteriormente por los procesos</li>
+            <li>Se nombran con sustantivo + adjetivo (ej: "PAGOS DIARIOS")</li>
+            <li>Siempre tienen al menos un flujo de entrada y otro de salida</li>
+        </ul>
+        
+        <h4>4. Entidades Externas</h4>
+        <ul>
+            <li>Representan fuentes o destinos de datos fuera del sistema</li>
+            <li>También llamadas "terminadores", "orígenes" o "sumideros"</li>
+            <li>Se nombran en singular (ej: "CLIENTE")</li>
+        </ul>
+        
+        <h3>Reglas de Conexión en DFD</h3>
+        
+        <div class="allowed">
+            <p><strong>Conexiones permitidas:</strong></p>
+            <ul>
+                <li>Proceso → Proceso</li>
+                <li>Proceso → Entidad Externa</li>
+                <li>Proceso → Almacenamiento de Datos</li>
+            </ul>
+        </div>
+        
+        <div class="not-allowed">
+            <p><strong>Conexiones NO permitidas:</strong></p>
+            <ul>
+                <li>Entidad Externa → Entidad Externa</li>
+                <li>Entidad Externa → Almacenamiento de Datos</li>
+                <li>Almacenamiento de Datos → Almacenamiento de Datos</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="section">
+        <h2>Niveles de los DFD</h2>
+        <p>Los DFD se crean en diferentes niveles de detalle:</p>
+        
+        <h3>1. Diagrama de Contexto (nivel más alto)</h3>
+        <ul>
+            <li>Muestra todo el sistema como un único proceso (Proceso 0)</li>
+            <li>Presenta los límites del sistema y sus interacciones con el mundo exterior</li>
+            <li>Solo contiene un proceso central, entidades externas y flujos de datos</li>
+            <li>No muestra almacenamientos de datos</li>
+        </ul>
+        
+        <h3>2. Diagrama 0 (segundo nivel)</h3>
+        <ul>
+            <li>Ampliación del proceso 0</li>
+            <li>Muestra los principales procesos, flujos y almacenamientos de datos</li>
+            <li>Mantiene las mismas entidades y conexiones externas del diagrama de contexto</li>
+        </ul>
+        
+        <h3>3. DFDs de Bajo Nivel (niveles adicionales)</h3>
+        <ul>
+            <li>Desglosan procesos complejos en procesos más simples</li>
+            <li>Utilizan técnicas de nivelado y balanceo:
+                <ul>
+                    <li><strong>Nivelado</strong>: Aumentar progresivamente el detalle hasta llegar a primitivas funcionales</li>
+                    <li><strong>Balanceo</strong>: Mantener consistencia entre los flujos de entrada/salida en los diagramas padre e hijo</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+    
+    <div class="section">
+        <h2>Diccionario de Datos</h2>
+        <p>Complementa los DFD documentando todos los detalles de:</p>
+        <table>
+            <tr>
+                <th>Componente</th>
+                <th>Elementos Documentados</th>
+            </tr>
+            <tr>
+                <td>Elementos de datos</td>
+                <td>Nombre, alias, tipo, longitud, valores aceptados, procedencia, usuarios responsables, etc.</td>
+            </tr>
+            <tr>
+                <td>Registros</td>
+                <td>Nombre, descripción, nombres alternativos, atributos, etc.</td>
+            </tr>
+            <tr>
+                <td>Flujos de datos</td>
+                <td>Nombre, descripción, origen, destino, volumen y frecuencia, etc.</td>
+            </tr>
+            <tr>
+                <td>Almacenamientos</td>
+                <td>Nombre, descripción, nombres alternativos, atributos, volumen y frecuencia, etc.</td>
+            </tr>
+            <tr>
+                <td>Procesos</td>
+                <td>Nombre, descripción, número del proceso, etc.</td>
+            </tr>
+            <tr>
+                <td>Entidades</td>
+                <td>Nombre, descripción, nombres alternativos, flujos de entrada y salida, etc.</td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="section">
+        <h2>Herramientas de Descripción de Procesos</h2>
+        <p>Para documentar las primitivas funcionales (procesos que no se desglosan más) se utilizan:</p>
+        <ul>
+            <li><strong>Lenguaje estructurado</strong>: Subconjunto del lenguaje formal que describe los procesos lógicos</li>
+            <li><strong>Tablas de decisión</strong>: Estructuras lógicas que muestran todas las combinaciones de condiciones y resultados</li>
+            <li><strong>Árboles de decisión</strong>: Representación gráfica de condiciones, acciones y reglas</li>
+        </ul>
+        
+        <h3>Diseño Modular</h3>
+        <p>El diseño modular se basa en tres estructuras lógicas fundamentales:</p>
+        <ol>
+            <li><strong>Secuencia</strong>: Ejecución paso a paso</li>
+            <li><strong>Selección</strong>: Bifurcaciones basadas en condiciones</li>
+            <li><strong>Iteración</strong>: Repetición basada en condiciones</li>
+        </ol>
+        <p>Cada estructura lógica debe tener un solo punto de entrada y salida.</p>
+    </div>
+</body>
+</html>

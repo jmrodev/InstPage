@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comandos Intermedios de Linux - Nivel 2</title>
+  <link rel="stylesheet" href="../../../../css/styles.css" />
+</head>
+
+<body>
+  <header>
+    <h1>Comandos Intermedios de Linux</h1>
+    <nav class="breadcrumb">
+      <a href="../../../../index.html"><i class="fas fa-home"></i> Inicio</a> /
+      <a href="../index.html">EdiII</a> /
+      <a href="index.html">Comandos Linux</a> / Nivel Intermedio
+    </nav>
+  </header>
+
+  <main>
+    <div class="note">
+      <p>
+        <i class="fas fa-exclamation-circle"></i> En esta sección avanzaremos al siguiente nivel en el uso de la
+        terminal Linux. Aprenderás comandos más potentes y técnicas que te
+        permitirán trabajar de manera más eficiente y realizar tareas más
+        complejas.
+      </p>
+    </div>
+
+    <section>
+      <h2><i class="fas fa-search"></i> Buscar y Filtrar Información</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-file-search"></i> La importancia de la búsqueda en sistemas Linux</h3>
+        <p>
+          Los sistemas Linux suelen tener miles de archivos distribuidos en
+          complejas estructuras de directorios. Saber cómo encontrar archivos
+          y contenido específico dentro de ellos es una habilidad fundamental
+          para administradores de sistemas y desarrolladores.
+        </p>
+
+        <p>
+          En este nivel, aprenderemos comandos que nos permiten buscar
+          archivos, filtrar contenido y manipular texto de manera eficiente,
+          lo que nos ahorrará mucho tiempo en nuestras tareas diarias.
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-folder-open"></i> find - Buscar archivos en el sistema</div>
+          <div class="tech-image">🔍</div>
+          <p>
+            El comando <code>find</code> es una herramienta extremadamente
+            potente para buscar archivos en el sistema de archivos basándose
+            en una gran variedad de criterios como nombre, tamaño, fecha de
+            modificación, permisos, etc.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              La búsqueda manual de archivos puede ser extremadamente
+              ineficiente. Con <code>find</code> puedes localizar archivos
+              rápidamente basándote en cualquier característica, e incluso
+              ejecutar comandos sobre los resultados. Es como tener un
+              asistente que puede encontrar exactamente lo que necesitas en
+              una enorme biblioteca.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment"># Buscar archivos por nombre</span>
+            <span class="prompt">$</span> find /home -name "*.txt"
+            <span class="output">
+              /home/usuario/documentos/notas.txt
+              /home/usuario/descargas/manual.txt</span>
+
+            <span class="comment"># Buscar por tipo (f=archivos, d=directorios)</span>
+            <span class="prompt">$</span> find /etc -type f -name "*.conf"
+            <span class="output">
+              /etc/ssh/ssh_config
+              /etc/apt/sources.list.d/vscode.list.conf</span>
+
+            <span class="comment"># Buscar archivos modificados en los últimos 7 días</span>
+            <span class="prompt">$</span> find ~ -type f -mtime -7
+            <span class="output">
+              /home/usuario/.bashrc
+              /home/usuario/documentos/proyecto/codigo.py</span>
+
+            <span class="comment"># Buscar archivos y ejecutar comandos sobre ellos</span>
+            <span class="prompt">$</span> find /var/log -name "*.log" -size
+            +10M -exec ls -lh {} \;
+            <span class="output">
+              -rw-r----- 1 root adm 15M oct 10 12:35 /var/log/syslog.1
+              -rw-r----- 1 root adm 23M oct 5 09:12 /var/log/kern.log.1</span>
+          </div>
+
+          <p><strong>Opciones comunes:</strong></p>
+          <ul>
+            <li>
+              <code>-name "patron"</code>: Busca por nombre (acepta comodines)
+            </li>
+            <li>
+              <code>-type f|d|l</code>: Busca por tipo (f=archivo,
+              d=directorio, l=enlace)
+            </li>
+            <li>
+              <code>-size +/-N[c|k|M|G]</code>: Busca por tamaño (c=bytes,
+              k=kilobytes, etc.)
+            </li>
+            <li>
+              <code>-mtime +/-N</code>: Modificados hace más de (+) o menos de
+              (-) N días
+            </li>
+            <li>
+              <code>-user nombre</code>: Archivos propiedad del usuario
+              indicado
+            </li>
+            <li>
+              <code>-exec comando {} \;</code>: Ejecuta comando en cada
+              resultado
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Encuentra todos los archivos .log en /var/log:
+                <code>find /var/log -name "*.log"</code>
+              </li>
+              <li>
+                Busca archivos más grandes de 100MB en tu directorio home:
+                <code>find ~ -type f -size +100M</code>
+              </li>
+              <li>
+                Encuentra todos los archivos modificados en las últimas 24
+                horas: <code>find ~ -type f -mtime -1</code>
+              </li>
+              <li>
+                Busca archivos .conf y cópialos a un directorio de respaldo:
+                <code>find /etc -name "*.conf" -exec cp {} ~/backup/ \;</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-file-alt"></i> grep - Buscar texto en archivos</div>
+          <div class="tech-image">🔤</div>
+          <p>
+            El comando <code>grep</code> (Global Regular Expression Print) te
+            permite buscar patrones de texto dentro de archivos o en la salida
+            de otros comandos.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              Es esencial para encontrar información específica en archivos de
+              texto. Con <code>grep</code> puedes localizar rápidamente
+              cadenas de texto, errores en logs, configuraciones específicas o
+              cualquier patrón de texto. Es como tener un asistente que puede
+              leer miles de páginas en segundos y señalarte exactamente lo que
+              buscas.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment"># Buscar una palabra en un archivo</span>
+            <span class="prompt">$</span> grep "error" /var/log/syslog
+            <span class="output">
+              Oct 15 14:23:53 servidor kernel: [ERROR] Failed to load
+              module</span>
+
+            <span class="comment"># Buscar ignorando mayúsculas/minúsculas</span>
+            <span class="prompt">$</span> grep -i "warning"
+            /var/log/apache2/error.log
+            <span class="output">
+              Oct 15 12:10:45 [warning] Server reached MaxClients setting Oct
+              16 08:23:12 [Warning] Slow query detected</span>
+
+            <span class="comment"># Buscar en múltiples archivos</span>
+            <span class="prompt">$</span> grep -r "function" ~/proyectos/
+            <span class="output">
+              /home/usuario/proyectos/app.js:function calcularTotal() {
+              /home/usuario/proyectos/utils.js:export function
+              formatDate(date) {</span>
+
+            <span class="comment"># Mostrar líneas antes y después del resultado</span>
+            <span class="prompt">$</span> grep -A 2 -B 1 "error"
+            /var/log/syslog
+            <span class="output">
+              Oct 15 14:23:52 servidor service: Normal operation Oct 15
+              14:23:53 servidor kernel: [ERROR] Failed to load module Oct 15
+              14:23:54 servidor kernel: Attempting recovery Oct 15 14:23:55
+              servidor kernel: Recovery successful</span>
+          </div>
+
+          <p><strong>Opciones comunes:</strong></p>
+          <ul>
+            <li><code>-i</code>: Ignora mayúsculas/minúsculas</li>
+            <li><code>-r</code>: Búsqueda recursiva en directorios</li>
+            <li>
+              <code>-v</code>: Invierte la búsqueda (muestra líneas que NO
+              coinciden)
+            </li>
+            <li><code>-n</code>: Muestra número de línea</li>
+            <li>
+              <code>-A n</code>: Muestra n líneas después de cada coincidencia
+            </li>
+            <li>
+              <code>-B n</code>: Muestra n líneas antes de cada coincidencia
+            </li>
+            <li><code>-E</code>: Usa expresiones regulares extendidas</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Busca la palabra "error" en los logs del sistema:
+                <code>grep "error" /var/log/syslog</code>
+              </li>
+              <li>
+                Encuentra todas las líneas que contengan direcciones IP:
+                <code
+                  >grep -E "([0-9]{1,3}\.){3}[0-9]{1,3}"
+                  /var/log/auth.log</code
+                >
+              </li>
+              <li>
+                Busca recursivamente la palabra "TODO" en todos los archivos
+                .py: <code>grep -r "TODO" --include="*.py" ~/proyectos/</code>
+              </li>
+              <li>
+                Encuentra líneas que NO contengan la palabra "success":
+                <code>grep -v "success" resultado.log</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-filter"></i> Utilidades de procesamiento de texto</div>
+          <div class="tech-image">📊</div>
+          <p>
+            Linux ofrece un conjunto de herramientas especializadas en
+            procesar y manipular datos textuales que, al combinarlas, crean
+            potentes soluciones.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlas?</strong>
+            <p>
+              Estas herramientas permiten transformar, filtrar y analizar
+              datos de manera eficiente. Dominarlas te permitirá automatizar
+              tareas repetitivas de procesamiento de texto que serían tediosas
+              manualmente. Son el equivalente a tener un laboratorio de
+              análisis de texto en tu terminal.
+            </p>
+          </div>
+
+          <div class="concept-box">
+            <h4>Principales herramientas:</h4>
+            <ul>
+              <li><strong>sort</strong>: Ordena líneas de texto</li>
+              <li><strong>uniq</strong>: Filtra líneas repetidas</li>
+              <li>
+                <strong>wc</strong>: Cuenta palabras, líneas y caracteres
+              </li>
+              <li><strong>cut</strong>: Extrae secciones de cada línea</li>
+              <li><strong>tr</strong>: Traduce o elimina caracteres</li>
+            </ul>
+          </div>
+
+          <div class="terminal">
+            <span class="comment"># sort - Ordenar líneas</span>
+            <span class="prompt">$</span> sort nombres.txt
+            <span class="output">Alberto Carlos Marta Sofía Zoe</span>
+
+            <span class="comment"># uniq - Eliminar repetidos (el archivo debe estar ordenado)</span>
+            <span class="prompt">$</span> sort registros.txt | uniq
+            <span class="output">error tipo 1 error tipo 2 error tipo 3</span>
+
+            <span class="comment"># wc - Contar líneas, palabras y caracteres</span>
+            <span class="prompt">$</span> wc -l archivo.txt
+            <span class="output">42 archivo.txt</span>
+
+            <span class="comment"># cut - Extraer campos (columnas)</span>
+            <span class="prompt">$</span> cut -d":" -f1,7 /etc/passwd | head
+            -5
+            <span class="output">
+              root:/bin/bash daemon:/usr/sbin/nologin bin:/usr/sbin/nologin
+              sys:/usr/sbin/nologin sync:/bin/sync</span>
+
+            <span class="comment"># tr - Traducir caracteres</span>
+            <span class="prompt">$</span> echo "Hola Mundo" | tr 'a-z' 'A-Z'
+            <span class="output">HOLA MUNDO</span>
+          </div>
+
+          <p><strong>Combinando comandos en pipeline:</strong></p>
+          <div class="terminal">
+            <span class="comment"># Encontrar las 5 direcciones IP más frecuentes en un log</span>
+            <span class="prompt">$</span> grep -Eo
+            "([0-9]{1,3}\.){3}[0-9]{1,3}" access.log | sort | uniq -c | sort
+            -nr | head -5
+            <span class="output">
+              156 192.168.1.105 89 8.8.8.8 67 192.168.1.32 54 216.58.215.110
+              42 192.168.1.1</span>
+
+            <span class="comment"># Contar cuántos usuarios usan cada shell</span>
+            <span class="prompt">$</span> cut -d: -f7 /etc/passwd | sort |
+            uniq -c | sort -nr
+            <span class="output">
+              15 /usr/sbin/nologin 5 /bin/bash 3 /bin/sync 2 /bin/false 1
+              /bin/zsh</span>
+          </div>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Ordena alfabéticamente el archivo /etc/passwd:
+                <code>sort /etc/passwd</code>
+              </li>
+              <li>
+                Cuenta cuántas líneas, palabras y caracteres tiene un archivo:
+                <code>wc mi_archivo.txt</code>
+              </li>
+              <li>
+                Extrae solo la primera columna de un archivo CSV:
+                <code>cut -d"," -f1 datos.csv</code>
+              </li>
+              <li>
+                Encuentra las 10 palabras más comunes en un documento:
+                <code
+                  >cat documento.txt | tr -cs 'a-zA-Z' '\n' | tr 'A-Z' 'a-z' |
+                  sort | uniq -c | sort -nr | head -10</code
+                >
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <section>
+        <h2><i class="fas fa-running"></i> Procesos y Gestión del Sistema</h2>
+
+        <div class="concept-box">
+          <h3><i class="fas fa-cog"></i> Entendiendo los procesos en Linux</h3>
+          <p>
+            En Linux, cada programa que se ejecuta está representado por uno o
+            más procesos. Un proceso es una instancia en ejecución de un
+            programa, con su propio espacio de memoria, identificador único
+            (PID) y recursos asignados.
+          </p>
+
+          <p>
+            El control de procesos es una habilidad fundamental para administrar
+            un sistema Linux, ya que te permite supervisar qué está
+            ejecutándose, usar recursos y cómo detener procesos problemáticos.
+          </p>
+        </div>
+
+        <div class="tech-container">
+          <div class="tech-box">
+            <div class="tech-title"><i class="fas fa-tasks"></i> ps - Lista de procesos</div>
+            <div class="tech-image">📋</div>
+            <p>
+              El comando <code>ps</code> muestra información sobre los procesos
+              activos en el sistema.
+            </p>
+
+            <div class="why-learn">
+              <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+              <p>
+                Monitorear los procesos es esencial para entender qué está
+                sucediendo en tu sistema. Con <code>ps</code> puedes identificar
+                procesos que consumen demasiados recursos, detectar programas
+                que se han quedado colgados o simplemente comprender mejor cómo
+                funciona tu sistema por dentro.
+              </p>
+            </div>
+
+            <div class="terminal">
+              <span class="comment"># Mostrar procesos del usuario actual</span>
+              <span class="prompt">$</span> ps
+              <span class="output">
+                PID TTY TIME CMD 3421 pts/0 00:00:00 bash 4526 pts/0 00:00:00
+                ps</span>
+
+              <span class="comment"># Formato completo, todos los procesos</span>
+              <span class="prompt">$</span> ps aux | head -5
+              <span class="output">
+                USER PID %CPU %MEM VSZ RSS TTY STAT START TIME COMMAND root 1
+                0.0 0.2 168924 11788 ? Ss oct15 0:09 /sbin/init root 2 0.0 0.0 0
+                0 ? S oct15 0:00 [kthreadd] root 3 0.0 0.0 0 0 ? I< oct15 0:00
+                [rcu_gp] root 4 0.0 0.0 0 0 ? I< oct15 0:00 [rcu_par_gp]</span>
+
+              <span class="comment"># Mostrar procesos en formato de árbol</span>
+              <span class="prompt">$</span> ps axjf | head -10
+              <span class="output">
+                PPID PID PGID SID TTY TPGID STAT UID TIME COMMAND 0 1 1 1 ? -1
+                Ss 0 0:09 /sbin/init 0 2 0 0 ? -1 S 0 0:00 [kthreadd] 2 3 0 0 ?
+                -1 I< 0 0:00 \_ [rcu_gp] 2 4 0 0 ? -1 I< 0 0:00 \_ [rcu_par_gp]
+                2 6 0 0 ? -1 I< 0 0:00 \_ [kworker/0:0H-events_highpri]</span>
+
+              <span class="comment"># Buscar un proceso específico</span>
+              <span class="prompt">$</span> ps aux | grep firefox
+              <span class="output">
+                usuario 2345 5.2 3.4 3458720 278800 ? Sl 10:23 2:42
+                /usr/lib/firefox/firefox</span>
+            </div>
+
+            <p><strong>Opciones comunes:</strong></p>
+            <ul>
+              <li><code>a</code>: Muestra procesos de todos los usuarios</li>
+              <li>
+                <code>u</code>: Formato detallado con información de usuario
+              </li>
+              <li><code>x</code>: Incluye procesos sin terminal</li>
+              <li>
+                <code>f</code>: Formato de árbol (muestra relación padre-hijo)
+              </li>
+              <li>
+                <code>--sort=[+|-]key</code>: Ordena la salida (ej. --sort=-cpu)
+              </li>
+            </ul>
+
+            <div class="exercise-box">
+              <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+              <ol>
+                <li>
+                  Lista todos tus procesos en ejecución:
+                  <code>ps aux | grep ^$USER</code>
+                </li>
+                <li>
+                  Encuentra el proceso que consume más CPU:
+                  <code>ps aux --sort=-%cpu | head -5</code>
+                </li>
+                <li>
+                  Muestra los procesos en formato de árbol: <code>ps axjf</code>
+                </li>
+                <li>
+                  Busca todos los procesos de un programa específico:
+                  <code>ps aux | grep [f]irefox</code>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-bar">
+        <button onclick="window.location.href='01_basico.html'">
+          ⬅ Nivel Anterior
+        </button>
+        <button onclick="window.location.href='03_avanzado.html'">
+          Siguiente Nivel ➡
+        </button>
+      </div>
+    </footer>
+  </body>
+</html>

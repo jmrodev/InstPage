@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Constructores y Destructores en PHP con Gatitos</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #673ab7;
+      padding-bottom: 10px;
+    }
+    .concept-box {
+      background-color: #ede7f6;
+      border-left: 5px solid #673ab7;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f5f5f5;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+    }
+    code {
+      font-family: 'Consolas', 'Monaco', monospace;
+      font-size: 0.9rem;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #673ab7;
+      color: white;
+      padding: 0.3rem 0.7rem;
+      border-radius: 16px;
+      margin-bottom: 0.5rem;
+    }
+    .note {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+    .warning {
+      background-color: #fff3e0;
+      border-left: 5px solid #ff9800;
+      padding: 1rem;
+      margin: 1rem 0;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🐱 Constructores y Destructores en PHP con Gatitos</h1>
+
+<div class="concept-box">
+  <span class="concept-title">Constructor (__construct)</span>
+  <p>El constructor es un método especial que se ejecuta automáticamente cuando se crea un nuevo objeto de una clase. Su función principal es inicializar las propiedades del objeto y realizar cualquier configuración necesaria.</p>
+  
+  <p>En PHP, el constructor se define mediante el método <code>__construct()</code>. Es uno de los "métodos mágicos" de PHP (todos comienzan con doble guion bajo).</p>
+  
+  <div class="example-box">
+    <code>
+class Gato {<br>
+&nbsp;&nbsp;private $nombre;<br>
+&nbsp;&nbsp;private $edad;<br>
+&nbsp;&nbsp;private $color;<br>
+<br>
+&nbsp;&nbsp;// Constructor<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $color) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->color = $color;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "¡Un nuevo gatito llamado {$this->nombre} ha llegado al mundo!" . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function maullar() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "{$this->nombre} dice: ¡Miau!";<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Gato: {$this->nombre}, Edad: {$this->edad} años, Color: {$this->color}";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso en consola:</p>
+  <div class="example-box">
+    <code>
+// Al crear un objeto, se ejecuta automáticamente el constructor<br>
+$gato1 = new Gato("Pelusa", 3, "Blanco");<br>
+echo $gato1->getInfo() . PHP_EOL;<br>
+<br>
+$gato2 = new Gato("Mittens", 2, "Negro");<br>
+echo $gato2->maullar() . PHP_EOL;
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+¡Un nuevo gatito llamado Pelusa ha llegado al mundo!<br>
+Gato: Pelusa, Edad: 3 años, Color: Blanco<br>
+¡Un nuevo gatito llamado Mittens ha llegado al mundo!<br>
+Mittens dice: ¡Miau!
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Parámetros Opcionales y Valores por Defecto</span>
+  <p>Los constructores pueden tener parámetros opcionales con valores por defecto, lo que permite crear objetos sin necesidad de proporcionar todos los argumentos.</p>
+  
+  <div class="example-box">
+    <code>
+class GatoDomestico {<br>
+&nbsp;&nbsp;private $nombre;<br>
+&nbsp;&nbsp;private $color;<br>
+&nbsp;&nbsp;private $edad;<br>
+&nbsp;&nbsp;private $dueno;<br>
+<br>
+&nbsp;&nbsp;// Constructor con parámetros opcionales<br>
+&nbsp;&nbsp;public function __construct($nombre, $color, $edad = 1, $dueno = "Sin dueño") {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->color = $color;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->dueno = $dueno;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Se ha creado un gato doméstico llamado {$this->nombre}" . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Gato: {$this->nombre}, Color: {$this->color}, Edad: {$this->edad} años, Dueño: {$this->dueno}";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso con diferentes combinaciones de parámetros:</p>
+  <div class="example-box">
+    <code>
+// Todos los parámetros<br>
+$gato1 = new GatoDomestico("Luna", "Gris", 4, "María");<br>
+echo $gato1->getInfo() . PHP_EOL;<br>
+<br>
+// Omitiendo el parámetro de dueño (usará el valor por defecto)<br>
+$gato2 = new GatoDomestico("Simba", "Naranja", 2);<br>
+echo $gato2->getInfo() . PHP_EOL;<br>
+<br>
+// Omitiendo edad y dueño (usará valores por defecto)<br>
+$gato3 = new GatoDomestico("Oreo", "Blanco y Negro");<br>
+echo $gato3->getInfo() . PHP_EOL;
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Se ha creado un gato doméstico llamado Luna<br>
+Gato: Luna, Color: Gris, Edad: 4 años, Dueño: María<br>
+Se ha creado un gato doméstico llamado Simba<br>
+Gato: Simba, Color: Naranja, Edad: 2 años, Dueño: Sin dueño<br>
+Se ha creado un gato doméstico llamado Oreo<br>
+Gato: Oreo, Color: Blanco y Negro, Edad: 1 años, Dueño: Sin dueño
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Destructor (__destruct)</span>
+  <p>El destructor es otro método mágico de PHP que se ejecuta automáticamente cuando un objeto es destruido o cuando ya no hay referencias a él (generalmente al final del script o cuando se asigna NULL a la variable que contiene el objeto).</p>
+  
+  <p>El destructor se define mediante el método <code>__destruct()</code> y se utiliza para realizar tareas de limpieza como cerrar conexiones a bases de datos, liberar recursos, etc.</p>
+  
+  <div class="example-box">
+    <code>
+class RefugioGatos {<br>
+&nbsp;&nbsp;private $nombre;<br>
+&nbsp;&nbsp;private $gatos = [];<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Se ha creado el refugio de gatos '{$this->nombre}'" . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function agregarGato($gato) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->gatos[] = $gato;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Se ha añadido un gato al refugio. Total: " . count($this->gatos) . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function __destruct() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "El refugio '{$this->nombre}' se está cerrando." . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Se liberan " . count($this->gatos) . " gatos para ser adoptados." . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->gatos = [];<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso en consola:</p>
+  <div class="example-box">
+    <code>
+// Bloque para controlar el alcance del objeto<br>
+{<br>
+&nbsp;&nbsp;$refugio = new RefugioGatos("Patitas Felices");<br>
+&nbsp;&nbsp;$refugio->agregarGato("Pelusa");<br>
+&nbsp;&nbsp;$refugio->agregarGato("Manchas");<br>
+&nbsp;&nbsp;$refugio->agregarGato("Tigre");<br>
+&nbsp;&nbsp;echo "Operando el refugio..." . PHP_EOL;<br>
+}<br>
+// Al salir del bloque, $refugio queda fuera de alcance y se llama al destructor<br>
+<br>
+echo "Continuando con otras operaciones..." . PHP_EOL;<br>
+<br>
+// Otro ejemplo: destrucción explícita<br>
+$otroRefugio = new RefugioGatos("Patitas Suaves");<br>
+$otroRefugio->agregarGato("Nube");<br>
+$otroRefugio = null;  // Destruye el objeto explícitamente<br>
+<br>
+echo "Fin del script" . PHP_EOL;
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Se ha creado el refugio de gatos 'Patitas Felices'<br>
+Se ha añadido un gato al refugio. Total: 1<br>
+Se ha añadido un gato al refugio. Total: 2<br>
+Se ha añadido un gato al refugio. Total: 3<br>
+Operando el refugio...<br>
+El refugio 'Patitas Felices' se está cerrando.<br>
+Se liberan 3 gatos para ser adoptados.<br>
+Continuando con otras operaciones...<br>
+Se ha creado el refugio de gatos 'Patitas Suaves'<br>
+Se ha añadido un gato al refugio. Total: 1<br>
+El refugio 'Patitas Suaves' se está cerrando.<br>
+Se liberan 1 gatos para ser adoptados.<br>
+Fin del script
+    </code>
+  </div>
+</div>
+
+<div class="concept-box">
+  <span class="concept-title">Constructores en Herencia</span>
+  <p>Cuando trabajamos con herencia, el constructor de la clase hija puede llamar al constructor de la clase padre mediante <code>parent::__construct()</code> para asegurar una inicialización adecuada.</p>
+  
+  <div class="example-box">
+    <code>
+class Gato {<br>
+&nbsp;&nbsp;protected $nombre;<br>
+&nbsp;&nbsp;protected $edad;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->nombre = $nombre;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->edad = $edad;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Constructor de Gato ejecutado para {$this->nombre}" . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function __destruct() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Destructor de Gato ejecutado para {$this->nombre}" . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+}<br>
+<br>
+class GatoRaza extends Gato {<br>
+&nbsp;&nbsp;private $raza;<br>
+<br>
+&nbsp;&nbsp;public function __construct($nombre, $edad, $raza) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__construct($nombre, $edad);  // Llamar al constructor de la clase padre<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$this->raza = $raza;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Constructor de GatoRaza ejecutado para {$this->nombre} ({$this->raza})" . PHP_EOL;<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function __destruct() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;echo "Destructor de GatoRaza ejecutado para {$this->nombre}" . PHP_EOL;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;parent::__destruct();  // Llamar al destructor de la clase padre<br>
+&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;public function getInfo() {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return "Gato: {$this->nombre}, Edad: {$this->edad}, Raza: {$this->raza}";<br>
+&nbsp;&nbsp;}<br>
+}
+    </code>
+  </div>
+  
+  <p>Uso en consola:</p>
+  <div class="example-box">
+    <code>
+$gatoRaza = new GatoRaza("Whiskers", 5, "Maine Coon");<br>
+echo $gatoRaza->getInfo() . PHP_EOL;<br>
+$gatoRaza = null;  // Destruye el objeto
+    </code>
+  </div>
+  
+  <p>Resultado en consola:</p>
+  <div class="example-box">
+    <code>
+Constructor de Gato ejecutado para Whiskers<br>
+Constructor de GatoRaza ejecutado para Whiskers (Maine Coon)<br>
+Gato: Whiskers, Edad: 5, Raza: Maine Coon<br>
+Destructor de GatoRaza ejecutado para Whiskers<br>
+Destructor de Gato ejecutado para Whiskers
+    </code>
+  </div>
+</div>
+
+<div class="note">
+  <strong>Nota:</strong> A partir de PHP 8.0, se pueden definir propiedades al mismo tiempo que se declaran en el constructor, lo que reduce la cantidad de código repetitivo. Esto se conoce como "promoción de propiedades del constructor".
+  
+  <div class="example-box">
+    <code>
+// PHP 8.0 y superior<br>
+class Gato {<br>
+&nbsp;&nbsp;// Declaración y promoción de prop

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <title>Uso de visudo</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.6;
+        margin: 0;
+        padding: 20px;
+        background-color: #f9f9f9;
+        color: #333;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #222;
+      }
+      h1 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🛠️ Uso de visudo</h1>
+
+    <p>
+      El comando
+      <code>visudo</code>
+      es una herramienta utilizada para editar de manera segura el archivo
+      <code>/etc/sudoers</code>
+      , que controla los permisos de los usuarios para ejecutar comandos con
+      <code>sudo</code>
+      . Este comando verifica la sintaxis del archivo antes de guardar los
+      cambios, evitando errores que puedan bloquear el acceso al sistema.
+    </p>
+
+    <h2>🔧 Cómo usar visudo</h2>
+    <ol>
+      <li>
+        <strong>Abre el archivo sudoers:</strong>
+        <p>
+          Ejecuta el comando
+          <code>visudo</code>
+          como usuario
+          <code>root</code>
+          o con permisos de
+          <code>sudo</code>
+          :
+        </p>
+        <pre><code>sudo visudo</code></pre>
+      </li>
+      <li>
+        <strong>Edita el archivo:</strong>
+        <p>
+          Dentro del editor, puedes agregar o modificar configuraciones. Por
+          ejemplo, para otorgar permisos de
+          <code>sudo</code>
+          a un usuario, agrega la siguiente línea:
+        </p>
+        <pre><code>nombre-de-usuario ALL=(ALL:ALL) ALL</code></pre>
+        <p>
+          O para habilitar permisos para un grupo (como
+          <code>sudo</code>
+          o
+          <code>wheel</code>
+          ):
+        </p>
+        <pre><code>%sudo   ALL=(ALL:ALL) ALL</code></pre>
+      </li>
+      <li>
+        <strong>Guarda los cambios:</strong>
+        <p>
+          Presiona
+          <code>Ctrl + O</code>
+          para guardar y
+          <code>Ctrl + X</code>
+          para salir si estás usando el editor predeterminado
+          <code>nano</code>
+          . Si estás usando
+          <code>vim</code>
+          , escribe
+          <code>:wq</code>
+          y presiona
+          <code>Enter</code>
+          .
+        </p>
+      </li>
+      <li>
+        <strong>Verifica la sintaxis:</strong>
+        <p>
+          El comando
+          <code>visudo</code>
+          verificará automáticamente la sintaxis del archivo antes de guardar.
+          Si hay errores, te notificará para corregirlos.
+        </p>
+      </li>
+    </ol>
+
+    <h2>📌 Notas Importantes</h2>
+    <ul>
+      <li>
+        Siempre usa
+        <code>visudo</code>
+        para editar el archivo
+        <code>/etc/sudoers</code>
+        . Editarlo directamente con otro editor puede causar errores de sintaxis
+        que bloqueen el acceso al sistema.
+      </li>
+      <li>
+        Para otorgar permisos de
+        <code>sudo</code>
+        a un usuario, asegúrate de que esté en el grupo adecuado (como
+        <code>sudo</code>
+        en Debian o
+        <code>wheel</code>
+        en Arch Linux).
+      </li>
+      <li>
+        Evita otorgar permisos de
+        <code>sudo</code>
+        a usuarios no confiables, ya que tendrán acceso completo al sistema.
+      </li>
+    </ul>
+
+    <h2>✅ Ejemplo Práctico</h2>
+    <p>
+      Supongamos que deseas otorgar permisos de
+      <code>sudo</code>
+      al usuario
+      <code>juan</code>
+      . Sigue estos pasos:
+    </p>
+    <ol>
+      <li>
+        Ejecuta
+        <code>sudo visudo</code>
+        .
+      </li>
+      <li>Agrega la siguiente línea al archivo:</li>
+      <pre><code>juan ALL=(ALL:ALL) ALL</code></pre>
+      <li>Guarda los cambios y cierra el editor.</li>
+      <li>
+        Prueba el acceso con
+        <code>sudo</code>
+        :
+      </li>
+      <pre><code>sudo apt update</code></pre>
+    </ol>
+
+    <h2>✅ Conclusión</h2>
+    <p>
+      El comando
+      <code>visudo</code>
+      es una herramienta esencial para administrar permisos de
+      <code>sudo</code>
+      de manera segura. Usarlo correctamente garantiza que los cambios en el
+      archivo
+      <code>/etc/sudoers</code>
+      no causen problemas en el sistema.
+    </p>
+  </body>
+</html>

@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <title>Solución: Command Not Found</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h1 {
+        text-align: center;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        background-color: #e8f4f8;
+        padding: 10px;
+        border-left: 5px solid #3498db;
+        margin-top: 40px;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      .note {
+        background-color: #fffde7;
+        padding: 15px;
+        border-left: 4px solid #ffd600;
+        margin: 25px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🛠️ Solución: Command Not Found</h1>
+
+    <p>
+      El error
+      <code>command not found</code>
+      ocurre cuando el sistema no puede encontrar el comando que intentas
+      ejecutar. Esto puede deberse a que el paquete correspondiente no está
+      instalado o a problemas con las variables de entorno. A continuación, se
+      explican las soluciones para sistemas basados en Debian y Arch Linux
+      (incluyendo derivadas como Ubuntu y Manjaro).
+    </p>
+
+    <h2>🔧 Solución en Debian y Derivadas (Ubuntu, Linux Mint, etc.)</h2>
+    <ol>
+      <li>
+        <strong>Verifica si el paquete está instalado:</strong>
+        <p>
+          Usa el siguiente comando para buscar el paquete que contiene el
+          comando:
+        </p>
+        <pre><code>sudo apt update && apt search nombre-del-comando</code></pre>
+        <p>
+          Por ejemplo, si el comando es
+          <code>curl</code>
+          , busca:
+        </p>
+        <pre><code>sudo apt search curl</code></pre>
+      </li>
+      <li>
+        <strong>Instala el paquete necesario:</strong>
+        <p>Si el paquete no está instalado, instálalo con:</p>
+        <pre><code>sudo apt install nombre-del-paquete</code></pre>
+        <p>Por ejemplo:</p>
+        <pre><code>sudo apt install curl</code></pre>
+      </li>
+      <li>
+        <strong>Verifica las variables de entorno:</strong>
+        <p>
+          Asegúrate de que el directorio
+          <code>/usr/bin</code>
+          o
+          <code>/usr/local/bin</code>
+          esté en tu variable
+          <code>PATH</code>
+          . Ejecuta:
+        </p>
+        <pre><code>echo $PATH</code></pre>
+        <p>
+          Si no está, agrega el directorio al
+          <code>PATH</code>
+          editando el archivo
+          <code>~/.bashrc</code>
+          :
+        </p>
+        <pre><code>export PATH=$PATH:/usr/bin:/usr/local/bin</code></pre>
+        <p>Luego, recarga el archivo:</p>
+        <pre><code>source ~/.bashrc</code></pre>
+      </li>
+    </ol>
+
+    <h2>🔧 Solución en Arch Linux y Derivadas (Manjaro, EndeavourOS, etc.)</h2>
+    <ol>
+      <li>
+        <strong>Verifica si el paquete está instalado:</strong>
+        <p>
+          Usa el siguiente comando para buscar el paquete que contiene el
+          comando:
+        </p>
+        <pre><code>sudo pacman -Ss nombre-del-comando</code></pre>
+        <p>
+          Por ejemplo, si el comando es
+          <code>wget</code>
+          , busca:
+        </p>
+        <pre><code>sudo pacman -Ss wget</code></pre>
+      </li>
+      <li>
+        <strong>Instala el paquete necesario:</strong>
+        <p>Si el paquete no está instalado, instálalo con:</p>
+        <pre><code>sudo pacman -S nombre-del-paquete</code></pre>
+        <p>Por ejemplo:</p>
+        <pre><code>sudo pacman -S wget</code></pre>
+      </li>
+      <li>
+        <strong>Verifica las variables de entorno:</strong>
+        <p>
+          Asegúrate de que el directorio
+          <code>/usr/bin</code>
+          o
+          <code>/usr/local/bin</code>
+          esté en tu variable
+          <code>PATH</code>
+          . Ejecuta:
+        </p>
+        <pre><code>echo $PATH</code></pre>
+        <p>
+          Si no está, agrega el directorio al
+          <code>PATH</code>
+          editando el archivo
+          <code>~/.bashrc</code>
+          :
+        </p>
+        <pre><code>export PATH=$PATH:/usr/bin:/usr/local/bin</code></pre>
+        <p>Luego, recarga el archivo:</p>
+        <pre><code>source ~/.bashrc</code></pre>
+      </li>
+    </ol>
+
+    <h2>📌 Notas Adicionales</h2>
+    <ul>
+      <li>
+        Si el comando pertenece a un paquete de terceros, verifica si necesitas
+        habilitar repositorios adicionales (como
+        <code>universe</code>
+        en Ubuntu o
+        <code>AUR</code>
+        en Arch Linux).
+      </li>
+      <li>
+        En Arch Linux, puedes usar
+        <code>yay</code>
+        o
+        <code>paru</code>
+        para instalar paquetes desde AUR.
+      </li>
+      <li>
+        Si el problema persiste, verifica los permisos del archivo ejecutable o
+        reinstala el paquete.
+      </li>
+    </ul>
+
+    <h2>✅ Conclusión</h2>
+    <p>
+      El error
+      <code>command not found</code>
+      generalmente se soluciona instalando el paquete correspondiente o
+      corrigiendo las variables de entorno. Siguiendo los pasos anteriores,
+      deberías poder resolver este problema en sistemas Debian y Arch Linux (y
+      sus derivadas).
+    </p>
+  </body>
+</html>

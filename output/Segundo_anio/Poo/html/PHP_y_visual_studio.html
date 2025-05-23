@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual PHP con Visual Studio Code</title>
+  <!-- Asumiendo que tu CSS está en esta ruta relativa -->
+  <link rel="stylesheet" href="../../../../css/styles.css" />
+  <!-- Añadiendo Font Awesome para iconos (opcional, pero usado en el original) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+  <header>
+    <h1>Usando PHP con Visual Studio Code</h1>
+    <nav class="breadcrumb">
+      <!-- Adapta esta ruta según tu estructura -->
+      <a href="../../../../index.html"><i class="fas fa-home"></i> Inicio</a> /
+      <a href="#">Desarrollo Web</a> /
+      <a href="#">PHP</a> / VS Code
+    </nav>
+  </header>
+
+  <main>
+    <div class="note">
+      <p>
+        <i class="fas fa-info-circle"></i> Bienvenido a esta guía para configurar y utilizar PHP de manera efectiva
+        dentro de Visual Studio Code (VS Code), uno de los editores de código más populares y potentes para el
+        desarrollo web moderno.
+      </p>
+    </div>
+
+    <section>
+      <h2><i class="fas fa-cogs"></i> Preparación del Entorno</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-tools"></i> Requisitos Previos</h3>
+        <p>
+          Antes de empezar a escribir código PHP en VS Code, necesitas asegurarte de tener tanto PHP como el propio
+          editor instalados en tu sistema. VS Code por sí solo es un editor de texto; requiere el intérprete de PHP
+          para ejecutar y depurar tu código.
+        </p>
+        <p>
+          Esta sección te guiará a través de los pasos esenciales para tener tu entorno listo.
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fab fa-php"></i> Instalación de PHP</div>
+          <div class="tech-image">🐘</div>
+          <p>
+            Necesitas tener PHP instalado en tu sistema operativo (Windows, macOS, Linux). Puedes descargarlo desde el
+            sitio oficial o usar gestores de paquetes.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué es necesario?</strong>
+            <p>
+              VS Code no incluye PHP. El intérprete de PHP es el programa que realmente lee y ejecuta tus scripts
+              <code>.php</code>. Sin él, solo podrías escribir código, pero no probarlo ni ejecutarlo.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment"># Verifica si PHP está instalado y su versión</span>
+            <span class="prompt">$</span> php -v
+            <span class="output">
+              PHP 8.1.10 (cli) (built: Aug 30 2022 18:11:12) (NTS)
+              Copyright (c) The PHP Group
+              Zend Engine v4.1.10, Copyright (c) Zend Technologies
+            </span>
+            <span class="comment"># Si no aparece nada o da error, necesitas instalarlo.</span>
+          </div>
+
+          <p><strong>Recursos de Instalación:</strong></p>
+          <ul>
+            <li><i class="fas fa-link"></i> <a href="https://www.php.net/manual/es/install.php" target="_blank"
+                rel="noopener noreferrer">Documentación Oficial de Instalación PHP</a></li>
+            <li><i class="fab fa-windows"></i> Para Windows: Usa XAMPP, WAMP, Laragon o descarga desde <a
+                href="https://windows.php.net/download/" target="_blank" rel="noopener noreferrer">windows.php.net</a>.
+            </li>
+            <li><i class="fab fa-apple"></i> Para macOS: Usa Homebrew (<code>brew install php</code>) o MAMP.</li>
+            <li><i class="fab fa-linux"></i> Para Linux (Debian/Ubuntu):
+              <code>sudo apt update && sudo apt install php</code>
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Verifica si tienes PHP instalado usando <code>php -v</code> en tu terminal.</li>
+              <li>Si no lo tienes, instálalo siguiendo la guía para tu sistema operativo.</li>
+              <li>Asegúrate de que el comando <code>php</code> funcione globalmente en tu terminal.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-code"></i> Instalación de Visual Studio Code</div>
+          <div class="tech-image">💻</div>
+          <p>
+            VS Code es un editor de código fuente gratuito, ligero y extensible desarrollado por Microsoft. Es ideal
+            para el desarrollo PHP gracias a su amplio soporte y ecosistema de extensiones.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué usar VS Code?</strong>
+            <p>
+              Ofrece resaltado de sintaxis, autocompletado inteligente (IntelliSense), depuración integrada, control
+              Git, terminal incorporada y miles de extensiones para personalizar tu flujo de trabajo. Es el estándar
+              de facto para muchos desarrolladores web.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment"># Verifica si tienes VS Code instalado (comando 'code')</span>
+            <span class="prompt">$</span> code --version
+            <span class="output">
+              1.78.2
+              b3e4e68a0bc097f0ae7907b217c1119af9e03435
+              x64
+            </span>
+            <span class="comment"># Si no funciona, necesitas instalarlo o añadirlo al PATH.</span>
+          </div>
+
+          <p><strong>Pasos:</strong></p>
+          <ul>
+            <li><i class="fas fa-download"></i> Ve a la <a href="https://code.visualstudio.com/" target="_blank"
+                rel="noopener noreferrer">página oficial de VS Code</a>.</li>
+            <li>Descarga el instalador adecuado para tu sistema operativo (Windows, macOS, Linux .deb/.rpm).</li>
+            <li>Ejecuta el instalador y sigue las instrucciones.</li>
+            <li>(Opcional pero recomendado) Asegúrate de marcar la opción "Agregar a PATH" durante la instalación en
+              Windows para poder lanzar VS Code desde la terminal.</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Descarga e instala VS Code si aún no lo tienes.</li>
+              <li>Abre VS Code y familiarízate con la interfaz básica.</li>
+              <li>Prueba a abrir tu terminal y ejecutar <code>code .</code> dentro de una carpeta para abrirla en VS
+                Code.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-puzzle-piece"></i> Configuración de VS Code para PHP</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-magic"></i> Extensiones y Configuraciones Clave</h3>
+        <p>
+          La verdadera potencia de VS Code para PHP proviene de sus extensiones. Estas añaden funcionalidades como
+          mejor autocompletado, depuración avanzada, formato de código y detección de errores (linting).
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-plug"></i> Extensiones Esenciales para PHP</div>
+          <div class="tech-image">🧩</div>
+          <p>
+            Instalar las extensiones adecuadas mejorará drásticamente tu productividad al desarrollar con PHP en VS
+            Code.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué instalar extensiones?</strong>
+            <p>
+              El soporte básico de PHP en VS Code es bueno, pero las extensiones lo llevan al siguiente nivel. Te
+              ayudan a escribir código más rápido, con menos errores y facilitan la depuración y el mantenimiento.
+            </p>
+          </div>
+
+          <p><strong>Extensiones Recomendadas:</strong></p>
+          <ul>
+            <li>
+              <strong>PHP Intelephense</strong> (o PHP IntelliSense): Proporciona autocompletado avanzado, navegación
+              de código, formato y diagnóstico de errores. Es una de las más populares y completas.
+              <br><i class="fas fa-search"></i> Búscala como: <code>bmewburn.vscode-intelephense-client</code>
+            </li>
+            <li>
+              <strong>PHP Debug</strong>: Permite integrar VS Code con Xdebug para depurar tu código PHP paso a paso,
+              inspeccionar variables, etc. Fundamental para solucionar problemas.
+              <br><i class="fas fa-search"></i> Búscala como: <code>xdebug.php-debug</code>
+            </li>
+             <li>
+              <strong>PHP DocBlocker</strong>: Facilita la creación de bloques de comentarios PHPDoc estándar.
+              <br><i class="fas fa-search"></i> Búscala como: <code>neilbrayfield.php-docblocker</code>
+            </li>
+             <li>
+              <strong>Composer</strong>: (Si usas Composer) Proporciona comandos y ayuda para manejar dependencias PHP.
+              <br><i class="fas fa-search"></i> Búscala como: <code>ikappas.composer</code>
+            </li>
+          </ul>
+
+           <p><strong>Cómo Instalar Extensiones:</strong></p>
+            <ol>
+                <li>Abre VS Code.</li>
+                <li>Ve a la vista de Extensiones (icono de bloques en la barra lateral o `Ctrl+Shift+X`).</li>
+                <li>Busca el nombre de la extensión.</li>
+                <li>Haz clic en "Instalar".</li>
+                <li>Puede que necesites reiniciar VS Code después de instalar algunas extensiones.</li>
+            </ol>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Abre la pestaña de Extensiones en VS Code.</li>
+              <li>Busca e instala "PHP Intelephense".</li>
+              <li>Busca e instala "PHP Debug".</li>
+              <li>Instala cualquier otra extensión que consideres útil (como PHP DocBlocker).</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-sliders-h"></i> Configuración del Intérprete PHP</div>
+          <div class="tech-image">⚙️</div>
+          <p>
+            Aunque a menudo VS Code detecta automáticamente tu instalación de PHP, a veces necesitas especificar
+            manualmente la ruta al ejecutable de PHP, especialmente si tienes múltiples versiones instaladas.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué configurar la ruta?</strong>
+            <p>
+              Las extensiones como Intelephense y PHP Debug necesitan saber dónde encontrar el intérprete de PHP para
+              validar la sintaxis correctamente, ejecutar scripts y habilitar la depuración. Si VS Code no lo
+              encuentra, muchas funcionalidades no estarán disponibles.
+            </p>
+          </div>
+
+          <p><strong>Cómo configurar la ruta (Settings JSON):</strong></p>
+          <ol>
+            <li>Abre la Paleta de Comandos (`Ctrl+Shift+P` o `Cmd+Shift+P`).</li>
+            <li>Escribe "Open User Settings (JSON)" y selecciónalo.</li>
+            <li>Dentro del objeto JSON <code>{}</code>, añade o modifica las siguientes líneas:</li>
+          </ol>
+          <code style="display: block; white-space: pre-wrap; background-color: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 5px;">{
+  // Ejemplo para Windows (ajusta la ruta si es diferente)
+  "php.validate.executablePath": "C:/path/to/your/php/php.exe",
+  "php.executablePath": "C:/path/to/your/php/php.exe",
+
+  // Ejemplo para Linux/macOS (ajusta la ruta si es diferente)
+  // A menudo '/usr/bin/php' o '/usr/local/bin/php'
+  // "php.validate.executablePath": "/usr/local/bin/php",
+  // "php.executablePath": "/usr/local/bin/php",
+
+  // Configuración recomendada para Intelephense (opcional)
+  "intelephense.environment.phpVersion": "8.1.0", // Pon tu versión
+  // ... otras configuraciones ...
+}</code>
+          <p><strong>Nota:</strong> <code>php.validate.executablePath</code> es para la validación integrada de VS Code, mientras que <code>php.executablePath</code> puede ser usado por otras extensiones. Es bueno configurar ambas.</p>
+
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Encuentra la ruta exacta a tu ejecutable <code>php</code> (o <code>php.exe</code> en Windows). Puedes usar <code>where php</code> (Windows) o <code>which php</code> (Linux/macOS).</li>
+              <li>Abre tus "User Settings (JSON)" en VS Code.</li>
+              <li>Añade la configuración <code>php.validate.executablePath</code> apuntando a tu ejecutable PHP. Guarda el archivo.</li>
+              <li>(Opcional) Configura <code>intelephense.environment.phpVersion</code> con tu versión de PHP.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <section>
+      <h2><i class="fas fa-play-circle"></i> Creación y Ejecución de Código PHP</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-file-code"></i> El Flujo de Trabajo Básico</h3>
+        <p>
+          Ahora que el entorno está configurado, veamos cómo crear, escribir y ejecutar archivos PHP directamente desde VS Code.
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-pencil-alt"></i> Escribiendo tu Primer Script PHP</div>
+          <div class="tech-image">✍️</div>
+          <p>
+            Crea un nuevo archivo con la extensión <code>.php</code>. VS Code reconocerá el tipo de archivo y activará el resaltado de sintaxis y las funcionalidades de las extensiones PHP instaladas.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Qué esperar?</strong>
+            <p>
+              Notarás que el código PHP (entre <code><?php</code> y <code>?></code>) se colorea de forma diferente al HTML. Si tienes Intelephense, empezarás a recibir sugerencias de autocompletado para funciones y variables PHP.
+            </p>
+          </div>
+
+          <p><strong>Ejemplo (<code>index.php</code>):</strong></p>
+          <code style="display: block; white-space: pre-wrap; background-color: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 5px;"><pre><code><!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Página PHP de Prueba</title>
+</head>
+<body>
+    <h1>Bienvenido a PHP con VS Code</h1>
+
+    <p>Fecha y hora actual:</p>
+    <?php
+        // Esto es un comentario PHP
+        $fechaActual = date('Y-m-d H:i:s');
+        echo "<strong>" . $fechaActual . "</strong>";
+
+        // Prueba de autocompletado (empieza a escribir 'str'...)
+        $mensaje = "Hola Mundo";
+        echo "<p>Mensaje: " . strtoupper($mensaje) . "</p>";
+    ?>
+
+    <p>Fin del script PHP.</p>
+</body>
+</html></code></pre></code>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Crea una nueva carpeta para tu proyecto PHP.</li>
+              <li>Abre esa carpeta en VS Code (`Archivo > Abrir Carpeta...` o `code .` desde la terminal).</li>
+              <li>Crea un nuevo archivo llamado <code>index.php</code>.</li>
+              <li>Copia y pega el código de ejemplo anterior en <code>index.php</code>.</li>
+              <li>Observa el resaltado de sintaxis. Intenta escribir funciones PHP como <code>date(</code> o <code>strtoupper(</code> para ver el autocompletado.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-terminal"></i> Ejecutando Scripts PHP</div>
+          <div class="tech-image">▶️</div>
+          <p>
+            Hay varias formas de ejecutar tu código PHP: usando el servidor web incorporado de PHP para ver páginas en el navegador, o ejecutando scripts directamente desde la terminal de VS Code.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Cómo probar el código?</strong>
+            <p>
+              Necesitas una forma de ver el resultado de tu script. El servidor web es ideal para archivos que generan HTML (como el ejemplo anterior), mientras que la ejecución directa en terminal es útil para scripts de consola o tareas automatizadas.
+            </p>
+          </div>
+
+          <p><strong>Método 1: Servidor Web Incorporado de PHP</strong></p>
+          <ol>
+              <li>Abre la terminal integrada de VS Code (`Terminal > Nuevo Terminal` o `Ctrl+`).</li>
+              <li>Asegúrate de estar en la carpeta raíz de tu proyecto.</li>
+              <li>Ejecuta el comando: <code>php -S localhost:8000</code></li>
+              <li>Abre tu navegador web y ve a <code>http://localhost:8000</code> (o <code>http://localhost:8000/index.php</code>). Verás tu página renderizada.</li>
+              <li>Para detener el servidor, vuelve a la terminal y presiona `Ctrl+C`.</li>
+          </ol>
+
+           <div class="terminal">
+            <span class="comment"># Iniciar el servidor web en el puerto 8000</span>
+            <span class="prompt">$</span> php -S localhost:8000
+            <span class="output">
+              PHP 8.1.10 Development Server (http://localhost:8000) started
+              [Tue May 16 10:30:00 2023] PHP 8.1.10 Development Server (http://localhost:8000) started
+              [Tue May 16 10:30:05 2023] [::1]:51234 Accepted
+              [Tue May 16 10:30:05 2023] [::1]:51234 [200]: GET /
+              [Tue May 16 10:30:05 2023] [::1]:51234 Closing
+            </span>
+           </div>
+
+
+          <p><strong>Método 2: Ejecución Directa en Terminal</strong></p>
+          <ol>
+              <li>Abre la terminal integrada de VS Code.</li>
+              <li>Ejecuta el comando: <code>php nombre_del_archivo.php</code></li>
+              <li>La salida del script (lo que imprima con <code>echo</code>, <code>print</code>, etc.) aparecerá directamente en la terminal.</li>
+          </ol>
+
+          <div class="terminal">
+            <span class="comment"># Ejecutar el script index.php directamente</span>
+            <span class="prompt">$</span> php index.php
+            <span class="output">
+              <!DOCTYPE html>
+              <html lang="es">
+              <head>
+                  <meta charset="UTF-8">
+                  <title>Página PHP de Prueba</title>
+              </head>
+              <body>
+                  <h1>Bienvenido a PHP con VS Code</h1>
+                  <p>Fecha y hora actual:</p>
+                  <strong>2023-05-16 10:35:00</strong><p>Mensaje: HOLA MUNDO</p>
+                  <p>Fin del script PHP.</p>
+              </body>
+              </html>
+            </span>
+           </div>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Usa la terminal integrada de VS Code para iniciar el servidor web de PHP con <code>php -S localhost:8000</code>.</li>
+              <li>Abre <code>http://localhost:8000</code> en tu navegador y verifica que la página se muestra correctamente.</li>
+              <li>Detén el servidor (`Ctrl+C`).</li>
+              <li>Ejecuta el script directamente usando <code>php index.php</code> y observa la salida HTML en la terminal.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-bug"></i> Depuración (Debugging) con Xdebug</h2>
+
+       <div class="concept-box">
+        <h3><i class="fas fa-search-location"></i> Encontrando y Corrigiendo Errores</h3>
+        <p>
+          La depuración es el proceso de encontrar y corregir errores (bugs) en tu código. Usar un depurador como Xdebug con VS Code te permite ejecutar tu código línea por línea, inspeccionar el valor de las variables en cualquier momento y entender exactamente qué está sucediendo.
+        </p>
+        <p>
+          Es mucho más eficiente que llenar tu código de <code>echo</code> o <code>var_dump</code>.
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-cogs"></i> Instalación y Configuración de Xdebug</div>
+          <div class="tech-image">🐞</div>
+          <p>
+            Xdebug es una extensión PHP que necesita ser instalada y configurada en tu archivo <code>php.ini</code> para que VS Code pueda conectarse a ella.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué Xdebug?</strong>
+            <p>
+               Es el estándar de facto para la depuración en PHP. Proporciona la interfaz necesaria para que herramientas como VS Code controlen la ejecución del script y analicen su estado. Sin Xdebug (o una alternativa similar), la extensión "PHP Debug" de VS Code no funcionará.
+            </p>
+          </div>
+
+          <p><strong>Pasos Generales:</strong></p>
+          <ol>
+              <li>
+                  <strong>Instalar Xdebug:</strong> La forma más fácil suele ser usar PECL (si está disponible): <code>pecl install xdebug</code>. Si no, descarga el .dll (Windows) o .so (Linux/macOS) precompilado desde <a href="https://xdebug.org/wizard" target="_blank" rel="noopener noreferrer">el asistente de Xdebug</a> o compílalo tú mismo.
+              </li>
+              <li>
+                  <strong>Localizar tu <code>php.ini</code>:</strong> Ejecuta <code>php --ini</code> en la terminal para ver qué archivo <code>php.ini</code> está usando tu PHP (puede haber uno para CLI y otro para el servidor web).
+              </li>
+              <li>
+                  <strong>Configurar <code>php.ini</code>:</strong> Abre el archivo <code>php.ini</code> y añade las siguientes líneas (asegúrate de que la ruta a <code>xdebug.so</code> o <code>xdebug.dll</code> sea correcta y ajusta las opciones según Xdebug v3+):
+              </li>
+          </ol>
+
+          <code style="display: block; white-space: pre-wrap; background-color: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 5px;"><pre><code>; Para Xdebug 3+
+[xdebug]
+zend_extension=ruta/completa/a/xdebug.so  ; O xdebug.dll en Windows
+xdebug.mode=debug                         ; Activa el modo depuración
+xdebug.start_with_request=yes             ; Inicia la depuración en cada request (útil para empezar)
+; Opcional: 'trigger' para iniciar solo con parámetro/cookie
+; xdebug.start_with_request=trigger
+xdebug.client_host=127.0.0.1              ; IP donde escucha VS Code
+xdebug.client_port=9003                   ; Puerto estándar para Xdebug 3+ (antes era 9000)
+xdebug.log=/tmp/xdebug.log                ; (Opcional) Para ver logs de Xdebug</code></pre></code>
+
+            <ol start="4">
+                <li>
+                    <strong>Reiniciar Servidor Web/PHP-FPM:</strong> Si estás depurando a través de un servidor web (Apache, Nginx), necesitas reiniciarlo para que cargue la nueva configuración de <code>php.ini</code>.
+                </li>
+                <li>
+                    <strong>Verificar Instalación:</strong> Ejecuta <code>php -v</code>. Deberías ver una línea que dice "with Xdebug v3.x.x". También puedes crear un archivo con <code><?php phpinfo(); ?></code> y buscar la sección de Xdebug al verlo en el navegador.
+                </li>
+            </ol>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Usa el <a href="https://xdebug.org/wizard" target="_blank" rel="noopener noreferrer">asistente de Xdebug</a> copiando la salida de <code>phpinfo()</code> para obtener instrucciones personalizadas.</li>
+              <li>Instala Xdebug siguiendo las instrucciones.</li>
+              <li>Localiza y edita tu archivo <code>php.ini</code> principal para añadir la configuración de Xdebug 3.</li>
+              <li>Verifica la instalación con <code>php -v</code> o <code>phpinfo()</code>.</li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-play-pause"></i> Usando el Depurador de VS Code</div>
+          <div class="tech-image">🔬</div>
+          <p>
+            Una vez Xdebug está configurado y la extensión "PHP Debug" instalada, puedes iniciar sesiones de depuración desde VS Code.
+          </p>
+
+           <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Cómo funciona?</strong>
+            <p>
+              VS Code escuchará conexiones entrantes de Xdebug. Al ejecutar tu script (ya sea desde el navegador o la terminal, dependiendo de la configuración), Xdebug se conectará a VS Code, permitiéndote controlar la ejecución.
+            </p>
+          </div>
+
+          <p><strong>Pasos para Depurar:</strong></p>
+          <ol>
+              <li>
+                  <strong>Crear Configuración de Lanzamiento (`launch.json`):</strong>
+                  <ul>
+                      <li>Ve a la vista "Ejecutar y Depurar" (icono de play con un bug en la barra lateral o `Ctrl+Shift+D`).</li>
+                      <li>Haz clic en "create a launch.json file".</li>
+                      <li>Selecciona "PHP" en el menú desplegable.</li>
+                      <li>Esto creará un archivo <code>.vscode/launch.json</code> con configuraciones predeterminadas. La configuración "Listen for Xdebug" es la más común para depuración web.</li>
+                  </ul>
+              </li>
+               <li>
+                  <strong>Establecer Puntos de Interrupción (Breakpoints):</strong>
+                  <ul>
+                      <li>Abre el archivo PHP que quieres depurar.</li>
+                      <li>Haz clic en el margen izquierdo, junto al número de línea donde quieres que la ejecución se pause. Aparecerá un punto rojo.</li>
+                  </ul>
+              </li>
+              <li>
+                  <strong>Iniciar la Escucha:</strong>
+                  <ul>
+                      <li>En la vista "Ejecutar y Depurar", asegúrate de que "Listen for Xdebug" esté seleccionado en el menú desplegable superior.</li>
+                      <li>Haz clic en el botón verde de "Play" (Iniciar depuración) o presiona `F5`. VS Code empezará a escuchar en el puerto configurado (por defecto 9003).</li>
+                  </ul>
+              </li>
+              <li>
+                  <strong>Ejecutar el Script:</strong>
+                  <ul>
+                      <li>Abre tu script PHP en el navegador (si estás depurando una aplicación web y usas `xdebug.start_with_request=yes` o `trigger`).</li>
+                      <li>O ejecuta el script desde la terminal (`php tu_script.php`), si Xdebug está configurado para CLI.</li>
+                  </ul>
+              </li>
+               <li>
+                  <strong>Depurar:</strong>
+                  <ul>
+                      <li>La ejecución se detendrá en el primer punto de interrupción que encuentre.</li>
+                      <li>Usa los controles de depuración en VS Code (Continuar F5, Saltar F10, Entrar F11, Salir Shift+F11).</li>
+                      <li>Inspecciona las variables locales, globales y superglobales en el panel izquierdo.</li>
+                      <li>Evalúa expresiones en la "Consola de Depuración".</li>
+                  </ul>
+              </li>
+               <li>
+                  <strong>Detener la Depuración:</strong>
+                  <ul>
+                      <li>Haz clic en el botón rojo de "Stop" en la barra de herramientas de depuración.</li>
+                  </ul>
+              </li>
+          </ol>
+
+           <p><strong>Ejemplo <code>.vscode/launch.json</code>:</strong></p>
+           <code style="display: block; white-space: pre-wrap; background-color: #1e1e1e; color: #d4d4d4; padding: 10px; border-radius: 5px;"><pre><code>{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Listen for Xdebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9003 // Asegúrate que coincida con php.ini
+        },
+        {
+            "name": "Launch currently open script",
+            "type": "php",
+            "request": "launch",
+            "program": "${file}",
+            "cwd": "${fileDirname}",
+            "port": 9003,
+            "runtimeExecutable": "/ruta/a/tu/php" // Opcional si está en el PATH
+        }
+    ]
+}</code></pre></code>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+            <ol>
+              <li>Abre tu proyecto PHP en VS Code.</li>
+              <li>Ve a la vista "Ejecutar y Depurar" y crea un archivo <code>launch.json</code> para PHP si no existe.</li>
+              <li>Abre tu archivo <code>index.php</code> y pon un punto de interrupción en la línea <code>$fechaActual = date('Y-m-d H:i:s');</code>.</li>
+              <li>Inicia la escucha de Xdebug (F5).</li>
+              <li>Recarga la página <code>http://localhost:8000</code> en tu navegador (asumiendo que el servidor PHP está corriendo y Xdebug configurado para iniciar con la petición).</li>
+              <li>La ejecución debería pausarse en VS Code. Explora los paneles de Variables y la barra de herramientas de depuración (F10 para pasar a la siguiente línea, F5 para continuar hasta el final).</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+     <section>
+      <h2><i class="fas fa-star"></i> Características Útiles Adicionales</h2>
+        <div class="concept-box">
+            <h3><i class="fas fa-rocket"></i> Optimizando tu Flujo de Trabajo</h3>
+            <p>VS Code ofrece muchas otras características que, combinadas con las extensiones adecuadas, pueden hacer tu desarrollo PHP aún más eficiente.</p>
+        </div>
+        <div class="tech-container">
+            <div class="tech-box">
+                <div class="tech-title"><i class="fas fa-lightbulb"></i> IntelliSense y Autocompletado</div>
+                <div class="tech-image">💡</div>
+                <p>Gracias a extensiones como PHP Intelephense, obtienes sugerencias inteligentes mientras escribes, incluyendo funciones PHP, métodos de clase, variables, constantes y palabras clave.</p>
+                 <div class="why-learn">
+                    <strong><i class="fas fa-question-circle"></i> ¿Beneficios?</strong>
+                    <p>Reduce errores tipográficos, acelera la escritura de código y te ayuda a descubrir funciones o métodos sin tener que consultar constantemente la documentación.</p>
+                 </div>
+                 <ul>
+                    <li>Autocompletado de funciones nativas y definidas por el usuario.</li>
+                    <li>Sugerencias de parámetros de funciones/métodos.</li>
+                    <li>Navegación rápida a la definición de funciones/clases (`F12` o `Ctrl+Click`).</li>
+                    <li>Detección de errores de sintaxis y tipos básicos en tiempo real.</li>
+                 </ul>
+            </div>
+             <div class="tech-box">
+                <div class="tech-title"><i class="fas fa-align-left"></i> Formateo y Linting</div>
+                <div class="tech-image">🧹</div>
+                <p>Mantén tu código limpio y consistente. VS Code puede formatear automáticamente tu código PHP según estándares definidos (como PSR-12) y detectar posibles problemas (linting).</p>
+                 <div class="why-learn">
+                    <strong><i class="fas fa-question-circle"></i> ¿Por qué es importante?</strong>
+                    <p>Un código bien formateado es más fácil de leer y mantener. El linting ayuda a identificar errores potenciales o malas prácticas antes de ejecutar el código.</p>
+                 </div>
+                 <ul>
+                    <li><strong>Formateador:</strong> PHP Intelephense incluye un formateador. Puedes configurar VS Code para formatear al guardar (`editor.formatOnSave`). Presiona `Shift+Alt+F` para formatear manualmente.</li>
+                    <li><strong>Linter:</strong> VS Code y PHP Intelephense realizan linting básico. Para análisis más profundos, considera herramientas externas como PHPStan o Psalm e intégralas mediante extensiones.</li>
+                 </ul>
+                 <div class="exercise-box">
+                    <strong><i class="fas fa-pencil-alt"></i> Tarea:</strong>
+                    <ol>
+                      <li>Asegúrate de tener `editor.formatOnSave` activado en tu configuración de VS Code (Settings JSON o UI).</li>
+                      <li>Desordena intencionalmente la indentación de tu archivo `index.php`.</li>
+                      <li>Guarda el archivo (`Ctrl+S`) y observa cómo se formatea automáticamente (si tienes Intelephense como formateador por defecto para PHP).</li>
+                    </ol>
+                 </div>
+            </div>
+             <div class="tech-box">
+                <div class="tech-title"><i class="fas fa-code-branch"></i> Integración con Git</div>
+                <div class="tech-image">🌿</div> <!-- Usando un emoji genérico si Font Awesome no está garantizado -->
+                <p>VS Code tiene una excelente integración incorporada con el sistema de control de versiones Git.</p>
+                 <div class="why-learn">
+                    <strong><i class="fas fa-question-circle"></i> ¿Por qué usar Git?</strong>
+                    <p>Es esencial para el desarrollo moderno. Te permite rastrear cambios, colaborar con otros, revertir errores y gestionar diferentes versiones de tu proyecto PHP.</p>
+                 </div>
+                  <ul>
+                    <li>Inicializa repositorios (`git init`).</li>
+                    <li>Visualiza cambios (añadidos, modificados, eliminados) en la vista de Control de Código Fuente (`Ctrl+Shift+G`).</li>
+                    <li>Realiza `git add`, `git commit`, `git push`, `git pull` directamente desde la interfaz.</li>
+                    <li>Maneja ramas (crear, cambiar, fusionar).</li>
+                    <li>Visualiza diferencias (diffs) entre versiones.</li>
+                 </ul>
+                 <div class="exercise-box">
+                    <strong><i class="fas fa-pencil-alt"></i> Tarea (si usas Git):</strong>
+                    <ol>
+                      <li>Asegúrate de tener Git instalado en tu sistema.</li>
+                      <li>Abre tu proyecto PHP en VS Code.</li>
+                      <li>Ve a la vista de Control de Código Fuente. Si no es un repositorio Git, haz clic en "Initialize Repository".</li>
+                      <li>Realiza algunos cambios en tu archivo `index.php`.</li>
+                      <li>Observa los cambios en la vista de Git. Haz "Stage Changes" (+) y escribe un mensaje de commit, luego confirma (✓).</li>
+                    </ol>
+                 </div>
+            </div>
+        </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <p style="text-align: center; padding: 20px; color: #ccc;">Fin de la Guía PHP con VS Code</p>
+    <!-- Puedes adaptar los botones del footer si es necesario -->
+     <div class="footer-bar" style="position: static; margin-top: 20px;">
+      <button onclick="alert('No hay nivel anterior en esta guía')">
+        <!-- No hay nivel anterior en este contexto -->
+      </button>
+      <button onclick="alert('Has llegado al final de la guía')">
+         <!-- No hay nivel siguiente en este contexto -->
+      </button>
+    </div>
+  </footer>
+</body>
+</html>
+

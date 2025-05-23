@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comandos Avanzados de Linux - Nivel 3</title>
+  <link rel="stylesheet" href="../../../../css/styles.css" />
+ </head>
+
+<body>
+  <header>
+    <h1>Comandos Avanzados de Linux</h1>
+    <nav class="breadcrumb">
+      <a href="../../../../index.html"><i class="fas fa-home"></i> Inicio</a> /
+      <a href="../index.html">EdiII</a> /
+      <a href="index.html">Comandos Linux</a> / Nivel Avanzado
+    </nav>
+  </header>
+
+  <main>
+    <div class="note">
+      <p>
+        <i class="fas fa-exclamation-circle"></i> En esta sección exploraremos conceptos y comandos avanzados de Linux.
+        Este nivel está dirigido a usuarios que ya tienen familiaridad con los
+        comandos básicos e intermedios y quieren profundizar en el control del
+        sistema y la automatización de tareas.
+      </p>
+    </div>
+
+    <section>
+      <h2><i class="fas fa-terminal"></i> Control Avanzado de Procesos</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-cogs"></i> Administración de procesos en sistemas Linux</h3>
+        <p>
+          Los sistemas Linux están constantemente ejecutando docenas o incluso
+          cientos de procesos simultáneamente. Un administrador eficiente debe
+          saber cómo monitorear, controlar y manipular estos procesos para
+          mantener el sistema funcionando correctamente.
+        </p>
+        <p>
+          En este nivel aprenderemos técnicas avanzadas para controlar los
+          procesos, enviar señales, configurar prioridades y monitorear el
+          rendimiento del sistema.
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-chart-bar"></i> top y htop - Monitoreo en tiempo real</div>
+          <div class="tech-image">📊</div>
+          <p>
+            Los comandos <code>top</code> y <code>htop</code> son herramientas
+            interactivas para monitorear los procesos del sistema en tiempo
+            real, mostrando estadísticas de uso de CPU, memoria y otros
+            recursos.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlos?</strong>
+            <p>
+              El monitoreo en tiempo real es esencial para diagnosticar
+              problemas de rendimiento. Estas herramientas te permiten ver qué
+              procesos están consumiendo más recursos y tomar decisiones sobre
+              la marcha. Es como tener un panel de control del sistema
+              que muestra todos los indicadores críticos en tiempo real.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Ejecutar top (presiona q para salir)
+            </span>
+            <span class="prompt">$</span> top
+            <span class="output">
+              top - 14:32:26 up 2 days, 3:42, 1 user, load average: 0.52,
+              0.58, 0.59 Tasks: 256 total, 1 running, 255 sleeping, 0 stopped,
+              0 zombie %Cpu(s): 5.9 us, 1.8 sy, 0.0 ni, 91.6 id, 0.3 wa, 0.0
+              hi, 0.4 si, 0.0 st MiB Mem : 16022.2 total, 8124.5 free, 3246.8
+              used, 4650.9 buff/cache MiB Swap: 2048.0 total, 2048.0 free, 0.0
+              used. 11981.4 avail Mem PID USER PR NI VIRT RES SHR S %CPU %MEM
+              TIME+ COMMAND 1652 usuario 20 0 4826980 422348 158776 S 9.3 2.6
+              15:50.66 firefox 3264 usuario 20 0 743700 127816 95816 S 4.0 0.8
+              2:34.42 gnome-terminal 1 root 20 0 168924 11788 8352 S 0.0 0.1
+              0:09.48 systemd 2 root 20 0 0 0 0 S 0.0 0.0 0:00.00
+              kthreadd
+            </span>
+
+            <span class="comment">
+              # Htop proporciona una interfaz más amigable (puede requerir
+              instalación)
+            </span>
+            <span class="prompt">$</span> htop
+            <span class="output">
+              [Interfaz colorida e interactiva con barras de CPU, memoria y
+              lista de procesos]
+            </span>
+          </div>
+
+          <p><strong>Comandos útiles en top:</strong></p>
+          <ul>
+            <li><code>k</code>: Mata un proceso (requiere ingresar PID)</li>
+            <li><code>r</code>: Renice un proceso (cambia su prioridad)</li>
+            <li><code>f</code>: Configurar campos a mostrar</li>
+            <li><code>u</code>: Filtrar por usuario</li>
+            <li><code>M</code>: Ordenar por uso de memoria</li>
+            <li><code>P</code>: Ordenar por uso de CPU (por defecto)</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Ejecuta <code>top</code> y observa los procesos que consumen
+                más CPU. Presiona <code>M</code> para ordenar por memoria.
+              </li>
+              <li>
+                Instala htop si no lo tienes:
+                <code>sudo apt install htop</code> (en sistemas basados en
+                Debian/Ubuntu)
+              </li>
+              <li>
+                Ejecuta <code>htop</code> y explora la interfaz. Usa F2 para
+                configurar las opciones de visualización.
+              </li>
+              <li>
+                En htop, filtra los procesos de un usuario específico
+                presionando <code>u</code> y seleccionando el usuario.
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-bolt"></i> kill, killall y pkill - Control de procesos</div>
+          <div class="tech-image">⚡</div>
+          <p>
+            Estos comandos permiten enviar señales a procesos, lo que puede
+            usarse para terminarlos, reiniciarlos o controlar su
+            comportamiento.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlos?</strong>
+            <p>
+              Cuando un programa se bloquea o consume demasiados recursos,
+              necesitas una forma de controlarlo. Estos comandos te permiten
+              "comunicarte" con los procesos para indicarles que deben
+              terminar, pausar o realizar otras acciones. Es como tener un
+              botón de emergencia para cualquier programa que se ejecute en tu
+              sistema.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Terminar un proceso por su PID
+            </span>
+            <span class="prompt">$</span> kill 1652
+            <span class="comment">
+              # Equivalente a kill -15 1652 (señal SIGTERM)
+            </span>
+
+            <span class="comment">
+              # Forzar la terminación inmediata (SIGKILL)
+            </span>
+            <span class="prompt">$</span> kill -9 1652
+
+            <span class="comment">
+              # Terminar todos los procesos con un nombre específico
+            </span>
+            <span class="prompt">$</span> killall firefox
+
+            <span class="comment">
+              # Terminar procesos por patrón
+            </span>
+            <span class="prompt">$</span> pkill -f "chromium"
+
+            <span class="comment">
+              # Enviar señal para recargar configuración (SIGHUP)
+            </span>
+            <span class="prompt">$</span> kill -HUP 3421
+          </div>
+
+          <p><strong>Señales comunes:</strong></p>
+          <ul>
+            <li>
+              <code>SIGTERM (15)</code>: Terminación ordenada (por defecto)
+            </li>
+            <li>
+              <code>SIGKILL (9)</code>: Terminación forzada (no puede ser
+              ignorada)
+            </li>
+            <li>
+              <code>SIGHUP (1)</code>: Desconexión del terminal / Recargar
+              configuración
+            </li>
+            <li><code>SIGSTOP (19)</code>: Pausar proceso</li>
+            <li><code>SIGCONT (18)</code>: Continuar proceso pausado</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Inicia un programa como Firefox y luego termínalo con
+                <code>killall firefox</code>
+              </li>
+              <li>
+                Usa <code>sleep 300 &</code> para iniciar un proceso en
+                segundo plano, luego encuentra su PID con <code>ps</code> y
+                termínalo con <code>kill</code>
+              </li>
+              <li>
+                Abre varias instancias de un programa (por ejemplo,
+                terminales) y usa <code>pkill</code> para cerrarlas todas a la
+                vez
+              </li>
+              <li>
+                Practica con diferentes señales: Ejecuta
+                <code>sleep 300 &</code>, pausa el proceso con
+                <code>kill -STOP %1</code> y reanúdalo con
+                <code>kill -CONT %1</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-balance-scale"></i> nice y renice - Prioridad de procesos</div>
+          <div class="tech-image">⚖️</div>
+          <p>
+            Los comandos <code>nice</code> y <code>renice</code> permiten
+            controlar la prioridad con la que el kernel asigna tiempo de CPU a
+            los procesos.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlos?</strong>
+            <p>
+              Los recursos del sistema son limitados, y a veces necesitas
+              asegurarte de que ciertos procesos reciban más (o menos)
+              atención del CPU. Estos comandos te permiten "enseñar modales" a
+              tus procesos, indicándoles qué tan "educadamente" deben
+              compartir los recursos.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Iniciar un proceso con baja prioridad (nice mayor)
+            </span>
+            <span class="prompt">$</span> nice -n 10 firefox
+
+            <span class="comment">
+              # Iniciar un proceso con alta prioridad (nice menor, requiere
+              privilegios)
+            </span>
+            <span class="prompt">$</span> sudo nice -n -10 importante_proceso
+
+            <span class="comment">
+              # Cambiar la prioridad de un proceso existente
+            </span>
+            <span class="prompt">$</span> renice 5 -p 1234
+
+            <span class="comment">
+              # Cambiar la prioridad de todos los procesos de un
+              usuario
+            </span>
+            <span class="prompt">$</span> sudo renice 5 -u usuario
+          </div>
+
+          <p><strong>Sobre los valores de nice:</strong></p>
+          <ul>
+            <li>Rango: -20 (mayor prioridad) a 19 (menor prioridad)</li>
+            <li>Por defecto: 0</li>
+            <li>Solo root puede asignar valores negativos</li>
+            <li>
+              Los usuarios normales solo pueden aumentar (hacer menos
+              prioritarios) sus propios procesos
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Inicia un proceso con prioridad baja:
+                <code
+                  >nice -n 15 find / -name "*.log" > /dev/null 2>&1 &</code
+                >
+              </li>
+              <li>
+                Verifica su valor de nice usando
+                <code>ps -o pid,nice,comm -p PID</code> (reemplaza PID con el
+                ID del proceso)
+              </li>
+              <li>
+                Cambia la prioridad de un proceso en ejecución:
+                <code>renice 10 -p PID</code>
+              </li>
+              <li>
+                Observa en <code>top</code> cómo el valor NI (nice) afecta la
+                cantidad de CPU que recibe el proceso
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-sync-alt"></i> jobs, bg y fg - Control de trabajos</div>
+          <div class="tech-image">🔄</div>
+          <p>
+            Estos comandos permiten controlar procesos lanzados desde la
+            terminal actual, moviéndolos entre primer plano y segundo plano.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlos?</strong>
+            <p>
+              Cuando trabajas en la terminal, a menudo necesitas ejecutar
+              varios comandos a la vez o pausar temporalmente un programa para
+              hacer otra cosa. El control de trabajos te permite gestionar
+              múltiples tareas sin necesidad de abrir nuevas terminales. Es
+              como tener varias aplicaciones en tu smartphone y poder alternar
+              entre ellas.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Iniciar un comando y pausarlo inmediatamente (Ctrl+Z)
+            </span>
+            <span class="prompt">$</span> find / -name "*.log"
+            <span class="output">
+              [Presiona Ctrl+Z] [1]+ Stopped find / -name "*.log"
+            </span>
+
+            <span class="comment"># Ver trabajos en la sesión actual</span>
+            <span class="prompt">$</span> jobs
+            <span class="output">
+              [1]+ Stopped find / -name "*.log"
+            </span>
+
+            <span class="comment"># Enviar un trabajo a segundo plano</span>
+            <span class="prompt">$</span> bg %1
+            <span class="output">
+              [1]+ find / -name "*.log" &
+            </span>
+
+            <span class="comment"># Traer un trabajo a primer plano</span>
+            <span class="prompt">$</span> fg %1
+            <span class="output">
+              find / -name "*.log"
+            </span>
+
+            <span class="comment">
+              # Iniciar directamente en segundo plano
+            </span>
+            <span class="prompt">$</span> sleep 100 &
+            <span class="output">
+              [2] 12345
+            </span>
+          </div>
+
+          <p><strong>Consejos útiles:</strong></p>
+          <ul>
+            <li>
+              Usa <code>&</code> al final de un comando para iniciarlo en
+              segundo plano
+            </li>
+            <li>
+              Presiona <code>Ctrl+Z</code> para pausar el programa actual
+            </li>
+            <li>
+              Usa <code>%1</code>, <code>%2</code>, etc. para referirte a
+              trabajos específicos
+            </li>
+            <li>
+              El signo <code>+</code> indica el trabajo actual por defecto
+            </li>
+            <li>
+              Si cierras la terminal, todos los trabajos en segundo plano
+              también se cierran (a menos que uses <code>nohup</code> o
+              <code>disown</code>)
+            </li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Inicia un proceso largo: <code>sleep 300</code>, paúsalo con
+                Ctrl+Z, y continúalo en segundo plano con <code>bg</code>
+              </li>
+              <li>
+                Ejecuta varios comandos en segundo plano y usa
+                <code>jobs</code> para ver la lista
+              </li>
+              <li>
+                Trae uno de los trabajos a primer plano con
+                <code>fg %n</code> (donde n es el número del trabajo)
+              </li>
+              <li>
+                Prueba a ejecutar: <code>xeyes &</code> (si está instalado) o
+                <code>gedit &</code> para ver cómo funciona con aplicaciones
+                gráficas
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2><i class="fas fa-filter"></i> Expresiones Regulares Avanzadas</h2>
+
+      <div class="concept-box">
+        <h3><i class="fas fa-magic"></i> El poder de las expresiones regulares</h3>
+        <p>
+          Las expresiones regulares (regex) son patrones de búsqueda
+          extremadamente flexibles que permiten encontrar y manipular texto
+          con gran precisión. Dominadas correctamente, se convierten en una de
+          las herramientas más poderosas para el procesamiento de texto.
+        </p>
+
+        <p>
+          Los usuarios avanzados de Linux utilizan expresiones regulares para
+          automatizar tareas complejas de procesamiento de texto, validación
+          de datos y búsqueda de patrones que serían imposibles con búsquedas
+          simples.
+        </p>
+      </div>
+
+      <div class="tech-container">
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-search-plus"></i> grep con regex avanzadas</div>
+          <div class="tech-image">🔎</div>
+          <p>
+            El comando <code>grep</code> combinado con expresiones regulares
+            avanzadas se convierte en una potente herramienta de análisis de
+            texto.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlas?</strong>
+            <p>
+              Las expresiones regulares te permiten buscar patrones complejos
+              en lugar de simples cadenas de texto. Esto es crucial para
+              analizar logs, procesar datos estructurados o extraer
+              información específica de archivos grandes. Es como tener un
+              detector de patrones ultrapreciso que puede encontrar una aguja
+              específica en un pajar.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Buscar direcciones IP en un archivo
+            </span>
+            <span class="prompt">$</span> grep -E
+            "([0-9]{1,3}\.){3}[0-9]{1,3}" /var/log/auth.log
+            <span class="output">
+              Jan 15 14:23:02 server sshd[1234]: Failed password for invalid
+              user admin from 192.168.1.105 port 49812 ssh2
+            </span>
+
+            <span class="comment">
+              # Buscar direcciones de correo electrónico
+            </span>
+            <span class="prompt">$</span> grep -E
+            "[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}" contactos.txt
+            <span class="output">
+              juan.perez@ejemplo.com maria_lopez123@mail-server.org
+            </span>
+
+            <span class="comment">
+              # Buscar líneas que comienzan con un patrón y terminan con
+              otro
+            </span>
+            <span class="prompt">$</span> grep -E "^DEBUG.*ERROR$" app.log
+            <span class="output">
+              DEBUG Iniciando proceso X que terminó con ERROR
+            </span>
+
+            <span class="comment">
+              # Buscar palabras que coincidan con un patrón específico
+            </span>
+            <span class="prompt">$</span> grep -E "\b[A-Z][a-z]{2,}\b"
+            texto.txt
+            <span class="output">Madrid Londres París Roma</span>
+          </div>
+
+          <p><strong>Operadores regex comunes:</strong></p>
+          <ul>
+            <li><code>^</code>: Inicio de línea</li>
+            <li><code>$</code>: Fin de línea</li>
+            <li><code>\b</code>: Límite de palabra</li>
+            <li>
+              <code>[a-z]</code>: Conjunto de caracteres (cualquier letra
+              minúscula)
+            </li>
+            <li>
+              <code>[^abc]</code>: Negación (cualquier carácter excepto a, b,
+              c)
+            </li>
+            <li>
+              <code>a{3,5}</code>: Cuantificador (entre 3 y 5 apariciones de
+              'a')
+            </li>
+            <li><code>a+</code>: Una o más apariciones</li>
+            <li><code>a*</code>: Cero o más apariciones</li>
+            <li><code>a?</code>: Cero o una aparición</li>
+            <li><code>a|b</code>: Alternancia (a o b)</li>
+            <li><code>(abc)</code>: Agrupación</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Busca todos los números de teléfono en un archivo:
+                <code
+                  >grep -E "\(?\d{3}\)?[-. ]?\d{3}[-. ]?\d{4}"
+                  contactos.txt</code
+                >
+              </li>
+              <li>
+                Encuentra todas las URLs en un archivo HTML:
+                <code
+                  >grep -E
+                  "https?://[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}(/[a-zA-Z0-9./-]*)?"
+                  pagina.html</code
+                >
+              </li>
+              <li>
+                Extrae todas las etiquetas HTML:
+                <code>grep -oE "<[^>]+>" archivo.html</code>
+              </li>
+              <li>
+                Busca líneas que contengan entre 3 y 5 dígitos consecutivos:
+                <code>grep -E "[0-9]{3,5}" datos.txt</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+
+        <div class="tech-box">
+          <div class="tech-title"><i class="fas fa-file-alt"></i> sed - Editor de flujo</div>
+          <div class="tech-image">🔄</div>
+          <p>
+            El comando <code>sed</code> (Stream Editor) es una potente
+            herramienta para procesar y transformar texto usando expresiones
+            regulares.
+          </p>
+
+          <div class="why-learn">
+            <strong><i class="fas fa-question-circle"></i> ¿Por qué deberías conocerlo?</strong>
+            <p>
+              A diferencia de grep que solo busca, sed puede buscar Y
+              reemplazar texto en archivos o flujos de datos. Es esencial para
+              automatizar ediciones que de otro modo requerirían abrir cada
+              archivo en un editor. Es como tener un asistente que puede
+              editar cientos de documentos siguiendo tus instrucciones
+              precisas.
+            </p>
+          </div>
+
+          <div class="terminal">
+            <span class="comment">
+              # Reemplazar la primera ocurrencia en cada línea
+            </span>
+            <span class="prompt">$</span> sed 's/original/reemplazo/'
+            archivo.txt
+            <span class="output">Texto con reemplazo y más original</span>
+
+            <span class="comment"># Reemplazar todas las ocurrencias</span>
+            <span class="prompt">$</span> sed 's/original/reemplazo/g'
+            archivo.txt
+            <span class="output">Texto con reemplazo y más reemplazo</span>
+
+            <span class="comment">
+              # Reemplazar solo en líneas que coincidan con un patrón
+            </span>
+            <span class="prompt">$</span> sed '/ERROR/s/valor=0/valor=1/'
+            log.txt
+            <span class="output">
+              INFO: Proceso normal valor=0 ERROR: Fallo en sistema valor=1
+              INFO: Otro proceso valor=0
+            </span>
+
+            <span class="comment">
+              # Eliminar líneas que coincidan con un patrón
+            </span>
+            <span class="prompt">$</span> sed '/^#/d' config.txt
+            <span class="output">servidor=192.168.1.1 puerto=8080</span>
+
+            <span class="comment">
+              # Guardar cambios en el archivo original (con -i)
+            </span>
+            <span class="prompt">$</span> sed -i 's/DEBUG/TRACE/' app.log
+          </div>
+
+          <p><strong>Comandos sed comunes:</strong></p>
+          <ul>
+            <li><code>s/patron/reemplazo/</code>: Sustituir texto</li>
+            <li><code>d</code>: Eliminar líneas</li>
+            <li><code>p</code>: Imprimir líneas (a menudo usado con -n)</li>
+            <li><code>i\texto</code>: Insertar texto antes de la línea</li>
+            <li><code>a\texto</code>: Añadir texto después de la línea</li>
+            <li><code>c\texto</code>: Cambiar línea completa</li>
+            <li><code>y/abc/ABC/</code>: Transliterar caracteres</li>
+          </ul>
+
+          <div class="exercise-box">
+            <strong><i class="fas fa-pencil-alt"></i> Ejercicios para practicar:</strong>
+            <ol>
+              <li>
+                Reemplaza todas las ocurrencias de un término en un archivo:
+                <code>sed 's/error/ERROR/g' log.txt</code>
+              </li>
+              <li>
+                Elimina todas las líneas en blanco de un archivo:
+                <code>sed '/^$/d' archivo.txt</code>
+              </li>
+              <li>
+                Imprime solo las líneas que contienen un patrón:
+                <code>sed -n '/ERROR/p' app.log</code>
+              </li>
+              <li>
+                Añade un prefijo a cada línea de un archivo:
+                <code>sed 's/^/LÍNEA: /' texto.txt</code>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-bar">
+      <button onclick="window.location.href='02_intermedio.html'">
+        ⬅ Nivel Anterior
+      </button>
+      <button onclick="window.location.href='04_experto.html'">
+        Siguiente Nivel ➡
+      </button>
+    </div>
+  </footer>
+</body>
+
+</html>

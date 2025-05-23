@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <title>Solución: User is not in the sudoers file</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h1 {
+        text-align: center;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        background-color: #e8f4f8;
+        padding: 10px;
+        border-left: 5px solid #3498db;
+        margin-top: 40px;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      .note {
+        background-color: #fffde7;
+        padding: 15px;
+        border-left: 4px solid #ffd600;
+        margin: 25px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🛠️ Solución: User is not in the sudoers file</h1>
+
+    <p>
+      El error
+      <code>user is not in the sudoers file</code>
+      ocurre cuando un usuario intenta ejecutar un comando con
+      <code>sudo</code>
+      , pero no tiene los permisos necesarios. Esto se debe a que el usuario no
+      está incluido en el archivo de configuración de sudoers. A continuación,
+      se explican los pasos para solucionar este problema.
+    </p>
+
+    <h2>🔧 Solución</h2>
+    <ol>
+      <li>
+        <strong>Accede como usuario root:</strong>
+        <p>
+          Si tienes acceso al usuario
+          <code>root</code>
+          , inicia sesión con:
+        </p>
+        <pre><code>su -</code></pre>
+        <p>Ingresa la contraseña de root cuando se te solicite.</p>
+      </li>
+      <li>
+        <strong>Agrega el usuario al grupo sudo:</strong>
+        <p>
+          Ejecuta el siguiente comando para agregar el usuario al grupo
+          <code>sudo</code>
+          (en sistemas basados en Debian) o al grupo
+          <code>wheel</code>
+          (en sistemas basados en Arch Linux):
+        </p>
+        <pre><code># En Debian y derivadas:
+usermod -aG sudo nombre-de-usuario
+
+# En Arch Linux y derivadas:
+usermod -aG wheel nombre-de-usuario</code></pre>
+        <p>
+          Reemplaza
+          <code>nombre-de-usuario</code>
+          con el nombre del usuario que deseas agregar.
+        </p>
+      </li>
+      <li>
+        <strong>Verifica el archivo sudoers:</strong>
+        <p>
+          Edita el archivo
+          <code>/etc/sudoers</code>
+          para asegurarte de que el grupo
+          <code>sudo</code>
+          o
+          <code>wheel</code>
+          tenga permisos. Usa el comando:
+        </p>
+        <pre><code>visudo</code></pre>
+        <p>
+          Busca las siguientes líneas y asegúrate de que no estén comentadas
+          (sin
+          <code>#</code>
+          al inicio):
+        </p>
+        <pre><code># Para sistemas Debian:
+%sudo   ALL=(ALL:ALL) ALL
+
+# Para sistemas Arch Linux:
+%wheel  ALL=(ALL:ALL) ALL</code></pre>
+      </li>
+      <li>
+        <strong>Guarda los cambios y cierra la sesión root:</strong>
+        <p>
+          Después de realizar los cambios, guarda el archivo y cierra la sesión
+          root con:
+        </p>
+        <pre><code>exit</code></pre>
+      </li>
+      <li>
+        <strong>Prueba el acceso sudo:</strong>
+        <p>
+          Inicia sesión con el usuario afectado y prueba un comando con
+          <code>sudo</code>
+          , por ejemplo:
+        </p>
+        <pre><code>sudo apt update</code></pre>
+        <p>
+          Si todo está configurado correctamente, no deberías volver a ver el
+          error.
+        </p>
+      </li>
+    </ol>
+
+    <h2>📌 Notas Adicionales</h2>
+    <ul>
+      <li>
+        Si no tienes acceso al usuario root, necesitarás acceso físico al
+        sistema para iniciar en modo de recuperación o desde un live CD/USB.
+      </li>
+      <li>
+        Siempre usa el comando
+        <code>visudo</code>
+        para editar el archivo
+        <code>/etc/sudoers</code>
+        , ya que verifica la sintaxis antes de guardar los cambios.
+      </li>
+    </ul>
+
+    <h2>✅ Conclusión</h2>
+    <p>
+      El error
+      <code>user is not in the sudoers file</code>
+      se soluciona agregando el usuario al grupo adecuado (
+      <code>sudo</code>
+      o
+      <code>wheel</code>
+      ) y verificando la configuración del archivo
+      <code>/etc/sudoers</code>
+      . Siguiendo los pasos anteriores, deberías poder resolver este problema y
+      otorgar permisos de sudo al usuario afectado.
+    </p>
+  </body>
+</html>

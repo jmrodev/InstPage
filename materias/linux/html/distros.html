@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Distribuciones Linux - Comparativa y Recomendaciones</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        h1 {
+            text-align: center;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+        }
+        h2 {
+            background-color: #e8f4f8;
+            padding: 10px;
+            border-left: 5px solid #3498db;
+            margin-top: 40px;
+        }
+        .distro-card {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-top: 4px solid;
+        }
+        .manjaro {
+            border-top-color: #2ecc71;
+        }
+        .ubuntu {
+            border-top-color: #e67e22;
+        }
+        .fedora {
+            border-top-color: #3498db;
+        }
+        .mint {
+            border-top-color: #27ae60;
+        }
+        .pros {
+            color: #27ae60;
+            font-weight: bold;
+        }
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .comparison-table th, .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        .comparison-table th {
+            background-color: #3498db;
+            color: white;
+        }
+        .comparison-table tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        .rating {
+            color: #f1c40f;
+            font-weight: bold;
+        }
+        .note {
+            background-color: #fffde7;
+            padding: 15px;
+            border-left: 4px solid #ffd600;
+            margin: 25px 0;
+        }
+        .download-box {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .stars {
+            color: #f1c40f;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <h1>Guía para Elegir tu Distribución Linux</h1>
+    
+    <div class="note">
+        <p>Si estás empezando con Linux o necesitas una distribución estable para VirtualBox/instalación nativa, aquí tienes una comparativa basada en <strong>facilidad de uso, rendimiento y soporte</strong>.</p>
+    </div>
+
+    <h2>🔍 Distribuciones Recomendadas</h2>
+
+    <div class="distro-card manjaro">
+        <h3>1. Manjaro Linux (Recomendación Principal)</h3>
+        <p><span class="pros">✅ Basada en Arch Linux</span> (pero más fácil de usar)</p>
+        <p><span class="pros">✅ Rolling Release</span> (actualizaciones continuas sin reinstalar)</p>
+        <p><span class="pros">✅ Varios entornos de escritorio</span> (KDE Plasma, XFCE, GNOME)</p>
+        <p><span class="pros">✅ Gran comunidad y documentación</span> (Wiki oficial + ArchWiki)</p>
+        
+        <div class="download-box">
+            <strong>📥 Descarga:</strong> <a href="https://manjaro.org/" target="_blank">Manjaro Oficial</a><br>
+            <strong>📚 Documentación:</strong> <a href="https://wiki.manjaro.org/index.php/Main_Page/es" target="_blank">Wiki Manjaro (en español)</a>
+        </div>
+
+        <h4>¿Por qué elegir Manjaro?</h4>
+        <ul>
+            <li>Ideal si quieres <strong>lo último en software</strong> sin complicaciones.</li>
+            <li><strong>KDE Plasma</strong> (escritorio recomendado) es <strong>moderno y personalizable</strong>.</li>
+            <li><strong>Gestor de paquetes (Pacman) + AUR</strong> (miles de aplicaciones disponibles).</li>
+        </ul>
+    </div>
+
+    <div class="distro-card ubuntu">
+        <h3>2. Ubuntu (Alternativa más fácil)</h3>
+        <p><span class="pros">✅ Basada en Debian</span> (muy estable)</p>
+        <p><span class="pros">✅ Gran compatibilidad con hardware</span> (ideal para VirtualBox)</p>
+        <p><span class="pros">✅ Soporte a largo plazo (LTS)</span> (versiones estables por años)</p>
+        <p><span class="pros">✅ Miles de tutoriales</span> (mejor documentada para principiantes)</p>
+        
+        <div class="download-box">
+            <strong>📥 Descarga:</strong> <a href="https://ubuntu.com/download" target="_blank">ubuntu.com</a>
+        </div>
+
+        <h4>¿Por qué elegir Ubuntu?</h4>
+        <ul>
+            <li><strong>Más fácil para usuarios nuevos</strong> (menos configuración manual).</li>
+            <li><strong>Menos problemas con drivers</strong> (ideal si solo quieres "que funcione").</li>
+            <li><strong>Software estable</strong> (no siempre la última versión, pero sin errores).</li>
+        </ul>
+    </div>
+
+    <div class="distro-card mint">
+        <h3>3. Linux Mint (Alternativa a Ubuntu)</h3>
+        <p><span class="pros">✅ Basada en Ubuntu</span> (pero más ligera)</p>
+        <p><span class="pros">✅ Interfaz similar a Windows</span> (fácil adaptación)</p>
+        <p><span class="pros">✅ Incluye codecs multimedia</span> (funciona todo sin configurar)</p>
+        <p><span class="pros">✅ Muy estable</span> (ideal para PCs antiguos)</p>
+        
+        <div class="download-box">
+            <strong>📥 Descarga:</strong> <a href="https://linuxmint.com/" target="_blank">linuxmint.com</a>
+        </div>
+    </div>
+
+    <div class="distro-card fedora">
+        <h3>4. Fedora (Para Developers)</h3>
+        <p><span class="pros">✅ Basada en Red Hat (RPM)</span> (muy estable pero con software actualizado)</p>
+        <p><span class="pros">✅ Soporte oficial de IBM/Red Hat</span> (ideal para desarrollo)</p>
+        <p><span class="pros">✅ Tecnologías nuevas</span> (Wayland, Podman, etc.)</p>
+        
+        <div class="download-box">
+            <strong>📥 Descarga:</strong> <a href="https://fedoraproject.org/" target="_blank">fedorapro  ject.org</a>
+        </div>
+
+        <h4>¿Por qué elegir Fedora?</h4>
+        <ul>
+            <li><strong>Excelente para programadores</strong> (Python, Docker, Kubernetes funcionan mejor).</li>
+            <li><strong>Más moderna que Ubuntu</strong>, pero igual de estable.</li>
+        </ul>
+    </div>
+
+    <h2>📊 Comparativa Rápida: ¿Cuál Elegir?</h2>
+
+    <table class="comparison-table">
+        <tr>
+            <th>Distribución</th>
+            <th>Facilidad</th>
+            <th>Rendimiento</th>
+            <th>Actualizaciones</th>
+            <th>Recomendación</th>
+        </tr>
+        <tr>
+            <td><strong>Manjaro</strong></td>
+            <td><span class="stars">⭐⭐⭐⭐</span></td>
+            <td><span class="stars">⭐⭐⭐⭐⭐</span></td>
+            <td>Rolling Release</td>
+            <td>Usuarios intermedios</td>
+        </tr>
+        <tr>
+            <td><strong>Ubuntu</strong></td>
+            <td><span class="stars">⭐⭐⭐⭐⭐</span></td>
+            <td><span class="stars">⭐⭐⭐⭐</span></td>
+            <td>6 meses (LTS 2 años)</td>
+            <td>Principiantes</td>
+        </tr>
+        <tr>
+            <td><strong>Linux Mint</strong></td>
+            <td><span class="stars">⭐⭐⭐⭐⭐</span></td>
+            <td><span class="stars">⭐⭐⭐⭐</span></td>
+            <td>Basada en Ubuntu LTS</td>
+            <td>Usuarios Windows</td>
+        </tr>
+        <tr>
+            <td><strong>Fedora</strong></td>
+            <td><span class="stars">⭐⭐⭐</span></td>
+            <td><span class="stars">⭐⭐⭐⭐⭐</span></td>
+            <td>6 meses</td>
+            <td>Developers</td>
+        </tr>
+    </table>
+
+    <h2>💡 Consejos Finales</h2>
+    <ul>
+        <li><strong>Si solo quieres probar Linux</strong> → <strong>Ubuntu o Linux Mint</strong> (más fácil).</li>
+        <li><strong>Si quieres lo último en software</strong> → <strong>Manjaro</strong> (pero requiere más aprendizaje).</li>
+        <li><strong>Si usas VirtualBox</strong>: Cualquiera funciona, pero <strong>Ubuntu/Mint dan menos problemas</strong>.</li>
+    </ul>
+
+    <div class="note">
+        <h3>📚 Documentación útil</h3>
+        <ul>
+            <li><a href="https://wiki.archlinux.org/" target="_blank">ArchWiki (para Manjaro)</a></li>
+            <li><a href="https://help.ubuntu.com/" target="_blank">Ubuntu Docs</a></li>
+            <li><a href="https://docs.fedoraproject.org/" target="_blank">Fedora Docs</a></li>
+        </ul>
+    </div>
+
+    <h2>🛠️ ¿Necesitas ayuda para instalarlo?</h2>
+    <ol>
+        <li><strong>Descarga la ISO</strong> desde los links oficiales.</li>
+        <li><strong>Graba un USB</strong> con <a href="https://www.ventoy.net/" target="_blank">Ventoy</a> (múltiples ISOs) o <a href="https://rufus.ie/" target="_blank">Rufus</a>.</li>
+        <li><strong>Instala en VirtualBox</strong> (o en una partición si quieres dual boot).</li>
+    </ol>
+
+    <p style="text-align: center; margin-top: 40px; font-size: 1.1em;">¡Cualquier duda, pregunta! 😊</p>
+</body>
+</html>

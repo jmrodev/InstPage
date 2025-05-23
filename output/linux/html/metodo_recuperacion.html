@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <title>Método de Recuperación</title>
+    <style>
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 20px;
+        color: #333;
+        background-color: #f9f9f9;
+      }
+      h1,
+      h2,
+      h3 {
+        color: #2c3e50;
+      }
+      h1 {
+        text-align: center;
+        border-bottom: 3px solid #3498db;
+        padding-bottom: 15px;
+        margin-bottom: 30px;
+      }
+      h2 {
+        background-color: #e8f4f8;
+        padding: 10px;
+        border-left: 5px solid #3498db;
+        margin-top: 40px;
+      }
+      code {
+        background-color: #f4f4f4;
+        padding: 2px 4px;
+        border-radius: 4px;
+        font-family: 'Courier New', Courier, monospace;
+      }
+      pre {
+        background-color: #f4f4f4;
+        padding: 10px;
+        border-radius: 4px;
+        overflow-x: auto;
+      }
+      ul {
+        margin: 10px 0;
+        padding-left: 20px;
+      }
+      li {
+        margin-bottom: 10px;
+      }
+      .note {
+        background-color: #fffde7;
+        padding: 15px;
+        border-left: 4px solid #ffd600;
+        margin: 25px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🛠️ Método de Recuperación</h1>
+
+    <p>
+      Si necesitas acceso físico al sistema para solucionar problemas, puedes
+      iniciar en modo de recuperación o desde un Live CD/USB. A continuación, se
+      explican ambos métodos:
+    </p>
+
+    <h2>🔧 Iniciar en Modo de Recuperación</h2>
+    <ol>
+      <li>
+        <strong>Reinicia tu computadora:</strong>
+        <p>
+          Durante el arranque, presiona la tecla adecuada para acceder al menú
+          de GRUB (generalmente
+          <code>Esc</code>
+          ,
+          <code>Shift</code>
+          , o
+          <code>F12</code>
+          , dependiendo de tu sistema).
+        </p>
+      </li>
+      <li>
+        <strong>Selecciona el Modo de Recuperación:</strong>
+        <p>
+          En el menú de GRUB, selecciona la opción
+          <strong>Modo de Recuperación</strong>
+          o
+          <strong>Recovery Mode</strong>
+          .
+        </p>
+      </li>
+      <li>
+        <strong>Abre una terminal como root:</strong>
+        <p>
+          Una vez en el menú de recuperación, selecciona la opción para abrir
+          una terminal con privilegios de root.
+        </p>
+      </li>
+    </ol>
+
+    <h2>🔧 Usar un Live CD/USB</h2>
+    <ol>
+      <li>
+        <strong>Inserta un Live CD/USB:</strong>
+        <p>Inserta un Live CD/USB de tu distribución Linux.</p>
+      </li>
+      <li>
+        <strong>Configura el arranque desde el dispositivo:</strong>
+        <p>
+          Accede a la configuración de tu BIOS/UEFI y selecciona el dispositivo
+          USB o CD como prioridad de arranque.
+        </p>
+      </li>
+      <li>
+        <strong>Inicia el sistema desde el Live CD/USB:</strong>
+        <p>Una vez iniciado, abre una terminal.</p>
+      </li>
+      <li>
+        <strong>Monta la partición de tu sistema:</strong>
+        <pre><code>sudo mount /dev/sdXn /mnt</code></pre>
+        <p>
+          Reemplaza
+          <code>/dev/sdXn</code>
+          con la partición donde está instalado tu sistema operativo (puedes
+          usar
+          <code>lsblk</code>
+          para identificarla).
+        </p>
+      </li>
+      <li>
+        <strong>Cambia al entorno de tu sistema:</strong>
+        <pre><code>sudo chroot /mnt</code></pre>
+      </li>
+    </ol>
+
+    <h2>🔧 Realizar Cambios</h2>
+    <p>
+      Una vez que tengas acceso al sistema, puedes realizar los cambios
+      necesarios. Por ejemplo:
+    </p>
+    <ul>
+      <li>
+        Agregar un usuario al grupo
+        <code>sudo</code>
+        o
+        <code>wheel</code>
+        :
+      </li>
+      <pre><code># En Debian y derivadas:
+usermod -aG sudo nombre-de-usuario
+
+# En Arch Linux y derivadas:
+usermod -aG wheel nombre-de-usuario</code></pre>
+      <li>
+        Editar el archivo
+        <code>/etc/sudoers</code>
+        con
+        <code>visudo</code>
+        :
+      </li>
+      <pre><code>sudo visudo</code></pre>
+    </ul>
+
+    <h2>🔄 Reiniciar el Sistema</h2>
+    <ol>
+      <li>
+        Sal del entorno
+        <code>chroot</code>
+        :
+      </li>
+      <pre><code>exit</code></pre>
+      <li>Desmonta la partición:</li>
+      <pre><code>sudo umount /mnt</code></pre>
+      <li>Reinicia el sistema:</li>
+      <pre><code>sudo reboot</code></pre>
+    </ol>
+
+    <h2>✅ Conclusión</h2>
+    <p>
+      Con estos métodos, puedes acceder al sistema para solucionar problemas
+      críticos, como permisos incorrectos o configuraciones dañadas. Asegúrate
+      de realizar los cambios necesarios y reiniciar el sistema correctamente.
+    </p>
+  </body>
+</html>
