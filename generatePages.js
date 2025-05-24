@@ -46,16 +46,42 @@ function generatePage(dirPath, relativePath = '') {
       const folderItems = fs.readdirSync(fullItemPath);
       const htmlFiles = folderItems.filter(f => f.toLowerCase().endsWith('.html') && f.toLowerCase() !== 'index.html');
 
-    if (itemName.toLowerCase() === 'scripts') {
-      const destFolder = path.join(outputBase, relItemPath);
-      fs.mkdirSync(destFolder, { recursive: true });
-      fs.cpSync(fullItemPath, destFolder, { recursive: true });
-      console.log(`Copied Scripts directory: ${fullItemPath} to ${destFolder}`); // Added for logging
-      html += `<li>📦 <a href="${itemName}/">${itemName}/ (Scripts)</a></li>
-`; // Link to it in parent index
-      // Continue to next item in forEach loop to prevent further processing of 'Scripts' dir by later else-if blocks
-      return; 
-    }
+      if (itemName.toLowerCase() === 'scripts') {
+        html += `<li>📦 <a href="${itemName}/">${itemName}/ (Scripts)</a></li>\n`;
+
+        const destFolder = path.join(outputBase, relItemPath);
+        fs.mkdirSync(destFolder, { recursive: true });
+        fs.cpSync(fullItemPath, destFolder, { recursive: true });
+        console.log(`Copied Scripts directory: ${fullItemPath} to ${destFolder}`);
+
+        // Generar index.html dentro de Scripts con listado de scripts
+        const scriptFiles = fs.readdirSync(fullItemPath)
+          .filter(f => !fs.statSync(path.join(fullItemPath, f)).isDirectory());
+
+        let scriptsHtml = `<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Scripts de la materia</title>
+</head>
+<body>
+  <h1>Scripts de la materia</h1>
+  <ul>
+`;
+
+        scriptFiles.forEach(f => {
+          scriptsHtml += `<li><a href="${f}" download>${f}</a></li>\n`;
+        });
+
+        scriptsHtml += `  </ul>
+  <a href="../index.html">⬅ Volver</a>
+</body>
+</html>
+`;
+
+        fs.writeFileSync(path.join(destFolder, 'index.html'), scriptsHtml, 'utf-8');
+        return;
+      }
       if (htmlFiles.length > 0) {
         // 📚 carpeta con materiales HTML (ej: capítulos)
         const destFolder = path.join(outputBase, relItemPath);
