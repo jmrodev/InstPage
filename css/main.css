@@ -164,7 +164,6 @@ tr:nth-child(even) {
     font-weight: bold;
 }
 
-
 /* Console Viewer Styles */
 .script-viewer-container {
     margin-bottom: 40px; /* Space between script viewers */
@@ -228,4 +227,3 @@ tr:nth-child(even) {
 .script-viewer-container .download-link:hover {
     background-color: #2980b9;
 }
-

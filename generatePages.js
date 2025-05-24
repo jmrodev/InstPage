@@ -6,11 +6,11 @@ const outputBase = path.join(__dirname, 'output');
 
 function getIcon(filename) {
   const ext = path.extname(filename).toLowerCase();
-  if (ext === '.pdf') return '📚';
+  if (ext === '.pdf') return '📄';
   if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) return '🖼️';
   if (['.mp3', '.wav', '.ogg'].includes(ext)) return '🔊';
   if (['.doc', '.docx', '.odt'].includes(ext)) return '📦';
-  if (ext === '.html') return '🌐';
+  if (ext === '.html') return '📝';
   return '📦';
 }
 
@@ -46,6 +46,16 @@ function generatePage(dirPath, relativePath = '') {
       const folderItems = fs.readdirSync(fullItemPath);
       const htmlFiles = folderItems.filter(f => f.toLowerCase().endsWith('.html') && f.toLowerCase() !== 'index.html');
 
+    if (itemName.toLowerCase() === 'scripts') {
+      const destFolder = path.join(outputBase, relItemPath);
+      fs.mkdirSync(destFolder, { recursive: true });
+      fs.cpSync(fullItemPath, destFolder, { recursive: true });
+      console.log(`Copied Scripts directory: ${fullItemPath} to ${destFolder}`); // Added for logging
+      html += `<li>📦 <a href="${itemName}/">${itemName}/ (Scripts)</a></li>
+`; // Link to it in parent index
+      // Continue to next item in forEach loop to prevent further processing of 'Scripts' dir by later else-if blocks
+      return; 
+    }
       if (htmlFiles.length > 0) {
         // 📚 carpeta con materiales HTML (ej: capítulos)
         const destFolder = path.join(outputBase, relItemPath);
