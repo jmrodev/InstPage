@@ -1,0 +1,165 @@
+/* General Body Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    max-width: 900px; /* Common choice, ventoy.html uses 1000px */
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+    background-color: #f9f9f9; /* bios.html and distros.html */
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    color: #2c3e50; /* Common across all files */
+}
+
+h1 {
+    text-align: center;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+
+h2 {
+    background-color: #e8f4f8; /* Common in bios.html and distros.html */
+    padding: 10px;
+    border-left: 5px solid #3498db;
+    margin-top: 40px; /* Common in bios.html and distros.html, ventoy has 30px */
+}
+
+h3 {
+    /* Style from ventoy.html, as bios.html and distros.html h3 were less defined or generic */
+    color: #2980b9; 
+    border-bottom: 1px dashed #ccc;
+    padding-bottom: 5px;
+    margin-top: 25px; /* Adding a default margin */
+    margin-bottom: 15px; /* Adding a default margin */
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 30px 0; /* Common default */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Common default */
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+th {
+    background-color: #3498db;
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Notes and Alerts */
+.note {
+    background-color: #fffde7;
+    padding: 15px;
+    border-left: 4px solid #ffd600;
+    margin: 25px 0; /* Common default */
+}
+
+/* Common Card/Box Styling */
+.card, .tech-box, .distro-card { /* Applying to existing classes too for wider compatibility */
+    background-color: white;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* Text Helpers */
+.pros, .pro { /* .pro from bios.html */
+    color: #27ae60;
+    font-weight: bold;
+}
+
+.cons, .con { /* .con from bios.html */
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+/* Utility for tables that might need horizontal scrolling */
+.comparison-table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0; /* ventoy.html specific margin for the wrapper */
+}
+
+/* Specific styles from bios.html that might be reused if structure is similar */
+.tech-title {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    color: #2c3e50; /* Already covered by h1,h2,h3 but can be for other elements */
+}
+
+.tech-image { /* For icons/emojis if used similarly */
+    text-align: center;
+    margin: 15px 0;
+    font-size: 5em;
+}
+
+/* Specific styles from ventoy.html */
+.feature { /* This was more like a highlighted note than a card */
+    background-color: #e8f4f8; /* Similar to h2 background */
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    border-left: 4px solid #3498db; /* Adding a similar border accent */
+}
+
+/* Specific styles from distros.html */
+.download-box {
+    background-color: #e8f4f8; /* Similar to h2 background and .feature */
+    padding: 15px;
+    border-radius: 5px;
+    margin: 15px 0;
+    border-left: 4px solid #27ae60; /* Accent with a different color */
+}
+
+.stars { /* For ratings */
+    color: #f1c40f;
+    font-size: 1.2em;
+    font-weight: bold; /* Making it bold like .rating from distros.html */
+}
+
+/* Border colors for cards - can be applied as additional classes */
+.border-bios { border-top: 4px solid #e74c3c; }
+.border-uefi { border-top: 4px solid #2ecc71; }
+.border-legacy { border-top: 4px solid #f39c12; }
+.border-manjaro { border-top: 4px solid #2ecc71; }
+.border-ubuntu { border-top: 4px solid #e67e22; }
+.border-fedora { border-top: 4px solid #3498db; }
+.border-mint { border-top: 4px solid #27ae60; }
+
+/* Boot process styling from bios.html - potentially reusable */
+.boot-process {
+    background-color: #e8f4f8; /* Consistent with h2 and .feature */
+    padding: 20px;
+    border-radius: 8px;
+    margin: 30px 0;
+    border-left: 5px solid #3498db; /* Consistent with h2 */
+}
+
+.boot-step {
+    margin-bottom: 15px;
+    position: relative;
+    padding-left: 30px;
+}
+
+.boot-step:before {
+    content: '➔';
+    position: absolute;
+    left: 0;
+    color: #3498db;
+    font-weight: bold;
+}
