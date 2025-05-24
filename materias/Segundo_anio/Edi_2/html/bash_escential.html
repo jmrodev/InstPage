@@ -4,86 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual de Comandos Linux</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 20px;
-            color: #333;
-            max-width: 1000px;
-            margin: 0 auto;
-        }
-        h1 {
-            color: #2c3e50;
-            text-align: center;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #3498db;
-            margin-top: 30px;
-            border-left: 5px solid #3498db;
-            padding-left: 10px;
-        }
-        h3 {
-            color: #2c3e50;
-        }
-        pre {
-            background-color: #f5f5f5;
-            border-left: 3px solid #3498db;
-            padding: 15px;
-            overflow-x: auto;
-        }
-        code {
-            font-family: 'Courier New', monospace;
-            background-color: #f5f5f5;
-            padding: 2px 4px;
-            border-radius: 3px;
-        }
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            margin: 20px 0;
-        }
-        th, td {
-            text-align: left;
-            padding: 12px;
-            border-bottom: 1px solid #ddd;
-        }
-        th {
-            background-color: #3498db;
-            color: white;
-        }
-        tr:hover {
-            background-color: #f5f5f5;
-        }
-        .toc {
-            background-color: #f8f9fa;
-            padding: 15px;
-            border-radius: 5px;
-            margin-bottom: 20px;
-        }
-        .toc h2 {
-            margin-top: 0;
-        }
-        .toc ul {
-            padding-left: 20px;
-        }
-        a {
-            color: #3498db;
-            text-decoration: none;
-        }
-        a:hover {
-            text-decoration: underline;
-        }
-        .note {
-            background-color: #e9f7fe;
-            border-left: 4px solid #3498db;
-            padding: 10px;
-            margin: 20px 0;
-        }
-    </style>
+    <link rel="stylesheet" href="../../../css/main.css">
 </head>
 <body>
     <h1>Manual de Comandos Linux</h1>
@@ -377,7 +298,1527 @@ echo "Fecha: $(date)"          # Muestra: Fecha: [fecha actual]
 files=$(ls)                    # Guarda salida de ls en variable
 echo "Archivos: $files"        # Muestra archivos</pre>
     </section>
-    
+    <section id="bash-script-examples" style="margin-top: 40px;"><h2>Ejemplos de Scripts Bash</h2>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">arith-loop.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# arith-loop: script to demonstrate arithmetic operators
+
+finished=0
+a=0
+printf "a\ta**2\ta**3\n"
+printf "=\t====\t====\n"
+
+until ((finished)); do
+	b=$((a**2))
+	c=$((a**3))
+	printf "%d\t%d\t%d\n" $a $b $c
+	((a&lt;10?++a:(finished=1)))	
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/arith-loop.sh" class="download-link" download="arith-loop.sh">Download arith-loop.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">array-2-4thEd.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# array-2: Use arrays to tally file owners
+
+declare -A files file_group file_owner groups owners
+
+if [[ ! -d "$1" ]]; then
+    echo "Usage: array-2 dir" &gt;&amp;2
+    exit 1
+fi
+
+for i in "$1"/*; do
+    owner="$(stat -c %U "$i")"
+    group="$(stat -c %G "$i")"
+    files["$i"]="$i"
+    file_owner["$i"]="$owner"
+    file_group["$i"]="$group"
+    ((++owners[$owner]))
+    ((++groups[$group]))
+done
+
+# List the collected files
+{ for i in "${files[@]}"; do
+    printf "%-40s %-10s %-10s\n" \
+        "$i" \
+	"${file_owner["$i"]}" \
+	"${file_group["$i"]}"
+done } | sort
+echo
+
+# List owners
+echo "File owners:"
+{ for i in "${!owners[@]}"; do
+    printf "%-10s: %5d file(s)\n" \
+	"$i" \
+	"${owners["$i"]}"
+done } | sort
+echo
+
+# List groups
+echo "File group owners:"
+{ for i in "${!groups[@]}"; do
+    printf "%-10s: %5d file(s)\n" \
+	"$i" \
+	"${groups["$i"]}"
+done } | sort
+</code></pre>
+    </div>
+    <a href="../Scripts/array-2-4thEd.sh" class="download-link" download="array-2-4thEd.sh">Download array-2-4thEd.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">array-lookup.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# array-lookup - demonstrate lookup using associative array
+
+declare -A cmds
+
+# fill array with commands and file sizes
+cd /usr/bin || exit 1
+echo "Loading commands..."
+for i in ./*; do
+  cmds["$i"]=$(stat -c "%s" "$i")
+done
+echo "${#cmds[@]} commands loaded"
+
+# perform lookup 
+while true; do
+  read -r -p "Enter command (empty to quit) -&gt; "
+  [[ -z $REPLY ]] &amp;&amp; break
+  if [[ -x $REPLY ]]; then
+    echo "$REPLY" "${cmds[./$REPLY]}" "bytes"
+  else
+    echo "No such command '$REPLY'."
+  fi
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/array-lookup.sh" class="download-link" download="array-lookup.sh">Download array-lookup.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">array-mapfile.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# array-mapfile - demonstrate mapfile builtin
+
+DICTIONARY=/usr/share/dict/words
+WORDLIST=~/wordlist.txt
+declare -a words
+
+# create filtered word list
+grep -v \' &lt; "$DICTIONARY" \
+    | grep -v "[[:upper:]]" \
+    | shuf &gt; "$WORDLIST"
+
+# read WORDLIST into array
+mapfile -t -n 32767 words &lt; "$WORDLIST"
+
+# create four word passphrase
+while [[ -z $REPLY ]]; do
+    echo "${words[$RANDOM]}" \
+         "${words[$RANDOM]}" \
+         "${words[$RANDOM]}" \
+         "${words[$RANDOM]}"
+    echo
+    read -r -p "Enter to continue, q to quit &gt; "
+    echo
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/array-mapfile.sh" class="download-link" download="array-mapfile.sh">Download array-mapfile.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">array-multi.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# array-multi - simulate a multi-dimensional array
+
+declare -A multi_array
+
+# Load array with a sequence of numbers
+counter=1
+for row in {1..10}; do
+  for col in {1..5}; do
+    address="$row, $col"
+    multi_array["$address"]=$counter
+    ((counter++))
+  done
+done
+
+# Output array contents
+for row in {1..10}; do
+  for col in {1..5}; do
+    address="$row, $col"
+    echo -ne "${multi_array["$address"]}" "\t"
+  done
+  echo
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/array-multi.sh" class="download-link" download="array-multi.sh">Download array-multi.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">array-sort.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# array-sort: Sort an array
+
+a=(f e d c b a)
+
+echo "Original array: " "${a[@]}"
+a_sorted=($(for i in "${a[@]}"; do echo "$i"; done | sort))
+echo "Sorted array:   " "${a_sorted[@]}"
+</code></pre>
+    </div>
+    <a href="../Scripts/array-sort.sh" class="download-link" download="array-sort.sh">Download array-sort.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">async-child.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# async-child : Asynchronous execution demo (child)
+
+echo "Child: child is running..."
+sleep 5
+echo "Child: child is done.  Exiting."
+</code></pre>
+    </div>
+    <a href="../Scripts/async-child.sh" class="download-link" download="async-child.sh">Download async-child.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">async-parent.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# async-parent : Asynchronous execution demo (parent)
+
+echo "Parent: starting..."
+
+echo "Parent: launching child script..."
+async-child &amp;
+pid=$!
+echo "Parent: child (PID= $pid) launched."
+
+echo "Parent: continuing..."
+sleep 2
+
+echo "Parent: pausing to wait for child to finish..."
+wait $pid
+
+echo "Parent: child is finished.  Continuing..."
+echo "Parent: parent is done.  Exiting." 
+</code></pre>
+    </div>
+    <a href="../Scripts/async-parent.sh" class="download-link" download="async-parent.sh">Download async-parent.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">average.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# average - script to calculate the average of a series of numbers
+
+# handle cmd line option
+if [[ $1 ]]; then
+	case $1 in
+		-s|--scale)	scale=$2 ;;
+		*)		echo "usage: average [-s scale]" &gt;&amp;2
+				exit 1 ;;
+	esac
+fi
+
+# construct instruction stream for bc
+c=0
+{	echo "t = 0; scale = 2"
+	[[ $scale ]] &amp;&amp; echo "scale = $scale"
+	while read -r value; do
+
+		# only process valid numbers
+		if [[ $value =~ ^[-+]?[0-9]*\.?[0-9]+$ ]]; then
+			echo "t += $value"
+			((++c))
+		fi
+	done
+
+	# make sure we don&amp;#39;t divide by zero
+	((c)) &amp;&amp; echo "t / $c"
+} | bc 
+</code></pre>
+    </div>
+    <a href="../Scripts/average.sh" class="download-link" download="average.sh">Download average.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">case-menu.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# case-menu: a menu driven system information program
+
+clear
+echo "
+Please Select:
+
+A. Display System Information
+B. Display Disk Space
+C. Display Home Space Utilization
+Q. Quit
+"
+read -r -p "Enter selection [A, B, C or Q] &gt; "
+
+case "$REPLY" in
+    q|Q)    echo "Program terminated."
+            exit
+            ;;
+    a|A)    echo "Hostname: $HOSTNAME"
+            uptime
+            ;;
+    b|B)    df -h
+            ;;
+    c|C)    if [[ "$(id -u)" -eq 0 ]]; then
+                echo "Home Space Utilization (All Users)"
+                du -sh /home/*
+            else
+                echo "Home Space Utilization ($USER)"
+                du -sh "$HOME"
+            fi
+            ;;
+    *)      echo "Invalid entry" &gt;&amp;2
+            exit 1
+            ;;
+esac
+</code></pre>
+    </div>
+    <a href="../Scripts/case-menu.sh" class="download-link" download="case-menu.sh">Download case-menu.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">file-info.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# file_info: simple file information program
+
+PROGNAME="$(basename "$0")"
+
+if [[ -e "$1" ]]; then
+	echo -e "\nFile Type:"
+	file "$1"
+	echo -e "\nFile Status:"
+	stat "$1"
+else
+	echo "$PROGNAME: usage: $PROGNAME file" &gt;&amp;2
+	exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/file-info.sh" class="download-link" download="file-info.sh">Download file-info.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">getopts-test.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# getopts-test: process command line options using getopts
+
+PROGNAME="$(basename "$0")"
+interactive=
+filename=
+
+usage () {
+    echo "$PROGNAME: usage: $PROGNAME [-f file | -i]"
+    return
+}
+
+while getopts :f:ih opt; do
+    case "$opt" in
+        f)  filename="$OPTARG" ;;
+        i)  interactive=1 ;;
+        h)  usage ;;
+        \?) echo "option &amp;#39;$OPTARG&amp;#39; invalid" ;;
+        :)  echo "option &amp;#39;$OPTARG&amp;#39; missing argument";;
+    esac
+done
+echo "interactive = &amp;#39;$interactive&amp;#39; filename = &amp;#39;$filename&amp;#39;"
+</code></pre>
+    </div>
+    <a href="../Scripts/getopts-test.sh" class="download-link" download="getopts-test.sh">Download getopts-test.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">hours.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# hours : script to count files by modification time
+
+usage () {
+	echo "usage: ${0##*/} directory" &gt;&amp;2
+}
+
+# Check that argument is a directory
+if [[ ! -d "$1" ]]; then
+	usage
+	exit 1
+fi
+
+# Initialize array
+for i in {0..23}; do hours[i]=0; done 
+
+# Collect data
+for i in $(stat -c %y "$1"/* | cut -c 12-13); do
+	j="${i/#0}"
+	((++hours[j]))
+	((++count))
+done
+
+# Display data
+echo -e "Hour\tFiles\tHour\tFiles"
+echo -e "----\t-----\t----\t-----"
+for i in {0..11}; do
+	j=$((i + 12))
+	printf "%02d\t%d\t%02d\t%d\n" \
+		"$i" \
+		"${hours[i]}" \
+		"$j" \
+		"${hours[j]}"
+done
+printf "\nTotal files = %d\n" "$count"
+</code></pre>
+    </div>
+    <a href="../Scripts/hours.sh" class="download-link" download="hours.sh">Download hours.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">loan-calc.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# loan-calc : script to calculate monthly loan payments
+
+PROGNAME="${0##*/}" # Use parameter expansion to get basename
+
+usage () {
+	cat &lt;&lt;- EOF
+	Usage: $PROGNAME PRINCIPAL INTEREST MONTHS 
+
+	Where:
+
+	PRINCIPAL is the amount of the loan
+	INTEREST is the APR as a number (7% = 0.07)
+	MONTHS is the length of the loan&amp;#39;s term.
+
+	EOF
+}
+
+if (($# != 3)); then
+	usage
+	exit 1
+fi
+
+principal=$1
+interest=$2
+months=$3
+
+bc &lt;&lt;- EOF
+	scale = 10 
+	i = $interest / 12
+	p = $principal
+	n = $months
+	a = p * ((i * ((1 + i) ^ n)) / (((1 + i) ^ n) - 1))
+	print a, "\n"
+EOF
+</code></pre>
+    </div>
+    <a href="../Scripts/loan-calc.sh" class="download-link" download="loan-calc.sh">Download loan-calc.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">local-vars.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# local-vars: script to demonstrate local variables
+
+foo=0	# global variable foo
+
+funct_1 () {
+
+	local foo	# variable foo local to funct_1
+
+	foo=1
+	echo "funct_1: foo = $foo"
+}
+
+funct_2 () {
+
+	local foo	# variable foo local to funct_2
+
+	foo=2
+	echo "funct_2: foo = $foo"
+}
+
+echo "global:  foo = $foo"
+funct_1
+echo "global:  foo = $foo"
+funct_2
+echo "global:  foo = $foo"
+</code></pre>
+    </div>
+    <a href="../Scripts/local-vars.sh" class="download-link" download="local-vars.sh">Download local-vars.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">longest-word.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# longest-word : find longest string in a file
+
+while [[ -n "$1" ]]; do
+	if [[ -r "$1" ]]; then
+		max_word=
+		max_len=0
+		for i in $(strings "$1"); do
+			len="$(echo -n "$i" | wc -c)"
+			if (( len &gt; max_len )); then
+				max_len="$len"
+				max_word="$i"
+			fi
+		done
+		echo "$1: &amp;#39;$max_word&amp;#39; ($max_len characters)"
+	fi
+	shift
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/longest-word.sh" class="download-link" download="longest-word.sh">Download longest-word.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">longest-word2.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# longest-word2 : find longest string in a file
+
+for i; do
+	if [[ -r "$i" ]]; then
+		max_word=
+		max_len=0
+		for j in $(strings "$i"); do
+			len=$(echo -n "$j" | wc -c)
+# echo $i $len
+			if (( len &gt; max_len )); then
+				max_len="$len"
+				max_word="$j"
+			fi
+		done
+		echo "$i: &amp;#39;$max_word&amp;#39; ($max_len characters)"
+	fi
+	shift
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/longest-word2.sh" class="download-link" download="longest-word2.sh">Download longest-word2.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">longest-word3.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# longest-word3 : find longest string in a file
+
+for i; do
+	if [[ -r "$i" ]]; then
+		max_word=
+		max_len=0
+		for j in $(strings "$i"); do
+			len="${#j}"
+			if (( len &gt; max_len )); then
+				max_len="$len"
+				max_word="$j"
+			fi
+		done
+		echo "$i: &amp;#39;$max_word&amp;#39; ($max_len characters)"
+	fi
+	shift
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/longest-word3.sh" class="download-link" download="longest-word3.sh">Download longest-word3.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">modulo.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# modulo1 : demonstrate the modulo operator
+
+for ((i = 0; i &lt;= 20; i = i + 1)); do
+	remainder=$((i % 5))
+	if (( remainder == 0 )); then
+		printf "&lt;%d&gt; " $i
+	else
+		printf "%d " $i
+	fi
+done
+printf "\n"
+</code></pre>
+    </div>
+    <a href="../Scripts/modulo.sh" class="download-link" download="modulo.sh">Download modulo.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">modulo2.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# modulo2 : demonstrate the modulo operator
+
+for ((i = 0; i &lt;= 20; ++i )); do
+	if (((i % 5) == 0 )); then
+		printf "&lt;%d&gt; " "$i"
+	else
+		printf "%d " "$i"
+	fi
+done
+printf "\n"
+</code></pre>
+    </div>
+    <a href="../Scripts/modulo2.sh" class="download-link" download="modulo2.sh">Download modulo2.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">posit-param.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# posit-param: script to view command line parameters
+
+echo "
+Number of arguments: $#
+\$0 = $0
+\$1 = $1
+\$2 = $2
+\$3 = $3
+\$4 = $4
+\$5 = $5
+\$6 = $6
+\$7 = $7
+\$8 = $8
+\$9 = $9
+"
+</code></pre>
+    </div>
+    <a href="../Scripts/posit-param.sh" class="download-link" download="posit-param.sh">Download posit-param.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">posit-param2.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# posit-param2: script to display all arguments
+
+count=1
+
+while [[ $# -gt 0 ]]; do
+	echo "Argument $count = $1"
+	count=$((count + 1))
+	shift
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/posit-param2.sh" class="download-link" download="posit-param2.sh">Download posit-param2.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">posit-param3.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# posit-params3 : script to demonstrate $* and $@
+
+print_params () {
+	echo "\$1 = $1"
+	echo "\$2 = $2"
+	echo "\$3 = $3"
+	echo "\$4 = $4"
+}
+
+pass_params () {
+	echo -e "\n" &amp;#39;$* :&amp;#39;;   print_params $*
+	echo -e "\n" &amp;#39;"$*" :&amp;#39;; print_params "$*"
+	echo -e "\n" &amp;#39;$@ :&amp;#39;;   print_params $@
+	echo -e "\n" &amp;#39;"$@" :&amp;#39;; print_params "$@"
+}
+
+pass_params "word" "words with spaces"
+</code></pre>
+    </div>
+    <a href="../Scripts/posit-param3.sh" class="download-link" download="posit-param3.sh">Download posit-param3.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">read-ifs.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# read-ifs: read fields from a file
+
+FILE=/etc/passwd
+
+read -r -p "Enter a user name &gt; " user_name
+
+file_info="$(grep "^$user_name:" $FILE)"
+
+if [ -n "$file_info" ]; then
+	IFS=":" read user pw uid gid name home shell &lt;&lt;&lt; "$file_info"
+	echo "User =      &amp;#39;$user&amp;#39;"
+	echo "UID =       &amp;#39;$uid&amp;#39;"
+	echo "GID =       &amp;#39;$gid&amp;#39;"
+	echo "Full Name = &amp;#39;$name&amp;#39;"
+	echo "Home Dir. = &amp;#39;$home&amp;#39;"
+	echo "Shell =     &amp;#39;$shell&amp;#39;" 
+else
+	echo "No such user &amp;#39;$user_name&amp;#39;" 2&gt;&amp;1
+	exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/read-ifs.sh" class="download-link" download="read-ifs.sh">Download read-ifs.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">read-integer.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# read-integer: evaluate the value of an integer.
+
+echo -n "Please enter an integer -&gt; "
+read int
+
+if [[ "$int" =~ ^-?[0-9]+$ ]]; then
+	if [ "$int" -eq 0 ]; then
+		echo "$int is zero."
+	else
+		if [ "$int" -lt 0 ]; then
+			echo "$int is negative."
+		else
+			echo "$int is positive."
+		fi
+		if [ $((int % 2)) -eq 0 ]; then
+			echo "$int is even."
+		else
+			echo "$int is odd."
+		fi
+	fi
+else
+	echo "Input value is not an integer." &gt;&amp;2
+	exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/read-integer.sh" class="download-link" download="read-integer.sh">Download read-integer.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">read-menu.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# read-menu: a menu driven system information program
+
+clear
+echo "
+Please Select:
+
+1. Display System Information
+2. Display Disk Space
+3. Display Home Space Utilization
+0. Quit
+"
+read -r -p "Enter selection [0-3] &gt; "
+
+if [[ "$REPLY" =~ ^[0-3]$ ]]; then
+	if [[ "$REPLY" == 0 ]]; then
+		echo "Program terminated."
+		exit
+	fi
+	if [[ "$REPLY" == 1 ]]; then
+		echo "Hostname: $HOSTNAME"
+		uptime
+		exit
+	fi
+	if [[ "$REPLY" == 2 ]]; then
+		df -h
+		exit
+	fi
+	if [[ "$REPLY" == 3 ]]; then
+		if [[ "$(id -u)" -eq 0 ]]; then
+			echo "Home Space Utilization (All Users)"
+			du -sh /home/*
+		else
+			echo "Home Space Utilization ($USER)"
+			du -sh "$HOME"
+		fi
+		exit
+	fi
+else
+	echo "Invalid entry." &gt;&amp;2
+	exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/read-menu.sh" class="download-link" download="read-menu.sh">Download read-menu.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">read-multiple.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# read-multiple: read multiple values from keyboard
+
+echo -n "Enter one or more values &gt; "
+read var1 var2 var3 var4 var5
+
+echo "var1 = &amp;#39;$var1&amp;#39;"
+echo "var2 = &amp;#39;$var2&amp;#39;"
+echo "var3 = &amp;#39;$var3&amp;#39;"
+echo "var4 = &amp;#39;$var4&amp;#39;"
+echo "var5 = &amp;#39;$var5&amp;#39;"
+</code></pre>
+    </div>
+    <a href="../Scripts/read-multiple.sh" class="download-link" download="read-multiple.sh">Download read-multiple.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">read-secret.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# read-secret: input a secret pass phrase
+
+if read -r -t 10 -sp "Enter secret pass phrase &gt; " secret_pass; then
+	echo -e "\nSecret pass phrase = &amp;#39;$secret_pass&amp;#39;"
+else
+	echo -e "\nInput timed out" 2&gt;&amp;1
+	exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/read-secret.sh" class="download-link" download="read-secret.sh">Download read-secret.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">read-single.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# read-single: read multiple values into default variable
+
+echo -n "Enter one or more values &gt; "
+read
+
+echo "REPLY = &amp;#39;$REPLY&amp;#39;"
+</code></pre>
+    </div>
+    <a href="../Scripts/read-single.sh" class="download-link" download="read-single.sh">Download read-single.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">read-validate.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# read-validate: validate input
+
+invalid_input () {
+	echo "Invalid input &amp;#39;$REPLY&amp;#39;" &gt;&amp;2
+	exit 1
+}
+
+read -r -p "Enter a single item &gt; "
+
+# input is empty (invalid)
+[[ -z "$REPLY" ]] &amp;&amp; invalid_input 
+
+# input is multiple items (invalid)
+(( "$(echo "$REPLY" | wc -w)" &gt; 1 )) &amp;&amp; invalid_input
+
+# is input a valid file name?
+if [[ "$REPLY" =~ ^[-[:alnum:]\._]+$ ]]; then
+	echo "&amp;#39;$REPLY&amp;#39; is a valid file name."
+	if [[ -e "$REPLY" ]]; then
+		echo "And file &amp;#39;$REPLY&amp;#39; exists."
+	else
+		echo "However, file &amp;#39;$REPLY&amp;#39; does not exist."
+	fi
+
+	# is input a floating point number?
+	if [[ "$REPLY" =~ ^-?[[:digit:]]*\.[[:digit:]]+$ ]]; then
+		echo "&amp;#39;$REPLY&amp;#39; is a floating point number."
+	else
+		echo "&amp;#39;$REPLY&amp;#39; is not a floating point number."
+	fi
+
+	# is input an integer?
+	if [[ "$REPLY" =~ ^-?[[:digit:]]+$ ]]; then
+		echo "&amp;#39;$REPLY&amp;#39; is an integer."
+	else
+		echo "&amp;#39;$REPLY&amp;#39; is not an integer."
+	fi
+else
+	echo "The string &amp;#39;$REPLY&amp;#39; is not a valid file name."
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/read-validate.sh" class="download-link" download="read-validate.sh">Download read-validate.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">simple_counter.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# simple_counter : demo of C style for command
+
+for (( i=0; i&lt;5; i=i+1 )); do
+	echo $i
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/simple_counter.sh" class="download-link" download="simple_counter.sh">Download simple_counter.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">sys_info_page.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# sys_info_page: program to output a system information page
+
+PROGNAME="$(basename "$0")"
+TITLE="System Information Report For $HOSTNAME"
+CURRENT_TIME="$(date +"%x %r %Z")"
+TIME_STAMP="Generated $CURRENT_TIME, by $USER"
+
+report_uptime () {
+    cat &lt;&lt; _EOF_
+        &lt;H2&gt;System Uptime&lt;/H2&gt;
+        &lt;PRE&gt;$(uptime)&lt;/PRE&gt;
+_EOF_
+    return
+}
+
+report_disk_space () {
+    cat &lt;&lt; _EOF_
+        &lt;H2&gt;Disk Space Utilization&lt;/H2&gt;
+        &lt;PRE&gt;$(df -h)&lt;/PRE&gt;
+_EOF_
+    return
+}
+
+report_home_space () {
+
+    local format="%8s%10s%10s\n"
+    local i dir_list total_files total_dirs total_size user_name
+
+    if [[ "$(id -u)" -eq 0 ]]; then
+        dir_list="/home/*"
+        user_name="All Users"
+    else
+        dir_list="$HOME"
+        user_name="$USER"
+    fi
+
+    echo "&lt;H2&gt;Home Space Utilization ($user_name)&lt;/H2&gt;"
+
+    for i in $dir_list; do
+
+        total_files="$(find "$i" -type f | wc -l)"
+        total_dirs="$(find "$i" -type d | wc -l)"
+        total_size="$(du -sh "$i" | cut -f 1)"
+
+        echo "&lt;H3&gt;$i&lt;/H3&gt;"
+        echo "&lt;PRE&gt;"
+        printf "$format" "Dirs" "Files" "Size"
+        printf "$format" "----" "-----" "----"
+        printf "$format" "$total_dirs" "$total_files" "$total_size"
+        echo "&lt;/PRE&gt;"
+    done
+    return
+}
+
+usage () {
+    echo "$PROGNAME: usage: $PROGNAME [-f file | -i]"
+    return
+}
+
+write_html_page () {
+    cat &lt;&lt; _EOF_
+    &lt;HTML&gt;
+        &lt;HEAD&gt;
+            &lt;TITLE&gt;$TITLE&lt;/TITLE&gt;
+        &lt;/HEAD&gt;
+        &lt;BODY&gt;
+            &lt;H1&gt;$TITLE&lt;/H1&gt;
+            &lt;P&gt;$TIME_STAMP&lt;/P&gt;
+            $(report_uptime)
+            $(report_disk_space)
+            $(report_home_space)
+        &lt;/BODY&gt;
+    &lt;/HTML&gt;
+_EOF_
+    return
+}
+
+# process command line options
+
+interactive=
+filename=
+
+while [[ -n "$1" ]]; do
+    case "$1" in
+        -f | --file)        shift
+                            filename="$1"
+                            ;;
+        -i | --interactive) interactive=1
+                            ;;
+        -h | --help)        usage
+                            exit
+                            ;;
+        *)                  usage &gt;&amp;2
+                            exit 1
+                            ;;
+    esac
+    shift
+done
+
+# interactive mode
+
+if [[ -n "$interactive" ]]; then
+    while true; do
+        read -r -p "Enter name of output file: " filename
+        if [[ -e "$filename" ]]; then
+            read -r -p "&amp;#39;$filename&amp;#39; exists. Overwrite? [y/n/q] &gt; "
+            case "$REPLY" in
+                Y|y)    break
+                        ;;
+                Q|q)    echo "Program terminated."
+                        exit
+                        ;;
+                *)      continue
+                        ;;
+            esac
+        elif [[ -z "$filename" ]]; then
+            continue
+        else
+            break
+        fi
+    done
+fi
+
+# output html page
+
+if [[ -n "$filename" ]]; then
+    if touch "$filename" &amp;&amp; [[ -f "$filename" ]]; then
+        write_html_page &gt; "$filename"
+    else
+        echo "$PROGNAME: Cannot write file &amp;#39;$filename&amp;#39;" &gt;&amp;2
+        exit 1
+    fi
+else
+    write_html_page
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/sys_info_page.sh" class="download-link" download="sys_info_page.sh">Download sys_info_page.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">test-integer.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# test-integer: evaluate the value of an integer.
+
+INT=-5
+
+if [ -z "$INT" ]; then
+	echo "INT is empty." &gt;&amp;2
+	exit 1
+fi
+
+if [ "$INT" -eq 0 ]; then
+	echo "INT is zero."
+else
+	if [ "$INT" -lt 0 ]; then
+		echo "INT is negative."
+	else
+		echo "INT is positive."
+	fi
+	if [ $((INT % 2)) -eq 0 ]; then
+		echo "INT is even."
+	else
+		echo "INT is odd."
+	fi
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/test-integer.sh" class="download-link" download="test-integer.sh">Download test-integer.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">test-integer2.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# test-integer2: evaluate the value of an integer.
+
+INT=-5
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+	if [ "$INT" -eq 0 ]; then
+		echo "INT is zero."
+	else
+		if [ "$INT" -lt 0 ]; then
+			echo "INT is negative."
+		else
+			echo "INT is positive."
+		fi
+		if [ $((INT % 2)) -eq 0 ]; then
+			echo "INT is even."
+		else
+			echo "INT is odd."
+		fi
+	fi
+else
+	echo "INT is not an integer." &gt;&amp;2
+	exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/test-integer2.sh" class="download-link" download="test-integer2.sh">Download test-integer2.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">test-integer2a.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# test-integer2a: evaluate the value of an integer.
+
+INT=-5
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+	if ((INT == 0)); then
+		echo "INT is zero."
+	else
+		if ((INT &lt; 0)); then
+			echo "INT is negative."
+		else
+			echo "INT is positive."
+		fi
+		if (( ((INT % 2)) == 0)); then
+			echo "INT is even."
+		else
+			echo "INT is odd."
+		fi
+	fi
+else
+	echo "INT is not an integer." &gt;&amp;2
+	exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/test-integer2a.sh" class="download-link" download="test-integer2a.sh">Download test-integer2a.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">test-integer3.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# test-integer3-4thEd: determine if an integer is within a
+# specified range of values.
+
+MIN_VAL=1
+MAX_VAL=100
+
+INT=50
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+	if [[ "$INT" -ge "$MIN_VAL" &amp;&amp; "$INT" -le "$MAX_VAL" ]]; then
+		echo "$INT is within $MIN_VAL to $MAX_VAL."
+	else
+		echo "$INT is out of range."
+	fi
+else
+        echo "INT is not an integer." &gt;&amp;2
+        exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/test-integer3.sh" class="download-link" download="test-integer3.sh">Download test-integer3.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">test-integer4.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# test-integer4: determine if an integer is outside a
+# specified range of values.
+
+MIN_VAL=1
+MAX_VAL=100
+
+INT=50
+
+if [[ "$INT" =~ ^-?[0-9]+$ ]]; then
+	if [[ ! ("$INT" -ge "$MIN_VAL" &amp;&amp; "$INT" -le "$MAX_VAL") ]]; then
+		echo "$INT is outside $MIN_VAL to $MAX_VAL."
+	else
+		echo "$INT is in range."
+	fi
+else
+        echo "INT is not an integer." &gt;&amp;2
+        exit 1
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/test-integer4.sh" class="download-link" download="test-integer4.sh">Download test-integer4.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">test-string.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# test-string: evaluate the value of a string
+
+ANSWER=maybe
+
+if [ -z "$ANSWER" ]; then
+	echo "There is no answer."
+	exit 1
+fi
+
+if [ "$ANSWER" = "yes" ]; then
+	echo "The answer is YES."
+elif [ "$ANSWER" = "no" ]; then
+	echo "The answer is NO."
+elif [ "$ANSWER" = "maybe" ]; then
+	echo "The answer is MAYBE."
+else
+	echo "The answer is UNKNOWN."
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/test-string.sh" class="download-link" download="test-string.sh">Download test-string.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">trap-demo.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# trap-demo : simple signal handling demo
+
+trap "echo &amp;#39;I am ignoring you.&amp;#39;" SIGINT SIGTERM
+
+for i in {1..5}; do
+	echo "Iteration $i of 5"
+	sleep 5
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/trap-demo.sh" class="download-link" download="trap-demo.sh">Download trap-demo.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">trap-demo2.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# trap-demo2 : simple signal handling demo
+
+exit_on_signal_SIGINT () {
+	echo "Script interrupted." 2&gt;&amp;1
+	exit 0
+}
+
+exit_on_signal_SIGTERM () {
+	echo "Script terminated." 2&gt;&amp;1
+	exit 0
+}
+
+trap exit_on_signal_SIGINT SIGINT
+trap exit_on_signal_SIGTERM SIGTERM
+
+for i in {1..5}; do
+	echo "Iteration $i of 5"
+	sleep 5
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/trap-demo2.sh" class="download-link" download="trap-demo2.sh">Download trap-demo2.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">trap-demo3.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# trap-demo3 - demonstrate ERR and EXIT signal handling
+
+trap "echo \"There is an error.\"" ERR
+trap "echo \"The program has ended.\"" EXIT
+
+echox "Running..."
+
+read -r -p "Say something... " something
+echo "$something"
+</code></pre>
+    </div>
+    <a href="../Scripts/trap-demo3.sh" class="download-link" download="trap-demo3.sh">Download trap-demo3.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">ul-param.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# ul-param: demonstrate case conversion via parameter expansion
+
+if [[ "$1" ]]; then
+        echo "${1,,}"
+        echo "${1,}"
+        echo "${1^^}"
+        echo "${1^}"
+fi
+</code></pre>
+    </div>
+    <a href="../Scripts/ul-param.sh" class="download-link" download="ul-param.sh">Download ul-param.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">until-count.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# until-count: display a series of numbers
+
+count=1
+
+until [[ "$count" -gt 5 ]]; do
+	echo "$count"
+	count=$((count + 1))
+done
+echo "Finished."
+</code></pre>
+    </div>
+    <a href="../Scripts/until-count.sh" class="download-link" download="until-count.sh">Download until-count.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">while-count.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# while-count: display a series of numbers
+
+count=1
+
+while [[ "$count" -le 5 ]]; do
+	echo "$count"
+	count=$((count + 1))
+done
+echo "Finished."
+</code></pre>
+    </div>
+    <a href="../Scripts/while-count.sh" class="download-link" download="while-count.sh">Download while-count.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">while-menu.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# while-menu: a menu driven system information program
+
+DELAY=3 # Number of seconds to display results
+
+while [[ "$REPLY" != 0 ]]; do
+	clear
+	cat &lt;&lt;- _EOF_
+		Please Select:
+
+		1. Display System Information
+		2. Display Disk Space
+		3. Display Home Space Utilization
+		0. Quit
+
+	_EOF_
+	read -r -p "Enter selection [0-3] &gt; "
+
+	if [[ "$REPLY" =~ ^[0-3]$ ]]; then
+		if [[ "$REPLY" == 1 ]]; then
+			echo "Hostname: $HOSTNAME"
+			uptime
+			sleep "$DELAY"
+		fi
+		if [[ "$REPLY" == 2 ]]; then
+			df -h
+			sleep "$DELAY"
+		fi
+		if [[ "$REPLY" == 3 ]]; then
+			if [[ "$(id -u)" -eq 0 ]]; then
+				echo "Home Space Utilization (All Users)"
+				du -sh /home/*
+			else
+				echo "Home Space Utilization ($USER)"
+				du -sh "$HOME"
+			fi
+			sleep "$DELAY"
+		fi
+	else
+		echo "Invalid entry."
+		sleep "$DELAY"
+	fi
+done
+echo "Program terminated."
+</code></pre>
+    </div>
+    <a href="../Scripts/while-menu.sh" class="download-link" download="while-menu.sh">Download while-menu.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">while-menu2.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# while-menu2: a menu driven system information program
+
+DELAY=3 # Number of seconds to display results
+
+while true; do
+	clear
+	cat &lt;&lt;- _EOF_
+		Please Select:
+
+		1. Display System Information
+		2. Display Disk Space
+		3. Display Home Space Utilization
+		0. Quit
+
+_EOF_
+	read -r -p "Enter selection [0-3] &gt; "
+
+	if [[ "$REPLY" =~ ^[0-3]$ ]]; then
+		if [[ "$REPLY" == 1 ]]; then
+			echo "Hostname: $HOSTNAME"
+			uptime
+			sleep "$DELAY"
+			continue
+		fi
+		if [[ "$REPLY" == 2 ]]; then
+			df -h
+			sleep $DELAY
+			continue
+		fi
+		if [[ "$REPLY" == 3 ]]; then
+			if [[ "$(id -u)" -eq 0 ]]; then
+				echo "Home Space Utilization (All Users)"
+				du -sh /home/*
+			else
+				echo "Home Space Utilization ($USER)"
+				du -sh "$HOME"
+			fi
+			sleep "$DELAY"
+			continue
+		fi
+		if [[ "$REPLY" == 0 ]]; then
+			break
+		fi
+	else
+		echo "Invalid entry."
+		sleep "$DELAY"
+	fi
+done
+echo "Program terminated."
+</code></pre>
+    </div>
+    <a href="../Scripts/while-menu2.sh" class="download-link" download="while-menu2.sh">Download while-menu2.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">while-read.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# while-read: read lines from a file
+
+while read -r distro version release; do
+	printf "Distro: %s\tVersion: %s\tReleased: %s\n" \
+		"$distro" \
+		"$version" \
+		"$release"
+done &lt; distros.txt
+</code></pre>
+    </div>
+    <a href="../Scripts/while-read.sh" class="download-link" download="while-read.sh">Download while-read.sh</a>
+</div>
+
+<div class="script-viewer-container">
+    <h3>Script Name: <span class="script-name">while-read2.sh</span></h3>
+    <div class="console-viewer">
+        <pre><code>#!/bin/bash
+
+# while-read2: read lines from a file
+
+sort -k 1,1 -k 2n distros.txt | while read -r distro version release; do
+	printf "Distro: %s\tVersion: %s\tReleased: %s\n" \
+		"$distro" \
+		"$version" \
+		"$release"
+done
+</code></pre>
+    </div>
+    <a href="../Scripts/while-read2.sh" class="download-link" download="while-read2.sh">Download while-read2.sh</a>
+</div>
+</section>
+
     <footer style="margin-top: 50px; text-align: center; border-top: 1px solid #ddd; padding-top: 20px;">
         <p>&copy; 2025 Manual de Comandos Linux</p>
     </footer>

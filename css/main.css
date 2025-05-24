@@ -163,3 +163,69 @@ tr:nth-child(even) {
     color: #3498db;
     font-weight: bold;
 }
+
+
+/* Console Viewer Styles */
+.script-viewer-container {
+    margin-bottom: 40px; /* Space between script viewers */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    background-color: #f9f9f9; /* Light background for the container itself */
+}
+
+.script-viewer-container h3 { /* Styling for the "Script Name: ..." part */
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.script-viewer-container .script-name {
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace; /* Monospace for script name too */
+}
+
+.console-viewer {
+    background-color: #282c34; /* Dark background for the console */
+    color: #abb2bf;            /* Light grey text color, common for terminals */
+    font-family: 'Courier New', Courier, monospace; /* Monospaced font */
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;          /* Allow horizontal scrolling for long lines */
+    line-height: 1.5;
+    font-size: 0.9em;          /* Slightly smaller font for code */
+}
+
+.console-viewer pre {
+    margin: 0;                 /* Remove default pre margin */
+    padding: 0;                /* Remove default pre padding */
+    background-color: transparent; /* Inherit from .console-viewer */
+    border: none;              /* Remove any borders from pre if they exist globally */
+    white-space: pre;          /* Preserve whitespace and newlines */
+}
+
+.console-viewer code {
+    font-family: inherit;      /* Inherit font from .console-viewer */
+    color: inherit;            /* Inherit color */
+    background-color: transparent; /* No specific background for code inside pre */
+    padding: 0;                /* Remove default code padding */
+    border-radius: 0;          /* Remove default code border-radius */
+    font-size: inherit;        /* Inherit font size */
+}
+
+.script-viewer-container .download-link {
+    display: inline-block;
+    margin-top: 15px;
+    padding: 8px 15px;
+    background-color: #3498db; /* Consistent with other links/buttons */
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.script-viewer-container .download-link:hover {
+    background-color: #2980b9;
+}
+
