@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "nodemon --watch generatePages.js --watch materias --exec \"node generatePages.js && node server.js\"",
     "dev:public": "node start-public.js",
+    "build": "node build.mjs",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
@@ -13,9 +14,12 @@
   "license": "ISC",
   "packageManager": "pnpm@10.11.0",
   "dependencies": {
+    "axios": "^1.9.0",
+    "cheerio": "^1.0.0",
     "express": "^5.1.0",
     "fs": "0.0.1-security",
     "nodemon": "^3.1.10",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "playwright": "^1.52.0"
   }
 }
