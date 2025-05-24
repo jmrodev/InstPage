@@ -6,11 +6,11 @@ const outputBase = path.join(__dirname, 'output');
 
 function getIcon(filename) {
   const ext = path.extname(filename).toLowerCase();
-  if (ext === '.pdf') return '📄';
+  if (ext === '.pdf') return '📚';
   if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) return '🖼️';
   if (['.mp3', '.wav', '.ogg'].includes(ext)) return '🔊';
   if (['.doc', '.docx', '.odt'].includes(ext)) return '📦';
-  if (ext === '.html') return '📝';
+  if (ext === '.html') return '🌐';
   return '📦';
 }
 
