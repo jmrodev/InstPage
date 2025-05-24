@@ -10,7 +10,7 @@ exec("node generatePages.js", (err, stdout, stderr) => {
   }
 
   const app = express();
-  const outputDir = path.join(__dirname, "output");
+  const outputDir = path.join(__dirname, "docs");
   const PORT = 3000;
 
   app.use(express.static(outputDir));

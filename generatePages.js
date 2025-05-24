@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 
 const rootDir = path.join(__dirname, 'materias');
-const outputBase = path.join(__dirname, 'output');
+const outputBase = path.join(__dirname, 'docs');
 
 function getIcon(filename) {
   const ext = path.extname(filename).toLowerCase();

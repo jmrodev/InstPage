@@ -4,7 +4,7 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
-app.use(express.static(path.join(__dirname, 'output')));
+app.use(express.static(path.join(__dirname, 'docs')));
 
 app.listen(PORT, () => {
   console.log(`📡 Servidor activo en: http://localhost:${PORT}`);
