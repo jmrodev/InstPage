@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Manual Práctico de PHP POO (Versión Consola)</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+      margin-bottom: 2rem;
+    }
+    h2.section-title {
+        color: #1a5276;
+        border-bottom: 1px solid #aed6f1;
+        padding-bottom: 8px;
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .concept-box {
+      background-color: #e3f2fd;
+      border-left: 5px solid #2196f3;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f0f0f0;
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+      border: 1px solid #ddd;
+    }
+    code { /* Estilo para código inline */
+      font-family: 'Consolas', 'Monaco', 'SFMono-Regular', 'Menlo', monospace;
+      font-size: 0.9rem;
+      color: #c7254e; 
+      background-color: #f9f2f4;
+      padding: 3px 5px;
+      border-radius: 4px;
+    }
+    .example-box pre { /* Para bloques de código dentro de example-box */
+        margin: 0; /* Quitar margen por defecto de pre */
+    }
+    .example-box pre code { /* Estilo específico para bloques de código dentro de example-box */
+        color: #333;
+        background-color: transparent;
+        padding: 0;
+        font-size: 0.875rem;
+        display: block;
+        white-space: pre-wrap;
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #2196f3;
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 18px;
+      margin-bottom: 1.2rem;
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+    .tip {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1.2rem;
+      margin: 1.5rem 0;
+      border-radius: 6px;
+    }
+    ul {
+        padding-left: 25px;
+    }
+    li {
+        margin-bottom: 0.6rem;
+    }
+    strong.keyword { /* Para resaltar palabras clave de PHP */
+        font-weight: 600;
+        color: #0b73b0; /* Azul oscuro para palabras clave */
+    }
+    strong.variable { /* Para resaltar variables especiales como $this */
+        font-weight: 600;
+        color: #d9534f; /* Un color rojizo para $this */
+    }
+    table {
+        width:100%; 
+        border-collapse: collapse;
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+    th, td {
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        background-color: #e3f2fd;
+    }
+  </style>
+</head>
+<body>
+
+<h1>📘 Manual Práctico de PHP POO (Versión Consola)</h1>
+
+<div class="concept-box">
+  <span class="concept-title">Introducción a la POO</span>
+  <p>La Programación Orientada a Objetos (POO) es un paradigma centrado en "objetos", que tienen características (propiedades) y pueden realizar acciones (métodos).</p>
+  <p>Beneficios: reutilización, organización, mantenibilidad y abstracción.</p>
+  <div class="tip">
+    <p><strong>Nota sobre este manual (Versión Consola):</strong> Los ejemplos de código PHP de este manual están adaptados para producir una salida legible cuando se ejecutan desde la línea de comandos (CLI). Usan <code>PHP_EOL</code> para saltos de línea. El manual en sí es un HTML para facilitar su lectura.</p>
+  </div>
+</div>
+
+<h2 class="section-title">🏛️ Sección 1: Clases y Objetos - Los Pilares de la POO</h2>
+<div class="concept-box">
+  <span class="concept-title">Clases: Los Moldes o Planos</span>
+  <p>Una <strong>clase</strong> (<code>class Coche</code>) es un molde para crear objetos. Define sus propiedades y métodos.</p>
+  <div class="example-box">
+<pre><code><?php
+// Definición de nuestra clase base 'Coche'
+class Coche {
+    // Vacía por ahora
+}
+
+$miPrimerCoche = new Coche();
+$otroCocheDiferente = new Coche();
+
+echo "Tipo de \$miPrimerCoche: " . gettype($miPrimerCoche) . PHP_EOL;
+echo "Clase de \$miPrimerCoche: " . get_class($miPrimerCoche) . PHP_EOL;
+
+var_dump($miPrimerCoche);
+var_dump($otroCocheDiferente);
+?></code></pre>
+  </div>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Objetos: Las Instancias de una Clase</span>
+  <p>Un <strong>objeto</strong> es una instancia concreta de una clase, creada con <strong class="keyword">new</strong>.</p>
+  <div class="tip">
+    <p>Una clase es la definición. Un objeto es la instancia real. Puedes tener múltiples objetos de una misma clase.</p>
+  </div>
+</div>
+
+<h2 class="section-title">🔩 Sección 2: Propiedades (Atributos)</h2>
+<div class="concept-box">
+  <span class="concept-title">Definiendo las Características</span>
+  <p>Las <strong>propiedades</strong> son las características de un objeto (<code>$marca</code>, <code>$modelo</code>). Se declaran como variables dentro de la clase.</p>
+  <div class="example-box">
+<pre><code><?php
+// Evolución de la clase Coche: ahora con propiedades
+class Coche {
+    public $marca;
+    public $modelo;
+    public $color = "Rojo"; 
+    public $velocidadActual = 0;
+}
+
+$miCoche = new Coche();
+$miCoche->marca = "Toyota";
+$miCoche->modelo = "Corolla";
+$miCoche->color = "Plata"; 
+
+echo "Marca: " . $miCoche->marca . PHP_EOL;
+echo "Modelo: " . $miCoche->modelo . PHP_EOL;
+echo "Color: " . $miCoche->color . PHP_EOL;
+echo "Velocidad: " . $miCoche->velocidadActual . " km/h" . PHP_EOL;
+
+$otroCoche = new Coche();
+$otroCoche->marca = "Ford";
+$otroCoche->modelo = "Focus";
+echo "--- Otro coche ---" . PHP_EOL;
+echo "Marca: " . $otroCoche->marca . ", Color: " . $otroCoche->color . PHP_EOL;
+?></code></pre>
+  </div>
+</div>
+
+<h2 class="section-title">🎬 Sección 3: Métodos (Comportamientos)</h2>
+<div class="concept-box">
+  <span class="concept-title">Realizando Acciones</span>
+  <p>Los <strong>métodos</strong> definen las acciones de un objeto (<code>arrancar()</code>, <code>acelerar()</code>). Se definen como funciones dentro de la clase.</p>
+  <div class="example-box">
+<pre><code><?php
+// Evolución de la clase Coche: ahora con propiedades y métodos
+class Coche {
+    public $marca;
+    public $modelo;
+    public $color = "Rojo";
+    public $velocidadActual = 0;
+    public $estaArrancado = false;
+
+    public function arrancar() {
+        if (!$this->estaArrancado) { 
+            $this->estaArrancado = true;
+            echo $this->marca . " " . $this->modelo . " ha arrancado." . PHP_EOL;
+        } else {
+            echo $this->marca . " " . $this->modelo . " ya estaba arrancado." . PHP_EOL;
+        }
+    }
+
+    public function apagar() {
+        if ($this->estaArrancado) {
+            $this->estaArrancado = false;
+            $this->velocidadActual = 0;
+            echo $this->marca . " " . $this->modelo . " se ha apagado." . PHP_EOL;
+        } else { 
+            echo $this->marca . " " . $this->modelo . " ya estaba apagado." . PHP_EOL;
+        }
+    }
+
+    public function acelerar($incremento) {
+        if ($this->estaArrancado) {
+            $this->velocidadActual += $incremento;
+            echo "El " . $this->marca . " " . $this->modelo . " aceleró a " . $this->velocidadActual . " km/h." . PHP_EOL;
+        } else { 
+            echo "No puedes acelerar, el " . $this->marca . " " . $this->modelo . " está apagado." . PHP_EOL;
+        }
+    }
+
+    public function obtenerInformacion() {
+        $estadoMotor = $this->estaArrancado ? "Encendido" : "Apagado";
+        return "Info: " . $this->marca . " " . $this->modelo . PHP_EOL .
+               "  Color: " . $this->color . PHP_EOL .
+               "  Motor: " . $estadoMotor . PHP_EOL .
+               "  Velocidad: " . $this->velocidadActual . " km/h" . PHP_EOL;
+    }
+}
+
+$miDeportivo = new Coche();
+$miDeportivo->marca = "Ferrari"; 
+$miDeportivo->modelo = "F8 Tributo";
+$miDeportivo->color = "Rojo Ferrari";
+
+$miDeportivo->arrancar();
+$miDeportivo->acelerar(100);
+echo $miDeportivo->obtenerInformacion();
+$miDeportivo->apagar();
+echo $miDeportivo->obtenerInformacion();
+?></code></pre>
+  </div>
+</div>
+<div class="concept-box">
+  <span class="concept-title">La Pseudo-Variable <strong class="variable">$this</strong></span>
+  <p>Dentro de los métodos, <strong class="variable">$this</strong> se refiere al objeto actual.</p>
+</div>
+
+<h2 class="section-title">☀️ Sección 4: Métodos Mágicos - Constructor y Destructor</h2>
+<div class="concept-box">
+  <span class="concept-title">El Constructor (<code>__construct</code>)</span>
+  <p>El <strong>constructor</strong> (<code>__construct</code>) se llama al crear un objeto con <strong class="keyword">new</strong>. Ideal para inicializar propiedades.</p>
+  <div class="example-box">
+<pre><code><?php
+// Evolución de Coche: con constructor y destructor
+class Coche {
+    public $marca;
+    public $modelo;
+    public $color;
+    public $velocidadActual = 0;
+    public $estaArrancado = false;
+
+    public function __construct($marcaCoche, $modeloCoche, $colorCoche = "Plata") {
+        $this->marca = $marcaCoche;
+        $this->modelo = $modeloCoche;
+        $this->color = $colorCoche;
+        echo "¡Fabricado un " . $this->marca . " " . $this->modelo . " de color " . $this->color . "!" . PHP_EOL;
+    }
+
+    public function arrancar() { 
+        if(!$this->estaArrancado) {$this->estaArrancado=true; echo $this->marca." " . $this->modelo ." arrancado." . PHP_EOL;}
+        else {echo $this->marca." " . $this->modelo ." ya estaba arrancado." . PHP_EOL;}
+    }
+    public function apagar() { 
+        if($this->estaArrancado) {$this->estaArrancado=false; $this->velocidadActual=0; echo $this->marca." " . $this->modelo ." apagado." . PHP_EOL;}
+        else {echo $this->marca." " . $this->modelo ." ya estaba apagado." . PHP_EOL;}
+    }
+    public function acelerar($inc) { 
+        if($this->estaArrancado) {$this->velocidadActual+=$inc; echo $this->marca." " . $this->modelo ." acelera a ".$this->velocidadActual." km/h." . PHP_EOL;}
+        else {echo "No puedes acelerar, el " . $this->marca . " " . $this->modelo . " está apagado." . PHP_EOL;}
+    }
+    public function obtenerInformacion() { 
+        $estadoMotor = $this->estaArrancado ? "Encendido" : "Apagado";
+        return "Info: ".$this->marca." ".$this->modelo. PHP_EOL .
+               "  Color: ".$this->color. PHP_EOL .
+               "  Motor: ".$estadoMotor. PHP_EOL .
+               "  Velocidad:".$this->velocidadActual." km/h" . PHP_EOL;
+    }
+
+    public function __destruct() {
+        echo "El coche " . $this->marca . " " . $this->modelo . " va al desguace." . PHP_EOL;
+    }
+}
+
+$miBerlina = new Coche("Volkswagen", "Passat", "Azul Marino");
+$suvFamiliar = new Coche("Volvo", "XC60"); 
+
+$miBerlina->arrancar();
+$miBerlina->acelerar(70);
+echo $miBerlina->obtenerInformacion();
+echo $suvFamiliar->obtenerInformacion();
+
+echo "--- Fin del script ---" . PHP_EOL;
+?>
+</code></pre>
+  </div>
+  <div class="tip">
+    <p><strong>Destructor (<code>__destruct</code>):</strong> Se llama cuando un objeto va a ser eliminado (al final del script o con <code>unset()</code>).</p>
+  </div>
+</div>
+
+<h2 class="section-title">🛡️ Sección 5: Encapsulamiento - Protegiendo los Componentes Internos</h2>
+<div class="concept-box">
+  <span class="concept-title">¿Qué es el Encapsulamiento?</span>
+  <p><strong>Encapsulamiento</strong>: Agrupar datos y métodos, y controlar el acceso a ellos con modificadores de visibilidad.</p>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Modificadores de Visibilidad: <code>public</code>, <code>private</code>, <code>protected</code></span>
+  <p><code>public</code>: Acceso total. <code>private</code>: Solo desde la misma clase. <code>protected</code>: Desde la misma clase y clases hijas.</p>
+  <p>Se usan métodos públicos (getters/setters) para acceso controlado a propiedades privadas/protegidas.</p>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Aplicando Encapsulamiento a <code>Coche</code></span>
+  <div class="example-box">
+<pre><code><?php
+// Evolución de Coche: ahora con encapsulamiento
+class Coche {
+    private $marca; 
+    private $modelo; 
+    private $color; 
+    private $velocidadActual = 0;
+    private $estaArrancado = false;
+    private $numeroSerie;
+
+    public function __construct($marca, $modelo, $color, $numeroSerie) {
+        $this->marca = $marca;
+        $this->modelo = $modelo;
+        $this->color = $color;
+        $this->numeroSerie = $numeroSerie;
+        echo "Coche " . $this->marca . " " . $this->modelo ." (SN: " . $this->getNumeroSerie(true) . ") fabricado." . PHP_EOL;
+    }
+
+    public function getMarca() { return $this->marca; }
+    public function getModelo() { return $this->modelo; }
+    public function getColor() { return $this->color; }
+    public function getVelocidadActual() { return $this->velocidadActual; }
+    public function getEstaArrancado() { return $this->estaArrancado; }
+    public function getNumeroSerie($completo = false) { 
+        return $completo ? $this->numeroSerie : "SN-XXXX-" . substr($this->numeroSerie, -4); 
+    }
+
+    public function setColor($nuevoColor) {
+        $this->color = $nuevoColor;
+        echo "El color del " . $this->getMarca() . " " . $this->getModelo() . " ha cambiado a " . $nuevoColor . "." . PHP_EOL;
+    }
+
+    public function arrancar() {
+        if (!$this->estaArrancado) {
+            $this->estaArrancado = true;
+            echo $this->getMarca() . " " . $this->getModelo() . " ha arrancado." . PHP_EOL;
+        } else { /* ... */ }
+    }
+    public function apagar() {
+        if ($this->estaArrancado) {
+            $this->estaArrancado = false;
+            $this->velocidadActual = 0;
+            echo $this->getMarca() . " " . $this->getModelo() . " se ha apagado." . PHP_EOL;
+        } else { /* ... */ }
+    }
+    public function acelerar($incremento) {
+        if ($this->estaArrancado && $incremento > 0) {
+            $this->velocidadActual += $incremento;
+            echo "El " . $this->getMarca() . " " . $this->getModelo() . " aceleró a " . $this->velocidadActual . " km/h." . PHP_EOL;
+        } elseif (!$this->estaArrancado) {
+             echo "No puedes acelerar, el " . $this->getMarca() . " " . $this->getModelo() . " está apagado." . PHP_EOL;
+        }
+    }
+    public function obtenerInformacionDetallada() {
+        $estado = $this->estaArrancado ? "Encendido" : "Apagado";
+        return "--- Ficha Técnica (" . $this->getNumeroSerie() . ") ---" . PHP_EOL .
+               "Marca: " . $this->getMarca() . PHP_EOL . 
+               "Modelo: " . $this->getModelo() . PHP_EOL .
+               "Color: " . $this->getColor() . PHP_EOL .
+               "Velocidad Actual: " . $this->getVelocidadActual() . " km/h" . PHP_EOL .
+               "Estado del Motor: " . $estado . PHP_EOL;
+    }
+    public function __destruct() {
+        echo "Coche " . $this->getMarca() . " " . $this->getModelo() . " (SN: " . $this->getNumeroSerie(true) . ") va al desguace." . PHP_EOL;
+    }
+}
+
+$miNuevoCoche = new Coche("Audi", "A4", "Negro Brillante", "ASN789234XYZ");
+echo "Mi coche es un: " . $miNuevoCoche->getMarca() . " " . $miNuevoCoche->getModelo() . "." . PHP_EOL;
+echo "SN (parcial): " . $miNuevoCoche->getNumeroSerie() . "." . PHP_EOL;
+$miNuevoCoche->arrancar();
+$miNuevoCoche->acelerar(50);
+$miNuevoCoche->setColor("Rojo Fuego");
+echo $miNuevoCoche->obtenerInformacionDetallada();
+$miNuevoCoche->apagar();
+?></code></pre>
+  </div>
+</div>
+
+<h2 class="section-title">🚗💨 Sección 6: Herencia - Creando Familias de Coches</h2>
+<div class="concept-box">
+  <span class="concept-title">¿Qué es la Herencia?</span>
+  <p>La <strong>herencia</strong> (<code>extends</code>) permite crear clases hijas que reutilizan y extienden una clase padre.</p>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Implementando Herencia</span>
+  <p><code>Coche</code> (de Sec. 5) se convierte en <code>VehiculoBase</code> con propiedades <code>protected</code>. Creamos <code>CocheDeportivo</code>.</p>
+  <div class="example-box">
+<pre><code><?php
+// --- Clase Padre: VehiculoBase ---
+class VehiculoBase {
+    protected $marca; 
+    protected $modelo;
+    protected $color;
+    protected $velocidadActual = 0;
+    protected $estaArrancado = false;
+    protected $numeroSerie;
+
+    public function __construct($marca, $modelo, $color, $numeroSerie) {
+        $this->marca = $marca;
+        $this->modelo = $modelo;
+        $this->color = $color;
+        $this->numeroSerie = $numeroSerie;
+        echo "Vehículo Base " . $this->marca . " " . $this->modelo . " (SN: " . $this->getNumeroSerie(true) . ") ensamblado." . PHP_EOL;
+    }
+
+    public function getMarca() { return $this->marca; }
+    public function getModelo() { return $this->modelo; }
+    public function getColor() { return $this->color; }
+    public function getVelocidadActual() { return $this->velocidadActual; }
+    public function getEstaArrancado() { return $this->estaArrancado; }
+    public function getNumeroSerie($completo = false) { 
+        return $completo ? $this->numeroSerie : "SN-BASE-" . substr($this->numeroSerie, -4); 
+    }
+    
+    public function arrancar() {
+        if (!$this->estaArrancado) {
+            $this->estaArrancado = true;
+            echo $this->marca . " " . $this->modelo . " ha arrancado motor (Base)." . PHP_EOL;
+        } else { /* ... */ }
+    }
+    public function apagar() {
+        if ($this->estaArrancado) {
+            $this->estaArrancado = false; $this->velocidadActual = 0;
+            echo $this->marca . " " . $this->modelo . " ha apagado motor (Base)." . PHP_EOL;
+        } else { /* ... */ }
+    }
+    public function acelerar($incremento) {
+        if ($this->estaArrancado && $incremento > 0) {
+            $this->velocidadActual += $incremento;
+            echo "Vehículo " . $this->marca . " " . $this->modelo . " aceleró a " . $this->velocidadActual . " km/h (Base)." . PHP_EOL;
+        } elseif(!$this->estaArrancado) { /* ... */ }
+    }
+    public function obtenerInformacionDetallada() {
+        $estadoMotor = $this->estaArrancado ? "Encendido" : "Apagado";
+        return "--- Ficha Técnica (Base " . $this->getNumeroSerie() . ") ---" . PHP_EOL .
+               "Marca: " . $this->getMarca() . PHP_EOL . 
+               "Modelo: " . $this->getModelo() . PHP_EOL .
+               "Color: " . $this->getColor() . PHP_EOL .
+               "Velocidad Actual: " . $this->getVelocidadActual() . " km/h" . PHP_EOL .
+               "Estado del Motor: " . $estadoMotor . PHP_EOL;
+    }
+    public function __destruct() {
+        echo "Vehículo Base " . $this->getMarca() . " " . $this->getModelo() . " (SN: " . $this->getNumeroSerie(true) . ") al desguace." . PHP_EOL;
+    }
+}
+
+class CocheDeportivo extends VehiculoBase {
+    private $tieneTurboActivado = false; 
+    public $aleron = "Fijo"; 
+
+    public function __construct($marca, $modelo, $color, $numeroSerie, $tipoAleron = "Deportivo Móvil") {
+        parent::__construct($marca, $modelo, $color, $numeroSerie); 
+        $this->aleron = $tipoAleron;
+        echo "¡Un Coche Deportivo " . $this->getMarca() . " " . $this->getModelo() . " con alerón " . $this->aleron . " ha llegado!" . PHP_EOL;
+    }
+
+    public function activarTurbo() {
+        if ($this->estaArrancado) { 
+            $this->tieneTurboActivado = true;
+            echo "¡TURBO ACTIVADO en el " . $this->getMarca() . " " . $this->getModelo() . "!" . PHP_EOL;
+        } else { /* ... */ }
+    }
+    public function desactivarTurbo() { $this->tieneTurboActivado = false; echo "Turbo desactivado en " . $this->getMarca() . "." . PHP_EOL;}
+
+    public function acelerar($incremento) { 
+        if ($this->estaArrancado && $incremento > 0) {
+            $factorAceleracion = $this->tieneTurboActivado ? 1.8 : 1.2; 
+            $this->velocidadActual += ($incremento * $factorAceleracion); 
+            echo ($this->tieneTurboActivado ? "(Con Turbo) " : "") . "El deportivo " . $this->getMarca() . " " . $this->getModelo() .
+                 " aceleró a " . round($this->velocidadActual) . " km/h." . PHP_EOL;
+        } elseif(!$this->estaArrancado) { /* ... */ }
+    }
+    public function obtenerInformacionDetallada() {
+        $infoBase = parent::obtenerInformacionDetallada(); 
+        $estadoTurbo = $this->tieneTurboActivado ? "Activado" : "Desactivado";
+        return str_replace("--- Ficha Técnica (Base", "--- Ficha Técnica (Deportivo", $infoBase) . // Modificamos parte de la info base
+               "Alerón: " . $this->aleron . PHP_EOL .
+               "Turbo: " . $estadoTurbo . PHP_EOL;
+    }
+    public function __destruct() {
+        echo "El Coche Deportivo " . $this->getMarca() . " " . $this->getModelo() . " se va a la pista celestial." . PHP_EOL;
+        parent::__destruct(); 
+    }
+}
+
+$miUtilitario = new VehiculoBase("Seat", "Ibiza", "Blanco", "VB1001");
+$miUtilitario->arrancar();
+$miUtilitario->acelerar(50);
+echo $miUtilitario->obtenerInformacionDetallada();
+
+echo "--------------------" . PHP_EOL;
+$miSuperDeportivo = new CocheDeportivo("Ferrari", "F40", "Rojo Corsa", "CD2002", "De Competición");
+$miSuperDeportivo->arrancar();
+$miSuperDeportivo->activarTurbo();
+$miSuperDeportivo->acelerar(100); 
+$miSuperDeportivo->desactivarTurbo();
+$miSuperDeportivo->acelerar(30); 
+echo $miSuperDeportivo->obtenerInformacionDetallada();
+?>
+</code></pre>
+  </div>
+</div>
+
+<h2 class="section-title">🎭 Sección 7: Polimorfismo - Objetos con Múltiples Formas</h2>
+<div class="concept-box">
+  <span class="concept-title">¿Qué es el Polimorfismo?</span>
+  <p><strong>Polimorfismo</strong>: Objetos de diferentes clases (con padre común o interfaz) responden al mismo método de forma específica a su tipo.</p>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Demostrando Polimorfismo</span>
+  <p>Usamos <code>VehiculoBase</code> y <code>CocheDeportivo</code>. Métodos sobrescritos se ejecutan según el tipo real del objeto.</p>
+  <div class="example-box">
+<pre><code><?php
+// Se asume que VehiculoBase y CocheDeportivo están definidos como en la Sección 6.
+
+echo "### Demostración de Polimorfismo ###" . PHP_EOL;
+$flotaDeVehiculos = [
+    new VehiculoBase("Renault", "Clio", "Azul", "VB3003"),
+    new CocheDeportivo("Porsche", "911 GT3", "Amarillo Racing", "CD4004", "Ajustable"),
+    new CocheDeportivo("Lamborghini", "Huracan", "Verde Mantis", "CD4005", "Aerodinámico")
+];
+
+foreach ($flotaDeVehiculos as $indice => $vehiculo) {
+    echo "--- Procesando Vehículo #".($indice + 1).": " . $vehiculo->getMarca() . " " . $vehiculo->getModelo() . " ---" . PHP_EOL;
+    $vehiculo->arrancar();
+    if ($vehiculo instanceof CocheDeportivo) { 
+        $vehiculo->activarTurbo(); 
+    }
+    $vehiculo->acelerar(60); 
+    echo $vehiculo->obtenerInformacionDetallada();
+}
+
+echo PHP_EOL . "### Función Polimórfica ###" . PHP_EOL;
+function realizarMantenimiento(VehiculoBase $v) { 
+    echo "--- Mantenimiento para: " . $v->getMarca() . " " . $v->getModelo() . " ---" . PHP_EOL;
+    if (!$v->getEstaArrancado()) $v->arrancar();
+    echo "Revisando motor... Estado: " . ($v->getEstaArrancado() ? "OK" : "APAGADO") . PHP_EOL;
+    if ($v instanceof CocheDeportivo) echo "Revisando sistema de turbo..." . PHP_EOL;
+    echo $v->obtenerInformacionDetallada();
+    $v->apagar();
+    echo "--- Mantenimiento finalizado ---" . PHP_EOL;
+}
+
+$deportivoPrueba = new CocheDeportivo("McLaren", "720S", "Naranja Papaya", "CD4006", "Activo Inteligente");
+realizarMantenimiento($deportivoPrueba);
+?>
+</code></pre>
+  </div>
+</div>
+
+<h2 class="section-title">🏛️ Sección 8: Clases y Métodos Abstractos - Definiendo Esqueletos</h2>
+<div class="concept-box">
+  <span class="concept-title">Clases y Métodos Abstractos</span>
+  <p>Una <strong>clase abstracta</strong> (<code>abstract class</code>) no se puede instanciar. Sirve de plantilla. Un <strong>método abstracto</strong> (<code>abstract public function</code>) solo define la firma; las clases hijas concretas DEBEN implementarlo.</p>
+  <div class="example-box">
+<pre><code><?php
+// --- Clase Padre ABSTRACTA: Vehiculo ---
+abstract class Vehiculo { 
+    protected $marca;
+    protected $modelo;
+    protected $color;
+    protected $numeroSerie;
+    protected $velocidadActual = 0;
+    protected $estaArrancado = false;
+
+    public function __construct($marca, $modelo, $color, $numeroSerie) {
+        $this->marca = $marca; $this->modelo = $modelo; $this->color = $color; $this->numeroSerie = $numeroSerie;
+    }
+
+    public function getMarca() { return $this->marca; }
+    public function getModelo() { return $this->modelo; }
+    
+    public function arrancar() {
+        if (!$this->estaArrancado) {
+            $this->estaArrancado = true;
+            echo $this->getMarca() . " " . $this->getModelo() . " (" . $this->getTipoVehiculo() . ") ha arrancado." . PHP_EOL;
+        } else { /* ... */ }
+    }
+    public function apagar() { 
+        if($this->estaArrancado) {$this->estaArrancado=false; $this->velocidadActual=0; echo $this->getMarca() . " " . $this->getModelo() . " (" . $this->getTipoVehiculo() . ") apagado." . PHP_EOL;}
+    }
+    public function acelerarBase($incremento) { // Método base de aceleración
+        if ($this->estaArrancado && $incremento > 0) {
+            $this->velocidadActual += $incremento;
+            echo $this->getMarca() . " " . $this->getModelo() . " (" . $this->getTipoVehiculo() . ") aceleró base a " . $this->velocidadActual . " km/h." . PHP_EOL;
+        }
+    }
+
+    abstract public function getTipoVehiculo(); 
+    abstract public function calcularConsumoEstimado($distancia); // km
+
+    public function __destruct() {
+        echo "El " . $this->getTipoVehiculo() . " " . $this->marca . " " . $this->modelo . " está siendo desmantelado." . PHP_EOL;
+    }
+}
+
+class CocheUrbano extends Vehiculo {
+    public function __construct($marca, $modelo, $color, $numeroSerie) {
+        parent::__construct($marca, $modelo, $color, $numeroSerie);
+        echo "Coche Urbano " . $this->getMarca() . " " . $this->getModelo() . " fabricado." . PHP_EOL;
+    }
+    public function getTipoVehiculo() { return "Coche Urbano"; }
+    public function calcularConsumoEstimado($distancia) { return $distancia * 0.06; } // 6L/100km
+     public function acelerar($incremento) { // Sobrescribe o implementa si fuera abstracto
+        $this->acelerarBase($incremento * 1.1); // Un poco más ágil
+        echo "(Aceleración específica de Urbano)" . PHP_EOL;
+    }
+}
+
+class CamionRegistrado extends Vehiculo {
+    private $capacidadCarga;
+    public function __construct($marca, $modelo, $color, $numeroSerie, $carga) {
+        parent::__construct($marca, $modelo, $color, $numeroSerie);
+        $this->capacidadCarga = $carga;
+        echo "Camión " . $this->getMarca() . " (Carga: " . $this->capacidadCarga . "T) listo." . PHP_EOL;
+    }
+    public function getTipoVehiculo() { return "Camión de Carga"; }
+    public function calcularConsumoEstimado($distancia) { return $distancia * 0.30; } // 30L/100km
+    public function acelerar($incremento) { // Sobrescribe o implementa si fuera abstracto
+        $this->acelerarBase($incremento * 0.7); // Más lento
+        echo "(Aceleración específica de Camión)" . PHP_EOL;
+    }
+}
+
+echo PHP_EOL . "### Clases Abstractas ###" . PHP_EOL;
+$miCityCar = new CocheUrbano("Fiat", "500", "Rojo Vivo", "CU12345");
+$miTrailer = new CamionRegistrado("Volvo", "FH16", "Blanco Polar", "TRUCK78901", 40);
+
+$miCityCar->arrancar();
+$miCityCar->acelerar(50); // Llama a CocheUrbano::acelerar
+echo "Consumo Fiat para 100km: " . $miCityCar->calcularConsumoEstimado(100) . " litros." . PHP_EOL;
+
+echo PHP_EOL;
+$miTrailer->arrancar();
+$miTrailer->acelerar(50); // Llama a CamionRegistrado::acelerar
+echo "Consumo Volvo para 100km: " . $miTrailer->calcularConsumoEstimado(100) . " litros." . PHP_EOL;
+?></code></pre>
+  </div>
+</div>
+
+<h2 class="section-title">📜 Sección 9: Interfaces - Definiendo Contratos de Comportamiento</h2>
+<div class="concept-box">
+  <span class="concept-title">¿Qué es una Interfaz?</span>
+  <p>Una <strong>interfaz</strong> (<code>interface</code>) define un contrato de métodos públicos que una clase DEBE implementar (<code>implements</code>), sin proveer implementación. Una clase puede implementar múltiples interfaces.</p>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Declarando y Usando Interfaces</span>
+  <div class="example-box">
+<pre><code><?php
+interface Arrancable {
+    public function arrancarMotor();
+    public function apagarMotor();
+    public function estaArrancado();
+}
+interface Conducible {
+    public function acelerarVehiculo($cantidad);
+    public function frenarVehiculo($cantidad);
+}
+interface Cargable {
+    public function cargar($item, $peso);
+    public function descargar($item);
+}
+
+class CamionModerno implements Arrancable, Conducible, Cargable {
+    private $marca, $modelo, $motorEncendido = false, $velocidad = 0, $pesoCargaActual = 0;
+    public function __construct($m, $md) { $this->marca=$m; $this->modelo=$md; echo "Camión $m $md listo." . PHP_EOL;}
+    public function arrancarMotor() { $this->motorEncendido=true; echo "$this->marca: Motor arrancado." . PHP_EOL;}
+    public function apagarMotor() { $this->motorEncendido=false; $this->velocidad=0; echo "$this->marca: Motor apagado." . PHP_EOL;}
+    public function estaArrancado() { return $this->motorEncendido; }
+    public function acelerarVehiculo($cant) { if($this->motorEncendido) $this->velocidad+=$cant; echo "$this->marca: Acelerando a $this->velocidad km/h." . PHP_EOL;}
+    public function frenarVehiculo($cant) { $this->velocidad-=$cant; if($this->velocidad<0)$this->velocidad=0; echo "$this->marca: Frenando a $this->velocidad km/h." . PHP_EOL;}
+    public function cargar($item, $peso) { $this->pesoCargaActual+=$peso; echo "$this->marca: Cargado '$item' ($peso kg). Total: $this->pesoCargaActual kg." . PHP_EOL;}
+    public function descargar($item) { /* ... lógica para encontrar y restar peso ... */ echo "$this->marca: Descargado '$item'." . PHP_EOL;}
+}
+
+class BicicletaElectrica implements Conducible { // No es Arrancable (motor siempre "listo"), no es Cargable
+    private $marca;
+    private $velocidad = 0;
+    public function __construct($m){ $this->marca = $m; echo "Bici Eléctrica $m lista." . PHP_EOL;}
+    public function acelerarVehiculo($cant) { $this->velocidad+=$cant; echo "$this->marca: Pedaleando más rápido a $this->velocidad km/h." . PHP_EOL;}
+    public function frenarVehiculo($cant) { $this->velocidad-=$cant; if($this->velocidad<0)$this->velocidad=0; echo "$this->marca: Frenando a $this->velocidad km/h." . PHP_EOL;}
+}
+
+echo PHP_EOL . "### Interfaces ###" . PHP_EOL;
+$miCamionInter = new CamionModerno("MAN", "TGX");
+$miBiciElec = new BicicletaElectrica("Specialized");
+
+function probarArranque(Arrancable $vehiculo){
+    echo "Probando arranque de: " . get_class($vehiculo) . PHP_EOL;
+    $vehiculo->arrancarMotor();
+}
+function probarConduccionVehiculo(Conducible $vehiculo){
+    echo "Probando conducción de: " . get_class($vehiculo) . PHP_EOL;
+    // Si es arrancable, lo arrancamos primero
+    if ($vehiculo instanceof Arrancable && !$vehiculo->estaArrancado()) {
+        $vehiculo->arrancarMotor();
+    }
+    // Asumimos que si no es Arrancable o ya arrancó, podemos acelerar
+    if (!($vehiculo instanceof Arrancable) || $vehiculo->estaArrancado()) {
+        $vehiculo->acelerarVehiculo(20);
+    } else {
+         echo "No se pudo conducir, el vehículo no arrancó." . PHP_EOL;
+    }
+}
+
+probarArranque($miCamionInter);
+// probarArranque($miBiciElec); // Error: BicicletaElectrica no implementa Arrancable
+
+probarConduccionVehiculo($miCamionInter);
+probarConduccionVehiculo($miBiciElec);
+
+if ($miCamionInter instanceof Cargable) {
+    $miCamionInter->cargar("Paquetes", 5000);
+}
+?>
+</code></pre>
+  </div>
+  <div class="concept-box">
+    <span class="concept-title">Clases Abstractas vs. Interfaces</span>
+    <table border="1">
+      <tr><th>Característica</th><th>Clase Abstracta</th><th>Interfaz</th></tr>
+      <tr><td>Propósito</td><td>Compartir código base, contrato parcial ("es un")</td><td>Definir contrato de comportamiento ("puede hacer")</td></tr>
+      <tr><td>Implementación</td><td>Hereda de UNA</td><td>Implementa MÚLTIPLES</td></tr>
+    </table>
+  </div>
+</div>
+
+<h2 class="section-title">🧬 Sección 10: Traits - Reutilización Horizontal de Código</h2>
+<div class="concept-box">
+  <span class="concept-title">¿Qué son los Traits?</span>
+  <p>Un <strong>Trait</strong> (<code>trait</code>) permite reutilizar métodos (y propiedades) en clases sin herencia, usando <code>use</code>. Es como "mezclar" funcionalidades.</p>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Declarando y Usando Traits</span>
+  <div class="example-box">
+<pre><code><?php
+trait Logger {
+    protected $logHistorial = [];
+    public function registrarLog($mensaje) {
+        $entrada = "[" . date("Y-m-d H:i:s") . "] " . $mensaje;
+        $this->logHistorial[] = $entrada;
+        echo "LOG: " . $mensaje . PHP_EOL;
+    }
+    public function mostrarHistorialLogCompleto() {
+        echo "--- Historial de Log ---" . PHP_EOL;
+        foreach ($this->logHistorial as $e) echo $e . PHP_EOL;
+        echo "------------------------" . PHP_EOL;
+    }
+}
+trait EmisorDeSonido {
+    public $sonidoPredeterminado = "Beep!";
+    public function emitirSonidoEspecifico($sonido = null) {
+        echo "SONIDO: " . ($sonido ?? $this->sonidoPredeterminado) . PHP_EOL;
+    }
+}
+
+class CocheAvanzadoConTraits {
+    use Logger, EmisorDeSonido;
+    public $marca;
+    public function __construct($marca) {
+        $this->marca = $marca;
+        $this->registrarLog("Coche " . $marca . " creado.");
+        $this->sonidoPredeterminado = "Vroom Vroom!"; 
+    }
+    public function conducir() {
+        $this->registrarLog("Conduciendo " . $this->marca);
+        $this->emitirSonidoEspecifico();
+    }
+}
+
+echo PHP_EOL . "### Traits ###" . PHP_EOL;
+$miCocheTrait = new CocheAvanzadoConTraits("Subaru");
+$miCocheTrait->conducir();
+$miCocheTrait->emitirSonidoEspecifico("Skrrrt!");
+$miCocheTrait->mostrarHistorialLogCompleto();
+?>
+</code></pre>
+  </div>
+</div>
+<div class="concept-box">
+  <span class="concept-title">Resolución de Conflictos de Nombres en Traits</span>
+  <p>Si dos Traits tienen métodos con el mismo nombre, usa <code>insteadof</code> para elegir y <code>as</code> para renombrar o cambiar visibilidad.</p>
+  <div class="example-box">
+<pre><code><?php
+trait ComunicadorA {
+    public function enviarMensaje() { echo "Mensaje A." . PHP_EOL; }
+}
+trait ComunicadorB {
+    public function enviarMensaje() { echo "Mensaje B URGENTE." . PHP_EOL; } 
+}
+
+class DispositivoMaestro {
+    use ComunicadorA, ComunicadorB {
+        ComunicadorB::enviarMensaje insteadof ComunicadorA; 
+        ComunicadorA::enviarMensaje as enviarMensajeTipoA;    
+    }
+}
+$dispMaestro = new DispositivoMaestro();
+$dispMaestro->enviarMensaje();        
+$dispMaestro->enviarMensajeTipoA();     
+?>
+</code></pre>
+  </div>
+</div>
+
+</body>
+</html>

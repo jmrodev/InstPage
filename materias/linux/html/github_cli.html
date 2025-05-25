@@ -1,0 +1,961 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Manual Detallado de GitHub CLI y Exploración Avanzada</title>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background-color: #f8f9fa;
+      color: #333;
+      margin: 2rem;
+      line-height: 1.6;
+    }
+    h1 {
+      color: #2c3e50;
+      text-align: center;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+      margin-bottom: 2rem; /* Más espacio después del título principal */
+    }
+    h2.section-title { /* Estilo para los títulos de las secciones principales de comandos */
+        color: #1a5276; /* Un azul más oscuro para los H2 */
+        border-bottom: 1px solid #aed6f1;
+        padding-bottom: 8px;
+        margin-top: 2.5rem;
+        margin-bottom: 1.5rem;
+    }
+    .concept-box {
+      background-color: #e3f2fd;
+      border-left: 5px solid #2196f3;
+      padding: 1.5rem;
+      margin-bottom: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    .example-box {
+      background-color: #f0f0f0; /* Un gris ligeramente diferente para example-box */
+      padding: 1rem;
+      border-radius: 6px;
+      margin: 1rem 0;
+      overflow-x: auto;
+      border: 1px solid #ddd; /* Borde sutil para example-box */
+    }
+    code { /* Estilo para código inline */
+      font-family: 'Consolas', 'Monaco', 'SFMono-Regular', 'Menlo', monospace;
+      font-size: 0.9rem;
+      color: #c7254e; 
+      background-color: #f9f2f4;
+      padding: 3px 5px; /* Un poco más de padding */
+      border-radius: 4px;
+    }
+    .example-box code { /* Estilo específico para bloques de código dentro de example-box */
+        color: #333;
+        background-color: transparent;
+        padding: 0;
+        font-size: 0.875rem; /* Ligeramente más pequeño para bloques */
+        display: block; /* Asegura que ocupe el ancho y permita saltos de línea */
+        white-space: pre-wrap; /* Respeta espacios y saltos de línea, ajusta si es largo */
+    }
+    .concept-title {
+      display: inline-block;
+      background-color: #2196f3;
+      color: white;
+      padding: 0.4rem 0.8rem; /* Ligeramente más padding */
+      border-radius: 18px; /* Más redondeado */
+      margin-bottom: 1.2rem; /* Más espacio */
+      font-weight: bold;
+      font-size: 1.1rem; /* Un poco más grande */
+    }
+    .tip {
+      background-color: #e8f5e9;
+      border-left: 5px solid #4caf50;
+      padding: 1.2rem; /* Más padding */
+      margin: 1.5rem 0; /* Más margen */
+      border-radius: 6px;
+    }
+    ul {
+        padding-left: 25px; /* Más indentación */
+    }
+    li {
+        margin-bottom: 0.6rem; /* Más espacio entre ítems de lista */
+    }
+    strong.command-name { /* Para resaltar nombres de comandos en el texto */
+        font-weight: 600;
+        color: #0b73b0; /* Azul oscuro para nombres de comando */
+    }
+  </style>
+</head>
+<body>
+
+<h1>📘 Manual Detallado de GitHub CLI y Exploración Avanzada</h1>
+
+<div class="concept-box">
+  <span class="concept-title">¿Qué es GitHub CLI (gh)?</span>
+  <p>GitHub CLI (<code>gh</code>) es la herramienta oficial de línea de comandos para interactuar con tu cuenta de GitHub. Te permite llevar gran parte del flujo de trabajo de GitHub directamente a tu terminal, desde la gestión de repositorios y la colaboración en código hasta la automatización de tareas con GitHub Actions.</p>
+  <p>Este manual te guiará a través de los comandos esenciales y te enseñará cómo descubrir funcionalidades más avanzadas por tu cuenta.</p>
+</div>
+<h2 class="section-title">🛠️ Descubriendo Comandos con <code>help</code></h2>
+<div class="concept-box">
+  <span class="concept-title">La Clave para Dominar <code>gh</code></span>
+  <p>GitHub CLI posee un sistema de ayuda exhaustivo y jerárquico. Es tu mejor aliado para explorar la herramienta a fondo.</p>
+  
+  <p><strong>Ayuda General:</strong> Muestra una lista de todos los comandos principales (grupos de comandos) y una descripción breve de cada uno. Ideal para empezar.</p>
+  <div class="example-box"><code>gh help</code></div>
+  <p>Alternativamente, puedes usar:</p>
+  <div class="example-box"><code>gh --help</code></div>
+
+  <p><strong>Ayuda para un Grupo de Comandos:</strong> Si quieres saber más sobre un grupo de comandos (por ejemplo, todo lo relacionado con <code class="command-name">repo</code>), usa:</p>
+  <div class="example-box"><code>gh repo --help</code></div>
+  <p>Esto listará todos los subcomandos disponibles bajo <code class="command-name">repo</code> (como <code>clone</code>, <code>create</code>, <code>list</code>, <code>fork</code>, <code>view</code>, etc.) y las opciones (flags) que se aplican globalmente a los comandos de <code class="command-name">repo</code>.</p>
+
+  <p><strong>Ayuda para un Subcomando Específico:</strong> Para obtener detalles completos sobre un subcomando específico (por ejemplo, <code class="command-name">gh repo create</code>), incluyendo todas sus banderas, opciones y, a menudo, ejemplos de uso:</p>
+  <div class="example-box"><code>gh repo create --help</code></div>
+  
+  <p>Este patrón <code class="command-name">[comando] [subcomando] --help</code> es universal en <code>gh</code>:</p>
+  <ul>
+    <li>Para crear Pull Requests: <div class="example-box"><code>gh pr create --help</code></div></li>
+    <li>Para listar Issues con filtros: <div class="example-box"><code>gh issue list --help</code></div></li>
+    <li>Para ejecutar un workflow de Actions: <div class="example-box"><code>gh workflow run --help</code></div></li>
+  </ul>
+  <p><strong>Exploración Activa:</strong> No dudes en ejecutar <code>--help</code> en cualquier nivel. Si un comando parece interesante, añade <code>--help</code> para ver qué más puede hacer. Esta es la forma más efectiva de descubrir funcionalidades ocultas o nuevas opciones que se añaden en actualizaciones de <code>gh</code>.</p>
+</div>
+
+<h2 class="section-title">🗂️ Gestión de Repositorios (<code>gh repo ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Comandos Fundamentales</span>
+  <p>Estos comandos te permiten interactuar con tus repositorios de GitHub y los de otros usuarios.</p>
+
+  <p><strong>Clonar un repositorio:</strong> Descarga un repositorio a tu máquina local.</p>
+  <div class="example-box"><code>gh repo clone OWNER/REPO</code></div>
+  <p>Para tus propios repositorios o los de organizaciones a las que perteneces, a menudo puedes omitir el <code>OWNER</code>:</p>
+  <div class="example-box"><code>gh repo clone MI-PROPIO-REPO</code></div>
+  <p>Puedes especificar un directorio diferente para clonar:</p>
+  <div class="example-box"><code>gh repo clone OWNER/REPO mi-directorio-local</code></div>
+  
+  <p><strong>Crear un nuevo repositorio:</strong> Inicia un nuevo repositorio en GitHub.</p>
+  <div class="example-box"><code>gh repo create [nombre-del-repositorio]</code></div>
+  <p>El comando es interactivo, pero puedes usar banderas para automatizarlo:</p>
+  <ul>
+    <li><code>--public</code> / <code>--private</code> / <code>--internal</code>: Define la visibilidad.</li>
+    <li><code>--description "Mi descripción detallada"</code>: Añade una descripción.</li>
+    <li><code>--homepage https://ejemplo.com</code>: Establece la URL del proyecto.</li>
+    <li><code>--template OWNER/TEMPLATE_REPO</code>: Crea desde una plantilla.</li>
+    <li><code>--add-readme</code>: Añade un archivo README.md inicial.</li>
+    <li><code>--gitignore GITIGNORE_TEMPLATE</code>: Añade un archivo .gitignore (ej: <code>Node</code>, <code>Python</code>).</li>
+    <li><code>--license MIT</code>: Añade una licencia (ej: <code>MIT</code>, <code>Apache-2.0</code>, <code>GPL-3.0</code>).</li>
+    <li><code>--source . --push</code>: Si estás en un repo local existente, lo crea en GitHub y sube el contenido.</li>
+  </ul>
+  <div class="example-box"><code>gh repo create mi-nuevo-proyecto --private --description "Un proyecto de prueba" --add-readme</code></div>
+
+  <p><strong>Listar repositorios:</strong> Muestra repositorios.</p>
+  <div class="example-box"><code>gh repo list [OWNER]</code></div>
+  <p>Opciones útiles:</p>
+  <ul>
+    <li><code>--limit N</code>: Limita el número de resultados.</li>
+    <li><code>--visibility public</code> (o <code>private</code>, <code>internal</code>): Filtra por visibilidad.</li>
+    <li><code>--forks</code>: Muestra solo forks.</li>
+    <li><code>--source</code>: Muestra solo repositorios que no son forks.</li>
+    <li><code>--language "JavaScript"</code>: Filtra por lenguaje.</li>
+  </ul>
+  <div class="example-box"><code>gh repo list --limit 30 --visibility private</code></div>
+
+  <p><strong>Ver un repositorio en el navegador:</strong></p>
+  <div class="example-box"><code>gh repo view [OWNER/REPO] --web</code></div>
+  <p>Si estás dentro de un repositorio clonado, puedes omitir <code>OWNER/REPO</code>.</p>
+
+  <p><strong>Hacer "Fork" de un repositorio:</strong> Crea una copia de un repositorio en tu propia cuenta.</p>
+  <div class="example-box"><code>gh repo fork OWNER/REPO</code></div>
+  <p>Opciones útiles:</p>
+  <ul>
+    <li><code>--clone</code>: Clona el fork inmediatamente después de crearlo.</li>
+    <li><code>--remote-name upstream</code>: Nombra el remote del repositorio original como 'upstream'.</li>
+    <li><code>--org NOMBRE_ORGANIZACION</code>: Hace el fork en una organización en lugar de tu cuenta personal.</li>
+  </ul>
+</div>
+<h2 class="section-title">🖇️ Trabajar con Pull Requests (<code>gh pr ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Colaboración en Código</span>
+  <p>Los Pull Requests (PRs) son el corazón de la colaboración en GitHub. Con <code>gh</code>, puedes gestionarlos eficientemente desde tu terminal.</p>
+
+  <p><strong>Listar Pull Requests:</strong> Muestra los PRs del repositorio actual.</p>
+  <div class="example-box"><code>gh pr list</code></div>
+  <p>Opciones útiles para filtrar:</p>
+  <ul>
+    <li><code>--state open</code> (por defecto), <code>closed</code>, <code>merged</code>, <code>all</code>: Filtra por estado.</li>
+    <li><code>--assignee USERNAME</code>: Muestra PRs asignados a un usuario específico.</li>
+    <li><code>--author USERNAME</code>: Muestra PRs creados por un usuario específico.</li>
+    <li><code>--base BRANCH_NAME</code>: Muestra PRs que apuntan a una rama base específica.</li>
+    <li><code>--label "bug"</code>: Filtra por etiquetas. Puedes usar múltiples etiquetas.</li>
+    <li><code>--limit N</code>: Limita el número de PRs mostrados.</li>
+    <li><code>--web</code>: Abre la lista de PRs en el navegador.</li>
+  </ul>
+  <div class="example-box"><code>gh pr list --state closed --author "octocat" --limit 10</code></div>
+
+  <p><strong>Ver el estado de tus Pull Requests actuales:</strong> Un resumen rápido de PRs que te involucran.</p>
+  <div class="example-box"><code>gh pr status</code></div>
+  <p>Muestra PRs creados por ti, PRs que necesitan tu revisión y PRs donde se te ha mencionado.</p>
+
+  <p><strong>Crear un Pull Request:</strong> Inicia un nuevo PR desde tu rama actual.</p>
+  <div class="example-box"><code>gh pr create</code></div>
+  <p><code>gh</code> intentará obtener el título y cuerpo de tus commits. Se iniciará un proceso interactivo para confirmar o editar estos detalles, seleccionar la rama base, añadir revisores, asignados, etiquetas y proyectos. Puedes usar banderas para automatizar:</p>
+  <ul>
+    <li><code>--title "Mi título del PR"</code></li>
+    <li><code>--body "Descripción detallada de los cambios."</code> (Puedes usar <code>-F, --body-file ARCHIVO</code> para leer el cuerpo desde un archivo).</li>
+    <li><code>--base main</code>: Especifica la rama base.</li>
+    <li><code>--head mi-rama-feature</code>: Especifica la rama de cabecera (si no es la actual).</li>
+    <li><code>--reviewer USERNAME,TEAMNAME</code>: Solicita revisiones.</li>
+    <li><code>--assignee USERNAME</code>: Asigna el PR.</li>
+    <li><code>--label "enhancement,needs-testing"</code>: Añade etiquetas.</li>
+    <li><code>--project "Mi Proyecto Kanban"</code>: Añade el PR a un proyecto.</li>
+    <li><code>--draft</code>: Crea el PR como borrador.</li>
+    <li><code>--web</code>: Abre el PR creado en el navegador.</li>
+  </ul>
+  <div class="example-box"><code>gh pr create --title "Nueva característica asombrosa" --body "Implementa X y Z para mejorar Y." --reviewer "monalisa" --label "feature"</code></div>
+
+  <p><strong>Hacer checkout de un PR localmente:</strong> Descarga los cambios de un PR a una nueva rama local para probarlos o revisarlos.</p>
+  <div class="example-box"><code>gh pr checkout NUMERO_PR_O_URL_PR</code></div>
+  <p>Esto crea una rama local con un nombre como <code>nombre-usuario-rama-feature</code>.</p>
+
+  <p><strong>Ver los cambios de un PR (diff):</strong> Muestra las diferencias introducidas por un PR.</p>
+  <div class="example-box"><code>gh pr diff [NUMERO_PR_O_URL_PR]</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--color always</code> (o <code>never</code>, <code>auto</code>): Controla la salida con colores.</li>
+    <li><code>--name-only</code>: Muestra solo los nombres de los archivos cambiados.</li>
+    <li><code>--patch</code>: Muestra el diff en formato patch.</li>
+  </ul>
+
+  <p><strong>Revisar un Pull Request:</strong> Aprueba, solicita cambios o comenta en un PR.</p>
+  <div class="example-box"><code>gh pr review [NUMERO_PR_O_URL_PR]</code></div>
+  <p>Opciones interactivas o mediante banderas:</p>
+  <ul>
+    <li><code>-a, --approve</code>: Aprueba los cambios.</li>
+    <li><code>-r, --request-changes</code>: Solicita cambios.</li>
+    <li><code>-c, --comment "Este es mi comentario."</code>: Deja un comentario general.</li>
+    <li><code>-b, --body "Comentario detallado de revisión."</code>: Similar a <code>-c</code>.</li>
+  </ul>
+  <div class="example-box"><code>gh pr review 123 --approve --body "¡Se ve genial!"</code></div>
+
+  <p><strong>Fusionar (Merge) un Pull Request:</strong> Incorpora los cambios de un PR a la rama base.</p>
+  <div class="example-box"><code>gh pr merge [NUMERO_PR_O_URL_PR]</code></div>
+  <p>Opciones de estrategia de fusión:</p>
+  <ul>
+    <li><code>-m, --merge</code>: Crea un commit de fusión (por defecto).</li>
+    <li><code>-s, --squash</code>: Combina todos los commits del PR en uno solo en la rama base.</li>
+    <li><code>-r, --rebase</code>: Aplica los commits del PR sobre la rama base.</li>
+    <li><code>-d, --delete-branch</code>: Elimina la rama del PR después de fusionar.</li>
+    <li><code>--admin</code>: Permite fusionar incluso si hay revisiones pendientes o checks fallidos (requiere permisos de admin).</li>
+  </ul>
+  <div class="example-box"><code>gh pr merge 456 --squash --delete-branch</code></div>
+
+  <p><strong>Cerrar un Pull Request:</strong> Cierra un PR sin fusionarlo.</p>
+  <div class="example-box"><code>gh pr close NUMERO_PR_O_URL_PR</code></div>
+  <p>Puedes añadir un comentario con <code>-c, --comment "Motivo del cierre."</code>.</p>
+
+  <p><strong>Reabrir un Pull Request:</strong> Vuelve a abrir un PR cerrado.</p>
+  <div class="example-box"><code>gh pr reopen NUMERO_PR_O_URL_PR</code></div>
+</div>
+
+<h2 class="section-title">🐛 Gestionar Issues (<code>gh issue ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Seguimiento de Tareas y Errores</span>
+  <p>Los Issues en GitHub son fundamentales para el seguimiento de tareas, mejoras, errores y otras discusiones relacionadas con el proyecto. <code>gh</code> te permite gestionarlos eficazmente.</p>
+
+  <p><strong>Listar Issues:</strong> Muestra los issues del repositorio actual.</p>
+  <div class="example-box"><code>gh issue list</code></div>
+  <p>Opciones útiles para filtrar y formatear:</p>
+  <ul>
+    <li><code>--state open</code> (por defecto), <code>closed</code>, <code>all</code>: Filtra por estado.</li>
+    <li><code>--assignee USERNAME</code>: Muestra issues asignados a un usuario.</li>
+    <li><code>--author USERNAME</code>: Muestra issues creados por un usuario.</li>
+    <li><code>--mentioning USERNAME</code>: Muestra issues que mencionan a un usuario.</li>
+    <li><code>--label "bug"</code>: Filtra por una o varias etiquetas (<code>--label "bug" --label "critical"</code>).</li>
+    <li><code>--milestone "Sprint 1"</code>: Filtra por hito.</li>
+    <li><code>--limit N</code>: Limita el número de issues mostrados.</li>
+    <li><code>--web</code>: Abre la lista de issues en el navegador.</li>
+    <li><code>-S, --search "palabra clave"</code>: Busca issues que contengan ciertas palabras clave en el título o cuerpo.</li>
+  </ul>
+  <div class="example-box"><code>gh issue list --label "documentation" --state open --limit 20</code></div>
+  <div class="example-box"><code>gh issue list -S "error de autenticación"</code></div>
+
+  <p><strong>Ver el estado de tus Issues actuales:</strong> Similar a <code>gh pr status</code>, pero para issues.</p>
+  <div class="example-box"><code>gh issue status</code></div>
+  <p>Muestra issues asignados a ti y issues abiertos que has creado.</p>
+
+  <p><strong>Crear un Issue:</strong> Abre un nuevo issue en el repositorio.</p>
+  <div class="example-box"><code>gh issue create</code></div>
+  <p>Se iniciará un proceso interactivo para el título y el cuerpo. Puedes usar banderas para más control:</p>
+  <ul>
+    <li><code>-t, --title "Título del Issue"</code></li>
+    <li><code>-b, --body "Descripción detallada del issue."</code> (También <code>-F, --body-file ARCHIVO</code>).</li>
+    <li><code>-a, --assignee USERNAME,@me</code>: Asigna el issue (<code>@me</code> te autoasigna).</li>
+    <li><code>-l, --label "bug,critical"</code>: Añade etiquetas.</li>
+    <li><code>-m, --milestone "Nombre del Hito"</code>: Asigna a un hito.</li>
+    <li><code>-p, --project "Nombre del Proyecto"</code>: Añade a un proyecto (beta).</li>
+    <li><code>--web</code>: Abre el issue creado en el navegador.</li>
+  </ul>
+  <div class="example-box"><code>gh issue create --title "Error al cargar la página de perfil" --body "Al hacer clic en el perfil, la página no carga y muestra un error 500." --label "bug" --assignee "@me"</code></div>
+
+  <p><strong>Ver un Issue específico:</strong> Muestra los detalles de un issue.</p>
+  <div class="example-box"><code>gh issue view NUMERO_ISSUE_O_URL</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--comments</code>: Muestra los comentarios del issue en la terminal.</li>
+    <li><code>--web</code>: Abre el issue en el navegador.</li>
+  </ul>
+  <div class="example-box"><code>gh issue view 74 --comments</code></div>
+
+  <p><strong>Cerrar un Issue:</strong> Marca un issue como cerrado.</p>
+  <div class="example-box"><code>gh issue close NUMERO_ISSUE_O_URL</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-c, --comment "Motivo del cierre. Solucionado en PR #123."</code>: Añade un comentario al cerrar.</li>
+  </ul>
+
+  <p><strong>Reabrir un Issue:</strong> Vuelve a abrir un issue que estaba cerrado.</p>
+  <div class="example-box"><code>gh issue reopen NUMERO_ISSUE_O_URL</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-c, --comment "El problema persiste bajo estas condiciones..."</code>: Añade un comentario al reabrir.</li>
+  </ul>
+  
+  <p><strong>Editar un Issue:</strong> Modifica los metadatos de un issue existente.</p>
+  <div class="example-box"><code>gh issue edit NUMERO_ISSUE_O_URL</code></div>
+  <p>Este comando permite cambiar interactivamente o mediante banderas el título, cuerpo, asignados, etiquetas, hitos y proyectos. Por ejemplo:</p>
+  <ul>
+    <li><code>--add-assignee USERNAME</code> / <code>--remove-assignee USERNAME</code></li>
+    <li><code>--add-label "nombre-label"</code> / <code>--remove-label "nombre-label"</code></li>
+    <li><code>--milestone "Nuevo Hito"</code></li>
+    <li><code>--title "Nuevo título para el issue"</code></li>
+    <li><code>--body "Nuevo cuerpo para el issue"</code></li>
+  </ul>
+  <div class="example-box"><code>gh issue edit 74 --add-label "prioridad-alta" --milestone "Versión 2.0"</code></div>
+
+  <p><strong>Comentar en un Issue:</strong> Añade un nuevo comentario a un issue.</p>
+  <div class="example-box"><code>gh issue comment NUMERO_ISSUE_O_URL</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-b, --body "Este es mi comentario."</code> (o <code>-F, --body-file ARCHIVO</code>).</li>
+    <li><code>--edit-last</code>: Edita el último comentario que hiciste en ese issue.</li>
+    <li><code>--web</code>: Abre la interfaz web para comentar.</li>
+  </ul>
+   <div class="example-box"><code>gh issue comment 74 --body "He reproducido el error. Estoy investigando la causa raíz."</code></div>
+</div>
+<h2 class="section-title">📄 Trabajar con Gists (<code>gh gist ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Fragmentos de Código y Notas Rápidas</span>
+  <p>Los Gists son una forma sencilla de compartir fragmentos de código, notas, o cualquier pequeño texto. GitHub CLI te permite gestionarlos directamente.</p>
+
+  <p><strong>Crear un Gist:</strong> Crea un nuevo Gist a partir de uno o más archivos, o desde la entrada estándar.</p>
+  <div class="example-box"><code>gh gist create archivo.js [otro_archivo.py] [notas.txt]</code></div>
+  <p>Para crear un Gist desde la entrada estándar (escribes directamente en la terminal y finalizas con Ctrl+D):</p>
+  <div class="example-box"><code>gh gist create -</code></div>
+  <p>Opciones útiles al crear:</p>
+  <ul>
+    <li><code>-d, --description "Descripción detallada del Gist"</code>: Añade una descripción.</li>
+    <li><code>-p, --public</code>: Hace el Gist público (por defecto son secretos/privados si no tienes otra configuración).</li>
+    <li><code>-w, --web</code>: Abre el Gist creado en el navegador.</li>
+    <li><code>-f, --filename "nombre_del_archivo.txt"</code>: Especifica un nombre de archivo cuando se crea desde la entrada estándar (<code>gh gist create -f mi_script.sh</code>).</li>
+  </ul>
+  <div class="example-box"><code>gh gist create mi_script.py -d "Un script útil en Python" --public</code></div>
+  <div class="example-box"><code>cat mi_codigo.java | gh gist create -f MiCodigo.java</code></div>
+
+
+  <p><strong>Listar tus Gists:</strong> Muestra una lista de tus Gists creados.</p>
+  <div class="example-box"><code>gh gist list</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--limit N</code>: Limita el número de Gists mostrados.</li>
+    <li><code>--public</code>: Muestra solo Gists públicos.</li>
+    <li><code>--secret</code>: Muestra solo Gists secretos.</li>
+  </ul>
+  <div class="example-box"><code>gh gist list --public --limit 10</code></div>
+
+  <p><strong>Ver un Gist:</strong> Muestra el contenido de un Gist específico.</p>
+  <div class="example-box"><code>gh gist view ID_DEL_GIST_O_URL</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--web</code>: Abre el Gist en el navegador.</li>
+    <li><code>-f, --filename "nombre_archivo.txt"</code>: Muestra solo el contenido de un archivo específico dentro del Gist.</li>
+    <li><code>--files</code>: Lista los nombres de los archivos contenidos en el Gist.</li>
+  </ul>
+  <div class="example-box"><code>gh gist view a1b2c3d4e5f6 --filename "script.js"</code></div>
+
+  <p><strong>Editar un Gist:</strong> Modifica un Gist existente. Normalmente abre tu editor de texto configurado.</p>
+  <div class="example-box"><code>gh gist edit ID_DEL_GIST_O_URL</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-a, --add "nuevo_archivo.md"</code>: Añade un nuevo archivo al Gist.</li>
+    <li><code>-d, --desc "Nueva descripción"</code>: Cambia la descripción del Gist.</li>
+    <li><code>--filename "nombre_existente.txt"</code>: Si quieres editar un archivo específico y el Gist tiene múltiples archivos, puedes indicarlo, aunque el editor interactivo suele manejar esto bien.</li>
+  </ul>
+  <p>Cuando editas, <code>gh</code> descargará los archivos del Gist a un directorio temporal, abrirá tu editor, y luego subirá los cambios cuando guardes y cierres el editor.</p>
+
+  <p><strong>Eliminar un Gist:</strong> Borra un Gist de forma permanente.</p>
+  <div class="example-box"><code>gh gist delete ID_DEL_GIST_O_URL</code></div>
+  <p>Se te pedirá confirmación antes de borrar.</p>
+
+  <p><strong>Clonar un Gist:</strong> Los Gists son repositorios Git, por lo que también puedes clonarlos.</p>
+  <div class="example-box"><code>gh gist clone ID_DEL_GIST_O_URL [directorio_opcional]</code></div>
+  <p>Esto es útil si quieres trabajar con los archivos del Gist localmente y tener control de versiones con Git.</p>
+
+</div>
+
+
+<h2 class="section-title">💻 Gestionar Codespaces (<code>gh codespace ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Entornos de Desarrollo en la Nube</span>
+  <p>GitHub Codespaces te proporciona un entorno de desarrollo completo en la nube, accesible desde cualquier lugar. Con <code>gh</code> puedes administrar tus codespaces directamente desde la terminal.</p>
+
+  <p><strong>Listar tus Codespaces:</strong> Muestra todos tus codespaces activos y detenidos.</p>
+  <div class="example-box"><code>gh codespace list</code></div>
+  <p>Opciones útiles:</p>
+  <ul>
+    <li><code>-q, --quiet</code>: Muestra solo los nombres de los codespaces.</li>
+    <li><code>-L, --limit N</code>: Limita el número de codespaces mostrados.</li>
+    <li><code>-R, --repo OWNER/REPO</code>: Muestra codespaces solo para un repositorio específico.</li>
+    <li><code>--json &lt;campos&gt;</code>: Muestra la salida en formato JSON (ej: <code>--json name,repository,state</code>).</li>
+  </ul>
+
+  <p><strong>Crear un nuevo Codespace:</strong> Inicia un nuevo entorno de desarrollo para un repositorio.</p>
+  <div class="example-box"><code>gh codespace create</code></div>
+  <p>Si estás dentro de un repositorio local que tiene un remoto en GitHub, creará un codespace para ese repo. Si no, te pedirá que selecciones un repositorio.</p>
+  <p>Opciones importantes:</p>
+  <ul>
+    <li><code>-R, --repo OWNER/REPO</code>: Especifica el repositorio para el cual crear el codespace.</li>
+    <li><code>-b, --branch NOMBRE_RAMA</code>: Especifica la rama a usar.</li>
+    <li><code>-m, --machine TIPO_MAQUINA</code>: Especifica el tipo de máquina (ej: <code>standardLinux</code>, <code>premiumLinux</code>). Usa <code>gh codespace machines</code> para ver opciones.</li>
+    <li><code>-l, --location REGION</code>: Especifica la región donde se creará el codespace (ej: <code>WestUs2</code>, <code>EastUs</code>, <code>WestEurope</code>).</li>
+    <li><code>--devcontainer-path RUTA/.devcontainer/devcontainer.json</code>: Especifica una ruta al archivo de configuración del dev container.</li>
+    <li><code>--idle-timeout-minutes N</code>: Establece el tiempo de inactividad antes de que el codespace se detenga automáticamente.</li>
+  </ul>
+  <div class="example-box"><code>gh codespace create -R cli/cli -b trunk -m standardLinux</code></div>
+
+  <p><strong>Detener un Codespace:</strong> Detiene un codespace en ejecución para conservar los minutos de cómputo.</p>
+  <div class="example-box"><code>gh codespace stop NOMBRE_DEL_CODESPACE</code></div>
+  <p>Puedes usar <code>-o, --org NOMBRE_ORGANIZACION</code> si el codespace pertenece a una organización.</p>
+
+  <p><strong>Iniciar un Codespace detenido:</strong> Vuelve a iniciar un codespace que estaba detenido.</p>
+  <div class="example-box"><code>gh codespace start NOMBRE_DEL_CODESPACE</code></div>
+
+  <p><strong>Eliminar un Codespace:</strong> Borra un codespace de forma permanente. Esto eliminará todos los cambios no guardados en un repositorio.</p>
+  <div class="example-box"><code>gh codespace delete NOMBRE_DEL_CODESPACE</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--all</code>: Elimina todos tus codespaces.</li>
+    <li><code>-f, --force</code>: Elimina sin pedir confirmación.</li>
+    <li><code>-d, --days N</code>: Elimina codespaces que no se han usado en N días.</li>
+  </ul>
+  <div class="example-box"><code>gh codespace delete --all --force</code></div>
+
+  <p><strong>Conectarse a un Codespace vía SSH:</strong> Establece una conexión SSH con tu codespace.</p>
+  <div class="example-box"><code>gh codespace ssh -c NOMBRE_DEL_CODESPACE</code></div>
+  <p>Esto te permite trabajar en el codespace como si fuera una máquina remota. También puedes ejecutar comandos directamente:</p>
+  <div class="example-box"><code>gh codespace ssh -c NOMBRE_DEL_CODESPACE -- 'ls -la'</code></div>
+  <p>Opciones:</p>
+    <ul>
+        <li><code>--profile NOMBRE_PERFIL_SSH</code>: Usa un perfil SSH específico.</li>
+        <li><code>-D PUERTO_LOCAL:PUERTO_REMOTO</code>: Reenvía un puerto.</li>
+    </ul>
+
+  <p><strong>Abrir un Codespace en VS Code (Escritorio o Web):</strong></p>
+  <div class="example-box"><code>gh codespace code -c NOMBRE_DEL_CODESPACE</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-w, --web</code>: Abre en VS Code para la Web.</li>
+    <li><code>-i, --insiders</code>: Abre en VS Code Insiders (si está instalado).</li>
+  </ul>
+
+  <p><strong>Copiar archivos desde/hacia un Codespace (scp):</strong> Transfiere archivos entre tu máquina local y un codespace.</p>
+  <div class="example-box"><code>gh codespace cp -c NOMBRE_DEL_CODESPACE archivo_remoto:/ruta/a/archivo.txt ./archivo_local.txt</code></div>
+  <p>O también:</p>
+  <div class="example-box"><code>gh codespace cp -c NOMBRE_DEL_CODESPACE ./archivo_local.txt archivo_remoto:/ruta/destino/</code></div>
+  <p>Usa <code>-r</code> para copiar directorios recursivamente.</p>
+  
+  <p><strong>Gestionar Puertos Reenviados (Port Forwarding):</strong></p>
+  <div class="example-box"><code>gh codespace ports -c NOMBRE_DEL_CODESPACE</code></div>
+  <p>Permite ver, reenviar y gestionar la visibilidad de los puertos de tu codespace.</p>
+  <ul>
+    <li><code>gh codespace ports forward PUERTO_REMOTO:PUERTO_LOCAL -c NOMBRE_CODESPACE</code></li>
+    <li><code>gh codespace ports visibility PUERTO:private|org|public -c NOMBRE_CODESPACE</code></li>
+  </ul>
+
+  <p><strong>Ver los logs de creación del Codespace:</strong> Útil para depurar problemas durante la creación.</p>
+  <div class="example-box"><code>gh codespace logs -c NOMBRE_DEL_CODESPACE</code></div>
+
+  <p><strong>Reconstruir un Codespace:</strong> Vuelve a ejecutar la configuración del dev container.</p>
+  <div class="example-box"><code>gh codespace rebuild -c NOMBRE_DEL_CODESPACE</code></div>
+  <p>Usa <code>--full</code> para una reconstrucción completa que limpia el volumen de datos.</p>
+
+</div>
+
+<h2 class="section-title">🚀 Interactuar con GitHub Actions (<code>gh workflow ...</code> y <code>gh run ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Automatización y CI/CD</span>
+  <p>GitHub Actions te permite automatizar tus flujos de trabajo de desarrollo de software. Con <code>gh</code>, puedes gestionar tus workflows y sus ejecuciones (runs) desde la terminal.</p>
+
+  <p><strong>Listar workflows:</strong> Muestra los workflows definidos en el repositorio actual.</p>
+  <div class="example-box"><code>gh workflow list</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-a, --all</code>: Muestra todos los workflows, incluyendo los desactivados o los que solo se ejecutan en ramas específicas.</li>
+    <li><code>-L, --limit N</code>: Limita el número de workflows mostrados.</li>
+  </ul>
+
+  <p><strong>Habilitar un workflow:</strong> Activa un workflow que estaba desactivado.</p>
+  <div class="example-box"><code>gh workflow enable WORKFLOW_NOMBRE_O_ID</code></div>
+  <p>Puedes obtener el nombre o ID del workflow usando <code>gh workflow list</code>.</p>
+
+  <p><strong>Deshabilitar un workflow:</strong> Desactiva un workflow para que no se ejecute.</p>
+  <div class="example-box"><code>gh workflow disable WORKFLOW_NOMBRE_O_ID</code></div>
+
+  <p><strong>Ver ejecuciones (runs) de workflows:</strong> Lista las ejecuciones recientes de los workflows.</p>
+  <div class="example-box"><code>gh run list</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-w, --workflow WORKFLOW_NOMBRE_O_ID</code>: Muestra ejecuciones solo para un workflow específico.</li>
+    <li><code>-L, --limit N</code>: Limita el número de ejecuciones mostradas.</li>
+    <li><code>-b, --branch NOMBRE_RAMA</code>: Filtra por rama.</li>
+    <li><code>-u, --actor USUARIO</code>: Filtra por el usuario que disparó la ejecución.</li>
+    <li><code>-S, --status success</code> (o <code>failure</code>, <code>cancelled</code>, <code>skipped</code>, <code>action_required</code>, <code>neutral</code>, <code>timed_out</code>, <code>in_progress</code>, <code>queued</code>, <code>waiting</code>): Filtra por el estado de la ejecución.</li>
+  </ul>
+  <div class="example-box"><code>gh run list -w "CI Principal" --status failure --limit 5</code></div>
+
+  <p><strong>Ver detalles de una ejecución específica:</strong> Muestra información sobre una ejecución particular, incluyendo sus jobs.</p>
+  <div class="example-box"><code>gh run view ID_EJECUCION</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--log</code>: Muestra los logs completos de todos los jobs de la ejecución.</li>
+    <li><code>--log-failed</code>: Muestra los logs solo de los jobs que fallaron.</li>
+    <li><code>-j, --job JOB_ID</code>: Muestra los logs de un job específico dentro de la ejecución.</li>
+    <li><code>-v, --verbose</code>: Muestra más detalles, como los pasos de cada job.</li>
+    <li><code>--web</code>: Abre la ejecución en el navegador.</li>
+    <li><code>--exit-status</code>: El comando saldrá con el mismo código de estado que la ejecución del workflow (útil para scripting).</li>
+  </ul>
+  <div class="example-box"><code>gh run view 123456789 --log-failed</code></div>
+
+  <p><strong>Descargar artefactos de una ejecución:</strong> Baja los artefactos producidos por una ejecución.</p>
+  <div class="example-box"><code>gh run download ID_EJECUCION</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-n, --name NOMBRE_ARTEFACTO</code>: Descarga un artefacto específico por su nombre. Si hay varios con el mismo nombre, los descarga todos.</li>
+    <li><code>-D, --dir DIRECTORIO_DESTINO</code>: Especifica el directorio donde guardar los artefactos.</li>
+  </ul>
+  <div class="example-box"><code>gh run download 123456789 -n "build-output" -D ./artefactos/</code></div>
+
+  <p><strong>Re-ejecutar un workflow:</strong> Vuelve a disparar una ejecución de workflow.</p>
+  <div class="example-box"><code>gh run rerun ID_EJECUCION</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--failed</code>: Re-ejecuta solo los jobs que fallaron en la ejecución original.</li>
+    <li><code>--debug</code>: Habilita la salida de depuración de pasos para la nueva ejecución.</li>
+  </ul>
+
+  <p><strong>Cancelar una ejecución en progreso:</strong> Detiene una ejecución de workflow que está actualmente en progreso o en cola.</p>
+  <div class="example-box"><code>gh run cancel ID_EJECUCION</code></div>
+
+  <p><strong>Disparar un workflow manualmente (workflow_dispatch):</strong> Si un workflow tiene el trigger <code>on: workflow_dispatch</code>, puedes iniciarlo manualmente.</p>
+  <div class="example-box"><code>gh workflow run WORKFLOW_NOMBRE_O_ID</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-r, --ref NOMBRE_RAMA_O_TAG</code>: Especifica la referencia (rama, tag o SHA) donde ejecutar el workflow.</li>
+    <li><code>-f CAMPO=VALOR</code>: Proporciona inputs si el workflow los define (ej: <code>-f version=1.2.3 -f environment=production</code>).</li>
+  </ul>
+  <div class="example-box"><code>gh workflow run "Deploy Staging" -r main -f version=test-build</code></div>
+
+  <p><strong>Ver variables y secretos de Actions (a nivel de repositorio):</strong></p>
+  <p>Variables:</p>
+  <div class="example-box"><code>gh variable list</code></div>
+  <div class="example-box"><code>gh variable set NOMBRE_VARIABLE --body "VALOR"</code></div>
+  <p>Secretos:</p>
+  <div class="example-box"><code>gh secret list</code></div>
+  <div class="example-box"><code>gh secret set NOMBRE_SECRETO --body "VALOR_SECRETO"</code></div>
+  <p>También puedes gestionarlos a nivel de organización o entorno con opciones adicionales (consulta <code>gh variable set --help</code> y <code>gh secret set --help</code>).</p>
+</div>
+
+<h2 class="section-title">🏷️ Gestión de Releases (<code>gh release ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Publicación de Versiones</span>
+  <p>Las Releases en GitHub te permiten empaquetar y distribuir versiones de tu software. Con <code>gh</code>, puedes automatizar y gestionar este proceso.</p>
+
+  <p><strong>Listar releases:</strong> Muestra las releases del repositorio actual.</p>
+  <div class="example-box"><code>gh release list</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-L, --limit N</code>: Limita el número de releases mostradas.</li>
+    <li><code>--exclude-drafts</code>: Excluye los borradores de releases.</li>
+    <li><code>--exclude-prereleases</code>: Excluye las pre-releases.</li>
+  </ul>
+
+  <p><strong>Crear una nueva release:</strong> Crea una nueva release asociada a un tag Git.</p>
+  <div class="example-box"><code>gh release create TAG_VERSION [archivos_adjuntos...]</code></div>
+  <p>El <code>TAG_VERSION</code> debe existir en el repositorio o puedes crearlo sobre la marcha si especificas un commit o rama con <code>--target</code>.</p>
+  <p>Opciones importantes:</p>
+  <ul>
+    <li><code>-t, --title "Título de la Release"</code>: Establece un título para la release. Si se omite, se usa el nombre del tag.</li>
+    <li><code>-n, --notes "Notas detalladas de esta versión."</code>: Añade notas de la release.</li>
+    <li><code>-F, --notes-file ARCHIVO_CON_NOTAS</code>: Lee las notas de la release desde un archivo.</li>
+    <li><code>--generate-notes</code>: Genera automáticamente las notas de la release a partir de los commits desde la release anterior.</li>
+    <li><code>-d, --draft</code>: Guarda la release como un borrador en lugar de publicarla.</li>
+    <li><code>-p, --prerelease</code>: Marca la release como una pre-release.</li>
+    <li><code>--target COMMIT_SHA_O_RAMA</code>: Especifica el commit o rama sobre el cual se creará el tag si este no existe. Por defecto, es la rama principal.</li>
+    <li><code>--latest</code>: Si no es una pre-release, la marca como la "última release". GitHub hace esto automáticamente si es la release más reciente no pre-release y no borrador.</li>
+    <li><code>--verify-tag</code>: Firma GPG el tag que se crea.</li>
+    <li><code>--discussion-category NOMBRE_CATEGORIA</code>: Inicia una discusión en la categoría especificada vinculada a esta release.</li>
+  </ul>
+  <div class="example-box"><code>gh release create v1.2.3 ./bin/programa.exe ./docs/manual.pdf --title "Versión 1.2.3 Estable" --notes "Corrección de errores importantes y mejoras de rendimiento."</code></div>
+  <div class="example-box"><code>gh release create v2.0.0-beta1 --prerelease --generate-notes</code></div>
+
+  <p><strong>Ver detalles de una release:</strong> Muestra información sobre una release específica.</p>
+  <div class="example-box"><code>gh release view [TAG_VERSION]</code></div>
+  <p>Si omites <code>TAG_VERSION</code>, mostrará la última release. Opciones:</p>
+  <ul>
+    <li><code>--web</code>: Abre la release en el navegador.</li>
+  </ul>
+
+  <p><strong>Descargar artefactos de una release:</strong> Baja los archivos adjuntos (artefactos) de una release.</p>
+  <div class="example-box"><code>gh release download [TAG_VERSION]</code></div>
+  <p>Si omites <code>TAG_VERSION</code>, intentará descargar de la última release. Opciones:</p>
+  <ul>
+    <li><code>-A, --pattern "PATRON_NOMBRE_ARCHIVO"</code>: Descarga solo los artefactos que coincidan con el patrón (ej: <code>*.zip</code>, <code>linux-*</code>). Puedes usar <code>*</code> y <code>?</code>.</li>
+    <li><code>-D, --dir DIRECTORIO_DESTINO</code>: Especifica el directorio donde guardar los artefactos. Por defecto, el directorio actual.</li>
+    <li><code>--clobber</code>: Sobrescribe archivos existentes si tienen el mismo nombre.</li>
+    <li><code>--skip-existing</code>: Omite la descarga si el archivo ya existe localmente.</li>
+  </ul>
+  <div class="example-box"><code>gh release download v1.2.3 -A "*.tar.gz" -D ./descargas/</code></div>
+
+  <p><strong>Subir artefactos a una release existente:</strong> Añade archivos a una release ya creada.</p>
+  <div class="example-box"><code>gh release upload TAG_VERSION archivo1.zip [archivo2.deb...]</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>--clobber</code>: Sobrescribe artefactos existentes si tienen el mismo nombre en la release.</li>
+  </ul>
+  <div class="example-box"><code>gh release upload v1.2.3 ./bin/programa_actualizado.exe --clobber</code></div>
+  
+  <p><strong>Editar una release:</strong> Modifica los detalles de una release existente.</p>
+  <div class="example-box"><code>gh release edit TAG_VERSION</code></div>
+  <p>Permite cambiar el título, notas, si es borrador o pre-release, etc. Usa las mismas banderas que <code>gh release create</code> para las modificaciones (<code>--notes</code>, <code>--title</code>, <code>--draft=false</code>, <code>--prerelease=false</code>, etc.).</p>
+  <div class="example-box"><code>gh release edit v1.2.3 --notes "Notas actualizadas con nuevos detalles." --draft=false</code></div>
+
+  <p><strong>Eliminar una release:</strong> Borra una release. Esto no borra el tag Git asociado, solo la release en sí y sus artefactos.</p>
+  <div class="example-box"><code>gh release delete TAG_VERSION</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-y, --yes</code>: Omite la confirmación.</li>
+    <li><code>--cleanup-tag</code>: También elimina el tag Git asociado en el repositorio remoto.</li>
+  </ul>
+</div>
+
+<h2 class="section-title">🔍 Búsqueda (<code>gh search ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Encontrar Información en GitHub</span>
+  <p>El comando <code>gh search</code> te permite buscar a través de diferentes tipos de contenido en GitHub, como repositorios, issues, pull requests y commits, utilizando la misma sintaxis de búsqueda que en la web de GitHub.</p>
+
+  <p><strong>Buscar Repositorios:</strong> Encuentra repositorios que coincidan con tus criterios de búsqueda.</p>
+  <div class="example-box"><code>gh search repos "tetris" --sort stars --order desc</code></div>
+  <p>Opciones comunes para <code>repos</code>:</p>
+  <ul>
+    <li><code>--archived</code>: Incluye/excluye repositorios archivados (ej: <code>true</code>, <code>false</code>).</li>
+    <li><code>--fork</code>: Incluye/excluye forks (ej: <code>true</code>, <code>false</code>, <code>only</code>).</li>
+    <li><code>--good-first-issues N</code>: Filtra por repositorios con al menos N issues etiquetadas como "good first issue".</li>
+    <li><code>--help-wanted-issues N</code>: Filtra por repositorios con al menos N issues etiquetadas como "help wanted".</li>
+    <li><code>--include-forks</code>: Un alias para <code>--fork=true</code>.</li>
+    <li><code>--language LENGUAJE</code>: Filtra por lenguaje de programación principal.</li>
+    <li><code>--license LICENCIA</code>: Filtra por tipo de licencia (ej: <code>mit</code>, <code>apache-2.0</code>).</li>
+    <li><code>--match CAMPO</code>: Restringe la búsqueda a campos específicos del repositorio (<code>name</code>, <code>description</code>, <code>readme</code>). Puedes usar múltiples.</li>
+    <li><code>--owner USUARIO_U_ORGANIZACION</code>: Busca dentro de los repositorios de un propietario específico.</li>
+    <li><code>--size RANGO</code>: Filtra por tamaño del repositorio en kilobytes (ej: <code>"&lt;1000"</code>, <code>"&gt;=50000"</code>).</li>
+    <li><code>--stars RANGO</code>: Filtra por número de estrellas (ej: <code>"&gt;100"</code>, <code>"10..50"</code>).</li>
+    <li><code>--topic TEMA</code>: Filtra por tema del repositorio.</li>
+    <li><code>--updated FECHA_O_RANGO</code>: Filtra por fecha de última actualización (ej: <code>"&gt;2023-01-01"</code>).</li>
+    <li><code>--visibility VISIBILIDAD</code>: Filtra por visibilidad (<code>public</code>, <code>private</code>, <code>internal</code>).</li>
+    <li><code>--sort CAMPO</code>: Campo por el cual ordenar (<code>stars</code>, <code>forks</code>, <code>updated</code>, <code>help-wanted-issues</code>, <code>name</code>).</li>
+    <li><code>--order asc|desc</code>: Dirección de ordenamiento.</li>
+    <li><code>-L, --limit N</code>: Número máximo de resultados a mostrar.</li>
+    <li><code>--web</code>: Abre los resultados de búsqueda en el navegador.</li>
+  </ul>
+  <div class="example-box"><code>gh search repos "react framework" --language javascript --stars "&gt;5000" --limit 10</code></div>
+
+  <p><strong>Buscar Issues y Pull Requests:</strong> Encuentra issues o pull requests que coincidan con tus criterios.</p>
+  <div class="example-box"><code>gh search issues "bug en login" --state open --repo cli/cli</code></div>
+  <div class="example-box"><code>gh search prs "refactor auth" --state merged --author "octocat"</code></div>
+  <p>Opciones comunes para <code>issues</code> y <code>prs</code> (muchas son compartidas):</p>
+  <ul>
+    <li><code>--app NOMBRE_APP</code>: Filtra por la app de GitHub que interactuó.</li>
+    <li><code>--assignee USUARIO</code>: Filtra por asignado.</li>
+    <li><code>--author USUARIO</code>: Filtra por autor.</li>
+    <li><code>--base-branch RAMA</code>: (Solo PRs) Filtra por rama base.</li>
+    <li><code>--closed FECHA_O_RANGO</code>: Filtra por fecha de cierre.</li>
+    <li><code>--commenter USUARIO</code>: Filtra por usuario que comentó.</li>
+    <li><code>--comments RANGO</code>: Filtra por número de comentarios.</li>
+    <li><code>--created FECHA_O_RANGO</code>: Filtra por fecha de creación.</li>
+    <li><code>--draft</code>: (Solo PRs) Filtra por PRs en borrador (<code>true</code> o <code>false</code>).</li>
+    <li><code>--head-branch RAMA</code>: (Solo PRs) Filtra por rama de cabecera.</li>
+    <li><code>--interactions RANGO</code>: Filtra por número de interacciones (comentarios, reacciones).</li>
+    <li><code>--involves USUARIO</code>: Filtra por usuario involucrado (autor, asignado, mencionado, etc.).</li>
+    <li><code>--label "ETIQUETA"</code>: Filtra por una o más etiquetas.</li>
+    <li><code>--language LENGUAJE</code>: (Solo Issues basados en código) Filtra por lenguaje.</li>
+    <li><code>--linked-pr</code>: (Solo Issues) Filtra por issues vinculados a un PR.</li>
+    <li><code>--mentions USUARIO</code>: Filtra por menciones a un usuario.</li>
+    <li><code>--milestone "HITO"</code>: Filtra por hito.</li>
+    <li><code>--no-assignee</code>, <code>--no-label</code>, <code>--no-milestone</code>, <code>--no-project</code>: Filtra por ausencia de estos campos.</li>
+    <li><code>--project OWNER/NUMERO_PROYECTO</code>: Filtra por proyecto al que pertenece.</li>
+    <li><code>--reactions RANGO</code>: Filtra por número de reacciones.</li>
+    <li><code>--repo OWNER/REPO</code>: Busca dentro de un repositorio específico (puedes usar múltiples <code>--repo</code>).</li>
+    <li><code>--review-requested USUARIO_O_EQUIPO</code>: (Solo PRs) Filtra por solicitud de revisión.</li>
+    <li><code>--review none|required|approved|changes_requested</code>: (Solo PRs) Filtra por estado de revisión.</li>
+    <li><code>--reviewed-by USUARIO</code>: (Solo PRs) Filtra por usuario que ha revisado.</li>
+    <li><code>--state open|closed|merged</code> (<code>merged</code> solo para PRs): Filtra por estado.</li>
+    <li><code>--status success|pending|failure</code>: (Solo PRs) Filtra por estado de los checks de CI.</li>
+    <li><code>--team-mentions EQUIPO</code>: Filtra por menciones a un equipo.</li>
+    <li><code>--type issue|pr</code>: (Solo <code>gh search issues</code>) Especifica si buscar issues o PRs. Por defecto busca ambos.</li>
+    <li><code>--updated FECHA_O_RANGO</code>: Filtra por fecha de última actualización.</li>
+    <li><code>--visibility public|private|internal</code>: Filtra por visibilidad del repositorio.</li>
+    <li><code>--sort CAMPO</code>: (<code>comments</code>, <code>created</code>, <code>interactions</code>, <code>reactions</code>, <code>updated</code>).</li>
+    <li><code>--order asc|desc</code></li>
+    <li><code>-L, --limit N</code></li>
+    <li><code>--web</code></li>
+  </ul>
+  <div class="example-box"><code>gh search issues "performance" --repo OWNER/REPO --label "enhancement" --state open --sort created --order asc --limit 5</code></div>
+  <div class="example-box"><code>gh search prs "docs update" --repo OWNER/REPO --author "@me" --web</code></div>
+
+  <p><strong>Buscar Commits:</strong> Encuentra commits que coincidan con tus criterios.</p>
+  <div class="example-box"><code>gh search commits "fix: off-by-one error" --repo cli/cli</code></div>
+  <p>Opciones comunes para <code>commits</code>:</p>
+  <ul>
+    <li><code>--author USUARIO</code>: Filtra por autor del commit.</li>
+    <li><code>--author-date FECHA_O_RANGO</code>: Filtra por fecha de autoría.</li>
+    <li><code>--author-email EMAIL</code>: Filtra por email del autor.</li>
+    <li><code>--committer USUARIO</code>: Filtra por committer.</li>
+    <li><code>--committer-date FECHA_O_RANGO</code>: Filtra por fecha del commit.</li>
+    <li><code>--committer-email EMAIL</code>: Filtra por email del committer.</li>
+    <li><code>--hash SHA_COMMIT</code>: Busca un hash de commit específico.</li>
+    <li><code>--merge true|false</code>: Filtra por commits de fusión.</li>
+    <li><code>--parent SHA_COMMIT</code>: Filtra por commits que tienen un padre específico.</li>
+    <li><code>--repo OWNER/REPO</code>: Busca dentro de un repositorio específico (puedes usar múltiples).</li>
+    <li><code>--tree SHA_TREE</code>: Filtra por commits que apuntan a un árbol específico.</li>
+    <li><code>--visibility public|private|internal</code>: Filtra por visibilidad del repositorio.</li>
+    <li><code>--sort author-date|committer-date</code></li>
+    <li><code>--order asc|desc</code></li>
+    <li><code>-L, --limit N</code></li>
+    <li><code>--web</code></li>
+  </ul>
+  <div class="example-box"><code>gh search commits "security vulnerability" --repo OWNER/REPO --sort committer-date --limit 5</code></div>
+  <div class="tip">
+    <strong>Consejo de Búsqueda:</strong> La cadena de búsqueda principal (ej: <code>"bug en login"</code>) utiliza la <a href="https://docs.github.com/es/search-github/getting-started-with-searching-on-github/understanding-the-search-syntax" target="_blank" rel="noopener noreferrer">sintaxis de búsqueda avanzada de GitHub</a>. Puedes usar operadores como <code>AND</code>, <code>OR</code>, <code>NOT</code>, comillas para frases exactas, y calificadores como <code>user:nombre</code>, <code>repo:owner/repo</code> directamente en la cadena si prefieres no usar las banderas específicas de <code>gh</code>.
+  </div>
+</div>
+
+<h2 class="section-title">🧩 Extensiones (<code>gh extension ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Ampliando la Funcionalidad de <code>gh</code></span>
+  <p>GitHub CLI es extensible, lo que significa que tú o la comunidad pueden añadir comandos personalizados para adaptar <code>gh</code> a flujos de trabajo específicos o integrar otras herramientas. Las extensiones son repositorios de GitHub que siguen una convención de nombres (<code>gh-NOMBRE_EXTENSION</code>).</p>
+
+  <p><strong>Listar extensiones instaladas:</strong> Muestra las extensiones que tienes actualmente instaladas.</p>
+  <div class="example-box"><code>gh extension list</code></div>
+  <p>Esto te mostrará el nombre de la extensión y la ruta a su repositorio.</p>
+
+  <p><strong>Instalar una extensión:</strong> Instala una extensión desde un repositorio de GitHub.</p>
+  <div class="example-box"><code>gh extension install OWNER/gh-NOMBRE_EXTENSION</code></div>
+  <p>Por ejemplo, para instalar la popular extensión Copilot para la línea de comandos (si tienes acceso a GitHub Copilot):</p>
+  <div class="example-box"><code>gh extension install github/gh-copilot</code></div>
+  <p>O una extensión para gestionar proyectos (beta):</p>
+  <div class="example-box"><code>gh extension install github/gh-projects</code></div>
+  <p>También puedes instalar una extensión en desarrollo desde un directorio local:</p>
+  <div class="example-box"><code>gh extension install ./ruta/a/mi/gh-extension-local</code></div>
+
+
+  <p><strong>Actualizar una extensión:</strong> Actualiza una o todas las extensiones instaladas a su última versión.</p>
+  <div class="example-box"><code>gh extension upgrade NOMBRE_EXTENSION</code></div>
+  <p>Para actualizar todas las extensiones:</p>
+  <div class="example-box"><code>gh extension upgrade --all</code></div>
+
+  <p><strong>Eliminar una extensión:</strong> Desinstala una extensión.</p>
+  <div class="example-box"><code>gh extension remove NOMBRE_EXTENSION</code></div>
+
+  <p><strong>Crear una nueva extensión:</strong> <code>gh</code> proporciona una herramienta para ayudarte a empezar con tu propia extensión.</p>
+  <div class="example-box"><code>gh extension create mi-nueva-extension</code></div>
+  <p>Esto generará un esqueleto de proyecto para una extensión escrita en Bash, pero puedes escribir extensiones en cualquier lenguaje que pueda ejecutarse como un script (Python, Ruby, JavaScript con Node, Go, etc.). La clave es que el repositorio contenga un ejecutable con el mismo nombre que el repositorio (ej: <code>gh-mi-extension/gh-mi-extension</code>).</p>
+
+  <p><strong>Navegar y buscar extensiones (Comando experimental):</strong> Aunque no es un comando oficial estable, a menudo se menciona la posibilidad de buscar o navegar extensiones. La forma más común de descubrir extensiones es a través de la comunidad, listas curatedas o buscando repositorios en GitHub con el topic <code>gh-extension</code>.</p>
+  <p>El comando <code>gh search repos --topic "gh-extension"</code> que vimos antes te puede ser útil aquí.</p>
+  <div class="example-box"><code>gh search repos --topic "gh-extension" "dashboard"</code></div>
+  
+  <p>Una vez instalada una extensión, digamos <code>gh- NOMBRE_EXTENSION</code>, puedes usarla como un comando normal de <code>gh</code>:</p>
+  <div class="example-box"><code>gh NOMBRE_EXTENSION [subcomandos_de_la_extension] [opciones]</code></div>
+  <p>Por ejemplo, si instalaste <code>gh-copilot</code>:</p>
+  <div class="example-box"><code>gh copilot suggest "Crear un alias para git status"</code></div>
+  <p>Las extensiones instaladas también suelen tener su propia ayuda accesible con <code>--help</code>:</p>
+  <div class="example-box"><code>gh NOMBRE_EXTENSION --help</code></div>
+
+  <div class="tip">
+    <strong>Explorando Extensiones:</strong>
+    Una buena forma de encontrar extensiones es visitar la página de GitHub con el tema <a href="https://github.com/topics/gh-extension" target="_blank" rel="noopener noreferrer"><code>gh-extension</code></a>. Muchas extensiones útiles y populares están listadas allí.
+    También puedes consultar la <a href="https://docs.github.com/es/github-cli/github-cli/using-github-cli-extensions" target="_blank" rel="noopener noreferrer">documentación oficial de extensiones de GitHub CLI</a> para más detalles sobre su uso y desarrollo.
+  </div>
+</div>
+
+<h2 class="section-title">📡 Interactuar con la API de GitHub (<code>gh api ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Acceso Directo y Personalizado</span>
+  <p>El comando <code>gh api</code> es una herramienta extremadamente poderosa que te permite realizar solicitudes directas a la <a href="https://docs.github.com/es/rest" target="_blank" rel="noopener noreferrer">API REST de GitHub</a> y a la <a href="https://docs.github.com/es/graphql" target="_blank" rel="noopener noreferrer">API GraphQL de GitHub</a>. Esto abre la puerta a cualquier interacción con GitHub que no esté cubierta por un comando específico de <code>gh</code>.</p>
+
+  <p><strong>Realizar una solicitud GET a un endpoint de la API REST:</strong></p>
+  <div class="example-box"><code>gh api /users/octocat</code></div>
+  <p>Por defecto, <code>gh api</code> antepone <code>https://api.github.com</code> a la ruta que proporciones. La salida será en formato JSON.</p>
+  <p>Otro ejemplo, para obtener información de un repositorio:</p>
+  <div class="example-box"><code>gh api /repos/cli/cli</code></div>
+
+  <p><strong>Métodos HTTP:</strong> Puedes especificar el método HTTP usando la bandera <code>-X</code> o <code>--method</code> (<code>GET</code> es el predeterminado).</p>
+  <ul>
+    <li><code>GET</code>: Para obtener datos.</li>
+    <li><code>POST</code>: Para crear recursos.</li>
+    <li><code>PUT</code>: Para reemplazar recursos.</li>
+    <li><code>PATCH</code>: Para actualizar parcialmente recursos.</li>
+    <li><code>DELETE</code>: Para eliminar recursos.</li>
+  </ul>
+
+  <p><strong>Enviar datos (payload) en solicitudes <code>POST</code>, <code>PUT</code>, <code>PATCH</code>:</strong></p>
+  <p>Puedes enviar datos como campos de formulario con <code>-f</code> (para <code>string</code>), <code>-F</code> (para <code>File</code>), <code>-i</code> (para <code>integer</code>), <code>-b</code> (para <code>boolean</code>), o un cuerpo JSON crudo con <code>--input</code>.</p>
+  
+  <p>Ejemplo creando un issue (aunque <code>gh issue create</code> es más fácil para esto, sirve como ejemplo de <code>POST</code>):</p>
+  <div class="example-box"><code>gh api --method POST -f title="Nuevo issue desde API" -f body="Cuerpo del issue creado con gh api" /repos/OWNER/REPO/issues</code></div>
+  
+  <p>Ejemplo actualizando la descripción de un repositorio (<code>PATCH</code>):</p>
+  <div class="example-box"><code>gh api --method PATCH -f description="Nueva descripción del repo vía API" /repos/OWNER/REPO</code></div>
+
+  <p><strong>Leer datos desde un archivo para el cuerpo de la solicitud (<code>--input</code> o <code>--raw-field</code>):</strong></p>
+  <p>Si tienes un archivo JSON con el payload:</p>
+  <div class="example-box"><code>gh api --method POST --input ./payload.json /repos/OWNER/REPO/labels</code></div>
+  <p>O puedes pasar JSON directamente:</p>
+  <div class="example-box"><code>echo '{"name":"nueva-etiqueta","color":"f29513","description":"Etiqueta creada desde gh api"}' | gh api --method POST --input - /repos/OWNER/REPO/labels</code></div>
+  <p>La opción <code>--raw-field nombre_campo=@archivo.json</code> permite enviar el contenido de un archivo como valor para un campo JSON.</p>
+
+
+  <p><strong>Encabezados HTTP Personalizados (<code>-H</code> o <code>--header</code>):</strong></p>
+  <div class="example-box"><code>gh api -H "Accept: application/vnd.github.v3.star+json" /user/starred/OWNER/REPO</code></div>
+  <p>Puedes usar múltiples banderas <code>-H</code>.</p>
+
+  <p><strong>Paginación:</strong> Para endpoints que devuelven muchos resultados, <code>gh api</code> puede manejar la paginación automáticamente con <code>--paginate</code>. Combina todas las páginas en una sola respuesta JSON (una lista de objetos).</p>
+  <div class="example-box"><code>gh api --paginate /repos/OWNER/REPO/issues</code></div>
+  <p>Si quieres ver los encabezados de paginación Link, puedes usar <code>-i</code> (no confundir con <code>-i</code> para campos enteros).</p>
+  <div class="example-box"><code>gh api -i /repos/OWNER/REPO/issues</code></div>
+
+  <p><strong>Silenciar la salida JSON (<code>-q</code> o <code>--quiet</code>):</strong> Útil si solo te interesa el código de estado HTTP (ej. para verificar si un recurso existe).</p>
+  <div class="example-box"><code>gh api -q /user/starred/OWNER/REPO</code></div>
+  <p>El comando saldrá con un código 0 si la solicitud fue exitosa (2xx), o un código distinto de cero en caso de error (4xx, 5xx).</p>
+
+  <p><strong>Plantillas de Salida (<code>-t</code> o <code>--template</code>):</strong> Puedes formatear la salida JSON usando la sintaxis de plantillas de Go.</p>
+  <div class="example-box"><code>gh api /user --template "{{.login}} ({{.name}})"</code></div>
+  <p>Para iterar sobre una lista de resultados (por ejemplo, con <code>--paginate</code>):</p>
+  <div class="example-box"><code>gh api --paginate /repos/cli/cli/tags --template '{{range .}}{{.name}}{{"\n"}}{{end}}'</code></div>
+
+  <p><strong>Consultas GraphQL:</strong> Para usar la API GraphQL de GitHub.</p>
+  <div class="example-box"><code>gh api graphql -f query='query { viewer { login } }'</code></div>
+  <p>Puedes pasar la consulta desde un archivo:</p>
+  <div class="example-box"><code>gh api graphql -F query=@mi_consulta.graphql</code></div>
+  <p>Y también puedes pasar variables GraphQL:</p>
+  <div class="example-box"><code>gh api graphql -f query='query($repo: String!) { repository(owner:"cli", name:$repo) { id } }' -f repo='cli'</code></div>
+
+  <p><strong>Host de GitHub Enterprise:</strong> Si trabajas con GitHub Enterprise Server, <code>gh api</code> (y todos los comandos <code>gh</code>) respetarán el host configurado (a través de <code>gh auth login</code> o la variable de entorno <code>GH_HOST</code>).</p>
+
+  <div class="tip">
+    <strong>Explorando la API:</strong>
+    Antes de usar <code>gh api</code> para operaciones complejas, es muy recomendable que te familiarices con la <a href="https://docs.github.com/es/rest/guides/getting-started-with-the-rest-api" target="_blank" rel="noopener noreferrer">documentación de la API REST de GitHub</a> o la <a href="https://docs.github.com/es/graphql/guides/introduction-to-graphql" target="_blank" rel="noopener noreferrer">documentación de GraphQL</a>.
+    Herramientas como Postman o Insomnia también son útiles para explorar los endpoints y construir tus solicitudes antes de pasarlas a <code>gh api</code>.
+    Recuerda que <code>gh</code> se encarga automáticamente de la autenticación, lo cual es una gran ventaja.
+  </div>
+</div>
+
+<h2 class="section-title">⚙️ Configuración y Alias (<code>gh config ...</code> y <code>gh alias ...</code>)</h2>
+<div class="concept-box">
+  <span class="concept-title">Personalizando tu Experiencia con <code>gh</code></span>
+  <p>GitHub CLI te permite personalizar su comportamiento a través de configuraciones y crear atajos para comandos complejos o de uso frecuente mediante alias.</p>
+
+  <p><strong>Ver la configuración actual:</strong> Muestra todos los valores de configuración actuales.</p>
+  <div class="example-box"><code>gh config list</code></div>
+  <p>Esto te mostrará la configuración global y la específica del host (si tienes varias cuentas de GitHub configuradas).</p>
+
+  <p><strong>Obtener un valor de configuración específico:</strong></p>
+  <div class="example-box"><code>gh config get git_protocol</code></div>
+  <p>Otros ejemplos de claves de configuración comunes:</p>
+  <ul>
+    <li><code>editor</code>: Tu editor de texto preferido (ej: <code>nano</code>, <code>vim</code>, <code>code</code>).</li>
+    <li><code>prompt</code>: Habilita/deshabilita las solicitudes interactivas (<code>enabled</code> o <code>disabled</code>).</li>
+    <li><code>pager</code>: El paginador a usar para salidas largas (ej: <code>less</code>, <code>cat</code>, o déjalo vacío para usar el predeterminado del sistema).</li>
+    <li><code>http_unix_socket</code>: Para usar <code>gh</code> con un socket Unix para proxies.</li>
+    <li><code>browser</code>: El navegador web a usar para comandos como <code>gh pr view --web</code>.</li>
+  </ul>
+
+  <p><strong>Establecer un valor de configuración:</strong></p>
+  <div class="example-box"><code>gh config set editor "code --wait"</code></div>
+  <div class="example-box"><code>gh config set git_protocol https</code></div>
+  <p>Opciones:</p>
+  <ul>
+    <li><code>-h, --host NOMBRE_HOST</code>: Establece la configuración para un host específico de GitHub (ej: <code>github.example.com</code> si usas GitHub Enterprise Server).</li>
+  </ul>
+
+  <p><strong>Listar alias definidos:</strong> Muestra todos los alias que has creado.</p>
+  <div class="example-box"><code>gh alias list</code></div>
+  <p>Esto te mostrará el nombre del alias y el comando que expande.</p>
+
+  <p><strong>Crear un nuevo alias:</strong> Define un atajo para un comando o una serie de comandos de <code>gh</code>.</p>
+  <div class="example-box"><code>gh alias set prc "pr create --fill --web"</code></div>
+  <p>Ahora puedes ejecutar <code>gh prc</code> y se expandirá a <code>gh pr create --fill --web</code>.</p>
+  <p>Los alias pueden ser simples expansiones o pueden tomar argumentos. Para pasar argumentos al comando expandido, usa <code>$1</code>, <code>$2</code>, etc., para referenciar los argumentos pasados al alias. Usa <code>"$@"</code> para pasar todos los argumentos.</p>
+  <p>Ejemplo de un alias que lista los 5 PRs más recientes y los abre en el navegador:</p>
+  <div class="example-box"><code>gh alias set recentprs "pr list --limit 5 --web"</code></div>
+  <p>Ejemplo de un alias que hace checkout de un PR y luego muestra su diff:</p>
+  <div class="example-box"><code>gh alias set prd "pr checkout $1 && gh pr diff $1"</code></div>
+  <p>Para ejecutar este alias: <code>gh prd 123</code> (donde 123 es el número del PR).</p>
+  <p>También puedes crear alias que ejecuten comandos de shell anteponiendo <code>!</code>:</p>
+  <div class="example-box"><code>gh alias set glog "!git log --oneline --graph --decorate --all"</code></div>
+  <p>Ahora <code>gh glog</code> ejecutará ese comando de Git.</p>
+
+  <p><strong>Eliminar un alias:</strong></p>
+  <div class="example-box"><code>gh alias delete NOMBRE_ALIAS</code></div>
+
+  <p><strong>Importar alias (experimental y puede cambiar):</strong> Aunque no hay un comando directo como `gh alias import`, los alias se guardan en el archivo de configuración de `gh` (usualmente `~/.config/gh/aliases.yml` o `~/.config/gh/config.yml` bajo una sección de alias). Podrías teóricamente editar este archivo directamente o compartirlo, pero es más seguro gestionarlos con `gh alias set` y `gh alias delete`.</p>
+  
+  <div class="tip">
+    <strong>Ubicación de los Archivos de Configuración:</strong>
+    La configuración de <code>gh</code> generalmente se guarda en:
+    <ul>
+      <li><strong>Linux/macOS:</strong> <code>~/.config/gh/</code> (con archivos como <code>config.yml</code>, <code>hosts.yml</code>, <code>aliases.yml</code>).</li>
+      <li><strong>Windows:</strong> <code>%APPDATA%\GitHub CLI\</code> (o <code>C:\Users\TU_USUARIO\AppData\Roaming\GitHub CLI\</code>).</li>
+    </ul>
+    Aunque es posible editar estos archivos manualmente, se recomienda usar los comandos <code>gh config</code> y <code>gh alias</code> para evitar errores de sintaxis.
+  </div>
+</div>
+
+<h2 class="section-title">💡 Tip Final y Próximos Pasos</h2>
+<div class="tip">
+  <strong>Domina GitHub CLI a tu Propio Ritmo:</strong>
+  <p>Este manual te ha proporcionado una base sólida sobre los comandos más importantes de GitHub CLI y cómo descubrir el resto. Aquí tienes algunos consejos para continuar tu aprendizaje y maximizar tu eficiencia:</p>
+  <ul>
+    <li><strong>Practica Regularmente:</strong> Intenta reemplazar tus interacciones web con GitHub por los comandos de <code>gh</code> siempre que sea posible. Cuanto más lo uses, más natural se volverá.</li>
+    <li><strong>Explora <code>--help</code> Constantemente:</strong> Como se enfatizó, la ayuda integrada es tu mejor amiga. Para cualquier comando que uses, revisa sus opciones con <code>--help</code>; podrías descubrir flags que te ahorren mucho tiempo.</li>
+    <li><strong>Crea Alias Útiles:</strong> Identifica las secuencias de comandos o comandos con muchas opciones que usas repetidamente y conviértelos en alias. Esto personalizará <code>gh</code> a tu flujo de trabajo específico.</li>
+    <li><strong>Experimenta con <code>gh api</code>:</strong> Para tareas muy específicas o para aprender más sobre la API de GitHub, <code>gh api</code> es invaluable. Comienza con solicitudes GET simples y luego explora otras más complejas.</li>
+    <li><strong>Prueba Extensiones:</strong> Busca extensiones que puedan cubrir necesidades particulares de tu equipo o proyecto. No dudes en probar las creadas por la comunidad.</li>
+    <li><strong>Contribuye o Crea Extensiones:</strong> Si tienes una idea para una nueva funcionalidad, considera desarrollar tu propia extensión. Es una excelente manera de contribuir y adaptar la herramienta aún más.</li>
+    <li><strong>Mantente Actualizado:</strong> GitHub CLI se actualiza con frecuencia. Ejecuta <code>gh version --checkForUpdate</code> o sigue el <a href="https://github.com/cli/cli/releases" target="_blank" rel="noopener noreferrer">repositorio oficial de <code>cli/cli</code></a> para conocer las nuevas características y mejoras. Un simple <code>gh extension upgrade --all</code> y la actualización del propio <code>gh</code> (generalmente vía tu gestor de paquetes) te mantendrán al día.</li>
+    <li><strong>Integra con Scripts:</strong> La verdadera potencia de cualquier herramienta CLI se manifiesta cuando la integras en scripts para automatizar tareas. Piensa en cómo <code>gh</code> puede ayudarte a automatizar partes de tu despliegue, gestión de proyectos o informes.</li>
+  </ul>
+  <p>Recuerda que el objetivo es hacer tu interacción con GitHub más rápida, eficiente y placentera. ¡Disfruta explorando y usando GitHub CLI!</p>
+</div>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+

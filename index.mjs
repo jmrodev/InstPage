@@ -3,7 +3,7 @@ import fs from 'fs';
 
 const browser = await chromium.launch({ headless: true });
 const page = await browser.newPage();
-await page.goto('https://www.xataka.com/tag/tecnologia');
+await page.goto('https://www.xataka.com');
 
 const articles = await page.evaluate(() => {
   const articleElements = document.querySelectorAll('article');
