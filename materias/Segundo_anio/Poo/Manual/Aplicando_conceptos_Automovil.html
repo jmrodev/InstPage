@@ -125,7 +125,7 @@
   <span class="concept-title">Clases: Los Moldes o Planos</span>
   <p>Una <strong>clase</strong> (<code>class Coche</code>) es un molde para crear objetos. Define sus propiedades y métodos.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // Definición de nuestra clase base 'Coche'
 class Coche {
     // Vacía por ahora
@@ -139,7 +139,7 @@ echo "Clase de \$miPrimerCoche: " . get_class($miPrimerCoche) . PHP_EOL;
 
 var_dump($miPrimerCoche);
 var_dump($otroCocheDiferente);
-?></code></pre>
+?&gt</code></pre>
   </div>
 </div>
 <div class="concept-box">
@@ -155,7 +155,7 @@ var_dump($otroCocheDiferente);
   <span class="concept-title">Definiendo las Características</span>
   <p>Las <strong>propiedades</strong> son las características de un objeto (<code>$marca</code>, <code>$modelo</code>). Se declaran como variables dentro de la clase.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // Evolución de la clase Coche: ahora con propiedades
 class Coche {
     public $marca;
@@ -179,7 +179,7 @@ $otroCoche->marca = "Ford";
 $otroCoche->modelo = "Focus";
 echo "--- Otro coche ---" . PHP_EOL;
 echo "Marca: " . $otroCoche->marca . ", Color: " . $otroCoche->color . PHP_EOL;
-?></code></pre>
+?&gt</code></pre>
   </div>
 </div>
 
@@ -188,7 +188,7 @@ echo "Marca: " . $otroCoche->marca . ", Color: " . $otroCoche->color . PHP_EOL;
   <span class="concept-title">Realizando Acciones</span>
   <p>Los <strong>métodos</strong> definen las acciones de un objeto (<code>arrancar()</code>, <code>acelerar()</code>). Se definen como funciones dentro de la clase.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // Evolución de la clase Coche: ahora con propiedades y métodos
 class Coche {
     public $marca;
@@ -244,7 +244,7 @@ $miDeportivo->acelerar(100);
 echo $miDeportivo->obtenerInformacion();
 $miDeportivo->apagar();
 echo $miDeportivo->obtenerInformacion();
-?></code></pre>
+?&gt</code></pre>
   </div>
 </div>
 <div class="concept-box">
@@ -257,7 +257,7 @@ echo $miDeportivo->obtenerInformacion();
   <span class="concept-title">El Constructor (<code>__construct</code>)</span>
   <p>El <strong>constructor</strong> (<code>__construct</code>) se llama al crear un objeto con <strong class="keyword">new</strong>. Ideal para inicializar propiedades.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // Evolución de Coche: con constructor y destructor
 class Coche {
     public $marca;
@@ -307,7 +307,7 @@ echo $miBerlina->obtenerInformacion();
 echo $suvFamiliar->obtenerInformacion();
 
 echo "--- Fin del script ---" . PHP_EOL;
-?>
+?&gt
 </code></pre>
   </div>
   <div class="tip">
@@ -328,7 +328,7 @@ echo "--- Fin del script ---" . PHP_EOL;
 <div class="concept-box">
   <span class="concept-title">Aplicando Encapsulamiento a <code>Coche</code></span>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // Evolución de Coche: ahora con encapsulamiento
 class Coche {
     private $marca; 
@@ -403,7 +403,7 @@ $miNuevoCoche->acelerar(50);
 $miNuevoCoche->setColor("Rojo Fuego");
 echo $miNuevoCoche->obtenerInformacionDetallada();
 $miNuevoCoche->apagar();
-?></code></pre>
+?&gt</code></pre>
   </div>
 </div>
 
@@ -416,7 +416,7 @@ $miNuevoCoche->apagar();
   <span class="concept-title">Implementando Herencia</span>
   <p><code>Coche</code> (de Sec. 5) se convierte en <code>VehiculoBase</code> con propiedades <code>protected</code>. Creamos <code>CocheDeportivo</code>.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // --- Clase Padre: VehiculoBase ---
 class VehiculoBase {
     protected $marca; 
@@ -527,7 +527,7 @@ $miSuperDeportivo->acelerar(100);
 $miSuperDeportivo->desactivarTurbo();
 $miSuperDeportivo->acelerar(30); 
 echo $miSuperDeportivo->obtenerInformacionDetallada();
-?>
+?&gt
 </code></pre>
   </div>
 </div>
@@ -541,7 +541,7 @@ echo $miSuperDeportivo->obtenerInformacionDetallada();
   <span class="concept-title">Demostrando Polimorfismo</span>
   <p>Usamos <code>VehiculoBase</code> y <code>CocheDeportivo</code>. Métodos sobrescritos se ejecutan según el tipo real del objeto.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // Se asume que VehiculoBase y CocheDeportivo están definidos como en la Sección 6.
 
 echo "### Demostración de Polimorfismo ###" . PHP_EOL;
@@ -574,7 +574,7 @@ function realizarMantenimiento(VehiculoBase $v) {
 
 $deportivoPrueba = new CocheDeportivo("McLaren", "720S", "Naranja Papaya", "CD4006", "Activo Inteligente");
 realizarMantenimiento($deportivoPrueba);
-?>
+?&gt
 </code></pre>
   </div>
 </div>
@@ -584,7 +584,7 @@ realizarMantenimiento($deportivoPrueba);
   <span class="concept-title">Clases y Métodos Abstractos</span>
   <p>Una <strong>clase abstracta</strong> (<code>abstract class</code>) no se puede instanciar. Sirve de plantilla. Un <strong>método abstracto</strong> (<code>abstract public function</code>) solo define la firma; las clases hijas concretas DEBEN implementarlo.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 // --- Clase Padre ABSTRACTA: Vehiculo ---
 abstract class Vehiculo { 
     protected $marca;
@@ -665,7 +665,7 @@ echo PHP_EOL;
 $miTrailer->arrancar();
 $miTrailer->acelerar(50); // Llama a CamionRegistrado::acelerar
 echo "Consumo Volvo para 100km: " . $miTrailer->calcularConsumoEstimado(100) . " litros." . PHP_EOL;
-?></code></pre>
+?&gt</code></pre>
   </div>
 </div>
 
@@ -677,7 +677,7 @@ echo "Consumo Volvo para 100km: " . $miTrailer->calcularConsumoEstimado(100) . "
 <div class="concept-box">
   <span class="concept-title">Declarando y Usando Interfaces</span>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 interface Arrancable {
     public function arrancarMotor();
     public function apagarMotor();
@@ -743,7 +743,7 @@ probarConduccionVehiculo($miBiciElec);
 if ($miCamionInter instanceof Cargable) {
     $miCamionInter->cargar("Paquetes", 5000);
 }
-?>
+?&gt
 </code></pre>
   </div>
   <div class="concept-box">
@@ -764,7 +764,7 @@ if ($miCamionInter instanceof Cargable) {
 <div class="concept-box">
   <span class="concept-title">Declarando y Usando Traits</span>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 trait Logger {
     protected $logHistorial = [];
     public function registrarLog($mensaje) {
@@ -804,7 +804,7 @@ $miCocheTrait = new CocheAvanzadoConTraits("Subaru");
 $miCocheTrait->conducir();
 $miCocheTrait->emitirSonidoEspecifico("Skrrrt!");
 $miCocheTrait->mostrarHistorialLogCompleto();
-?>
+?&gt
 </code></pre>
   </div>
 </div>
@@ -812,7 +812,7 @@ $miCocheTrait->mostrarHistorialLogCompleto();
   <span class="concept-title">Resolución de Conflictos de Nombres en Traits</span>
   <p>Si dos Traits tienen métodos con el mismo nombre, usa <code>insteadof</code> para elegir y <code>as</code> para renombrar o cambiar visibilidad.</p>
   <div class="example-box">
-<pre><code><?php
+<pre><code>&lt;?php
 trait ComunicadorA {
     public function enviarMensaje() { echo "Mensaje A." . PHP_EOL; }
 }
@@ -829,7 +829,7 @@ class DispositivoMaestro {
 $dispMaestro = new DispositivoMaestro();
 $dispMaestro->enviarMensaje();        
 $dispMaestro->enviarMensajeTipoA();     
-?>
+?&gt
 </code></pre>
   </div>
 </div>
